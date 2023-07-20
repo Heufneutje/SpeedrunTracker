@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SpeedrunTracker.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SpeedrunTracker.Views.GamesView">
+    <ContentView.Resources>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </ContentView.Resources>
+    <StackLayout>
+        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand"/>
+        <ListView ItemsSource="{Binding SearchResults}" IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}" CachingStrategy="RecycleElement" VerticalOptions="FillAndExpand" IsGroupingEnabled="True" HasUnevenRows="True" ItemTapped="ListView_ItemTapped" SelectionMode="None">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ImageSource}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+                                </Image.Behaviors>
+                            </Image>
+                            <Label Text="{Binding SearchType}" Grid.Column="1" FontAttributes="Bold" Padding="5"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="100">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding Assets.CoverSmall.Uri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit"/>
+                            <Label Text="{Binding Names.International}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0"/>
+                            <Label Text="{Binding Path=Released, StringFormat=Released: {0}}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentView>

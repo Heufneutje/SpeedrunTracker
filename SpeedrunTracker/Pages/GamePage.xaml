@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SpeedrunTracker.Converters"
+             xmlns:views="clr-namespace:SpeedrunTracker.Views"
+             x:Class="SpeedrunTracker.Pages.GameDetailPage"
+             Title="{Binding Game.Names.International}"
+             Appearing="ContentPage_Appearing">
+    <ContentPage.Resources>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <VerticalStackLayout Padding="10" Grid.Row="0">
+            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand"/>
+            <views:GameDetailView IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"/>
+        </VerticalStackLayout>
+        <Button Text="Leaderboard" Clicked="Button_Clicked" Grid.Row="1"/>
+        <views:LeaderboardView Grid.Row="2"/>
+    </Grid>
+    </ScrollView>
+</ContentPage>

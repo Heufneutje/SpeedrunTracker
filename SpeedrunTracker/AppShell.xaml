@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:SpeedrunTracker.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="SpeedrunTracker.AppShell"
+    FlyoutBackgroundColor="DarkCyan">
+    <Shell.Resources>
+        <Style x:Key="FlyoutItemStyle" TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="Cyan"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </Shell.Resources>
+    
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Style="{StaticResource FlyoutItemStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="150" />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding FlyoutIcon}" Margin="10" HeightRequest="30" HorizontalOptions="EndAndExpand">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="White"/>
+                    </Image.Behaviors>
+                </Image>
+                <Label Grid.Column="1"
+                Text="{Binding Title}"
+                FontSize="Body"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Start"
+                x:Name="_label">
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.FlyoutHeader>
+        <Label Text="SpeedrunTracker" FontSize="Large" Padding="20"/>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Search" FlyoutIcon="search">
+        <ShellContent x:Name="search" ContentTemplate="{DataTemplate pages:SearchPage}" Route="Search" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Following" FlyoutIcon="following">
+        <ShellContent x:Name="following" ContentTemplate="{DataTemplate pages:FollowingPage}" Route="Following" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Notifications" FlyoutIcon="bell">
+        <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate pages:NotificationsPage}" Route="Notifications" />
+    </FlyoutItem>
+
+</Shell>
