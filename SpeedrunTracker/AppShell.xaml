@@ -15,7 +15,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="{Binding FlyoutIcon}" Margin="10" HeightRequest="30" HorizontalOptions="EndAndExpand">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}"/>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
                     </Image.Behaviors>
                 </Image>
                 <Label Grid.Column="1"
@@ -31,15 +31,15 @@
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout>
-            <Label Text="SpeedrunTracker" FontSize="Large" Padding="20"/>
-            <Image Source="main" HeightRequest="150"/>
+            <Label Text="SpeedrunTracker" FontSize="Large" Padding="20" />
+            <Image Source="main" HeightRequest="150" />
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Search" FlyoutIcon="search">
         <ShellContent x:Name="search" ContentTemplate="{DataTemplate pages:SearchPage}" Route="Search" />
     </FlyoutItem>
-    
+
     <FlyoutItem Title="Following" FlyoutIcon="following">
         <ShellContent x:Name="following" ContentTemplate="{DataTemplate pages:FollowingPage}" Route="Following" />
     </FlyoutItem>
@@ -47,5 +47,4 @@
     <FlyoutItem Title="Notifications" FlyoutIcon="bell">
         <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate pages:NotificationsPage}" Route="Notifications" />
     </FlyoutItem>
-
 </Shell>

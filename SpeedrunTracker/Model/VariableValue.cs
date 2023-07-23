@@ -6,5 +6,6 @@ public class VariableValue
 {
     [JsonPropertyName("label")]
     public string Name { get; set; }
+
     public string Rules { get; set; }
 }

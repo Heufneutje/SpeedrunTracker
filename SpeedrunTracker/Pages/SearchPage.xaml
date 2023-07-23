@@ -10,17 +10,17 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <SearchBar x:Name="searchBar"
-                   Placeholder="Search games..." 
+                   Placeholder="Search games..."
                    SearchCommand="{Binding SearchCommand}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                    Grid.Row="0"
-                   HorizontalOptions="FillAndExpand" 
+                   HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <views:GameSearchResultView Grid.Row="1"/>
+        <views:GameSearchResultView Grid.Row="1" />
     </Grid>
 </ContentPage>

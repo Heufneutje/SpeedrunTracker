@@ -1,12 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.Logging;
 using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Model;
 using SpeedrunTracker.Model.Enum;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace SpeedrunTracker.ViewModels
 {
@@ -25,6 +22,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private Game _game;
+
         public Game Game
         {
             get => _game;
@@ -41,6 +39,7 @@ namespace SpeedrunTracker.ViewModels
         private IEnumerable<Variable> _allVariables;
 
         private ObservableCollection<Category> _categories;
+
         public ObservableCollection<Category> Categories
         {
             get => _categories;
@@ -60,6 +59,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private Category _selectedCategory;
+
         public Category SelectedCategory
         {
             get => _selectedCategory;
@@ -76,6 +76,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private ObservableCollection<Level> _levels;
+
         public ObservableCollection<Level> Levels
         {
             get => _levels;
@@ -92,12 +93,13 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private Level _selectedLevel;
+
         public Level SelectedLevel
         {
             get => _selectedLevel;
             set
             {
-                if (_selectedLevel == value) 
+                if (_selectedLevel == value)
                     return;
 
                 _selectedLevel = value;
@@ -107,6 +109,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private ObservableCollection<VariableViewModel> _variables;
+
         public ObservableCollection<VariableViewModel> Variables
         {
             get => _variables;
@@ -121,6 +124,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private Leaderboard _leaderboard;
+
         public Leaderboard Leaderboard
         {
             get => _leaderboard;
@@ -133,6 +137,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private bool _isLoadingLeaderboard;
+
         public bool IsLoadingLeaderboard
         {
             get => _isLoadingLeaderboard;

@@ -6,6 +6,7 @@ namespace SpeedrunTracker.ViewModels;
 public class BaseViewModel : INotifyPropertyChanged
 {
     private bool _isRunningBackgroundTask;
+
     public bool IsRunningBackgroundTask
     {
         get => _isRunningBackgroundTask;

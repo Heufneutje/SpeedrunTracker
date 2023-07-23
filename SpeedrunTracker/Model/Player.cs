@@ -7,12 +7,14 @@ public class Player : BaseSpeedrunObject
 {
     [JsonPropertyName("rel")]
     public PlayerType PlayerType { get; set; }
+
     public string Name { get; set; }
     public Names Names { get; set; }
     public string Weblink { get; set; }
 
     [JsonPropertyName("name-style")]
     public PlayerNameStyle NameStyle { get; set; }
+
     public DateTime? Signup { get; set; }
     public PlayerLocation Location { get; set; }
     public Link Twitch { get; set; }

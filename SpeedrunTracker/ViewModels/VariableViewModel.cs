@@ -9,6 +9,7 @@ public class VariableViewModel : BaseViewModel
     public string Name { get; set; }
 
     private ViewVariableValue _selectedValue;
+
     public ViewVariableValue SelectedValue
     {
         get => _selectedValue;
@@ -20,6 +21,7 @@ public class VariableViewModel : BaseViewModel
     }
 
     private ObservableCollection<ViewVariableValue> _values;
+
     public ObservableCollection<ViewVariableValue> Values
     {
         get => _values;

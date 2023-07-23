@@ -10,7 +10,6 @@ namespace SpeedrunTracker.ViewModels
 {
     public class GameSearchViewModel : BaseViewModel
     {
-
         private readonly IGamesRepository _gamesRepository;
         public ICommand SearchCommand => new AsyncRelayCommand<string>(Search, CanSearch);
         public ICommand NavigateToCommand => new AsyncRelayCommand<Game>(NavigateTo);
@@ -21,6 +20,7 @@ namespace SpeedrunTracker.ViewModels
         }
 
         private ObservableCollection<SearchResultGroup> _searchResults;
+
         public ObservableCollection<SearchResultGroup> SearchResults
         {
             get => _searchResults;

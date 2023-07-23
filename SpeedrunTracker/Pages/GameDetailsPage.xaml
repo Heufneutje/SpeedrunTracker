@@ -9,19 +9,19 @@
     <ScrollView>
         <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
-                <views:GameDetailHeaderView/>
+                <views:GameDetailHeaderView />
             </Border>
             <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
-            <views:GameDetailFilterView Grid.Row="1"/>
+                <views:GameDetailFilterView Grid.Row="1" />
             </Border>
             <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2" IsVisible="{Binding IsLeaderboardVisible}">
-                <views:LeaderboardView Grid.Row="2"/>
+                <views:LeaderboardView Grid.Row="2" />
             </Border>
         </Grid>
     </ScrollView>

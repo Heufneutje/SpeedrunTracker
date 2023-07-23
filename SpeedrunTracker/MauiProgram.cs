@@ -6,33 +6,33 @@ namespace SpeedrunTracker;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
+    public static MauiApp CreateMauiApp()
+    {
 #if ANDROID
-		Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
-		{
-			handler.PlatformView.MaxWidth = int.MaxValue;
-		});
+        Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
+        {
+            handler.PlatformView.MaxWidth = int.MaxValue;
+        });
 #endif
 
         var builder = MauiApp.CreateBuilder();
-		builder
+        builder
             .UseMauiCommunityToolkit()
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         builder.Services.AddSpeedrunTrackerServices(builder.Configuration);
-		builder.Services.RegisterViewModels();
-		builder.Services.RegisterPages();
+        builder.Services.RegisterViewModels();
+        builder.Services.RegisterPages();
 
-		return builder.Build();
-	}
+        return builder.Build();
+    }
 }

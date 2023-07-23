@@ -2,10 +2,10 @@ namespace SpeedrunTracker.Views;
 
 public partial class Loadable : ContentView
 {
-	public Loadable()
-	{
-		InitializeComponent();
-	}
+    public Loadable()
+    {
+        InitializeComponent();
+    }
 
     public BindableProperty LoadableContentProp = BindableProperty.Create(nameof(LoadableContent), typeof(IView), typeof(Loadable));
 

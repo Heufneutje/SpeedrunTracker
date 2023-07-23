@@ -4,5 +4,5 @@
              x:Class="SpeedrunTracker.Pages.FollowingPage"
              Title="FollowingPage">
 
-    <Label Text="Under construction"/>
+    <Label Text="Under construction" />
 </ContentPage>

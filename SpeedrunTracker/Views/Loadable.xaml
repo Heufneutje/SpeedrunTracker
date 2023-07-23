@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:SpeedrunTracker.Converters"
              x:Class="SpeedrunTracker.Views.Loadable">
-    
+
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            
         </ControlTemplate>
     </ContentView.ControlTemplate>
 </ContentView>
