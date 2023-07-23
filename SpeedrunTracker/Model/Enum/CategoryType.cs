@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace SpeedrunTracker.Model.Enum;
 
 public enum CategoryType
 {
-    [JsonPropertyName("per-game")]
+    [EnumMember(Value = "per-game")]
     PerGame,
 
-    [JsonPropertyName("per-level")]
+    [EnumMember(Value = "per-level")]
     PerLevel
 }

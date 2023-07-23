@@ -1,7 +1,12 @@
-﻿using SpeedrunTracker.Interfaces;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
+using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Model;
 using SpeedrunTracker.Model.Enum;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace SpeedrunTracker.ViewModels
 {
@@ -9,7 +14,6 @@ namespace SpeedrunTracker.ViewModels
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly ILeaderboardRepository _leaderboardRepository;
-        private readonly Dictionary<string, List<VariableViewModel>> _variableViewModels;
 
         // TODO: Replace with config value
         private const int _maxResults = 50;
@@ -18,7 +22,6 @@ namespace SpeedrunTracker.ViewModels
         {
             _gamesRepository = gamesRepository;
             _leaderboardRepository = leaderboardRepository;
-            _variableViewModels = new Dictionary<string, List<VariableViewModel>>();
         }
 
         private Game _game;
@@ -29,6 +32,7 @@ namespace SpeedrunTracker.ViewModels
             {
                 _game = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Platforms));
             }
         }
 
@@ -42,8 +46,12 @@ namespace SpeedrunTracker.ViewModels
             get => _categories;
             set
             {
-                if (_categories == value)
+                if (_categories.SequenceEqualOrNull(value))
+                {
+                    if (_allVariables.Any(x => x.Scope.Type == VariableScopeType.SingleLevel))
+                        UpdateVariables();
                     return;
+                }
 
                 _categories = value;
                 NotifyPropertyChanged();
@@ -62,35 +70,7 @@ namespace SpeedrunTracker.ViewModels
 
                 _selectedCategory = value;
 
-                if (!_variableViewModels.ContainsKey(_selectedCategory.Id))
-                {
-                    List<VariableViewModel> variablesVMs = new List<VariableViewModel>();
-                    IEnumerable<Variable> variables = _allVariables.Where(x => x.IsSubcategory);
-                    if (string.IsNullOrEmpty(SelectedLevel.Id))
-                        variables = variables.Where(x => x.Scope.Type != VariableScopeType.AllLevels);
-                    else
-                        variables = variables.Where(x => x.Scope.Type != VariableScopeType.FullGame);
-
-                    foreach (Variable variable in variables.Where(x => x.Category == null || x.Category == value.Id))
-                    {
-                        VariableViewModel vm = new VariableViewModel()
-                        {
-                            VariableId = variable.Id,
-                            Name = variable.Name,
-                            Values = variable.Values.Values.Select(x => new ViewVariableValue()
-                            {
-                                Id = x.Key,
-                                Label = x.Value.Label,
-                                Rules = x.Value.Rules
-                            }).AsObservableCollection()
-                        };
-                        variablesVMs.Add(vm);
-                    }
-
-                    _variableViewModels.Add(_selectedCategory.Id, variablesVMs);
-                }
-
-                Variables = _variableViewModels[_selectedCategory.Id].AsObservableCollection();
+                UpdateVariables();
                 NotifyPropertyChanged();
             }
         }
@@ -101,11 +81,12 @@ namespace SpeedrunTracker.ViewModels
             get => _levels;
             set
             {
-                if (_levels == value)
+                if (_levels.SequenceEqualOrNull(value))
                     return;
 
                 _levels = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(HasIndividualLevels));
                 SelectedLevel = Levels.First();
             }
         }
@@ -131,6 +112,9 @@ namespace SpeedrunTracker.ViewModels
             get => _variables;
             set
             {
+                if (_variables.SequenceEqualOrNull(value))
+                    return;
+
                 _variables = value;
                 NotifyPropertyChanged();
             }
@@ -144,8 +128,38 @@ namespace SpeedrunTracker.ViewModels
             {
                 _leaderboard = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(IsLeaderboardVisible));
             }
         }
+
+        private bool _isLoadingLeaderboard;
+        public bool IsLoadingLeaderboard
+        {
+            get => _isLoadingLeaderboard;
+            set
+            {
+                _isLoadingLeaderboard = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(IsLeaderboardVisible));
+            }
+        }
+
+        public bool IsLeaderboardVisible => IsLoadingLeaderboard || _leaderboard != null;
+
+        public bool HasIndividualLevels => _levels != null && _levels.Count > 1;
+
+        public string Platforms
+        {
+            get
+            {
+                if (Game?.Platforms == null)
+                    return string.Empty;
+
+                return string.Join(", ", Game.Platforms.Data.Select(x => x.Name));
+            }
+        }
+
+        public ICommand ShowLeaderboardCommand => new AsyncRelayCommand(LoadLeaderboardAsync);
 
         public async Task LoadCategoriesAsync()
         {
@@ -168,6 +182,8 @@ namespace SpeedrunTracker.ViewModels
 
         public async Task LoadLeaderboardAsync()
         {
+            IsLoadingLeaderboard = true;
+
             List<string> variableValues = new List<string>();
             foreach (VariableViewModel vm in Variables)
                 variableValues.Add($"var-{vm.VariableId}={vm.SelectedValue.Id}");
@@ -186,6 +202,47 @@ namespace SpeedrunTracker.ViewModels
                         entry.Run.Players[i] = leaderboard.Players.Data.FirstOrDefault(x => x.Id == entry.Run.Players[i].Id);
 
             Leaderboard = leaderboard;
+            IsLoadingLeaderboard = false;
+        }
+
+        private void UpdateVariables()
+        {
+            List<VariableViewModel> variablesVMs = new List<VariableViewModel>();
+            IEnumerable<Variable> variables = _allVariables.Where(x => x.IsSubcategory);
+            if (string.IsNullOrEmpty(SelectedLevel.Id))
+                variables = variables.Where(x => x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.FullGame);
+            else
+                variables = variables.Where(x => x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.AllLevels || x.Scope.Type == VariableScopeType.SingleLevel && x.Scope.Level == SelectedLevel.Id);
+
+            foreach (Variable variable in variables.Where(x => x.Category == null || x.Category == SelectedCategory.Id))
+            {
+                VariableViewModel vm = new VariableViewModel()
+                {
+                    VariableId = variable.Id,
+                    Name = variable.Name,
+                    Values = variable.Values.Values.Select(x => new ViewVariableValue()
+                    {
+                        Id = x.Key,
+                        Name = x.Value.Name,
+                        Rules = x.Value.Rules
+                    }).AsObservableCollection()
+                };
+                variablesVMs.Add(vm);
+            }
+
+            Variables = variablesVMs.AsObservableCollection();
+        }
+
+        private Asset GetLeaderboardEntryAsset(int place)
+        {
+            return place switch
+            {
+                1 => Game?.Assets?.TrophyFirstPlace,
+                2 => Game?.Assets?.TrophySecondPlace,
+                3 => Game?.Assets?.TrophyThirdPlace,
+                4 => Game?.Assets?.TrophyFouthPlace,
+                _ => null,
+            };
         }
     }
 }

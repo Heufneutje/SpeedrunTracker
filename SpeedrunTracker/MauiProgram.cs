@@ -9,10 +9,10 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 #if ANDROID
-Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
-{
-	handler.PlatformView.MaxWidth = int.MaxValue;
-});
+		Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
+		{
+			handler.PlatformView.MaxWidth = int.MaxValue;
+		});
 #endif
 
         var builder = MauiApp.CreateBuilder();

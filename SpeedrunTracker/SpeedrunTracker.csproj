@@ -28,6 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackageIcon></PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,7 +49,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\values-night\colors.xml" />
+	  <None Remove="Platforms\Android\Resources\values-night\styles.xml" />
+	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Properties\appSettings.json" />
+	  <None Remove="Resources\Images\main.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,6 +63,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
@@ -72,6 +78,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\GameDetailsPage.xaml.cs">
+	    <DependentUpon>GameDetailsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GameDetailFilterView.xaml.cs">
+	    <DependentUpon>GameDetailFilterView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GameSearchResultView.xaml.cs">
+	    <DependentUpon>GameSearchResultView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Loadable.xaml.cs">
 	    <DependentUpon>Loadable.xaml</DependentUpon>
 	  </Compile>
@@ -84,7 +99,7 @@
 	  <MauiXaml Update="Pages\FollowingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\GamePage.xaml">
+	  <MauiXaml Update="Pages\GameDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NotificationsPage.xaml">
@@ -93,10 +108,19 @@
 	  <MauiXaml Update="Pages\SearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\GameDetailView.xaml">
+	  <MauiXaml Update="Resources\Styles\Converters.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\GamesView.xaml">
+	  <MauiXaml Update="Resources\Styles\Templates.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GameDetailFilterView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GameDetailHeaderView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GameSearchResultView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LeaderboardView.xaml">

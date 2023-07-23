@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SpeedrunTracker.Resources.Styles.Templates">
+    <DataTemplate x:Key="SearchResultGroupHeaderTemplate">
+        <ViewCell>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding ImageSource}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"/>
+                    </Image.Behaviors>
+                </Image>
+                <Label Text="{Binding SearchType}" Grid.Column="1" FontAttributes="Bold" Padding="5"/>
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchResultTemplate">
+        <ViewCell Height="100">
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{Binding Assets.CoverSmall.FixedGameAssetUri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit"/>
+                <Label Text="{Binding Names.International}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0"/>
+                <Label Text="{Binding Path=Released, StringFormat=Released: {0}}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10"/>
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CategoryTemplate">
+        <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal"></VisualState>
+                    <VisualState Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Cyan}, Dark={StaticResource DarkCyan}}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Label Text="{Binding Name}"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LeaderboardTemplate">
+        <ViewCell>
+            <Grid Padding="5,20,20,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ColorFrom.DarkColor}" FontAttributes="Bold" Grid.Column="1"/>
+                <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2"/>
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+
+    <DataTemplate x:Key="VariablesTemplate">
+        <VerticalStackLayout>
+            <Label Text="{Binding Name}" Style="{StaticResource IndentedLabel}"/>
+            <CollectionView ItemsSource="{Binding Values}" 
+                                        SelectedItem="{Binding SelectedValue}" 
+                                        SelectionMode="Single" 
+                                        HorizontalOptions="Start"
+                                        ItemTemplate="{StaticResource CategoryTemplate}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </VerticalStackLayout>
+    </DataTemplate>
+</ResourceDictionary>

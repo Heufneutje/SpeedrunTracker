@@ -34,10 +34,4 @@ public partial class GameDetailPage : ContentPage
 
 		_isLoaded = true;
     }
-
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        GameDetailViewModel vm = BindingContext as GameDetailViewModel;
-        await vm.LoadLeaderboardAsync();
-    }
 }

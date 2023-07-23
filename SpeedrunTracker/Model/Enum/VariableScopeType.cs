@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace SpeedrunTracker.Model.Enum;
 
@@ -6,9 +6,12 @@ public enum VariableScopeType
 {
     Global,
 
-    [JsonPropertyName("full-game")]
+    [EnumMember(Value = "full-game")]
     FullGame,
 
-    [JsonPropertyName("all-levels")]
-    AllLevels
+    [EnumMember(Value = "all-levels")]
+    AllLevels,
+
+    [EnumMember(Value = "single-level")]
+    SingleLevel
 }

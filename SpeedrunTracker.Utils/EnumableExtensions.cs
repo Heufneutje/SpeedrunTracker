@@ -8,4 +8,14 @@ public static class EnumableExtensions
     {
         return new ObservableCollection<T>(collection);
     }
+
+    public static bool SequenceEqualOrNull<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
+    {
+        if (first == null && second == null)
+            return true;
+        if (first != null && second != null && first.SequenceEqual(second))
+            return true;
+
+        return false;
+    }
 }

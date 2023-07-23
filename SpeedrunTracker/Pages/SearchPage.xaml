@@ -21,6 +21,6 @@
                    Grid.Row="0"
                    HorizontalOptions="FillAndExpand" 
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <views:GamesView Grid.Row="1"/>
+        <views:GameSearchResultView Grid.Row="1"/>
     </Grid>
 </ContentPage>

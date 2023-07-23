@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SpeedrunTracker.Views"
+             x:Class="SpeedrunTracker.Pages.GameDetailPage"
+             Title="{Binding Game.Names.International}"
+             Appearing="ContentPage_Appearing"
+             BackgroundImageSource="{Binding Game.Assets.Background.FixedThemeAssetUri}">
+    <ScrollView>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                <views:GameDetailHeaderView/>
+            </Border>
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+            <views:GameDetailFilterView Grid.Row="1"/>
+            </Border>
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2" IsVisible="{Binding IsLeaderboardVisible}">
+                <views:LeaderboardView Grid.Row="2"/>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

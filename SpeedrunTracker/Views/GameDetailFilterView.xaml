@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SpeedrunTracker.Views"
+             x:Class="SpeedrunTracker.Views.GameDetailFilterView">
+    <VerticalStackLayout Padding="10">
+        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand"/>
+        <VerticalStackLayout IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+            <Label Text="Full Game / Individual Level" Style="{StaticResource IndentedLabel}" IsVisible="{Binding HasIndividualLevels}"/>
+            <Picker SelectedItem="{Binding SelectedLevel}" ItemsSource="{Binding Levels}" IsVisible="{Binding HasIndividualLevels}"/>
+            <Label Text="Category" Style="{StaticResource IndentedLabel}"/>
+            <CollectionView ItemsSource="{Binding Categories}" 
+                        SelectedItem="{Binding SelectedCategory}"
+                        SelectionMode="Single" 
+                        HorizontalOptions="Start"
+                        ItemTemplate="{StaticResource CategoryTemplate}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+            <CollectionView ItemsSource="{Binding Variables}" HorizontalOptions="Center" ItemTemplate="{StaticResource VariablesTemplate}" VerticalScrollBarVisibility="Never">
+            </CollectionView>
+            <Button Text="Show Leaderboard" Command="{Binding ShowLeaderboardCommand}" Margin="5"/>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

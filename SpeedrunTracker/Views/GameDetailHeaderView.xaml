@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeedrunTracker.Views.GameDetailHeaderView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri}" Margin="10"/>
+        <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Text="Released:" Grid.Column="0" Grid.Row="0" FontAttributes="Bold"/>
+                <Label Text="{Binding Game.Released}" Grid.Column="1" Grid.Row="0"/>
+                <Label Text="Platforms:" Grid.Column="0" Grid.Row="1" FontAttributes="Bold"/>
+                <Label Text="{Binding Platforms}" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

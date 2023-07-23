@@ -5,24 +5,7 @@
     xmlns:pages="clr-namespace:SpeedrunTracker.Pages"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="SpeedrunTracker.AppShell"
-    FlyoutBackgroundColor="DarkCyan">
-    <Shell.Resources>
-        <Style x:Key="FlyoutItemStyle" TargetType="Grid">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="Cyan"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-    </Shell.Resources>
-    
+    FlyoutBackgroundColor="{StaticResource DarkCyan}">
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid Style="{StaticResource FlyoutItemStyle}">
@@ -32,7 +15,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="{Binding FlyoutIcon}" Margin="10" HeightRequest="30" HorizontalOptions="EndAndExpand">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="White"/>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}"/>
                     </Image.Behaviors>
                 </Image>
                 <Label Grid.Column="1"
@@ -47,7 +30,10 @@
     </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
-        <Label Text="SpeedrunTracker" FontSize="Large" Padding="20"/>
+        <VerticalStackLayout>
+            <Label Text="SpeedrunTracker" FontSize="Large" Padding="20"/>
+            <Image Source="main" HeightRequest="150"/>
+        </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Search" FlyoutIcon="search">

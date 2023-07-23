@@ -23,23 +23,4 @@ public class Player : BaseSpeedrunObject
 
     [JsonIgnore]
     public string DisplayName => PlayerType == PlayerType.Guest ? Name : string.IsNullOrEmpty(Names.International) ? Names.Japanese : Names.International;
-
-    [JsonIgnore]
-    public PlayerNameStyle DisplayNameStyle
-    {
-        get
-        {
-            if (PlayerType == PlayerType.User)
-                return NameStyle;
-
-            return new()
-            {
-                ColorFrom = new()
-                {
-                    Dark = "#ffffff",
-                    Light = "#000000"
-                }
-            };
-        }
-    }
 }

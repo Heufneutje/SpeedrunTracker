@@ -4,7 +4,9 @@ using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Pages;
 using SpeedrunTracker.Repository;
 using SpeedrunTracker.ViewModels;
+using SpeedrunTracker.Views;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace SpeedrunTracker.DependencyInjection;
 
@@ -17,13 +19,13 @@ public static class DependencyInjectionExtensions
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             Converters =
             {
-                new JsonPropertyNameStringEnumConverter()
+                new JsonStringEnumMemberConverter()
             }
         };
 
         RefitSettings settings = new()
         {
-            //ContentSerializer = new SystemTextJsonContentSerializer(options)
+            ContentSerializer = new SystemTextJsonContentSerializer(options)
         };
 
         services.AddRefitClient<IGamesService>(settings).ConfigureHttpClient(ConfigureHttpClient);

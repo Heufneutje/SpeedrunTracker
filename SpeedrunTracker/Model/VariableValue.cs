@@ -1,7 +1,10 @@
-﻿namespace SpeedrunTracker.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace SpeedrunTracker.Model;
 
 public class VariableValue
 {
-    public string Label { get; set; }
+    [JsonPropertyName("label")]
+    public string Name { get; set; }
     public string Rules { get; set; }
 }

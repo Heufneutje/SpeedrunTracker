@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Model;
+using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -11,6 +13,7 @@ namespace SpeedrunTracker.ViewModels
 
         private readonly IGamesRepository _gamesRepository;
         public ICommand SearchCommand => new AsyncRelayCommand<string>(Search, CanSearch);
+        public ICommand NavigateToCommand => new AsyncRelayCommand<Game>(NavigateTo);
 
         public GameSearchViewModel(IGamesRepository gamesRepository)
         {
@@ -41,5 +44,10 @@ namespace SpeedrunTracker.ViewModels
         }
 
         public bool CanSearch(object parameter) => !IsRunningBackgroundTask;
+
+        private async Task NavigateTo(Game game)
+        {
+            await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
+        }
     }
 }

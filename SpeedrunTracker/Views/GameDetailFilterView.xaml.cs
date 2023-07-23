@@ -2,9 +2,9 @@ using SpeedrunTracker.ViewModels;
 
 namespace SpeedrunTracker.Views;
 
-public partial class GameDetailView : ContentView
+public partial class GameDetailFilterView : ContentView
 {
-	public GameDetailView()
+	public GameDetailFilterView()
 	{
 		InitializeComponent();
 	}
