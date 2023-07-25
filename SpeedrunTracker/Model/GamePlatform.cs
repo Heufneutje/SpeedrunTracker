@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Model;
 
-public class Platform : BaseSpeedrunObject
+public class GamePlatform : BaseSpeedrunObject
 {
     public string Name { get; set; }
 }

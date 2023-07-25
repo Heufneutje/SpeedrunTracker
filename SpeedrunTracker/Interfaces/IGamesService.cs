@@ -5,7 +5,7 @@ namespace SpeedrunTracker.Interfaces
 {
     public interface IGamesService
     {
-        [Get("/games?name={name}&embed=platforms")]
+        [Get("/games?name={name}&embed=platforms,moderators")]
         Task<PagedData<List<Game>>> SearchGamesAsync(string name);
 
         [Get("/games/{gameId}/categories")]

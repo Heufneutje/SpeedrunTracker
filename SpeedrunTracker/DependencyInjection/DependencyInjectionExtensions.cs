@@ -3,6 +3,7 @@ using Refit;
 using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Pages;
 using SpeedrunTracker.Repository;
+using SpeedrunTracker.Services;
 using SpeedrunTracker.ViewModels;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -29,8 +30,11 @@ public static class DependencyInjectionExtensions
 
         services.AddRefitClient<IGamesService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<ILeaderboardService>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<IUserService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddScoped<IGamesRepository, GamesRepository>();
         services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddSingleton<IBrowserService, BrowserService>();
 
         return services;
     }
@@ -46,6 +50,7 @@ public static class DependencyInjectionExtensions
     {
         services.AddSingleton<GameSearchViewModel>();
         services.AddTransient<GameDetailViewModel>();
+        services.AddTransient<RunDetailsViewModel>();
 
         return services;
     }
@@ -54,6 +59,7 @@ public static class DependencyInjectionExtensions
     {
         services.AddSingleton<SearchPage>();
         services.AddTransient<GameDetailPage>();
+        services.AddTransient<RunDetailsPage>();
 
         return services;
     }

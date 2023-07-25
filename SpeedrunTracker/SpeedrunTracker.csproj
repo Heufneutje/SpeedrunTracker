@@ -53,7 +53,17 @@
 	  <None Remove="Platforms\Android\Resources\values-night\styles.xml" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Properties\appSettings.json" />
+	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\category.svg" />
+	  <None Remove="Resources\Images\clock.svg" />
+	  <None Remove="Resources\Images\comment.svg" />
+	  <None Remove="Resources\Images\hourglass.svg" />
 	  <None Remove="Resources\Images\main.png" />
+	  <None Remove="Resources\Images\platform.svg" />
+	  <None Remove="Resources\Images\rejected.svg" />
+	  <None Remove="Resources\Images\trophy.svg" />
+	  <None Remove="Resources\Images\user.svg" />
+	  <None Remove="Resources\Images\verified.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -96,6 +106,9 @@
 	  <MauiXaml Update="AppShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\RunPropertyControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\FollowingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -103,6 +116,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NotificationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\RunDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SearchPage.xaml">

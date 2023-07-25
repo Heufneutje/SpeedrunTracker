@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Model;
 using SpeedrunTracker.Model.Enum;
+using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -166,6 +168,8 @@ namespace SpeedrunTracker.ViewModels
 
         public ICommand ShowLeaderboardCommand => new AsyncRelayCommand(LoadLeaderboardAsync);
 
+        public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
+
         public async Task LoadCategoriesAsync()
         {
             List<Category> categories = (await _gamesRepository.GetGameCategoriesAsync(Game.Id)).Data;
@@ -208,6 +212,48 @@ namespace SpeedrunTracker.ViewModels
 
             Leaderboard = leaderboard;
             IsLoadingLeaderboard = false;
+        }
+
+        private async Task NavigateToRun(LeaderboardEntry entry)
+        {
+            Category category = _categories.FirstOrDefault(x => x.Id == entry.Run.CategoryId);
+            Level level = _levels.FirstOrDefault(x => x.Id == entry.Run.LevelId);
+            GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == entry.Run.System.PlatformId);
+            User examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == entry.Run.Status.ExaminerId);
+
+            List<RunVariable> runVariables = new();
+            foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
+            {
+                Variable variable = _allVariables.FirstOrDefault(x => x.Id == valuePair.Key);
+                if (variable == null)
+                    continue;
+
+                VariableValue value = variable.Values.Values.FirstOrDefault(x => x.Key == valuePair.Value).Value;
+                if (value == null)
+                    continue;
+
+                runVariables.Add(new()
+                {
+                    Name = variable.Name,
+                    Value = value.Name,
+                    IsSubcategory = variable.IsSubcategory
+                });
+            }
+
+            RunDetails runDetails = new RunDetails()
+            {
+                Category = category,
+                GameAssets = _game.Assets,
+                Examiner = examiner,
+                Level = level,
+                Place = entry.Place,
+                Platform = platform,
+                Ruleset = _game.Ruleset,
+                Run = entry.Run,
+                Variables = runVariables,
+            };
+
+            await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
         }
 
         private void UpdateVariables()

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SpeedrunTracker.Model;
 
-public class Player : BaseSpeedrunObject
+public class User : BaseSpeedrunObject
 {
     [JsonPropertyName("rel")]
     public PlayerType PlayerType { get; set; }

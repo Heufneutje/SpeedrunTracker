@@ -4,39 +4,63 @@ namespace SpeedrunTracker.Model;
 
 public class SpeedrunTime
 {
-    [JsonPropertyName("primary")]
-    public string PrimaryTimeCode { get; set; }
-
     [JsonPropertyName("primary_t")]
     public double PrimarySeconds { get; set; }
-
-    [JsonPropertyName("realtime")]
-    public string RealtimeTimeCode { get; set; }
 
     [JsonPropertyName("realtime_t")]
     public double RealtimeSeconds { get; set; }
 
-    [JsonPropertyName("realtime_noloads")]
-    public string RealtimeNoLoadsTimeCode { get; set; }
-
     [JsonPropertyName("realtime_noloads_t")]
     public double RealtimeNoLoadsSeconds { get; set; }
-
-    [JsonPropertyName("ingame")]
-    public string IngameTimeCode { get; set; }
 
     [JsonPropertyName("ingame_t")]
     public double IngameSeconds { get; set; }
 
-    [JsonIgnore]
-    public TimeSpan PrimaryTimeSpan => TimeSpan.FromSeconds(PrimarySeconds);
+    private string _primaryTimeSpan;
 
     [JsonIgnore]
-    public TimeSpan RealtimeTimeSpan => TimeSpan.FromSeconds(RealtimeSeconds);
+    public string PrimaryTimeSpan
+    {
+        get
+        {
+            _primaryTimeSpan ??= TimeSpan.FromSeconds(PrimarySeconds).ToShortForm();
+            return _primaryTimeSpan;
+        }
+    }
+
+    private string _realtimeTimeSpan;
 
     [JsonIgnore]
-    public TimeSpan RealtimeNoLoadsTimeSpan => TimeSpan.FromSeconds(RealtimeNoLoadsSeconds);
+    public string RealtimeTimeSpan
+    {
+        get
+        {
+            _realtimeTimeSpan ??= TimeSpan.FromSeconds(RealtimeSeconds).ToShortForm();
+            return _realtimeTimeSpan;
+        }
+    }
+
+    private string _realtimeNoLoadsTimeSpan;
 
     [JsonIgnore]
-    public TimeSpan IngameTimeSpan => TimeSpan.FromSeconds(IngameSeconds);
+    public string RealtimeNoLoadsTimeSpan
+    {
+        get
+        {
+            _realtimeNoLoadsTimeSpan ??= TimeSpan.FromSeconds(RealtimeNoLoadsSeconds).ToShortForm();
+            return _realtimeNoLoadsTimeSpan;
+        }
+    }
+
+    private string _ingameTimeSpan;
+
+    [JsonIgnore]
+    public string IngameTimeSpan
+    {
+        get
+        {
+            _ingameTimeSpan ??= TimeSpan.FromSeconds(IngameSeconds).ToShortForm();
+            return _ingameTimeSpan;
+        }
+    }
 }

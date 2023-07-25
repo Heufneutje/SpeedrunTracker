@@ -2,6 +2,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              x:Class="SpeedrunTracker.Resources.Styles.Templates">
     <DataTemplate x:Key="SearchResultGroupHeaderTemplate">
         <ViewCell>
@@ -87,5 +88,13 @@
                 </CollectionView.ItemsLayout>
             </CollectionView>
         </VerticalStackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RunVariablesTemplate">
+        <controls:RunPropertyControl Title="{Binding Name}" Value="{Binding Value}" ImageSource="category" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="RunPlayersTemplate">
+        <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ColorFrom.DarkColor}" Margin="5,0,0,5" />
     </DataTemplate>
 </ResourceDictionary>
