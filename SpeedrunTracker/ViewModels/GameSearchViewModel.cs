@@ -45,7 +45,7 @@ namespace SpeedrunTracker.ViewModels
 
             if (_settingsViewModel.EnableGameSearch)
             {
-                List<Game> games = (await _gamesRepository.SearchGamesAsync(query.Trim())).Data;
+                IEnumerable<Game> games = (await _gamesRepository.SearchGamesAsync(query.Trim())).Data.OrderBy(x => x.IsRomhack);
                 if (games.Any())
                 {
                     SearchResultGroup gamesGroup = new SearchResultGroup(Model.Enum.SearchType.Games, games.Select(x => new SearchResult()
@@ -61,7 +61,7 @@ namespace SpeedrunTracker.ViewModels
 
             if (_settingsViewModel.EnableUserSearch)
             {
-                List<User> users = (await _userRepository.SearchUsersAsync(query.Trim())).Data;
+                IEnumerable<User> users = (await _userRepository.SearchUsersAsync(query.Trim())).Data;
                 if (users.Any())
                 {
                     SearchResultGroup usersGroup = new SearchResultGroup(Model.Enum.SearchType.Users, users.Select(x => new SearchResult()
