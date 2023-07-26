@@ -4,59 +4,61 @@
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              x:Class="SpeedrunTracker.Pages.RunDetailsPage"
              Title="{Binding Title}"
-             BackgroundImageSource="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}"
              Appearing="ContentPage_Appearing">
-    <ScrollView>
-        <Grid Padding="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Image Source="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <ScrollView>
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
-                <VerticalStackLayout Padding="10">
-                    <Button Text="Watch Video" Command="{Binding ShowVideoCommand}" IsVisible="{Binding HasVideo}" />
-                    <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" />
-                    <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding HasComment}" ImageSource="comment" />
-                </VerticalStackLayout>
-            </Border>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                    <VerticalStackLayout Padding="10">
+                        <Button Text="Watch Video" Command="{Binding ShowVideoCommand}" IsVisible="{Binding HasVideo}" />
+                        <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" />
+                        <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding HasComment}" ImageSource="comment" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
-                <VerticalStackLayout Padding="10">
-                    <controls:RunPropertyControl Title="Players" ImageSource="user" IsValueVisible="False" />
-                    <CollectionView ItemsSource="{Binding RunDetails.Run.Players}" ItemTemplate="{StaticResource RunPlayersTemplate}" />
-                </VerticalStackLayout>
-            </Border>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+                    <VerticalStackLayout Padding="10">
+                        <controls:RunPropertyControl Title="Players" ImageSource="user" IsValueVisible="False" />
+                        <CollectionView ItemsSource="{Binding RunDetails.Run.Players}" ItemTemplate="{StaticResource RunPlayersTemplate}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2">
-                <VerticalStackLayout Padding="10">
-                    <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
-                    <CollectionView ItemsSource="{Binding RunDetails.Variables}" ItemTemplate="{StaticResource RunVariablesTemplate}" />
-                </VerticalStackLayout>
-            </Border>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2">
+                    <VerticalStackLayout Padding="10">
+                        <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
+                        <CollectionView ItemsSource="{Binding RunDetails.Variables}" ItemTemplate="{StaticResource RunVariablesTemplate}" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="3">
-                <VerticalStackLayout Padding="10">
-                    <controls:RunPropertyControl Title="Rank" Value="{Binding RunDetails.Place}" ImageSource="trophy" />
-                    <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
-                    <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.IngameTimeSpan}" ImageSource="clock" IsVisible="{Binding HasInGameTime}" />
-                    <controls:RunPropertyControl Title="Real Time" Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtime}" />
-                    <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtimeNoLoads}" />
-                    <controls:RunPropertyControl Title="Date" Value="{Binding RunDetails.Run.Date, StringFormat=
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="3">
+                    <VerticalStackLayout Padding="10">
+                        <controls:RunPropertyControl Title="Rank" Value="{Binding RunDetails.Place}" ImageSource="trophy" />
+                        <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
+                        <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.IngameTimeSpan}" ImageSource="clock" IsVisible="{Binding HasInGameTime}" />
+                        <controls:RunPropertyControl Title="Real Time" Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtime}" />
+                        <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtimeNoLoads}" />
+                        <controls:RunPropertyControl Title="Date" Value="{Binding RunDetails.Run.Date, StringFormat=
                         '{0:yyyy-MM-dd}'}" ImageSource="calendar" />
-                    <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" />
-                </VerticalStackLayout>
-            </Border>
+                        <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" />
+                    </VerticalStackLayout>
+                </Border>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
-                <VerticalStackLayout Padding="10">
-                    <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
-                    <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ColorFrom.DarkColor}" IsVisible="{Binding HasExaminer}" />
-                </VerticalStackLayout>
-            </Border>
-        </Grid>
-    </ScrollView>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
+                    <VerticalStackLayout Padding="10">
+                        <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
+                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ColorFrom.DarkColor}" IsVisible="{Binding HasExaminer}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>

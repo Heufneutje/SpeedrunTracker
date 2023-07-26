@@ -4,25 +4,27 @@
              xmlns:views="clr-namespace:SpeedrunTracker.Views"
              x:Class="SpeedrunTracker.Pages.GameDetailPage"
              Title="{Binding Game.Names.International}"
-             Appearing="ContentPage_Appearing"
-             BackgroundImageSource="{Binding Game.Assets.Background.FixedThemeAssetUri}">
-    <ScrollView>
-        <Grid Padding="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+             Appearing="ContentPage_Appearing">
+    <Grid>
+        <Image Source="{Binding Game.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <ScrollView>
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
-                <views:GameDetailHeaderView />
-            </Border>
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
-                <views:GameDetailFilterView Grid.Row="1" />
-            </Border>
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2" IsVisible="{Binding IsLeaderboardVisible}">
-                <views:LeaderboardView Grid.Row="2" />
-            </Border>
-        </Grid>
-    </ScrollView>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                    <views:GameDetailHeaderView />
+                </Border>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+                    <views:GameDetailFilterView Grid.Row="1" />
+                </Border>
+                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2" IsVisible="{Binding IsLeaderboardVisible}">
+                    <views:LeaderboardView Grid.Row="2" />
+                </Border>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>
