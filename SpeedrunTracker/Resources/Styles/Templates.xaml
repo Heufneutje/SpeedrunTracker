@@ -33,9 +33,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding Assets.CoverSmall.FixedGameAssetUri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                <Label Text="{Binding Names.International}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                <Label Text="{Binding Path=Released, StringFormat=Released: {0}}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+                <Image Source="{Binding ImageUrl}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
+                <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+                <Label Text="{Binding Subtitle}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
             </Grid>
         </ViewCell>
     </DataTemplate>
@@ -96,5 +96,12 @@
 
     <DataTemplate x:Key="RunPlayersTemplate">
         <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ColorFrom.DarkColor}" Margin="5,0,0,5" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SearchFiltersTemplate">
+        <HorizontalStackLayout>
+            <Switch IsToggled="{Binding IsEnabled}" />
+            <Label Text="{Binding SearchType}" />
+        </HorizontalStackLayout>
     </DataTemplate>
 </ResourceDictionary>

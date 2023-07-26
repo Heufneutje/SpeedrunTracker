@@ -13,14 +13,13 @@ namespace SpeedrunTracker.ViewModels
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly ILeaderboardRepository _leaderboardRepository;
+        private readonly SettingsViewModel _settingsViewModel;
 
-        // TODO: Replace with config value
-        private const int _maxResults = 50;
-
-        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository)
+        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, SettingsViewModel settingsViewModel)
         {
             _gamesRepository = gamesRepository;
             _leaderboardRepository = leaderboardRepository;
+            _settingsViewModel = settingsViewModel;
         }
 
         private Game _game;
@@ -202,8 +201,8 @@ namespace SpeedrunTracker.ViewModels
                 variables = $"&{variables}";
 
             Leaderboard leaderboard = (string.IsNullOrEmpty(SelectedLevel.Id) ?
-                await _leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _maxResults) :
-                await _leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _maxResults)).Data;
+                await _leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults) :
+                await _leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)).Data;
 
             foreach (LeaderboardEntry entry in leaderboard.Runs)
                 for (int i = 0; i < entry.Run.Players.Count; i++)

@@ -47,4 +47,8 @@
     <FlyoutItem Title="Notifications" FlyoutIcon="bell">
         <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate pages:NotificationsPage}" Route="Notifications" />
     </FlyoutItem>
+
+    <FlyoutItem Title="Settings" FlyoutIcon="gear">
+        <ShellContent x:Name="settings" ContentTemplate="{DataTemplate pages:SettingsPage}" Route="Settings" />
+    </FlyoutItem>
 </Shell>

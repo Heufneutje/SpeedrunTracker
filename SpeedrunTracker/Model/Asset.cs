@@ -8,4 +8,6 @@ public class Asset
     public string FixedGameAssetUri => Uri?.Replace("gameasset", "static/game");
 
     public string FixedThemeAssetUri => Uri?.Replace("themeasset", "static/theme");
+
+    public string FixedUserAssetUri => Uri?.Replace("userasset", "static/user");
 }

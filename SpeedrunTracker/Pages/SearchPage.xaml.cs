@@ -4,10 +4,10 @@ namespace SpeedrunTracker.Pages;
 
 public partial class SearchPage : ContentPage
 {
-    public SearchPage(GameSearchViewModel viewModel)
+    public SearchPage(GameSearchViewModel searchViewModel)
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = searchViewModel;
     }
 
     private void searchBar_SearchButtonPressed(object sender, EventArgs e)

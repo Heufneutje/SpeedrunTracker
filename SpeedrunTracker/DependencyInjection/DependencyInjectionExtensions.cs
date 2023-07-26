@@ -49,6 +49,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
         services.AddSingleton<GameSearchViewModel>();
+        services.AddSingleton<SettingsViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
 
@@ -58,6 +59,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection RegisterPages(this IServiceCollection services)
     {
         services.AddSingleton<SearchPage>();
+        services.AddSingleton<SettingsPage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
 

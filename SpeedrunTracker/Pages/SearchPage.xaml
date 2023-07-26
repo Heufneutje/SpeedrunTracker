@@ -4,10 +4,6 @@
              x:Class="SpeedrunTracker.Pages.SearchPage"
              xmlns:views="clr-namespace:SpeedrunTracker.Views"
              Title="Search">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

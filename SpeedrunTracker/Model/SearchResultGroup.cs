@@ -3,25 +3,18 @@ using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.Model
 {
-    public class SearchResultGroup : ObservableCollection<Game>
+    public class SearchResultGroup : ObservableCollection<SearchResult>
     {
         public SearchType SearchType { get; }
 
-        public string ImageSource
+        public string ImageSource => SearchType switch
         {
-            get
-            {
-                switch (SearchType)
-                {
-                    case SearchType.Games:
-                        return "game.svg";
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
+            SearchType.Games => "game.svg",
+            SearchType.Users => "user.svg",
+            _ => string.Empty,
+        };
 
-        public SearchResultGroup(SearchType searchType, List<Game> items) : base(items)
+        public SearchResultGroup(SearchType searchType, List<SearchResult> items) : base(items)
         {
             SearchType = searchType;
         }

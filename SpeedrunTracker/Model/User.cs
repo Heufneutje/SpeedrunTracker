@@ -22,6 +22,7 @@ public class User : BaseSpeedrunObject
     public Link YouTube { get; set; }
     public Link Twitter { get; set; }
     public Link SpeedrunsLive { get; set; }
+    public UserAssets Assets { get; set; }
 
     [JsonIgnore]
     public string DisplayName => PlayerType == PlayerType.Guest ? Name : string.IsNullOrEmpty(Names.International) ? Names.Japanese : Names.International;

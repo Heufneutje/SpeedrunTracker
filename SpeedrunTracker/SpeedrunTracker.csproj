@@ -57,6 +57,7 @@
 	  <None Remove="Resources\Images\category.svg" />
 	  <None Remove="Resources\Images\clock.svg" />
 	  <None Remove="Resources\Images\comment.svg" />
+	  <None Remove="Resources\Images\gear.svg" />
 	  <None Remove="Resources\Images\hourglass.svg" />
 	  <None Remove="Resources\Images\main.png" />
 	  <None Remove="Resources\Images\platform.svg" />
@@ -122,6 +123,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SearchPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Converters.xaml">

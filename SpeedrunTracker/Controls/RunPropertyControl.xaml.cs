@@ -1,5 +1,3 @@
-using Android.Content;
-
 namespace SpeedrunTracker.Controls;
 
 public partial class RunPropertyControl : ContentView

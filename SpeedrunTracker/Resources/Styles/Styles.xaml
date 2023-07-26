@@ -405,6 +405,11 @@
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    <Style TargetType="Line">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
     <Style x:Key="FlyoutItemStyle" TargetType="Grid">
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -434,5 +439,11 @@
     <Style x:Key="IndentedLabel" TargetType="Label">
         <Setter Property="Margin" Value="4,0,0,0" />
         <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <Style x:Key="GroupHeaderLabel" TargetType="Label">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Medium"/>
     </Style>
 </ResourceDictionary>

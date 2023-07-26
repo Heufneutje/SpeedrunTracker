@@ -16,4 +16,9 @@ public class UserRepository : IUserRepository
     {
         return _userService.GetUserAsync(userId);
     }
+
+    public Task<PagedData<List<User>>> SearchUsersAsync(string name)
+    {
+        return _userService.SearchUsersAsync(name);
+    }
 }
