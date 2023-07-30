@@ -36,12 +36,12 @@
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Search" FlyoutIcon="search">
-        <ShellContent x:Name="search" ContentTemplate="{DataTemplate pages:SearchPage}" Route="Search" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Following" FlyoutIcon="following">
         <ShellContent x:Name="following" ContentTemplate="{DataTemplate pages:FollowingPage}" Route="Following" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Search" FlyoutIcon="search">
+        <ShellContent x:Name="search" ContentTemplate="{DataTemplate pages:SearchPage}" Route="Search" />
     </FlyoutItem>
 
     <FlyoutItem Title="Notifications" FlyoutIcon="bell">
