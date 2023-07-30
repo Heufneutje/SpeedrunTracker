@@ -2,11 +2,11 @@
 
 namespace SpeedrunTracker.Model;
 
-public class PlayerNameStyle
+public class UserNameStyle
 {
     [JsonPropertyName("color-from")]
-    public PlayerNameStyleGradient ColorFrom { get; set; }
+    public UserNameStyleGradient ColorFrom { get; set; }
 
     [JsonPropertyName("color-to")]
-    public PlayerNameStyleGradient ColorTo { get; set; }
+    public UserNameStyleGradient ColorTo { get; set; }
 }

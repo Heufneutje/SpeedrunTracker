@@ -104,4 +104,49 @@
             <Label Text="{Binding SearchType}" />
         </HorizontalStackLayout>
     </DataTemplate>
+
+    <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate">
+        <ViewCell Height="100">
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
+                <Label Text="{Binding Game.Names.International}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PersonalBestsTemplate">
+        <ViewCell>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="{Binding Level.Name}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
+                    <Label Text="{Binding Category.Data.Name}" />
+                    <CollectionView ItemsSource="{Binding Run.Variables}" ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1">
+                    <HorizontalStackLayout>
+                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" WidthRequest="14" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" />
+                        <Label Text="{Binding OrdinalPlace}" FontAttributes="Bold" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding Run.Times.PrimaryTimeSpan}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2">
+                    <Label Text="{Binding Platform.Data.Name}" />
+                    <Label Text="{Binding Run.Date, StringFormat='{0:yyyy-MM-dd}'}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PersonalBestRunVariablesTemplate">
+        <Label Text="{Binding Value}" />
+    </DataTemplate>
 </ResourceDictionary>

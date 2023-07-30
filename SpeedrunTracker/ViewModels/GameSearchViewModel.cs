@@ -86,6 +86,8 @@ namespace SpeedrunTracker.ViewModels
         {
             if (result.SearchObject is Game game)
                 await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
+            else if (result.SearchObject is User user)
+                await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
         }
     }
 }

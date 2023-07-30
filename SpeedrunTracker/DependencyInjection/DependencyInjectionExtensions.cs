@@ -52,6 +52,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SettingsViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
+        services.AddTransient<UserDetailsViewModel>();
 
         return services;
     }
@@ -62,6 +63,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SettingsPage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
+        services.AddTransient<UserDetailPage>();
 
         return services;
     }

@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Model
 {
-    public class PlayerLocation
+    public class UserLocation
     {
         public Country Country { get; set; }
     }

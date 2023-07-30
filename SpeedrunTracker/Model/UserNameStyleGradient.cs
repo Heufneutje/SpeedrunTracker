@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Model;
 
-public class PlayerNameStyleGradient
+public class UserNameStyleGradient
 {
     public string Light { get; set; }
     public string Dark { get; set; }

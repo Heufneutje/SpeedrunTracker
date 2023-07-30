@@ -10,4 +10,7 @@ public interface IUserService
 
     [Get("/users?name={name}")]
     Task<PagedData<List<User>>> SearchUsersAsync(string name);
+
+    [Get("/users/{userId}/personal-bests?embed=game,category,category.variables,level,platform")]
+    Task<BaseData<List<LeaderboardEntry>>> GetUserPersonalBestsAsync(string userId);
 }

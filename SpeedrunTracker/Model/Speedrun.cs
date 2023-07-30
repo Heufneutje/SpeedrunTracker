@@ -15,9 +15,20 @@ public class Speedrun : BaseSpeedrunObject
     public GameSystem System { get; set; }
     public Dictionary<string, string> Values { get; set; }
 
+    [JsonPropertyName("game")]
+    public string GameId { get; set; }
+
     [JsonPropertyName("category")]
     public string CategoryId { get; set; }
 
     [JsonPropertyName("level")]
     public string LevelId { get; set; }
+
+    [JsonIgnore]
+    public List<RunVariable> Variables { get; set; }
+
+    public Speedrun()
+    {
+        Variables = new List<RunVariable>();
+    }
 }

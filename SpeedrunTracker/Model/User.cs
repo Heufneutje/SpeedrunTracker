@@ -11,17 +11,24 @@ public class User : BaseSpeedrunObject
     public string Name { get; set; }
     public Names Names { get; set; }
     public string Weblink { get; set; }
+    public string Pronouns { get; set; }
 
     [JsonPropertyName("name-style")]
-    public PlayerNameStyle NameStyle { get; set; }
+    public UserNameStyle NameStyle { get; set; }
 
     public DateTime? Signup { get; set; }
-    public PlayerLocation Location { get; set; }
+    public UserLocation Location { get; set; }
     public Link Twitch { get; set; }
     public Link Hitbox { get; set; }
+
+    [JsonPropertyName("youtube")]
     public Link YouTube { get; set; }
+
     public Link Twitter { get; set; }
-    public Link SpeedrunsLive { get; set; }
+
+    [JsonPropertyName("speedrunslive")]
+    public Link SpeedRunsLive { get; set; }
+
     public UserAssets Assets { get; set; }
 
     [JsonIgnore]

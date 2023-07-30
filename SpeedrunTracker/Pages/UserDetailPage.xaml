@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeedrunTracker.Pages.UserDetailPage"
+              xmlns:views="clr-namespace:SpeedrunTracker.Views"
+             Title="{Binding DisplayName}"
+             Appearing="ContentPage_Appearing">
+    <ScrollView>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                <views:UserDetailHeaderView />
+            </Border>
+
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+                <views:UserPersonalBestsView />
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

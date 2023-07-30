@@ -220,7 +220,6 @@ namespace SpeedrunTracker.ViewModels
             GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == entry.Run.System.PlatformId);
             User examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == entry.Run.Status.ExaminerId);
 
-            List<RunVariable> runVariables = new();
             foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
             {
                 Variable variable = _allVariables.FirstOrDefault(x => x.Id == valuePair.Key);
@@ -231,12 +230,7 @@ namespace SpeedrunTracker.ViewModels
                 if (value == null)
                     continue;
 
-                runVariables.Add(new()
-                {
-                    Name = variable.Name,
-                    Value = value.Name,
-                    IsSubcategory = variable.IsSubcategory
-                });
+                entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
             }
 
             RunDetails runDetails = new RunDetails()
@@ -249,7 +243,7 @@ namespace SpeedrunTracker.ViewModels
                 Platform = platform,
                 Ruleset = _game.Ruleset,
                 Run = entry.Run,
-                Variables = runVariables,
+                Variables = entry.Run.Variables,
             };
 
             await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
@@ -281,18 +275,6 @@ namespace SpeedrunTracker.ViewModels
             }
 
             Variables = variablesVMs.AsObservableCollection();
-        }
-
-        private Asset GetLeaderboardEntryAsset(int place)
-        {
-            return place switch
-            {
-                1 => Game?.Assets?.TrophyFirstPlace,
-                2 => Game?.Assets?.TrophySecondPlace,
-                3 => Game?.Assets?.TrophyThirdPlace,
-                4 => Game?.Assets?.TrophyFouthPlace,
-                _ => null,
-            };
         }
     }
 }

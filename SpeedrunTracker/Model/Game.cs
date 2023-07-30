@@ -2,11 +2,9 @@
 
 namespace SpeedrunTracker.Model;
 
-public class Game : BaseSpeedrunObject
+public class Game : BaseGame
 {
-    public Names Names { get; set; }
     public int Released { get; set; }
-    public GameAssets Assets { get; set; }
     public BaseData<List<GamePlatform>> Platforms { get; set; }
     public Ruleset Ruleset { get; set; }
     public BaseData<List<User>> Moderators { get; set; }
