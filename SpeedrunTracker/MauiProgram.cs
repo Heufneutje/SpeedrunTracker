@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SpeedrunTracker.DependencyInjection;
+using System.Reflection;
 
 namespace SpeedrunTracker;
 
@@ -14,8 +16,14 @@ public static class MauiProgram
             handler.PlatformView.MaxWidth = int.MaxValue;
         });
 #endif
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        using Stream stream = assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json");
 
-        var builder = MauiApp.CreateBuilder();
+        IConfigurationRoot config = new ConfigurationBuilder()
+                    .AddJsonStream(stream)
+                    .Build();
+
+        MauiAppBuilder builder = MauiApp.CreateBuilder();
         builder
             .UseMauiCommunityToolkit()
             .UseMauiApp<App>()
@@ -24,6 +32,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        builder.Configuration.AddConfiguration(config);
 
 #if DEBUG
         builder.Logging.AddDebug();

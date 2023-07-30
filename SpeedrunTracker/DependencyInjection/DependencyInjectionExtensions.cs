@@ -37,13 +37,12 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IBrowserService, BrowserService>();
 
         return services;
-    }
 
-    private static void ConfigureHttpClient(HttpClient client)
-    {
-        //client.BaseAddress = new Uri(config["speedrun-dot-com:api-base-address"]));
-        client.BaseAddress = new Uri("https://www.speedrun.com/api/v1");
-        client.DefaultRequestHeaders.Add("User-Agent", "Heufneutje-SpeedrunTracker/0.0.1");
+        void ConfigureHttpClient(HttpClient client)
+        {
+            client.BaseAddress = new Uri(config["speedrun-dot-com:api-base-address"]);
+            client.DefaultRequestHeaders.Add("User-Agent", "Heufneutje-SpeedrunTracker/0.0.1");
+        }
     }
 
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)

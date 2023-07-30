@@ -52,7 +52,6 @@
 	  <None Remove="Platforms\Android\Resources\values-night\colors.xml" />
 	  <None Remove="Platforms\Android\Resources\values-night\styles.xml" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
-	  <None Remove="Properties\appSettings.json" />
 	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\category.svg" />
 	  <None Remove="Resources\Images\clock.svg" />
@@ -328,7 +327,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Properties\appSettings.json" />
+	  <EmbeddedResource Include="appsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -597,6 +596,7 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
