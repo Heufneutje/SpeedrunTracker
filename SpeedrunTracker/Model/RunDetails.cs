@@ -1,4 +1,6 @@
-﻿namespace SpeedrunTracker.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace SpeedrunTracker.Model;
 
 public class RunDetails
 {
@@ -11,4 +13,16 @@ public class RunDetails
     public GameAssets GameAssets { get; set; }
     public Ruleset Ruleset { get; set; }
     public User Examiner { get; set; }
+
+    private string _ordinalPlace;
+
+    public string OrdinalPlace
+    {
+        get
+        {
+            if (_ordinalPlace == null)
+                _ordinalPlace = Place.AsOrdinal();
+            return _ordinalPlace;
+        }
+    }
 }
