@@ -29,6 +29,8 @@ public class FollowedEntityViewModel : BaseViewModel
         }
     }
 
+    public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
+
     public FollowedEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, ILocalFollowService localFollowService)
     {
         _gamesRepository = gamesRepository;
@@ -67,7 +69,7 @@ public class FollowedEntityViewModel : BaseViewModel
         }
 
         Entities = entities.AsObservableCollection();
-
         IsRunningBackgroundTask = false;
+        NotifyPropertyChanged(nameof(HasEntities));
     }
 }
