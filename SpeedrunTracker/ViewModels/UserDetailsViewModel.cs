@@ -30,6 +30,8 @@ public class UserDetailsViewModel : BaseViewModel
         }
     }
 
+    private bool? _isCurrentlyShowingLevels;
+    private List<LeaderboardEntry> _allPersonalBests;
     private ObservableCollection<UserPersonalBestsGroup> _personalBests;
 
     public ObservableCollection<UserPersonalBestsGroup> PersonalBests
@@ -41,6 +43,7 @@ public class UserDetailsViewModel : BaseViewModel
             {
                 _personalBests = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ShowRuns));
             }
         }
     }
@@ -49,9 +52,14 @@ public class UserDetailsViewModel : BaseViewModel
 
     public string CountryImageSource => $"flags/{_user?.Location?.Country?.Code}_flag";
 
+    public bool ShowRuns => PersonalBests?.Any() == true || IsRunningBackgroundTask;
+
     public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrl);
 
     public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
+
+    public ICommand LoadFullGamePersonalBestsCommand => new AsyncRelayCommand(LoadFullGamePersonalBests);
+    public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
     public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository)
     {
@@ -59,49 +67,67 @@ public class UserDetailsViewModel : BaseViewModel
         _userRepository = userRepository;
     }
 
-    public async Task LoadPersonalBests()
+    private Task LoadFullGamePersonalBests() => LoadPersonalBests(false);
+
+    private Task LoadLevelPersonalBests() => LoadPersonalBests(true);
+
+    private async Task LoadPersonalBests(bool showLevels)
     {
-        List<UserPersonalBestsGroup> groups = new();
-        IEnumerable<IGrouping<string, LeaderboardEntry>> groupedBests = (await _userRepository.GetUserPersonalBestsAsync(_user.Id)).Data.GroupBy(x => x.Run.GameId);
-        Dictionary<string, User> players = new();
-        foreach (IGrouping<string, LeaderboardEntry> group in groupedBests)
+        IsRunningBackgroundTask = true;
+        try
         {
-            List<LeaderboardEntry> entries = group.ToList();
-            foreach (LeaderboardEntry entry in entries)
+            if (_isCurrentlyShowingLevels == true && showLevels || _isCurrentlyShowingLevels == false && !showLevels)
+                return;
+
+            NotifyPropertyChanged(nameof(ShowRuns));
+            _isCurrentlyShowingLevels = showLevels;
+            _allPersonalBests ??= (await _userRepository.GetUserPersonalBestsAsync(_user.Id)).Data;
+            IEnumerable<LeaderboardEntry> filteredBests = showLevels ? _allPersonalBests.Where(x => x.Run.LevelId != null) : _allPersonalBests.Where(x => x.Run.LevelId == null);
+
+            Dictionary<string, User> players = new();
+            List<UserPersonalBestsGroup> groups = new();
+            foreach (IGrouping<string, LeaderboardEntry> group in filteredBests.GroupBy(x => x.Run.GameId))
             {
-                foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
+                List<LeaderboardEntry> entries = group.ToList();
+                foreach (LeaderboardEntry entry in entries)
                 {
-                    Variable variable = entry.Category.Data.Variables.Data.FirstOrDefault(x => x.Id == valuePair.Key);
-                    if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
-                        continue;
-
-                    VariableValue value = variable.Values.Values[valuePair.Value];
-                    entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
-                }
-
-                for (int i = 0; i < entry.Run.Players.Count; i++)
-                {
-                    if (entry.Run.Players[i].PlayerType != PlayerType.User)
-                        continue;
-
-                    string playerId = entry.Run.Players[i].Id;
-                    if (playerId == _user.Id)
-                        entry.Run.Players[i] = _user;
-                    else
+                    foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
                     {
-                        if (!players.ContainsKey(playerId))
-                            players.Add(playerId, (await _userRepository.GetUserAsync(playerId)).Data);
+                        Variable variable = entry.Category.Data.Variables.Data.FirstOrDefault(x => x.Id == valuePair.Key);
+                        if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
+                            continue;
 
-                        entry.Run.Players[i] = players[playerId];
+                        VariableValue value = variable.Values.Values[valuePair.Value];
+                        entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
+                    }
+
+                    for (int i = 0; i < entry.Run.Players.Count; i++)
+                    {
+                        if (entry.Run.Players[i].PlayerType != PlayerType.User)
+                            continue;
+
+                        string playerId = entry.Run.Players[i].Id;
+                        if (playerId == _user.Id)
+                            entry.Run.Players[i] = _user;
+                        else
+                        {
+                            if (!players.ContainsKey(playerId))
+                                players.Add(playerId, (await _userRepository.GetUserAsync(playerId)).Data);
+
+                            entry.Run.Players[i] = players[playerId];
+                        }
                     }
                 }
+
+                groups.Add(new UserPersonalBestsGroup(entries.First().Game.Data, entries));
             }
 
-            groups.Add(new UserPersonalBestsGroup(entries.First().Game.Data, entries));
+            PersonalBests = groups.AsObservableCollection();
         }
-
-        PersonalBests = groups.AsObservableCollection();
-        IsRunningBackgroundTask = false;
+        finally
+        {
+            IsRunningBackgroundTask = false;
+        }
     }
 
     private async Task NavigateToRun(LeaderboardEntry entry)
@@ -117,7 +143,7 @@ public class UserDetailsViewModel : BaseViewModel
             Examiner = examiner,
             Level = entry.Level,
             Place = entry.Place,
-            Platform = entry.Platform.Data,
+            Platform = entry.Platform,
             Run = entry.Run,
             Variables = entry.Run.Variables
         };

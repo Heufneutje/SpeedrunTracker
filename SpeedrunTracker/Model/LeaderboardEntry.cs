@@ -11,11 +11,13 @@ public class LeaderboardEntry
 
     // For some ungodly reason it's a single object when there is a level and an empty list if there's not.
     [JsonPropertyName("level")]
-    public BaseData<object> ThisShouldBeALevel { get; set; }
+    public BaseData<object> LevelJson { get; set; }
 
     public BaseData<Category> Category { get; set; }
 
-    public BaseData<GamePlatform> Platform { get; set; }
+    // For some ungodly reason it's a single object when there is a platform and an empty list if there's not.
+    [JsonPropertyName("platform")]
+    public BaseData<object> PlatformJson { get; set; }
 
     private Level _level;
 
@@ -24,9 +26,20 @@ public class LeaderboardEntry
     {
         get
         {
-            if (_level == null)
-                _level = Run.LevelId == null ? null : JsonSerializer.Deserialize<Level>(ThisShouldBeALevel.Data.ToString());
+            _level ??= Run.LevelId == null ? null : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString());
             return _level;
+        }
+    }
+
+    private GamePlatform _platform;
+
+    [JsonIgnore]
+    public GamePlatform Platform
+    {
+        get
+        {
+            _platform ??= Run?.System?.PlatformId == null ? null : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString());
+            return _platform;
         }
     }
 
@@ -37,8 +50,7 @@ public class LeaderboardEntry
     {
         get
         {
-            if (_ordinalPlace == null)
-                _ordinalPlace = Place.AsOrdinal();
+            _ordinalPlace ??= Place.AsOrdinal();
             return _ordinalPlace;
         }
     }

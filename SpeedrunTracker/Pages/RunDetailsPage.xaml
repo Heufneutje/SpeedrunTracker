@@ -34,7 +34,7 @@
 
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Level" Value="{Binding RunDetails.Level.Name}" ImageSource="world" />
+                        <controls:RunPropertyControl Title="Level" Value="{Binding RunDetails.Level.Name}" ImageSource="world" IsVisible="{Binding RunDetails.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
                         <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
                         <CollectionView ItemsSource="{Binding RunDetails.Variables}" ItemTemplate="{StaticResource RunVariablesTemplate}" />
                     </VerticalStackLayout>
@@ -49,7 +49,7 @@
                         <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtimeNoLoads}" />
                         <controls:RunPropertyControl Title="Date" Value="{Binding RunDetails.Run.Date, StringFormat=
                         '{0:yyyy-MM-dd}'}" ImageSource="calendar" />
-                        <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" />
+                        <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" IsVisible="{Binding RunDetails.Platform, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>
 

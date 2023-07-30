@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpeedrunTracker.Pages.UserDetailPage"
               xmlns:views="clr-namespace:SpeedrunTracker.Views"
-             Title="{Binding DisplayName}"
-             Appearing="ContentPage_Appearing">
+             Title="{Binding DisplayName}">
     <ScrollView>
         <Grid Padding="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -16,7 +16,14 @@
                 <views:UserDetailHeaderView />
             </Border>
 
-            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+            <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1" Padding="5">
+                <Grid ColumnDefinitions="*,*">
+                    <Button Text="Show Full Game PBs" Grid.Column="0" Margin="5" Command="{Binding LoadFullGamePersonalBestsCommand}" />
+                    <Button Text="Show Level PBs" Grid.Column="1" Margin="5" Command="{Binding LoadLevelPersonalBestsCommand}" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource TransparentGridElementBorder}" IsVisible="{Binding ShowRuns}" Grid.Row="2">
                 <views:UserPersonalBestsView />
             </Border>
         </Grid>

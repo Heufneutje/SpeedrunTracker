@@ -18,13 +18,6 @@ public partial class UserDetailPage : ContentPage
     public UserDetailPage(UserDetailsViewModel viewModel)
     {
         InitializeComponent();
-        viewModel.IsRunningBackgroundTask = true;
         BindingContext = _viewModel = viewModel;
-    }
-
-    private async void ContentPage_Appearing(object sender, EventArgs e)
-    {
-        if (!_isLoaded)
-            await _viewModel.LoadPersonalBests();
     }
 }
