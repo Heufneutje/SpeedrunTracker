@@ -28,7 +28,7 @@ public class LocalFollowService : ILocalFollowService
 
     public async Task<List<FollowedEntity>> GetFollowedEntitiesAsync()
     {
-        return await _databaseService.Connection.Table<FollowedEntity>().ToListAsync();
+        return await _databaseService.Connection.Table<FollowedEntity>().OrderBy(x => x.Title).ToListAsync();
     }
 
     public async Task<bool> IsFollowingAsync(string id)
