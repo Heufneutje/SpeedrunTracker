@@ -25,4 +25,25 @@ public class RunDetails
             return _ordinalPlace;
         }
     }
+
+    private Asset _trophyAsset;
+
+    public Asset TrophyAsset
+    {
+        get
+        {
+            if (_trophyAsset == null && Place < 5)
+            {
+                _trophyAsset = Place switch
+                {
+                    1 => GameAssets?.TrophyFirstPlace,
+                    2 => GameAssets?.TrophySecondPlace,
+                    3 => GameAssets?.TrophyThirdPlace,
+                    4 => GameAssets?.TrophyFouthPlace,
+                    _ => null
+                };
+            }
+            return _trophyAsset;
+        }
+    }
 }

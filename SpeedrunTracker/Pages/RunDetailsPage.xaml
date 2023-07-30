@@ -42,7 +42,12 @@
 
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="3">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Rank" Value="{Binding RunDetails.OrdinalPlace}" ImageSource="trophy" />
+                        <controls:RunPropertyControl Title="Rank" IsValueVisible="False" ImageSource="trophy" />
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding RunDetails.TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding RunDetails.TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
+                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="0,-5,0,0" TextColor="{StaticResource Gray200}" />
+                        </HorizontalStackLayout>
+
                         <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
                         <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.IngameTimeSpan}" ImageSource="clock" IsVisible="{Binding HasInGameTime}" />
                         <controls:RunPropertyControl Title="Real Time" Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtime}" />

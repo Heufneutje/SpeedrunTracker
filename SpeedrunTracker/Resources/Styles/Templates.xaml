@@ -133,7 +133,7 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" WidthRequest="14" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" />
+                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
                         <Label Text="{Binding OrdinalPlace}" FontAttributes="Bold" />
                     </HorizontalStackLayout>
                     <Label Text="{Binding Run.Times.PrimaryTimeSpan}" />
@@ -148,5 +148,5 @@
 
     <DataTemplate x:Key="PersonalBestRunVariablesTemplate">
         <Label Text="{Binding Value}" />
-    </DataTemplate>
+    </DataTemplate>    
 </ResourceDictionary>
