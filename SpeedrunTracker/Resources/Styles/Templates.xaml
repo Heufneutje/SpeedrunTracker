@@ -4,7 +4,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              x:Class="SpeedrunTracker.Resources.Styles.Templates">
-    <DataTemplate x:Key="SearchResultGroupHeaderTemplate">
+    <DataTemplate x:Key="EntitiesGroupHeaderTemplate">
         <ViewCell>
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
@@ -16,12 +16,12 @@
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Text="{Binding SearchType}" Grid.Column="1" FontAttributes="Bold" Padding="5" />
+                <Label Text="{Binding EntityType}" Grid.Column="1" FontAttributes="Bold" Padding="5" />
             </Grid>
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="SearchResultTemplate">
+    <DataTemplate x:Key="EntitiesTemplate">
         <ViewCell Height="100">
             <Grid Padding="10">
                 <Grid.RowDefinitions>

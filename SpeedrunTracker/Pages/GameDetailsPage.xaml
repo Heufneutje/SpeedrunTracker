@@ -5,6 +5,9 @@
              x:Class="SpeedrunTracker.Pages.GameDetailPage"
              Title="{Binding Game.Names.International}"
              Appearing="ContentPage_Appearing">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowGameCommand}" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding Game.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>

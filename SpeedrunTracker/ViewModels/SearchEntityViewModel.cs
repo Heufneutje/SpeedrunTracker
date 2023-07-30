@@ -8,31 +8,30 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
 {
-    public class GameSearchViewModel : BaseViewModel
+    public class SearchEntityViewModel : BaseViewModel
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly IUserRepository _userRepository;
-
         private readonly SettingsViewModel _settingsViewModel;
 
         public ICommand SearchCommand => new AsyncRelayCommand<string>(Search, CanSearch);
-        public ICommand NavigateToCommand => new AsyncRelayCommand<SearchResult>(NavigateTo);
+        public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateTo);
 
-        public GameSearchViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, SettingsViewModel settingsViewModel)
+        public SearchEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, SettingsViewModel settingsViewModel)
         {
             _gamesRepository = gamesRepository;
             _userRepository = userRepository;
             _settingsViewModel = settingsViewModel;
         }
 
-        private ObservableCollection<SearchResultGroup> _searchResults;
+        private ObservableCollection<EntityGroup> _entities;
 
-        public ObservableCollection<SearchResultGroup> SearchResults
+        public ObservableCollection<EntityGroup> Entities
         {
-            get => _searchResults;
+            get => _entities;
             set
             {
-                _searchResults = value;
+                _entities = value;
                 NotifyPropertyChanged();
             }
         }
@@ -41,14 +40,14 @@ namespace SpeedrunTracker.ViewModels
         {
             IsRunningBackgroundTask = true;
 
-            ObservableCollection<SearchResultGroup> result = new ObservableCollection<SearchResultGroup>();
+            ObservableCollection<EntityGroup> result = new ObservableCollection<EntityGroup>();
 
             if (_settingsViewModel.EnableGameSearch)
             {
                 IEnumerable<Game> games = (await _gamesRepository.SearchGamesAsync(query.Trim())).Data.OrderBy(x => x.IsRomhack);
                 if (games.Any())
                 {
-                    SearchResultGroup gamesGroup = new SearchResultGroup(Model.Enum.SearchType.Games, games.Select(x => new SearchResult()
+                    EntityGroup gamesGroup = new EntityGroup(Model.Enum.EntityType.Games, games.Select(x => new Entity()
                     {
                         Title = x.Names.International,
                         Subtitle = $"Released: {x.Released}",
@@ -64,7 +63,7 @@ namespace SpeedrunTracker.ViewModels
                 IEnumerable<User> users = (await _userRepository.SearchUsersAsync(query.Trim())).Data;
                 if (users.Any())
                 {
-                    SearchResultGroup usersGroup = new SearchResultGroup(Model.Enum.SearchType.Users, users.Select(x => new SearchResult()
+                    EntityGroup usersGroup = new EntityGroup(Model.Enum.EntityType.Users, users.Select(x => new Entity()
                     {
                         Title = x.Names.International,
                         Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
@@ -75,18 +74,18 @@ namespace SpeedrunTracker.ViewModels
                 }
             }
 
-            SearchResults = result;
+            Entities = result;
 
             IsRunningBackgroundTask = false;
         }
 
         public bool CanSearch(object parameter) => !IsRunningBackgroundTask;
 
-        private async Task NavigateTo(SearchResult result)
+        private async Task NavigateTo(Entity entity)
         {
-            if (result.SearchObject is Game game)
+            if (entity.SearchObject is Game game)
                 await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
-            else if (result.SearchObject is User user)
+            else if (entity.SearchObject is User user)
                 await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
         }
     }

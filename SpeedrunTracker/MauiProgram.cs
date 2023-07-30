@@ -30,6 +30,7 @@ public static class MauiProgram
 #endif
 
         builder.Services.AddSpeedrunTrackerServices(builder.Configuration);
+        builder.Services.AddLocalStorage();
         builder.Services.RegisterViewModels();
         builder.Services.RegisterPages();
 

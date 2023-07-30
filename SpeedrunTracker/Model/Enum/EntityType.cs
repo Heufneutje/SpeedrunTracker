@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Model.Enum;
 
-public enum SearchType
+public enum EntityType
 {
     Games, Series, Users
 }

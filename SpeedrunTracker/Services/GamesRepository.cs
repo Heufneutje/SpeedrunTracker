@@ -12,6 +12,11 @@ public class GamesRepository : IGamesRepository
         _gamesService = gamesService;
     }
 
+    public Task<BaseData<Game>> GetGameAsync(string gameId)
+    {
+        return _gamesService.GetGameAsync(gameId);
+    }
+
     public Task<BaseData<List<Category>>> GetGameCategoriesAsync(string gameId)
     {
         return _gamesService.GetGameCategoriesAsync(gameId);

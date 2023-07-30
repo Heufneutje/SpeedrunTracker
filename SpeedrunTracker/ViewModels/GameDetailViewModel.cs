@@ -13,12 +13,14 @@ namespace SpeedrunTracker.ViewModels
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly ILeaderboardRepository _leaderboardRepository;
+        private readonly ILocalFollowService _followService;
         private readonly SettingsViewModel _settingsViewModel;
 
-        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, SettingsViewModel settingsViewModel)
+        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, SettingsViewModel settingsViewModel)
         {
             _gamesRepository = gamesRepository;
             _leaderboardRepository = leaderboardRepository;
+            _followService = followService;
             _settingsViewModel = settingsViewModel;
         }
 
@@ -165,9 +167,26 @@ namespace SpeedrunTracker.ViewModels
             }
         }
 
+        private bool _isFollowing;
+
+        public bool IsFollowing
+        {
+            get => _isFollowing;
+            set
+            {
+                _isFollowing = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(FollowButtonText));
+            }
+        }
+
+        public string FollowButtonText => IsFollowing ? "Unfollow" : "Follow";
+
         public ICommand ShowLeaderboardCommand => new AsyncRelayCommand(LoadLeaderboardAsync);
 
         public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
+
+        public ICommand FollowGameCommand => new AsyncRelayCommand(ToggleFollowGame);
 
         public async Task LoadCategoriesAsync()
         {
@@ -186,6 +205,11 @@ namespace SpeedrunTracker.ViewModels
         public async Task LoadVariablesAsync()
         {
             _allVariables = (await _gamesRepository.GetGameVariablesAsync(Game.Id)).Data;
+        }
+
+        public async Task LoadFollowingStatusAsync()
+        {
+            IsFollowing = await _followService.IsFollowingAsync(Game.Id);
         }
 
         public async Task LoadLeaderboardAsync()
@@ -247,6 +271,16 @@ namespace SpeedrunTracker.ViewModels
             };
 
             await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
+        }
+
+        private async Task ToggleFollowGame()
+        {
+            if (IsFollowing)
+                await _followService.UnfollowAsync(Game.Id);
+            else
+                await _followService.FollowGameAsync(Game);
+
+            IsFollowing = !IsFollowing;
         }
 
         private void UpdateVariables()

@@ -600,6 +600,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.5" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -620,8 +622,8 @@
 	  <Compile Update="Views\GameDetailFilterView.xaml.cs">
 	    <DependentUpon>GameDetailFilterView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\GameSearchResultView.xaml.cs">
-	    <DependentUpon>GameSearchResultView.xaml</DependentUpon>
+	  <Compile Update="Views\SpeedrunEntitiesView.xaml.cs">
+	    <DependentUpon>SpeedrunEntitiesView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Loadable.xaml.cs">
 	    <DependentUpon>Loadable.xaml</DependentUpon>
@@ -671,7 +673,7 @@
 	  <MauiXaml Update="Views\GameDetailHeaderView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\GameSearchResultView.xaml">
+	  <MauiXaml Update="Views\SpeedrunEntitiesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LeaderboardView.xaml">

@@ -29,6 +29,7 @@ public partial class GameDetailPage : ContentPage
             await _viewModel.LoadVariablesAsync();
             await _viewModel.LoadCategoriesAsync();
             await _viewModel.LoadLevelsAsync();
+            await _viewModel.LoadFollowingStatusAsync();
             _viewModel.IsRunningBackgroundTask = false;
             _isLoaded = true;
         }

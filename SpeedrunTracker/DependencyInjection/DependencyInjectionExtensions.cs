@@ -48,7 +48,8 @@ public static class DependencyInjectionExtensions
 
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
-        services.AddSingleton<GameSearchViewModel>();
+        services.AddSingleton<SearchEntityViewModel>();
+        services.AddSingleton<FollowedEntityViewModel>();
         services.AddSingleton<SettingsViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
@@ -60,10 +61,20 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection RegisterPages(this IServiceCollection services)
     {
         services.AddSingleton<SearchPage>();
+        services.AddSingleton<FollowingPage>();
         services.AddSingleton<SettingsPage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddLocalStorage(this IServiceCollection services)
+    {
+        services.AddTransient<IMauiInitializeService, LocalDatabaseInitializer>();
+        services.AddSingleton<ILocalDatabaseService, LocalDatabaseService>();
+        services.AddSingleton<ILocalFollowService, LocalFollowService>();
 
         return services;
     }
