@@ -324,6 +324,7 @@
 	  <None Remove="Resources\Images\trophy.svg" />
 	  <None Remove="Resources\Images\user.svg" />
 	  <None Remove="Resources\Images\verified.svg" />
+	  <None Remove="Resources\Images\world.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

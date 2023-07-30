@@ -34,6 +34,7 @@
 
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2">
                     <VerticalStackLayout Padding="10">
+                        <controls:RunPropertyControl Title="Level" Value="{Binding RunDetails.Level.Name}" ImageSource="world" />
                         <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
                         <CollectionView ItemsSource="{Binding RunDetails.Variables}" ItemTemplate="{StaticResource RunVariablesTemplate}" />
                     </VerticalStackLayout>
