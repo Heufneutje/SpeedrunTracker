@@ -21,7 +21,7 @@
                     <VerticalStackLayout Padding="10">
                         <Button Text="Watch Video" Command="{Binding ShowVideoCommand}" IsVisible="{Binding HasVideo}" />
                         <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" />
-                        <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding HasComment}" ImageSource="comment" />
+                        <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding RunDetails.Run.Comment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" />
                     </VerticalStackLayout>
                 </Border>
 
@@ -55,7 +55,7 @@
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
-                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ColorFrom.DarkColor}" IsVisible="{Binding HasExaminer}" />
+                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ColorFrom.DarkColor}" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>

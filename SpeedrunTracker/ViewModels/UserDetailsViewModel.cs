@@ -5,7 +5,6 @@ using SpeedrunTracker.Model;
 using SpeedrunTracker.Model.Enum;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
-using System.Text.Json;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -27,12 +26,6 @@ public class UserDetailsViewModel : BaseViewModel
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(DisplayName));
                 NotifyPropertyChanged(nameof(CountryImageSource));
-                NotifyPropertyChanged(nameof(HasPronouns));
-                NotifyPropertyChanged(nameof(HasYouTube));
-                NotifyPropertyChanged(nameof(HasTwitch));
-                NotifyPropertyChanged(nameof(HasTwitter));
-                NotifyPropertyChanged(nameof(HasHitbox));
-                NotifyPropertyChanged(nameof(HasSpeedRunsLive));
             }
         }
     }
@@ -55,18 +48,6 @@ public class UserDetailsViewModel : BaseViewModel
     public string DisplayName => _user?.DisplayName;
 
     public string CountryImageSource => $"flags/{_user?.Location?.Country?.Code}_flag";
-
-    public bool HasPronouns => !string.IsNullOrEmpty(_user?.Pronouns);
-
-    public bool HasYouTube => !string.IsNullOrEmpty(_user?.YouTube?.Uri);
-
-    public bool HasTwitch => !string.IsNullOrEmpty(_user?.Twitch?.Uri);
-
-    public bool HasTwitter => !string.IsNullOrEmpty(_user?.Twitter?.Uri);
-
-    public bool HasHitbox => !string.IsNullOrEmpty(_user?.Hitbox?.Uri);
-
-    public bool HasSpeedRunsLive => !string.IsNullOrEmpty(_user?.SpeedRunsLive?.Uri);
 
     public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrl);
 

@@ -21,18 +21,14 @@ namespace SpeedrunTracker.ViewModels
                 _runDetails = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Title));
-                NotifyPropertyChanged(nameof(HasComment));
                 NotifyPropertyChanged(nameof(HasVideo));
                 NotifyPropertyChanged(nameof(HasInGameTime));
                 NotifyPropertyChanged(nameof(HasRealtime));
                 NotifyPropertyChanged(nameof(HasRealtimeNoLoads));
                 NotifyPropertyChanged(nameof(StatusImage));
                 NotifyPropertyChanged(nameof(StatusDescription));
-                NotifyPropertyChanged(nameof(HasExaminer));
             }
         }
-
-        public bool HasComment => !string.IsNullOrEmpty(_runDetails?.Run?.Comment);
 
         public bool HasVideo => _runDetails?.Run?.Videos?.Links?.Any() == true;
 
@@ -45,8 +41,6 @@ namespace SpeedrunTracker.ViewModels
         public bool HasRealtime => ShouldShowTimingType(TimingType.Realtime);
 
         public bool HasRealtimeNoLoads => ShouldShowTimingType(TimingType.RealtimeNoLoads);
-
-        public bool HasExaminer => !string.IsNullOrEmpty(RunDetails?.Run?.Status?.ExaminerId);
 
         public string StatusDescription
         {
