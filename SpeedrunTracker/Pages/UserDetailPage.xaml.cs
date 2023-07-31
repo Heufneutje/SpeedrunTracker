@@ -3,7 +3,7 @@ using SpeedrunTracker.ViewModels;
 
 namespace SpeedrunTracker.Pages;
 
-[QueryProperty(nameof(Model.User), "User")]
+[QueryProperty(nameof(User), "User")]
 public partial class UserDetailPage : ContentPage
 {
     private readonly UserDetailsViewModel _viewModel;
@@ -19,5 +19,14 @@ public partial class UserDetailPage : ContentPage
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
+    }
+
+    private async void ContentPage_Appearing(object sender, EventArgs e)
+    {
+        if (!_isLoaded)
+        {
+            await _viewModel.LoadFollowingStatusAsync();
+            _isLoaded = true;
+        }
     }
 }

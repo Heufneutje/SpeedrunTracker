@@ -9,20 +9,19 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class UserDetailsViewModel : BaseViewModel
+public class UserDetailsViewModel : BaseFollowViewModel<User>
 {
     private readonly IBrowserService _browserService;
     private readonly IUserRepository _userRepository;
-    private User _user;
 
     public User User
     {
-        get => _user;
+        get => _followEntity;
         set
         {
-            if (_user != value)
+            if (_followEntity != value)
             {
-                _user = value;
+                _followEntity = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(DisplayName));
                 NotifyPropertyChanged(nameof(CountryImageSource));
@@ -48,9 +47,9 @@ public class UserDetailsViewModel : BaseViewModel
         }
     }
 
-    public string DisplayName => _user?.DisplayName;
+    public string DisplayName => User?.DisplayName;
 
-    public string CountryImageSource => $"flags/{_user?.Location?.Country?.Code}_flag";
+    public string CountryImageSource => $"flags/{User?.Location?.Country?.Code}_flag";
 
     public bool ShowRuns => PersonalBests?.Any() == true || IsRunningBackgroundTask;
 
@@ -61,7 +60,7 @@ public class UserDetailsViewModel : BaseViewModel
     public ICommand LoadFullGamePersonalBestsCommand => new AsyncRelayCommand(LoadFullGamePersonalBests);
     public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository)
+    public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, ILocalFollowService followService) : base(followService)
     {
         _browserService = browserService;
         _userRepository = userRepository;
@@ -81,7 +80,7 @@ public class UserDetailsViewModel : BaseViewModel
 
             NotifyPropertyChanged(nameof(ShowRuns));
             _isCurrentlyShowingLevels = showLevels;
-            _allPersonalBests ??= (await _userRepository.GetUserPersonalBestsAsync(_user.Id)).Data;
+            _allPersonalBests ??= (await _userRepository.GetUserPersonalBestsAsync(User.Id)).Data;
             IEnumerable<LeaderboardEntry> filteredBests = showLevels ? _allPersonalBests.Where(x => x.Run.LevelId != null) : _allPersonalBests.Where(x => x.Run.LevelId == null);
 
             Dictionary<string, User> players = new();
@@ -107,8 +106,8 @@ public class UserDetailsViewModel : BaseViewModel
                             continue;
 
                         string playerId = entry.Run.Players[i].Id;
-                        if (playerId == _user.Id)
-                            entry.Run.Players[i] = _user;
+                        if (playerId == User.Id)
+                            entry.Run.Players[i] = User;
                         else
                         {
                             if (!players.ContainsKey(playerId))
@@ -155,4 +154,6 @@ public class UserDetailsViewModel : BaseViewModel
     {
         await _browserService.OpenAsync(url);
     }
+
+    protected override Task FollowAsync(User entity) => _followService.FollowUserAsync(entity);
 }

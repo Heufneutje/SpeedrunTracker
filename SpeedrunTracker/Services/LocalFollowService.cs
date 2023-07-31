@@ -15,13 +15,26 @@ public class LocalFollowService : ILocalFollowService
 
     public async Task FollowGameAsync(BaseGame game)
     {
-        FollowedEntity item = new FollowedEntity()
+        FollowedEntity item = new()
         {
             Id = game.Id,
             ImageUrl = game.Assets?.CoverSmall?.FixedGameAssetUri,
             Title = game.Names.International,
             Subtitle = $"Released: {game.Released}",
             Type = EntityType.Games
+        };
+        await _databaseService.Connection.InsertAsync(item);
+    }
+
+    public async Task FollowUserAsync(User user)
+    {
+        FollowedEntity item = new()
+        {
+            Id = user.Id,
+            ImageUrl = user.Assets?.Image?.FixedUserAssetUri,
+            Title = user.Names.International,
+            Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
+            Type = EntityType.Users
         };
         await _databaseService.Connection.InsertAsync(item);
     }

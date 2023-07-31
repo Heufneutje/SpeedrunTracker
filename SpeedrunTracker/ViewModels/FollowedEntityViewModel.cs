@@ -46,6 +46,10 @@ public class FollowedEntityViewModel : BaseViewModel
                 Game game = (await _gamesRepository.GetGameAsync(entity.Id)).Data;
                 await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
                 break;
+            case EntityType.Users:
+                User user = (await _userRepository.GetUserAsync(entity.Id)).Data;
+                await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+                break;
         }
     }
 
