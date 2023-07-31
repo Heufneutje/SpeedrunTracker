@@ -9,29 +9,25 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
 {
-    public class GameDetailViewModel : BaseViewModel
+    public class GameDetailViewModel : BaseFollowViewModel<Game>
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly ILeaderboardRepository _leaderboardRepository;
-        private readonly ILocalFollowService _followService;
         private readonly SettingsViewModel _settingsViewModel;
 
-        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, SettingsViewModel settingsViewModel)
+        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, SettingsViewModel settingsViewModel) : base(followService)
         {
             _gamesRepository = gamesRepository;
             _leaderboardRepository = leaderboardRepository;
-            _followService = followService;
             _settingsViewModel = settingsViewModel;
         }
 
-        private Game _game;
-
         public Game Game
         {
-            get => _game;
+            get => _followEntity;
             set
             {
-                _game = value;
+                _followEntity = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Platforms));
             }
@@ -167,26 +163,9 @@ namespace SpeedrunTracker.ViewModels
             }
         }
 
-        private bool _isFollowing;
-
-        public bool IsFollowing
-        {
-            get => _isFollowing;
-            set
-            {
-                _isFollowing = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(FollowButtonText));
-            }
-        }
-
-        public string FollowButtonText => IsFollowing ? "Unfollow" : "Follow";
-
         public ICommand ShowLeaderboardCommand => new AsyncRelayCommand(LoadLeaderboardAsync);
 
         public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
-
-        public ICommand FollowGameCommand => new AsyncRelayCommand(ToggleFollowGame);
 
         public async Task LoadCategoriesAsync()
         {
@@ -205,11 +184,6 @@ namespace SpeedrunTracker.ViewModels
         public async Task LoadVariablesAsync()
         {
             _allVariables = (await _gamesRepository.GetGameVariablesAsync(Game.Id)).Data;
-        }
-
-        public async Task LoadFollowingStatusAsync()
-        {
-            IsFollowing = await _followService.IsFollowingAsync(Game.Id);
         }
 
         public async Task LoadLeaderboardAsync()
@@ -260,27 +234,17 @@ namespace SpeedrunTracker.ViewModels
             RunDetails runDetails = new RunDetails()
             {
                 Category = category,
-                GameAssets = _game.Assets,
+                GameAssets = Game.Assets,
                 Examiner = examiner,
                 Level = level,
                 Place = entry.Place,
                 Platform = platform,
-                Ruleset = _game.Ruleset,
+                Ruleset = Game.Ruleset,
                 Run = entry.Run,
                 Variables = entry.Run.Variables,
             };
 
             await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
-        }
-
-        private async Task ToggleFollowGame()
-        {
-            if (IsFollowing)
-                await _followService.UnfollowAsync(Game.Id);
-            else
-                await _followService.FollowGameAsync(Game);
-
-            IsFollowing = !IsFollowing;
         }
 
         private void UpdateVariables()
@@ -310,5 +274,7 @@ namespace SpeedrunTracker.ViewModels
 
             Variables = variablesVMs.AsObservableCollection();
         }
+
+        protected override Task FollowAsync(Game entity) => _followService.FollowGameAsync(entity);
     }
 }

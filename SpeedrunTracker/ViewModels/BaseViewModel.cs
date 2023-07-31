@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class BaseViewModel : INotifyPropertyChanged
+public abstract class BaseViewModel : INotifyPropertyChanged
 {
     private bool _isRunningBackgroundTask;
 
