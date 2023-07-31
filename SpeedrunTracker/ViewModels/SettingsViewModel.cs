@@ -1,50 +1,65 @@
-﻿namespace SpeedrunTracker.ViewModels;
+﻿using SpeedrunTracker.Interfaces;
+
+namespace SpeedrunTracker.ViewModels;
 
 public class SettingsViewModel : BaseViewModel
 {
-    private bool _enableGameSearch;
+    private readonly ILocalSettingsService _settingsService;
+    private bool _hasChanges;
 
     public bool EnableGameSearch
     {
-        get => _enableGameSearch;
+        get => _settingsService.UserSettings.EnableGameSearch;
         set
         {
-            _enableGameSearch = value;
-            NotifyPropertyChanged();
+            if (_settingsService.UserSettings.EnableGameSearch != value)
+            {
+                _settingsService.UserSettings.EnableGameSearch = value;
+                _hasChanges = true;
+                NotifyPropertyChanged();
+            }
         }
     }
-
-    private bool _enableUserSearch;
 
     public bool EnableUserSearch
     {
-        get => _enableUserSearch;
+        get => _settingsService.UserSettings.EnableUserSearch;
         set
         {
-            _enableUserSearch = value;
-            NotifyPropertyChanged();
+            if (_settingsService.UserSettings.EnableUserSearch != value)
+            {
+                _settingsService.UserSettings.EnableUserSearch = value;
+                _hasChanges = true;
+                NotifyPropertyChanged();
+            }
         }
     }
 
-    private int _maxLeaderboardResults;
-
     public int MaxLeaderboardResults
     {
-        get => _maxLeaderboardResults;
+        get => _settingsService.UserSettings.MaxLeaderboardResults;
         set
         {
             if (value < 1)
                 value = 1;
 
-            _maxLeaderboardResults = value;
-            NotifyPropertyChanged();
+            if (_settingsService.UserSettings.MaxLeaderboardResults != value)
+            {
+                _settingsService.UserSettings.MaxLeaderboardResults = value;
+                _hasChanges = true;
+                NotifyPropertyChanged();
+            }
         }
     }
 
-    public SettingsViewModel()
+    public SettingsViewModel(ILocalSettingsService settingsService)
     {
-        EnableGameSearch = true;
-        EnableUserSearch = true;
-        MaxLeaderboardResults = 50;
+        _settingsService = settingsService;
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        if (_hasChanges)
+            await _settingsService.SaveSettingsAsync();
     }
 }

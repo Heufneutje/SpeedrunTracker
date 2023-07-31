@@ -74,6 +74,7 @@ public static class DependencyInjectionExtensions
         services.AddTransient<IMauiInitializeService, LocalDatabaseInitializer>();
         services.AddSingleton<ILocalDatabaseService, LocalDatabaseService>();
         services.AddSingleton<ILocalFollowService, LocalFollowService>();
+        services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
 
         return services;
     }

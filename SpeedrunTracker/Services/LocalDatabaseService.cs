@@ -14,6 +14,6 @@ public class LocalDatabaseService : ILocalDatabaseService
             return;
 
         Connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, databaseName), flags);
-        await Connection.CreateTableAsync<FollowedEntity>();
+        await Connection.CreateTablesAsync<FollowedEntity, UserSettings>();
     }
 }
