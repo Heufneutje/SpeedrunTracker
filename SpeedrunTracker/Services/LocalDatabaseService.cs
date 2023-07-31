@@ -1,5 +1,4 @@
 ﻿using SpeedrunTracker.Interfaces;
-using SpeedrunTracker.Model;
 using SQLite;
 
 namespace SpeedrunTracker.Services;

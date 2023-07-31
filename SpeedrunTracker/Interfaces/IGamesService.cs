@@ -1,5 +1,4 @@
 ﻿using Refit;
-using SpeedrunTracker.Model;
 
 namespace SpeedrunTracker.Interfaces
 {

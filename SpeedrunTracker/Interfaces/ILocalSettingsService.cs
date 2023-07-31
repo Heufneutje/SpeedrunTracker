@@ -1,6 +1,4 @@
-﻿using SpeedrunTracker.Model;
-
-namespace SpeedrunTracker.Interfaces;
+﻿namespace SpeedrunTracker.Interfaces;
 
 public interface ILocalSettingsService
 {

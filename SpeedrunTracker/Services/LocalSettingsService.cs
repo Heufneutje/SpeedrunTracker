@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Interfaces;
-using SpeedrunTracker.Model;
 
 namespace SpeedrunTracker.Services;
 

@@ -50,7 +50,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="appsettings.json" />
+		<EmbeddedResource Include="appsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,89 +66,93 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SpeedrunTracker.Utils\SpeedrunTracker.Utils.csproj" />
+		<ProjectReference Include="..\SpeedrunTracker.Utils\SpeedrunTracker.Utils.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Using Include="SpeedrunTracker.Utils" />
+		<Using Include="SpeedrunTracker.Utils" />
+		<Using Include="SpeedrunTracker.Model" />
+		<Using Include="SpeedrunTracker.Model.Base" />
+		<Using Include="SpeedrunTracker.Model.Enum" />
+		<Using Include="SpeedrunTracker.Model.LocalData" />
+		<Using Include="SpeedrunTracker.Model.SpeedrunDotCom" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\GameDetailsPage.xaml.cs">
-	    <DependentUpon>GameDetailsPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Pages\UserDetailPage.xaml.cs">
-	    <DependentUpon>UserDetailPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\GameDetailFilterView.xaml.cs">
-	    <DependentUpon>GameDetailFilterView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\SpeedrunEntitiesView.xaml.cs">
-	    <DependentUpon>SpeedrunEntitiesView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Loadable.xaml.cs">
-	    <DependentUpon>Loadable.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UserPersonalBestsView.xaml.cs">
-	    <DependentUpon>UserPersonalBestsView.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Pages\GameDetailsPage.xaml.cs">
+			<DependentUpon>GameDetailsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\UserDetailPage.xaml.cs">
+			<DependentUpon>UserDetailPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\GameDetailFilterView.xaml.cs">
+			<DependentUpon>GameDetailFilterView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SpeedrunEntitiesView.xaml.cs">
+			<DependentUpon>SpeedrunEntitiesView.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Loadable.xaml.cs">
+			<DependentUpon>Loadable.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\UserPersonalBestsView.xaml.cs">
+			<DependentUpon>UserPersonalBestsView.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AppShell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\RunPropertyControl.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\FollowingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\GameDetailsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\NotificationsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\RunDetailsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SearchPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\SettingsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\UserDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\Converters.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\Templates.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\GameDetailFilterView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\GameDetailHeaderView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\SpeedrunEntitiesView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\LeaderboardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Loadable.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\UserPersonalBestsView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\UserDetailHeaderView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="AppShell.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Controls\RunPropertyControl.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\FollowingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\GameDetailsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\NotificationsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\RunDetailsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SearchPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\UserDetailPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\Converters.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\Templates.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\GameDetailFilterView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\GameDetailHeaderView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SpeedrunEntitiesView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\LeaderboardView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Loadable.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\UserPersonalBestsView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\UserDetailHeaderView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
-
 </Project>

@@ -1,4 +1,3 @@
-using SpeedrunTracker.Model;
 using SpeedrunTracker.ViewModels;
 
 namespace SpeedrunTracker.Pages;

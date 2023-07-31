@@ -148,5 +148,5 @@
 
     <DataTemplate x:Key="PersonalBestRunVariablesTemplate">
         <Label Text="{Binding Value}" />
-    </DataTemplate>    
+    </DataTemplate>
 </ResourceDictionary>

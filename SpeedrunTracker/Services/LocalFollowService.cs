@@ -1,6 +1,4 @@
 ﻿using SpeedrunTracker.Interfaces;
-using SpeedrunTracker.Model;
-using SpeedrunTracker.Model.Enum;
 
 namespace SpeedrunTracker.Services;
 

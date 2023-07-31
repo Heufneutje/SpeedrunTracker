@@ -1,5 +1,4 @@
-﻿using SpeedrunTracker.Model.Enum;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.Model
 {

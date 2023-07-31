@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SpeedrunTracker.Model;
+﻿namespace SpeedrunTracker.Model;
 
 public class RunDetails
 {
