@@ -11,7 +11,7 @@
         </Grid.RowDefinitions>
 
         <SearchBar x:Name="searchBar"
-                   Placeholder="Search games..."
+                   Placeholder="Search..."
                    SearchCommand="{Binding SearchCommand}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                    Grid.Row="0"
