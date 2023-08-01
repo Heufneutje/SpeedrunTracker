@@ -48,6 +48,10 @@
         <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate pages:NotificationsPage}" Route="Notifications" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Profile" FlyoutIcon="user">
+        <ShellContent x:Name="profile" ContentTemplate="{DataTemplate pages:ProfilePage}" Route="Profiole" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Settings" FlyoutIcon="gear">
         <ShellContent x:Name="settings" ContentTemplate="{DataTemplate pages:SettingsPage}" Route="Settings" />
     </FlyoutItem>

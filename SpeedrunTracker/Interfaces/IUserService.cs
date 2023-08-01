@@ -12,4 +12,7 @@ public interface IUserService
 
     [Get("/users/{userId}/personal-bests?embed=game,category,category.variables,level,platform")]
     Task<BaseData<List<LeaderboardEntry>>> GetUserPersonalBestsAsync(string userId);
+
+    [Get("/profile")]
+    Task<BaseData<User>> GetUserProfileAsync([Header(Constants.ApiKeyHeader)] string header);
 }

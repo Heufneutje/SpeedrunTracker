@@ -7,4 +7,6 @@ public interface IUserRepository
     Task<PagedData<List<User>>> SearchUsersAsync(string name);
 
     Task<BaseData<List<LeaderboardEntry>>> GetUserPersonalBestsAsync(string userId);
+
+    Task<BaseData<User>> GetUserProfileAsync();
 }

@@ -115,6 +115,9 @@
 		<MauiXaml Update="Pages\NotificationsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\ProfilePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\RunDetailsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

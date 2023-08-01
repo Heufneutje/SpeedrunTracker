@@ -35,6 +35,8 @@ public static class DependencyInjectionExtensions
         services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddSingleton<IBrowserService, BrowserService>();
+        services.AddSingleton<IDialogService, DialogService>();
+        services.AddSingleton<IToastService, ToastService>();
 
         return services;
 
@@ -50,6 +52,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SearchEntityViewModel>();
         services.AddSingleton<FollowedEntityViewModel>();
         services.AddSingleton<SettingsViewModel>();
+        services.AddSingleton<ProfileViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
         services.AddTransient<UserDetailsViewModel>();
@@ -62,6 +65,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SearchPage>();
         services.AddSingleton<FollowingPage>();
         services.AddSingleton<SettingsPage>();
+        services.AddSingleton<ProfilePage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpeedrunTracker.Pages.ProfilePage"
+             Title="Profile"
+             Appearing="ContentPage_Appearing">
+    <StackLayout>
+        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
+        <Grid RowDefinitions="3*,*" IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+            <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">
+                <Border Style="{StaticResource ProfileAvatarStyle}">
+                    <Image Source="{Binding ImageUri}" Margin="{Binding ImageMargin}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToUserCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Border>
+                <Label Text="{Binding Name}" FontSize="Large" HorizontalOptions="Center" Padding="10" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="1" Margin="0,40,0,0">
+                <Label Text="Enter your API key below to link your speedrun.com profile." HorizontalOptions="Center" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                <Entry x:Name="_apiKeyEntry" Placeholder="API Key" IsPassword="True" HorizontalOptions="Center" WidthRequest="300" Margin="20" Text="{Binding ApiKey, Mode=TwoWay}" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                <Button Text="Login" HorizontalOptions="Center" WidthRequest="100" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" Command="{Binding LoginCommand}" Clicked="Button_Clicked" />
+                <Button Text="Logout" HorizontalOptions="Center" WidthRequest="100" IsVisible="{Binding IsLoggedIn}" Command="{Binding LogoutCommand}" />
+            </VerticalStackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

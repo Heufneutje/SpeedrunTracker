@@ -21,6 +21,11 @@ public class UserRepository : IUserRepository
         return _userService.GetUserPersonalBestsAsync(userId);
     }
 
+    public async Task<BaseData<User>> GetUserProfileAsync()
+    {
+        return await _userService.GetUserProfileAsync(await SecureStorage.GetAsync(Constants.ApiKey));
+    }
+
     public Task<PagedData<List<User>>> SearchUsersAsync(string name)
     {
         return _userService.SearchUsersAsync(name);
