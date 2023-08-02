@@ -12,6 +12,8 @@ public class NotificationListViewModel : BaseViewModel
 {
     private readonly INotificationRepository _notificationRepository;
     private readonly IToastService _toastService;
+    private readonly IBrowserService _browserService;
+    private readonly ILeaderboardRepository _leaderboardRepository;
     private int _offset;
     private bool _hasReachedEnd;
 
@@ -27,15 +29,31 @@ public class NotificationListViewModel : BaseViewModel
         }
     }
 
+    private Notification _selectedNotification;
+
+    public Notification SelectedNotification
+    {
+        get => _selectedNotification;
+        set
+        {
+            _selectedNotification = value;
+            NotifyPropertyChanged();
+        }
+    }
+
     public ICommand LoadMoreCommand => new AsyncRelayCommand(LoadNotificationsAsync);
 
     public ICommand RefreshCommand => new AsyncRelayCommand(RefreshNotificationsAsync);
 
-    public NotificationListViewModel(INotificationRepository notificationRepository, IToastService toastService)
+    public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
+
+    public NotificationListViewModel(INotificationRepository notificationRepository, IToastService toastService, IBrowserService browserService, ILeaderboardRepository leaderboardRepository)
     {
         _notifications = new ObservableCollection<Notification>();
         _notificationRepository = notificationRepository;
         _toastService = toastService;
+        _browserService = browserService;
+        _leaderboardRepository = leaderboardRepository;
     }
 
     private async Task LoadNotificationsAsync()
@@ -70,5 +88,15 @@ public class NotificationListViewModel : BaseViewModel
         Notifications.Clear();
         await LoadNotificationsAsync();
         IsRunningBackgroundTask = false;
+    }
+
+    private async Task OpenNotificationLinkAsync()
+    {
+        NotificationLink link = SelectedNotification?.Item;
+
+        if (link != null)
+            await _browserService.OpenAsync(link.Uri);
+
+        SelectedNotification = null;
     }
 }

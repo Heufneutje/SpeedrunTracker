@@ -7,10 +7,12 @@
     <RefreshView IsRefreshing="{Binding IsRunningBackgroundTask}" Command="{Binding RefreshCommand}">
         <CollectionView
                 VerticalOptions="FillAndExpand"
-                SelectionMode="None"
+                SelectionMode="Single"
                 ItemsSource="{Binding Notifications}"
                 RemainingItemsThreshold="5"
                 RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
-                ItemTemplate="{StaticResource NotificationTemplate}"/>
+                ItemTemplate="{StaticResource NotificationTemplate}"
+                SelectedItem="{Binding SelectedNotification, Mode=TwoWay}"
+                SelectionChangedCommand="{Binding OpenLinkCommand}" />
     </RefreshView>
 </ContentPage>

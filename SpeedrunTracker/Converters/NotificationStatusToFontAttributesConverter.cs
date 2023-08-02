@@ -9,7 +9,7 @@ namespace SpeedrunTracker.Converters
             if (!(value is NotificationStatusType type))
                 throw new InvalidOperationException("The value must be a boolean");
 
-            return type == NotificationStatusType.Unread ? FontAttributes.Bold | FontAttributes.Italic : FontAttributes.None;
+            return type == NotificationStatusType.Unread ? FontAttributes.Bold : FontAttributes.None;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
