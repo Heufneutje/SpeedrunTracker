@@ -7,4 +7,5 @@
     <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
     <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
     <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+    <converters:NotificationStatusToFontAttributesConverter x:Key="NotificationStatusToFontAttributesConverter" />
 </ResourceDictionary>

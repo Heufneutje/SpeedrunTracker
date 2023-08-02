@@ -31,9 +31,11 @@ public static class DependencyInjectionExtensions
         services.AddRefitClient<IGamesService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<ILeaderboardService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<IUserService>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<INotificationService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddScoped<IGamesRepository, GamesRepository>();
         services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
         services.AddSingleton<IBrowserService, BrowserService>();
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IToastService, ToastService>();
@@ -53,6 +55,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<FollowedEntityViewModel>();
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<ProfileViewModel>();
+        services.AddSingleton<NotificationListViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
         services.AddTransient<UserDetailsViewModel>();
@@ -66,6 +69,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<FollowingPage>();
         services.AddSingleton<SettingsPage>();
         services.AddSingleton<ProfilePage>();
+        services.AddSingleton<NotificationsPage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();

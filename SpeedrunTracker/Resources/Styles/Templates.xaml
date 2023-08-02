@@ -149,4 +149,14 @@
     <DataTemplate x:Key="PersonalBestRunVariablesTemplate">
         <Label Text="{Binding Value}" />
     </DataTemplate>
+
+    <DataTemplate x:Key="NotificationTemplate">
+        <VerticalStackLayout>
+            <VerticalStackLayout Padding="20">
+                <Label Text="{Binding Created, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+                <Label Text="{Binding Text}" Padding="0,10,0,0" FontAttributes="{Binding Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
+            </VerticalStackLayout>
+            <Line StrokeThickness="1" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+        </VerticalStackLayout>
+    </DataTemplate>
 </ResourceDictionary>
