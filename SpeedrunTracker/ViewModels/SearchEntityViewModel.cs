@@ -46,7 +46,7 @@ namespace SpeedrunTracker.ViewModels
                 IEnumerable<Game> games = (await _gamesRepository.SearchGamesAsync(query.Trim())).Data.OrderBy(x => x.IsRomhack);
                 if (games.Any())
                 {
-                    EntityGroup gamesGroup = new EntityGroup(Model.Enum.EntityType.Games, games.Select(x => new Entity()
+                    EntityGroup gamesGroup = new EntityGroup(EntityType.Games, games.Select(x => new Entity()
                     {
                         Title = x.Names.International,
                         Subtitle = $"Released: {x.Released}",
@@ -62,7 +62,7 @@ namespace SpeedrunTracker.ViewModels
                 IEnumerable<User> users = (await _userRepository.SearchUsersAsync(query.Trim())).Data;
                 if (users.Any())
                 {
-                    EntityGroup usersGroup = new EntityGroup(Model.Enum.EntityType.Users, users.Select(x => new Entity()
+                    EntityGroup usersGroup = new EntityGroup(EntityType.Users, users.Select(x => new Entity()
                     {
                         Title = x.Names.International,
                         Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",

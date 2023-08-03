@@ -76,11 +76,11 @@
 
 	<ItemGroup>
 		<Using Include="SpeedrunTracker.Utils" />
-		<Using Include="SpeedrunTracker.Model" />
-		<Using Include="SpeedrunTracker.Model.Base" />
-		<Using Include="SpeedrunTracker.Model.Enum" />
-		<Using Include="SpeedrunTracker.Model.LocalData" />
-		<Using Include="SpeedrunTracker.Model.SpeedrunDotCom" />
+		<Using Include="SpeedrunTracker.Models" />
+		<Using Include="SpeedrunTracker.Models.Base" />
+		<Using Include="SpeedrunTracker.Models.Enum" />
+		<Using Include="SpeedrunTracker.Models.LocalData" />
+		<Using Include="SpeedrunTracker.Models.SpeedrunDotCom" />
 	</ItemGroup>
 
 	<ItemGroup>
