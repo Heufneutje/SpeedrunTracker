@@ -2,6 +2,6 @@
 
 public class NotificationLink
 {
-    public NotificationLinkType Rel { get; set; }
+    public NotificationLinkType? Rel { get; set; }
     public string Uri { get; set; }
 }
