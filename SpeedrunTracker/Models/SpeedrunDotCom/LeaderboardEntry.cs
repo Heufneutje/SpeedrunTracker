@@ -63,17 +63,14 @@ public class LeaderboardEntry
         get
         {
             if (_trophyAsset == null && Place < 5)
-            {
-                _trophyAsset = Place switch
-                {
-                    1 => Game?.Data?.Assets?.TrophyFirstPlace,
-                    2 => Game?.Data?.Assets?.TrophySecondPlace,
-                    3 => Game?.Data?.Assets?.TrophyThirdPlace,
-                    4 => Game?.Data?.Assets?.TrophyFouthPlace,
-                    _ => null
-                };
-            }
+                _trophyAsset = Game?.Data?.Assets?.GetTrophyAsset(Place);
+
             return _trophyAsset;
+        }
+        set
+        {
+            if (_trophyAsset != value)
+                _trophyAsset = value;
         }
     }
 }

@@ -31,16 +31,7 @@ public class RunDetails
         get
         {
             if (_trophyAsset == null && Place < 5)
-            {
-                _trophyAsset = Place switch
-                {
-                    1 => GameAssets?.TrophyFirstPlace,
-                    2 => GameAssets?.TrophySecondPlace,
-                    3 => GameAssets?.TrophyThirdPlace,
-                    4 => GameAssets?.TrophyFouthPlace,
-                    _ => null
-                };
-            }
+                _trophyAsset = GameAssets?.GetTrophyAsset(Place);
             return _trophyAsset;
         }
     }

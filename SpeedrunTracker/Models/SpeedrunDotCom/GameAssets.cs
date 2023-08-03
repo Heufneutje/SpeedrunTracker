@@ -25,4 +25,16 @@ public class GameAssets
 
     [JsonPropertyName("trophy-4th")]
     public Asset TrophyFouthPlace { get; set; }
+
+    public Asset GetTrophyAsset(int place)
+    {
+        return place switch
+        {
+            1 => TrophyFirstPlace,
+            2 => TrophySecondPlace,
+            3 => TrophyThirdPlace,
+            4 => TrophyFouthPlace,
+            _ => null
+        };
+    }
 }
