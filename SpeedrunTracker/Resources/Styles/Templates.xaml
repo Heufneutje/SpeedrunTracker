@@ -87,12 +87,13 @@
 
     <DataTemplate x:Key="VariablesTemplate" x:DataType="viewmodels:VariableViewModel">
         <VerticalStackLayout>
-            <Label Text="{Binding Name}" Style="{StaticResource IndentedLabel}" />
-            <CollectionView ItemsSource="{Binding Values}"
-                                        SelectedItem="{Binding SelectedValue}"
-                                        SelectionMode="Single"
-                                        HorizontalOptions="Start"
-                                        ItemTemplate="{StaticResource CategoryTemplate}">
+            <controls:RunPropertyControl Title="{Binding Name}" IsValueVisible="False" ImageSource="category" />
+            <CollectionView Margin="0,-5,0,0"
+                            ItemsSource="{Binding Values}"
+                            SelectedItem="{Binding SelectedValue}"
+                            SelectionMode="Single"
+                            HorizontalOptions="Start"
+                            ItemTemplate="{StaticResource CategoryTemplate}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>

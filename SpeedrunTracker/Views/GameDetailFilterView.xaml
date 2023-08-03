@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:GameDetailViewModel"
              x:Class="SpeedrunTracker.Views.GameDetailFilterView">
     <VerticalStackLayout Padding="10">
         <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <VerticalStackLayout IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
-            <Label Text="Full Game / Individual Level" Style="{StaticResource IndentedLabel}" IsVisible="{Binding HasIndividualLevels}" />
-            <Picker SelectedItem="{Binding SelectedLevel}" ItemsSource="{Binding Levels}" IsVisible="{Binding HasIndividualLevels}" />
-            <Label Text="Category" Style="{StaticResource IndentedLabel}" />
-            <CollectionView ItemsSource="{Binding Categories}"
+            <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" IsVisible="{Binding HasIndividualLevels}" />
+            <Picker SelectedItem="{Binding SelectedLevel}" ItemsSource="{Binding Levels}" IsVisible="{Binding HasIndividualLevels}" Margin="3,-10,0,0" />
+            <controls:RunPropertyControl Title="Category" IsValueVisible="False" ImageSource="category" />
+            <CollectionView Margin="0,-5,0,0"
+                        ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}"
                         SelectionMode="Single"
                         HorizontalOptions="Start"
