@@ -476,6 +476,6 @@
         </Setter>
         <Setter Property="HeightRequest" Value="150" />
         <Setter Property="WidthRequest" Value="150" />
-        <Setter Property="BackgroundColor" Value="{StaticResource Gray400}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray400}" />
     </Style>
 </ResourceDictionary>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:SpeedrunTracker.Views"
-             x:Class="SpeedrunTracker.Pages.GameDetailPage"
+             x:Class="SpeedrunTracker.Views.GameDetailPage"
              Title="{Binding Game.Names.International}"
              Appearing="ContentPage_Appearing">
     <ContentPage.ToolbarItems>

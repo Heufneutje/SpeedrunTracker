@@ -1,6 +1,6 @@
 using SpeedrunTracker.ViewModels;
 
-namespace SpeedrunTracker.Pages;
+namespace SpeedrunTracker.Views;
 
 public partial class ProfilePage : ContentPage
 {

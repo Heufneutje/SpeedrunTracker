@@ -1,6 +1,6 @@
 using SpeedrunTracker.ViewModels;
 
-namespace SpeedrunTracker.Pages;
+namespace SpeedrunTracker.Views;
 
 [QueryProperty(nameof(RunDetails), "RunDetails")]
 public partial class RunDetailsPage : ContentPage

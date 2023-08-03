@@ -2,7 +2,7 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:SpeedrunTracker.Pages"
+    xmlns:views="clr-namespace:SpeedrunTracker.Views"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="SpeedrunTracker.AppShell"
     FlyoutBackgroundColor="{StaticResource DarkCyan}">
@@ -37,22 +37,22 @@
     </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Following" FlyoutIcon="following">
-        <ShellContent x:Name="following" ContentTemplate="{DataTemplate pages:FollowingPage}" Route="Following" />
+        <ShellContent x:Name="following" ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" />
     </FlyoutItem>
 
     <FlyoutItem Title="Search" FlyoutIcon="search">
-        <ShellContent x:Name="search" ContentTemplate="{DataTemplate pages:SearchPage}" Route="Search" />
+        <ShellContent x:Name="search" ContentTemplate="{DataTemplate views:SearchPage}" Route="Search" />
     </FlyoutItem>
 
     <FlyoutItem Title="Notifications" FlyoutIcon="bell">
-        <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate pages:NotificationsPage}" Route="Notifications" />
+        <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate views:NotificationsPage}" Route="Notifications" />
     </FlyoutItem>
 
     <FlyoutItem Title="Profile" FlyoutIcon="user">
-        <ShellContent x:Name="profile" ContentTemplate="{DataTemplate pages:ProfilePage}" Route="Profiole" />
+        <ShellContent x:Name="profile" ContentTemplate="{DataTemplate views:ProfilePage}" Route="Profiole" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings" FlyoutIcon="gear">
-        <ShellContent x:Name="settings" ContentTemplate="{DataTemplate pages:SettingsPage}" Route="Settings" />
+        <ShellContent x:Name="settings" ContentTemplate="{DataTemplate views:SettingsPage}" Route="Settings" />
     </FlyoutItem>
 </Shell>

@@ -1,6 +1,6 @@
 using SpeedrunTracker.ViewModels;
 
-namespace SpeedrunTracker.Pages;
+namespace SpeedrunTracker.Views;
 
 [QueryProperty(nameof(Game), "Game")]
 public partial class GameDetailPage : ContentPage

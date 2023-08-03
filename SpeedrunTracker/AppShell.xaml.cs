@@ -1,5 +1,5 @@
 using SpeedrunTracker.Navigation;
-using SpeedrunTracker.Pages;
+using SpeedrunTracker.Views;
 
 namespace SpeedrunTracker;
 

@@ -84,10 +84,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Pages\GameDetailsPage.xaml.cs">
+		<Compile Update="Views\GameDetailsPage.xaml.cs">
 			<DependentUpon>GameDetailsPage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Pages\UserDetailPage.xaml.cs">
+		<Compile Update="Views\UserDetailPage.xaml.cs">
 			<DependentUpon>UserDetailPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\GameDetailFilterView.xaml.cs">
@@ -111,28 +111,28 @@
 		<MauiXaml Update="Controls\RunPropertyControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\FollowingPage.xaml">
+		<MauiXaml Update="Views\FollowingPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\GameDetailsPage.xaml">
+		<MauiXaml Update="Views\GameDetailsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\NotificationsPage.xaml">
+		<MauiXaml Update="Views\NotificationsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\ProfilePage.xaml">
+		<MauiXaml Update="Views\ProfilePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\RunDetailsPage.xaml">
+		<MauiXaml Update="Views\RunDetailsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\SearchPage.xaml">
+		<MauiXaml Update="Views\SearchPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\SettingsPage.xaml">
+		<MauiXaml Update="Views\SettingsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\UserDetailPage.xaml">
+		<MauiXaml Update="Views\UserDetailPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Resources\Styles\Converters.xaml">

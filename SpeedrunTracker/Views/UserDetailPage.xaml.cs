@@ -1,6 +1,6 @@
 using SpeedrunTracker.ViewModels;
 
-namespace SpeedrunTracker.Pages;
+namespace SpeedrunTracker.Views;
 
 [QueryProperty(nameof(User), "User")]
 public partial class UserDetailPage : ContentPage
