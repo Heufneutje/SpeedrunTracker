@@ -6,6 +6,7 @@
              x:Class="SpeedrunTracker.Resources.Styles.Converters">
     <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
     <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+    <converters:IsNullConverter x:Key="IsNullConverter" />
     <toolkit:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
     <converters:NotificationStatusToFontAttributesConverter x:Key="NotificationStatusToFontAttributesConverter" />
 </ResourceDictionary>

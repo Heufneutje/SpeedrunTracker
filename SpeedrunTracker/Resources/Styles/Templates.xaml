@@ -78,7 +78,8 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" />
+                <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
+                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNullConverter}}" />
                 <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ColorFrom.DarkColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
             </Grid>

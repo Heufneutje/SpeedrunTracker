@@ -202,8 +202,11 @@ namespace SpeedrunTracker.ViewModels
 
             foreach (LeaderboardEntry entry in leaderboard.Runs)
                 for (int i = 0; i < entry.Run.Players.Count; i++)
+                {
                     if (entry.Run.Players[i].PlayerType == PlayerType.User)
                         entry.Run.Players[i] = leaderboard.Players.Data.FirstOrDefault(x => x.Id == entry.Run.Players[i].Id);
+                    entry.TrophyAsset = Game.Assets.GetTrophyAsset(entry.Place);
+                }
 
             Leaderboard = leaderboard;
             IsLoadingLeaderboard = false;
