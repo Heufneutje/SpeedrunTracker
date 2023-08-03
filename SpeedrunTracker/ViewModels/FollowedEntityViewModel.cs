@@ -13,17 +13,7 @@ public class FollowedEntityViewModel : BaseViewModel
     private readonly IUserRepository _userRepository;
     private readonly ILocalFollowService _localFollowService;
 
-    private ObservableCollection<EntityGroup> _entities;
-
-    public ObservableCollection<EntityGroup> Entities
-    {
-        get => _entities;
-        set
-        {
-            _entities = value;
-            NotifyPropertyChanged();
-        }
-    }
+    public ObservableCollection<EntityGroup> Entities { get; set; }
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
@@ -36,12 +26,14 @@ public class FollowedEntityViewModel : BaseViewModel
         _gamesRepository = gamesRepository;
         _userRepository = userRepository;
         _localFollowService = localFollowService;
+        Entities = new ObservableCollection<EntityGroup>();
     }
 
     private async Task DeleteAsync(Entity value)
     {
         await _localFollowService.UnfollowAsync(value.Id);
-        await LoadFollowedEntities();
+        foreach (EntityGroup group in Entities)
+            group.Remove(value);
     }
 
     private async Task NavigateTo(Entity entity)
@@ -80,6 +72,7 @@ public class FollowedEntityViewModel : BaseViewModel
 
         Entities = entities.AsObservableCollection();
         IsRunningBackgroundTask = false;
+        NotifyPropertyChanged(nameof(Entities));
         NotifyPropertyChanged(nameof(HasEntities));
     }
 }
