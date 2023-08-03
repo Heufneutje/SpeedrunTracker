@@ -96,9 +96,6 @@
 		<Compile Update="Views\SpeedrunEntitiesView.xaml.cs">
 			<DependentUpon>SpeedrunEntitiesView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Views\Loadable.xaml.cs">
-			<DependentUpon>Loadable.xaml</DependentUpon>
-		</Compile>
 		<Compile Update="Views\UserPersonalBestsView.xaml.cs">
 			<DependentUpon>UserPersonalBestsView.xaml</DependentUpon>
 		</Compile>
@@ -151,9 +148,6 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\LeaderboardView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\Loadable.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\UserPersonalBestsView.xaml">
