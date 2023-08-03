@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpeedrunTracker.Views.FollowingPage"
-             xmlns:views="clr-namespace:SpeedrunTracker.Views"
+             x:DataType="viewmodels:FollowedEntityViewModel"
+             xmlns:local="clr-namespace:SpeedrunTracker.Views"
+             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              Title="Following"
              Appearing="ContentPage_Appearing">
     <Grid>
         <Label Text="It looks like you're not following any games or users yet!&#10;&#10;Search for a game or user and hit the Follow button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
-        <views:SpeedrunEntitiesView IsVisible="{Binding HasEntities}" />
+        <local:SpeedrunEntitiesView IsVisible="{Binding HasEntities}" />
     </Grid>
 </ContentPage>

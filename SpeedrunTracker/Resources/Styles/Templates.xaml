@@ -4,6 +4,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:models="clr-namespace:SpeedrunTracker.Model"
+             xmlns:speedrunmodels="clr-namespace:SpeedrunTracker.Model.SpeedrunDotCom"
              x:Class="SpeedrunTracker.Resources.Styles.Templates">
     <DataTemplate x:Key="EntitiesGroupHeaderTemplate">
         <ViewCell>
@@ -22,7 +24,7 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="EntitiesTemplate">
+    <DataTemplate x:Key="EntitiesTemplate" x:DataType="models:Entity">
         <ViewCell Height="100">
             <SwipeView>
                 <SwipeView.RightItems>
@@ -48,7 +50,7 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="CategoryTemplate">
+    <DataTemplate x:Key="CategoryTemplate" x:DataType="speedrunmodels:Category">
         <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
@@ -67,7 +69,7 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="LeaderboardTemplate">
+    <DataTemplate x:Key="LeaderboardTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
         <ViewCell>
             <Grid Padding="5,20,20,20">
                 <Grid.ColumnDefinitions>
@@ -83,7 +85,7 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="VariablesTemplate">
+    <DataTemplate x:Key="VariablesTemplate" x:DataType="viewmodels:VariableViewModel">
         <VerticalStackLayout>
             <Label Text="{Binding Name}" Style="{StaticResource IndentedLabel}" />
             <CollectionView ItemsSource="{Binding Values}"
@@ -98,22 +100,15 @@
         </VerticalStackLayout>
     </DataTemplate>
 
-    <DataTemplate x:Key="RunVariablesTemplate">
+    <DataTemplate x:Key="RunVariablesTemplate" x:DataType="models:RunVariable">
         <controls:RunPropertyControl Title="{Binding Name}" Value="{Binding Value}" ImageSource="category" />
     </DataTemplate>
 
-    <DataTemplate x:Key="RunPlayersTemplate">
+    <DataTemplate x:Key="RunPlayersTemplate" x:DataType="speedrunmodels:User">
         <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ColorFrom.DarkColor}" Margin="5,0,0,5" />
     </DataTemplate>
 
-    <DataTemplate x:Key="SearchFiltersTemplate">
-        <HorizontalStackLayout>
-            <Switch IsToggled="{Binding IsEnabled}" />
-            <Label Text="{Binding SearchType}" />
-        </HorizontalStackLayout>
-    </DataTemplate>
-
-    <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate">
+    <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
         <ViewCell Height="100">
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
@@ -126,7 +121,7 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestsTemplate">
+    <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
         <ViewCell>
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
@@ -154,11 +149,11 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestRunVariablesTemplate">
+    <DataTemplate x:Key="PersonalBestRunVariablesTemplate" x:DataType="models:RunVariable">
         <Label Text="{Binding Value}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="NotificationTemplate">
+    <DataTemplate x:Key="NotificationTemplate" x:DataType="speedrunmodels:Notification">
         <VerticalStackLayout>
             <VerticalStackLayout Padding="20">
                 <Label Text="{Binding Created, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
