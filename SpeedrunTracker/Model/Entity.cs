@@ -7,4 +7,6 @@ public class Entity
     public string Subtitle { get; set; }
     public string ImageUrl { get; set; }
     public object SearchObject { get; set; }
+
+    public bool CanDelete => SearchObject is EntityType;
 }

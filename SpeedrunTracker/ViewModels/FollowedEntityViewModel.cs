@@ -13,8 +13,6 @@ public class FollowedEntityViewModel : BaseViewModel
     private readonly IUserRepository _userRepository;
     private readonly ILocalFollowService _localFollowService;
 
-    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateTo);
-
     private ObservableCollection<EntityGroup> _entities;
 
     public ObservableCollection<EntityGroup> Entities
@@ -29,11 +27,21 @@ public class FollowedEntityViewModel : BaseViewModel
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
+    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateTo);
+
+    public ICommand DeleteCommand => new AsyncRelayCommand<Entity>(DeleteAsync);
+
     public FollowedEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, ILocalFollowService localFollowService)
     {
         _gamesRepository = gamesRepository;
         _userRepository = userRepository;
         _localFollowService = localFollowService;
+    }
+
+    private async Task DeleteAsync(Entity value)
+    {
+        await _localFollowService.UnfollowAsync(value.Id);
+        await LoadFollowedEntities();
     }
 
     private async Task NavigateTo(Entity entity)

@@ -50,6 +50,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\delete.svg" />
+	  <None Remove="Resources\Images\follow.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<EmbeddedResource Include="appsettings.json" />
 	</ItemGroup>
 
