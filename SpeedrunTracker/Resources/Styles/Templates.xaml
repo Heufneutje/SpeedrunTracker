@@ -50,7 +50,7 @@
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="CategoryTemplate" x:DataType="speedrunmodels:Category">
+    <DataTemplate x:Key="CategoryTemplate">
         <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
