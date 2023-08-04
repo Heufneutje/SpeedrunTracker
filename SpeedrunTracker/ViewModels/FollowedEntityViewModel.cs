@@ -17,10 +17,6 @@ public class FollowedEntityViewModel : BaseViewModel
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
-    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateTo);
-
-    public ICommand DeleteCommand => new AsyncRelayCommand<Entity>(DeleteAsync);
-
     public FollowedEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, ILocalFollowService localFollowService)
     {
         _gamesRepository = gamesRepository;
@@ -29,14 +25,9 @@ public class FollowedEntityViewModel : BaseViewModel
         Entities = new ObservableCollection<EntityGroup>();
     }
 
-    private async Task DeleteAsync(Entity value)
-    {
-        await _localFollowService.UnfollowAsync(value.Id);
-        foreach (EntityGroup group in Entities)
-            group.Remove(value);
-    }
+    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateAsync);
 
-    private async Task NavigateTo(Entity entity)
+    private async Task NavigateAsync(Entity entity)
     {
         switch ((EntityType)entity.SearchObject)
         {

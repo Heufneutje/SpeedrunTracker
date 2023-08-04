@@ -26,27 +26,20 @@
 
     <DataTemplate x:Key="EntitiesTemplate" x:DataType="models:Entity">
         <ViewCell Height="100">
-            <SwipeView>
-                <SwipeView.RightItems>
-                    <SwipeItems>
-                        <SwipeItem Text="Delete" BackgroundColor="{StaticResource DeleteButtonColor}" IconImageSource="delete" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FollowedEntityViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}" IsVisible="{Binding CanDelete}" />
-                    </SwipeItems>
-                </SwipeView.RightItems>
-                <Grid Padding="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <Image Source="{Binding ImageUrl}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                    <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                    <Label Text="{Binding Subtitle}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
-                </Grid>
-            </SwipeView>
+                <Image Source="{Binding ImageUrl}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
+                <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+                <Label Text="{Binding Subtitle}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+            </Grid>
         </ViewCell>
     </DataTemplate>
 

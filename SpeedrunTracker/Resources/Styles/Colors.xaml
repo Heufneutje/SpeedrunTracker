@@ -45,5 +45,4 @@
     <Color x:Key="Gray900Transparent">#99212121</Color>
     <Color x:Key="WhiteTransparent">#99FFFFFF</Color>
     <Color x:Key="FullTransparent">Transparent</Color>
-    <Color x:Key="DeleteButtonColor">Red</Color>
 </ResourceDictionary>
