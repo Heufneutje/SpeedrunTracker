@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class FollowedEntityViewModel : BaseViewModel
+public class FollowedEntityViewModel : BaseNetworkActionViewModel
 {
     private readonly IGamesRepository _gamesRepository;
     private readonly IUserRepository _userRepository;
@@ -17,7 +17,7 @@ public class FollowedEntityViewModel : BaseViewModel
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
-    public FollowedEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, ILocalFollowService localFollowService)
+    public FollowedEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
     {
         _gamesRepository = gamesRepository;
         _userRepository = userRepository;
@@ -32,12 +32,14 @@ public class FollowedEntityViewModel : BaseViewModel
         switch ((EntityType)entity.SearchObject)
         {
             case EntityType.Games:
-                Game game = (await _gamesRepository.GetGameAsync(entity.Id)).Data;
-                await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
+                BaseData<Game> game = await ExecuteNetworkTask(_gamesRepository.GetGameAsync(entity.Id));
+                if (game != null)
+                    await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game.Data);
                 break;
             case EntityType.Users:
-                User user = (await _userRepository.GetUserAsync(entity.Id)).Data;
-                await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+                BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(entity.Id));
+                if (user != null)
+                    await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user.Data);
                 break;
         }
     }

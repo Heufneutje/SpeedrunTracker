@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
 {
-    public class SearchEntityViewModel : BaseViewModel
+    public class SearchEntityViewModel : BaseNetworkActionViewModel
     {
         private readonly IGamesRepository _gamesRepository;
         private readonly IUserRepository _userRepository;
@@ -16,7 +16,7 @@ namespace SpeedrunTracker.ViewModels
         public ICommand SearchCommand => new AsyncRelayCommand<string>(Search, CanSearch);
         public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateTo);
 
-        public SearchEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, SettingsViewModel settingsViewModel)
+        public SearchEntityViewModel(IGamesRepository gamesRepository, IUserRepository userRepository, IToastService toastService, SettingsViewModel settingsViewModel) : base(toastService)
         {
             _gamesRepository = gamesRepository;
             _userRepository = userRepository;
@@ -39,43 +39,55 @@ namespace SpeedrunTracker.ViewModels
         {
             IsRunningBackgroundTask = true;
 
-            ObservableCollection<EntityGroup> result = new ObservableCollection<EntityGroup>();
-
-            if (_settingsViewModel.EnableGameSearch)
+            try
             {
-                IEnumerable<Game> games = (await _gamesRepository.SearchGamesAsync(query.Trim())).Data.OrderBy(x => x.IsRomhack);
-                if (games.Any())
-                {
-                    EntityGroup gamesGroup = new EntityGroup(EntityType.Games, games.Select(x => new Entity()
-                    {
-                        Title = x.Names.International,
-                        Subtitle = $"Released: {x.Released}",
-                        ImageUrl = x.Assets.CoverSmall.FixedGameAssetUri,
-                        SearchObject = x
-                    }).ToList());
-                    result.Add(gamesGroup);
-                }
-            }
+                ObservableCollection<EntityGroup> result = new ObservableCollection<EntityGroup>();
 
-            if (_settingsViewModel.EnableUserSearch)
+                if (_settingsViewModel.EnableGameSearch)
+                {
+                    PagedData<List<Game>> apiData = await ExecuteNetworkTask(_gamesRepository.SearchGamesAsync(query.Trim()));
+                    if (apiData == null)
+                        return;
+
+                    IEnumerable<Game> games = apiData.Data.OrderBy(x => x.IsRomhack);
+                    if (games.Any())
+                    {
+                        EntityGroup gamesGroup = new EntityGroup(EntityType.Games, games.Select(x => new Entity()
+                        {
+                            Title = x.Names.International,
+                            Subtitle = $"Released: {x.Released}",
+                            ImageUrl = x.Assets.CoverSmall.FixedGameAssetUri,
+                            SearchObject = x
+                        }).ToList());
+                        result.Add(gamesGroup);
+                    }
+                }
+
+                if (_settingsViewModel.EnableUserSearch)
+                {
+                    PagedData<List<User>> apiData = await ExecuteNetworkTask(_userRepository.SearchUsersAsync(query.Trim()));
+                    if (apiData == null)
+                        return;
+
+                    if (apiData.Data.Any())
+                    {
+                        EntityGroup usersGroup = new EntityGroup(EntityType.Users, apiData.Data.Select(x => new Entity()
+                        {
+                            Title = x.Names.International,
+                            Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
+                            ImageUrl = x.Assets.Image.FixedUserAssetUri,
+                            SearchObject = x
+                        }).ToList());
+                        result.Add(usersGroup);
+                    }
+                }
+
+                Entities = result;
+            }
+            finally
             {
-                IEnumerable<User> users = (await _userRepository.SearchUsersAsync(query.Trim())).Data;
-                if (users.Any())
-                {
-                    EntityGroup usersGroup = new EntityGroup(EntityType.Users, users.Select(x => new Entity()
-                    {
-                        Title = x.Names.International,
-                        Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
-                        ImageUrl = x.Assets.Image.FixedUserAssetUri,
-                        SearchObject = x
-                    }).ToList());
-                    result.Add(usersGroup);
-                }
+                IsRunningBackgroundTask = false;
             }
-
-            Entities = result;
-
-            IsRunningBackgroundTask = false;
         }
 
         public bool CanSearch(object parameter) => !IsRunningBackgroundTask;

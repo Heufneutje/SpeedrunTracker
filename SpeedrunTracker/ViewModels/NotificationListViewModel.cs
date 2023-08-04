@@ -8,12 +8,10 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class NotificationListViewModel : BaseViewModel
+public class NotificationListViewModel : BaseNetworkActionViewModel
 {
     private readonly INotificationRepository _notificationRepository;
-    private readonly IToastService _toastService;
     private readonly IBrowserService _browserService;
-    private readonly ILeaderboardRepository _leaderboardRepository;
     private int _offset;
     private bool _hasReachedEnd;
 
@@ -47,13 +45,11 @@ public class NotificationListViewModel : BaseViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
-    public NotificationListViewModel(INotificationRepository notificationRepository, IToastService toastService, IBrowserService browserService, ILeaderboardRepository leaderboardRepository)
+    public NotificationListViewModel(INotificationRepository notificationRepository, IToastService toastService, IBrowserService browserService) : base(toastService)
     {
         _notifications = new ObservableCollection<Notification>();
         _notificationRepository = notificationRepository;
-        _toastService = toastService;
         _browserService = browserService;
-        _leaderboardRepository = leaderboardRepository;
     }
 
     private async Task LoadNotificationsAsync()
@@ -61,24 +57,17 @@ public class NotificationListViewModel : BaseViewModel
         if (_hasReachedEnd)
             return;
 
-        try
-        {
-            PagedData<List<Notification>> notifications = await _notificationRepository.GetNotificationsAsync(_offset);
-            foreach (Notification notification in notifications.Data)
-                Notifications.Add(notification);
+        PagedData<List<Notification>> notifications = await ExecuteNetworkTask(_notificationRepository.GetNotificationsAsync(_offset));
+        if (notifications == null)
+            return;
 
-            if (notifications.Pagination.Size == 0)
-                _hasReachedEnd = true;
-            else
-                _offset += notifications.Pagination.Size;
-        }
-        catch (Exception ex)
-        {
-            if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-                await _toastService.ShowToastAsync("You must be logged in to view notifications.", ToastDuration.Long);
-            else
-                await _toastService.ShowToastAsync($"An error occurred while getting notification data: {ex.Message}");
-        }
+        foreach (Notification notification in notifications.Data)
+            Notifications.Add(notification);
+
+        if (notifications.Pagination.Size == 0)
+            _hasReachedEnd = true;
+        else
+            _offset += notifications.Pagination.Size;
     }
 
     public async Task RefreshNotificationsAsync()
