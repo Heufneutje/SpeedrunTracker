@@ -32,4 +32,13 @@ public class User : BaseSpeedrunObject
 
     [JsonIgnore]
     public string DisplayName => PlayerType == PlayerType.Guest ? Name : string.IsNullOrEmpty(Names.International) ? Names.Japanese : Names.International;
+
+    public User()
+    {
+    }
+
+    public User(string name)
+    {
+        Names = new Names() { International = name };
+    }
 }

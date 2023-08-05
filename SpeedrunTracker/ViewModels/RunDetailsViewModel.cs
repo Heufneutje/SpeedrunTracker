@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
 {
-    public class RunDetailsViewModel : BaseViewModel
+    public class RunDetailsViewModel : BaseNetworkActionViewModel
     {
         private readonly IBrowserService _browserService;
         private readonly IUserRepository _userRepository;
@@ -65,7 +65,7 @@ namespace SpeedrunTracker.ViewModels
             _ => string.Empty,
         };
 
-        public RunDetailsViewModel(IBrowserService browserService, IUserRepository userRepository)
+        public RunDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, IToastService toastService) : base(toastService)
         {
             _browserService = browserService;
             _userRepository = userRepository;
@@ -78,7 +78,10 @@ namespace SpeedrunTracker.ViewModels
         public async Task LoadData()
         {
             if (RunDetails.Examiner == null && RunDetails.Run.Status.ExaminerId != null)
-                RunDetails.Examiner = (await _userRepository.GetUserAsync(RunDetails.Run.Status.ExaminerId))?.Data;
+            {
+                BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(RunDetails.Run.Status.ExaminerId));
+                RunDetails.Examiner = user?.Data ?? new User("User Not Found");
+            }
         }
     }
 }

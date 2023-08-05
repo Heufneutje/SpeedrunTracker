@@ -38,8 +38,19 @@ namespace SpeedrunTracker.ViewModels
             }
             catch (Exception ex)
             {
-                if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-                    await _toastService.ShowToastAsync("You must be logged in to view this content.", ToastDuration.Long);
+                if (ex is ApiException apiEx)
+                    switch (apiEx.StatusCode)
+                    {
+                        case HttpStatusCode.Forbidden:
+                            await _toastService.ShowToastAsync("You must be logged in to view this content.", ToastDuration.Long);
+                            break;
+                        case HttpStatusCode.NotFound:
+                            // We're letting each specific case handle itself. One case in which this happens is a run that was verified by a deleted user.
+                            break;
+                        default:
+                            await _toastService.ShowToastAsync(ex.Message);
+                            break;
+                    }
                 else
                     await _toastService.ShowToastAsync(ex.Message);
 
