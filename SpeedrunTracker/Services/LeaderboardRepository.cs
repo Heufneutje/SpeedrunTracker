@@ -14,25 +14,11 @@ public class LeaderboardRepository : ILeaderboardRepository
 
     public Task<BaseData<Leaderboard>> GetFullGameLeaderboardAsync(string gameId, string categoryId, string variables, int maxResults)
     {
-        try
-        {
-            return _leaderboardService.GetFullGameLeaderboardAsync(gameId, categoryId, variables, maxResults);
-        }
-        catch (ApiException ex)
-        {
-            return null;
-        }
+        return _leaderboardService.GetFullGameLeaderboardAsync(gameId, categoryId, variables, maxResults);
     }
 
     public Task<BaseData<Leaderboard>> GetLevelLeaderboardAsync(string gameId, string levelId, string categoryId, string variables, int maxResults)
     {
-        try
-        {
-            return _leaderboardService.GetLevelLeaderboardAsync(gameId, levelId, categoryId, variables, maxResults);
-        }
-        catch (ApiException ex)
-        {
-            return null;
-        }
+        return _leaderboardService.GetLevelLeaderboardAsync(gameId, levelId, categoryId, variables, maxResults);
     }
 }

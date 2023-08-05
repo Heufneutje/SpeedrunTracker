@@ -48,7 +48,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
     {
         IsRunningBackgroundTask = true;
 
-        List<EntityGroup> entities = new List<EntityGroup>();
+        List<EntityGroup> entities = new();
         List<FollowedEntity> followedEntities = await _localFollowService.GetFollowedEntitiesAsync();
 
         foreach (IGrouping<EntityType, FollowedEntity> grouping in followedEntities.GroupBy(x => x.Type))

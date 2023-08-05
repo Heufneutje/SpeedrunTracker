@@ -1,9 +1,6 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.Input;
-using Refit;
+﻿using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Interfaces;
 using System.Collections.ObjectModel;
-using System.Net;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;

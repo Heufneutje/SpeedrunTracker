@@ -41,7 +41,7 @@ namespace SpeedrunTracker.ViewModels
 
             try
             {
-                ObservableCollection<EntityGroup> result = new ObservableCollection<EntityGroup>();
+                ObservableCollection<EntityGroup> result = new();
 
                 if (_settingsViewModel.EnableGameSearch)
                 {
@@ -52,7 +52,7 @@ namespace SpeedrunTracker.ViewModels
                     IEnumerable<Game> games = apiData.Data.OrderBy(x => x.IsRomhack);
                     if (games.Any())
                     {
-                        EntityGroup gamesGroup = new EntityGroup(EntityType.Games, games.Select(x => new Entity()
+                        EntityGroup gamesGroup = new(EntityType.Games, games.Select(x => new Entity()
                         {
                             Title = x.Names.International,
                             Subtitle = $"Released: {x.Released}",
@@ -71,7 +71,7 @@ namespace SpeedrunTracker.ViewModels
 
                     if (apiData.Data.Any())
                     {
-                        EntityGroup usersGroup = new EntityGroup(EntityType.Users, apiData.Data.Select(x => new Entity()
+                        EntityGroup usersGroup = new(EntityType.Users, apiData.Data.Select(x => new Entity()
                         {
                             Title = x.Names.International,
                             Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",

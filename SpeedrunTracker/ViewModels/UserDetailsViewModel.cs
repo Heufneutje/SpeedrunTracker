@@ -133,7 +133,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         if (entry.Run.Status.ExaminerId != null)
             examiner = (await _userRepository.GetUserAsync(entry.Run.Status.ExaminerId)).Data;
 
-        RunDetails runDetails = new RunDetails()
+        RunDetails runDetails = new()
         {
             Category = entry.Category.Data,
             GameAssets = entry.Game.Data.Assets,

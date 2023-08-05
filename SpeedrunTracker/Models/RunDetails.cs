@@ -18,8 +18,7 @@ public class RunDetails
     {
         get
         {
-            if (_ordinalPlace == null)
-                _ordinalPlace = Place.AsOrdinal();
+            _ordinalPlace ??= Place.AsOrdinal();
             return _ordinalPlace;
         }
     }

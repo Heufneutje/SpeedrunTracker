@@ -174,7 +174,7 @@ namespace SpeedrunTracker.ViewModels
 
         public async Task LoadLevelsAsync()
         {
-            List<Level> levels = new List<Level>() { new() { Name = "Full Game" } };
+            List<Level> levels = new() { new() { Name = "Full Game" } };
             levels.AddRange((await _gamesRepository.GetGameLevelsAsync(Game.Id)).Data);
             Levels = levels.AsObservableCollection();
         }
@@ -188,7 +188,7 @@ namespace SpeedrunTracker.ViewModels
         {
             IsLoadingLeaderboard = true;
 
-            List<string> variableValues = new List<string>();
+            List<string> variableValues = new();
             foreach (VariableViewModel vm in Variables)
                 variableValues.Add($"var-{vm.VariableId}={vm.SelectedValue.Id}");
             string variables = string.Join('&', variableValues);
@@ -232,7 +232,7 @@ namespace SpeedrunTracker.ViewModels
                 entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
             }
 
-            RunDetails runDetails = new RunDetails()
+            RunDetails runDetails = new()
             {
                 Category = category,
                 GameAssets = Game.Assets,
@@ -250,7 +250,7 @@ namespace SpeedrunTracker.ViewModels
 
         private void UpdateVariables()
         {
-            List<VariableViewModel> variablesVMs = new List<VariableViewModel>();
+            List<VariableViewModel> variablesVMs = new();
             IEnumerable<Variable> variables = _allVariables.Where(x => x.IsSubcategory);
             if (string.IsNullOrEmpty(SelectedLevel.Id))
                 variables = variables.Where(x => x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.FullGame);
@@ -259,7 +259,7 @@ namespace SpeedrunTracker.ViewModels
 
             foreach (Variable variable in variables.Where(x => x.Category == null || x.Category == SelectedCategory.Id))
             {
-                VariableViewModel vm = new VariableViewModel()
+                VariableViewModel vm = new()
                 {
                     VariableId = variable.Id,
                     Name = variable.Name,
