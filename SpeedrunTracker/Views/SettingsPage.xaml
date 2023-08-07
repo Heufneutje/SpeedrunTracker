@@ -9,19 +9,6 @@
     <VerticalStackLayout Padding="10">
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
-                <Label Text="Search Filters" Style="{StaticResource GroupHeaderLabel}" />
-                <Line />
-                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="10,0,10,0">
-                    <Label Grid.Column="0" Grid.Row="0" Text="Games" VerticalTextAlignment="Center" />
-                    <Switch Grid.Column="1" Grid.Row="0" IsToggled="{Binding EnableGameSearch}" />
-                    <Label Grid.Column="0" Grid.Row="1" Text="Users" VerticalTextAlignment="Center" />
-                    <Switch Grid.Column="1" Grid.Row="1" IsToggled="{Binding EnableUserSearch}" />
-                </Grid>
-            </VerticalStackLayout>
-        </Border>
-
-        <Border Style="{StaticResource TransparentGridElementBorder}">
-            <VerticalStackLayout>
                 <Label Text="Maximum Leaderboard Results" Style="{StaticResource GroupHeaderLabel}" />
                 <Line />
                 <Grid ColumnDefinitions="*,Auto" Margin="0,0,10,0">

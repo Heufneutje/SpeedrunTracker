@@ -23,8 +23,6 @@ public class LocalSettingsService : ILocalSettingsService
         {
             UserSettings = new()
             {
-                EnableGameSearch = Convert.ToBoolean(_configuration["defaults:enable-game-search"]),
-                EnableUserSearch = Convert.ToBoolean(_configuration["defaults:enable-user-search"]),
                 MaxLeaderboardResults = Convert.ToInt32(_configuration["defaults:max-leaderboard-results"])
             };
 
