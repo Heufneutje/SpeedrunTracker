@@ -50,6 +50,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\cross.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<EmbeddedResource Include="appsettings.json" />
 	</ItemGroup>
 
@@ -88,9 +92,6 @@
 		<Compile Update="Views\GameDetailFilterView.xaml.cs">
 			<DependentUpon>GameDetailFilterView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Views\SpeedrunEntitiesView.xaml.cs">
-			<DependentUpon>SpeedrunEntitiesView.xaml</DependentUpon>
-		</Compile>
 		<Compile Update="Views\UserPersonalBestsView.xaml.cs">
 			<DependentUpon>UserPersonalBestsView.xaml</DependentUpon>
 		</Compile>
@@ -102,6 +103,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Controls\RunPropertyControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\BaseSearchContentPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\FollowingPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -116,9 +120,6 @@
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\RunDetailsPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\SearchPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\SettingsPage.xaml">
@@ -137,9 +138,6 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\GameDetailHeaderView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\SpeedrunEntitiesView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\LeaderboardView.xaml">

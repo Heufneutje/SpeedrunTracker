@@ -6,7 +6,9 @@
              x:DataType="viewmodels:UserDetailsViewModel"
              x:Class="SpeedrunTracker.Views.UserDetailPage"
              Title="{Binding DisplayName}"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" />
     </ContentPage.ToolbarItems>

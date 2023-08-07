@@ -5,10 +5,28 @@
              x:DataType="viewmodels:FollowedEntityViewModel"
              xmlns:local="clr-namespace:SpeedrunTracker.Views"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Following"
              Appearing="ContentPage_Appearing">
     <Grid>
         <Label Text="It looks like you're not following any games or users yet!&#10;&#10;Search for a game or user and hit the Follow button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
-        <local:SpeedrunEntitiesView IsVisible="{Binding HasEntities}" />
+        <StackLayout IsVisible="{Binding HasEntities}">
+            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding Entities}"
+                  IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
+                  CachingStrategy="RecycleElement"
+                  VerticalOptions="FillAndExpand"
+                  IsGroupingEnabled="True"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
+                  ItemTemplate="{StaticResource EntitiesTemplate}">
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                                    Command="{Binding NavigateToCommand}"
+                                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                </ListView.Behaviors>
+            </ListView>
+        </StackLayout>
     </Grid>
 </ContentPage>

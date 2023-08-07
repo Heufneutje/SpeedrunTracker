@@ -40,8 +40,7 @@
     <Color x:Key="Blue100Accent">#3E8EED</Color>
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
-    <Color x:Key="Cyan">Cyan</Color>
-    <Color x:Key="DarkCyan">DarkCyan</Color>
+    <Color x:Key="LightHighlight">#257eb8</Color>
     <Color x:Key="Gray900Transparent">#99212121</Color>
     <Color x:Key="WhiteTransparent">#99FFFFFF</Color>
     <Color x:Key="FullTransparent">Transparent</Color>

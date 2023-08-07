@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:SpeedrunTracker.Views"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="SpeedrunTracker.AppShell"
-    FlyoutBackgroundColor="{StaticResource DarkCyan}">
+    FlyoutBackgroundColor="{StaticResource Primary}">
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid Style="{StaticResource FlyoutItemStyle}">
@@ -18,13 +18,7 @@
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Grid.Column="1"
-                Text="{Binding Title}"
-                FontSize="Body"
-                VerticalTextAlignment="Center"
-                HorizontalTextAlignment="Start"
-                x:Name="_label">
-                </Label>
+                <Label Grid.Column="1" Text="{Binding Title}" Style="{StaticResource FlyoutItemLabelStyle}" />
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
@@ -36,23 +30,19 @@
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Following" FlyoutIcon="following">
-        <ShellContent x:Name="following" ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" Title="Following" Icon="following" />
+        <Tab Title="Search" Icon="search">
+            <ShellContent ContentTemplate="{DataTemplate views:GameSearchPage}" Route="SearchGames" Title="Games" />
+            <ShellContent ContentTemplate="{DataTemplate views:UserSearchPage}" Route="SearchUsers" Title="Users" />
+        </Tab>
+        <ShellContent ContentTemplate="{DataTemplate views:NotificationsPage}" Route="Notifications" Title="Notifications" Icon="bell" />
     </FlyoutItem>
-
-    <FlyoutItem Title="Search" FlyoutIcon="search">
-        <ShellContent x:Name="search" ContentTemplate="{DataTemplate views:SearchPage}" Route="Search" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Notifications" FlyoutIcon="bell">
-        <ShellContent x:Name="notifications" ContentTemplate="{DataTemplate views:NotificationsPage}" Route="Notifications" />
-    </FlyoutItem>
-
     <FlyoutItem Title="Profile" FlyoutIcon="user">
-        <ShellContent x:Name="profile" ContentTemplate="{DataTemplate views:ProfilePage}" Route="Profiole" />
+        <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="Profiole" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings" FlyoutIcon="gear">
-        <ShellContent x:Name="settings" ContentTemplate="{DataTemplate views:SettingsPage}" Route="Settings" />
+        <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Route="Settings" />
     </FlyoutItem>
 </Shell>

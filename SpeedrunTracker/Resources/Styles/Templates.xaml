@@ -53,7 +53,7 @@
                     <VisualState Name="Normal"></VisualState>
                     <VisualState Name="Selected">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Cyan}, Dark={StaticResource DarkCyan}}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightHighlight}, Dark={StaticResource Primary}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

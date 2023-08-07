@@ -6,7 +6,9 @@
              x:DataType="viewmodels:GameDetailViewModel"
              x:Class="SpeedrunTracker.Views.GameDetailPage"
              Title="{Binding Game.Names.International}"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" />
     </ContentPage.ToolbarItems>

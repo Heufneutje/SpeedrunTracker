@@ -6,7 +6,9 @@
              x:DataType="viewmodels:RunDetailsViewModel"
              x:Class="SpeedrunTracker.Views.RunDetailsPage"
              Title="{Binding Title}"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
     <Grid>
         <Image Source="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>

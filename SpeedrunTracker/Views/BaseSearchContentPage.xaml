@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             x:DataType="viewmodels:BaseSearchEntityViewModel"
+             x:Class="SpeedrunTracker.Views.BaseSearchContentPage"
+             Title="Search">
+    <!-- Move to SearchHandlers when https://github.com/dotnet/maui/issues/8716 is fixed.
+    <Shell.SearchHandler>
+        <SearchHandler Placeholder="{Binding SearchTextPlaceholder}" Command="{Binding SearchCommand}" Query="{Binding Query}" QueryIcon="search" ClearIcon="cross" />
+    </Shell.SearchHandler>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <SearchBar x:Name="searchBar"
+                   Placeholder="{Binding SearchTextPlaceholder}"
+                   SearchCommand="{Binding SearchCommand}"
+                   Text="{Binding Query}"
+                   Grid.Row="0"
+                   HorizontalOptions="FillAndExpand"
+                   SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
+        <StackLayout Grid.Row="1">
+            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding Entities}"
+                  IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
+                  CachingStrategy="RecycleElement"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  ItemTemplate="{StaticResource EntitiesTemplate}">
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                                Command="{Binding NavigateToCommand}"
+                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                </ListView.Behaviors>
+            </ListView>
+        </StackLayout>
+    </Grid>
+</ContentPage>

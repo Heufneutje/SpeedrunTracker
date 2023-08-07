@@ -51,7 +51,8 @@ public static class DependencyInjectionExtensions
 
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
-        services.AddSingleton<SearchEntityViewModel>();
+        services.AddSingleton<GameSearchViewModel>();
+        services.AddSingleton<UserSearchViewModel>();
         services.AddSingleton<FollowedEntityViewModel>();
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<ProfileViewModel>();
@@ -65,7 +66,8 @@ public static class DependencyInjectionExtensions
 
     public static IServiceCollection RegisterPages(this IServiceCollection services)
     {
-        services.AddSingleton<SearchPage>();
+        services.AddSingleton<GameSearchPage>();
+        services.AddSingleton<UserSearchPage>();
         services.AddSingleton<FollowingPage>();
         services.AddSingleton<SettingsPage>();
         services.AddSingleton<ProfilePage>();
