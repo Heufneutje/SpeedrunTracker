@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Interfaces;
+using SpeedrunTracker.Extensions;
+using SpeedrunTracker.Navigation;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -30,7 +32,24 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
 
     public bool HasVideo => _runDetails?.Run?.Videos?.Links?.Any() == true;
 
+    private User _selectedPlayer;
+
+    public User SelectedPlayer
+    {
+        get => _selectedPlayer;
+        set
+        {
+            if (_selectedPlayer != value)
+            {
+                _selectedPlayer = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
     public ICommand ShowVideoCommand => new AsyncRelayCommand(ShowVideo);
+
+    public ICommand NavigateToUserCommand => new AsyncRelayCommand<User>(NavigateToUserAsync);
 
     public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players.First().DisplayName}";
 
@@ -82,5 +101,17 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(RunDetails.Run.Status.ExaminerId));
             RunDetails.Examiner = user?.Data ?? User.GetUserNotFoundPlaceholder();
         }
+    }
+
+    private async Task NavigateToUserAsync(User user)
+    {
+        if (user == null)
+        {
+            user = SelectedPlayer;
+            SelectedPlayer = null;
+        }
+
+        if (!string.IsNullOrEmpty(user.Id))
+            await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
     }
 }

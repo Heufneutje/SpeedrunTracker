@@ -32,7 +32,7 @@
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Players" ImageSource="user" IsValueVisible="False" />
-                        <CollectionView ItemsSource="{Binding RunDetails.Run.Players}" ItemTemplate="{StaticResource RunPlayersTemplate}" />
+                        <CollectionView ItemsSource="{Binding RunDetails.Run.Players}" ItemTemplate="{StaticResource RunPlayersTemplate}" SelectionMode="Single" SelectedItem="{Binding SelectedPlayer}" SelectionChangedCommand="{Binding NavigateToUserCommand}" />
                     </VerticalStackLayout>
                 </Border>
 
@@ -66,7 +66,11 @@
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
                         <controls:RunPropertyControl Title="Examiner" IsValueVisible="False" ImageSource="user" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
-                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,0" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
+                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,0" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToUserCommand}" CommandParameter="{Binding RunDetails.Examiner}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </VerticalStackLayout>
                 </Border>
             </Grid>
