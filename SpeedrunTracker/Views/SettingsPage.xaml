@@ -9,6 +9,14 @@
     <VerticalStackLayout Padding="10">
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
+                <Label Text="Theme" Style="{StaticResource GroupHeaderLabel}" />
+                <Line />
+                <Picker ItemsSource="{Binding Themes}" SelectedItem="{Binding Theme}" Margin="20,5,20,5" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Style="{StaticResource TransparentGridElementBorder}">
+            <VerticalStackLayout>
                 <Label Text="Maximum Leaderboard Results" Style="{StaticResource GroupHeaderLabel}" />
                 <Line />
                 <Grid ColumnDefinitions="*,Auto" Margin="0,0,10,0">
