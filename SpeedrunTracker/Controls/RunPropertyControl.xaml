@@ -14,7 +14,7 @@
                     </Image>
                     <Label Text="{TemplateBinding Title}" FontAttributes="Bold" />
                 </HorizontalStackLayout>
-                <Label Text="{TemplateBinding Value}" TextColor="{TemplateBinding ValueTextColor}" IsVisible="{TemplateBinding IsValueVisible}" />
+                <Label Text="{TemplateBinding Value}" IsVisible="{TemplateBinding IsValueVisible}" />
             </VerticalStackLayout>
         </ControlTemplate>
     </ContentView.ControlTemplate>

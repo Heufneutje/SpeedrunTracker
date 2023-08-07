@@ -42,6 +42,6 @@
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
     <Color x:Key="LightHighlight">#257eb8</Color>
     <Color x:Key="Gray900Transparent">#99212121</Color>
-    <Color x:Key="WhiteTransparent">#99FFFFFF</Color>
+    <Color x:Key="WhiteTransparent">#BBFFFFFF</Color>
     <Color x:Key="FullTransparent">Transparent</Color>
 </ResourceDictionary>

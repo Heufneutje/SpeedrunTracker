@@ -49,7 +49,7 @@
                         <controls:RunPropertyControl Title="Rank" IsValueVisible="False" ImageSource="trophy" />
                         <HorizontalStackLayout>
                             <Image Source="{Binding RunDetails.TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding RunDetails.TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
-                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="0,-5,0,0" TextColor="{StaticResource Gray200}" />
+                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="5,-5,0,0" FontAttributes="Bold" />
                         </HorizontalStackLayout>
 
                         <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
@@ -65,7 +65,8 @@
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
-                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Examiner" IsValueVisible="False" ImageSource="user" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
+                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,0" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
