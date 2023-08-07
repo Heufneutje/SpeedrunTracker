@@ -6,143 +6,142 @@ using SpeedrunTracker.Navigation;
 using System.Net;
 using System.Windows.Input;
 
-namespace SpeedrunTracker.ViewModels
+namespace SpeedrunTracker.ViewModels;
+
+public class ProfileViewModel : BaseViewModel
 {
-    public class ProfileViewModel : BaseViewModel
+    private readonly IUserRepository _userRepository;
+    private readonly IDialogService _dialogService;
+    private readonly IToastService _toastService;
+
+    private User _user;
+
+    public User User
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IDialogService _dialogService;
-        private readonly IToastService _toastService;
-
-        private User _user;
-
-        public User User
+        get => _user;
+        set
         {
-            get => _user;
-            set
+            if (_user != value)
             {
-                if (_user != value)
-                {
-                    _user = value;
-                    NotifyPropertyChanged();
-                    NotifyPropertyChanged(nameof(Name));
-                    NotifyPropertyChanged(nameof(ImageUri));
-                    NotifyPropertyChanged(nameof(ImageMargin));
-                }
+                _user = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Name));
+                NotifyPropertyChanged(nameof(ImageUri));
+                NotifyPropertyChanged(nameof(ImageMargin));
             }
         }
+    }
 
-        private bool _isLoggedIn;
+    private bool _isLoggedIn;
 
-        public bool IsLoggedIn
+    public bool IsLoggedIn
+    {
+        get => _isLoggedIn;
+        set
         {
-            get => _isLoggedIn;
-            set
+            if (_isLoggedIn != value)
             {
-                if (_isLoggedIn != value)
-                {
-                    _isLoggedIn = value;
-                    NotifyPropertyChanged();
-                }
+                _isLoggedIn = value;
+                NotifyPropertyChanged();
             }
         }
+    }
 
-        private string _apiKey;
+    private string _apiKey;
 
-        public string ApiKey
+    public string ApiKey
+    {
+        get => _apiKey;
+        set
         {
-            get => _apiKey;
-            set
+            if (_apiKey != value)
             {
-                if (_apiKey != value)
-                {
-                    _apiKey = value;
-                    NotifyPropertyChanged();
-                }
+                _apiKey = value;
+                NotifyPropertyChanged();
             }
         }
+    }
 
-        public string Name => _user?.DisplayName ?? "Guest";
+    public string Name => _user?.DisplayName ?? "Guest";
 
-        public string ImageUri => _user?.Assets?.Image?.FixedUserAssetUri ?? "user";
+    public string ImageUri => _user?.Assets?.Image?.FixedUserAssetUri ?? "user";
 
-        public int ImageMargin => IsLoggedIn ? 0 : 10;
+    public int ImageMargin => IsLoggedIn ? 0 : 10;
 
-        public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
+    public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
 
-        public ICommand LogoutCommand => new AsyncRelayCommand(LogoutAsync);
+    public ICommand LogoutCommand => new AsyncRelayCommand(LogoutAsync);
 
-        public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
+    public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
 
-        public ProfileViewModel(IUserRepository userRepository, IDialogService dialogService, IToastService toastService)
+    public ProfileViewModel(IUserRepository userRepository, IDialogService dialogService, IToastService toastService)
+    {
+        _userRepository = userRepository;
+        _dialogService = dialogService;
+        _toastService = toastService;
+    }
+
+    public async Task LoadProfileAsync()
+    {
+        IsRunningBackgroundTask = true;
+
+        try
         {
-            _userRepository = userRepository;
-            _dialogService = dialogService;
-            _toastService = toastService;
-        }
-
-        public async Task LoadProfileAsync()
-        {
-            IsRunningBackgroundTask = true;
-
-            try
+            IsLoggedIn = !string.IsNullOrEmpty(await SecureStorage.GetAsync(Constants.ApiKey));
+            if (!_isLoggedIn)
             {
-                IsLoggedIn = !string.IsNullOrEmpty(await SecureStorage.GetAsync(Constants.ApiKey));
-                if (!_isLoggedIn)
-                {
-                    User = null;
-                    return;
-                }
-
-                User = (await _userRepository.GetUserProfileAsync()).Data;
-            }
-            catch (Exception ex)
-            {
-                if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-                {
-                    await _toastService.ShowToastAsync("The provided API key is invalid.");
-                    await LogoutAsync(false);
-                }
-                else
-                    await _toastService.ShowToastAsync($"An error occurred while getting profile data: {ex.Message}");
-            }
-            finally
-            {
-                IsRunningBackgroundTask = false;
-            }
-        }
-
-        private async Task LoginAsync()
-        {
-            if (string.IsNullOrEmpty(ApiKey))
-            {
-                await _toastService.ShowToastAsync("No API key provided.");
+                User = null;
                 return;
             }
 
-            await SecureStorage.SetAsync(Constants.ApiKey, ApiKey);
-            ApiKey = null;
+            User = (await _userRepository.GetUserProfileAsync()).Data;
+        }
+        catch (Exception ex)
+        {
+            if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
+            {
+                await _toastService.ShowToastAsync("The provided API key is invalid.");
+                await LogoutAsync(false);
+            }
+            else
+                await _toastService.ShowToastAsync($"An error occurred while getting profile data: {ex.Message}");
+        }
+        finally
+        {
+            IsRunningBackgroundTask = false;
+        }
+    }
+
+    private async Task LoginAsync()
+    {
+        if (string.IsNullOrEmpty(ApiKey))
+        {
+            await _toastService.ShowToastAsync("No API key provided.");
+            return;
+        }
+
+        await SecureStorage.SetAsync(Constants.ApiKey, ApiKey);
+        ApiKey = null;
+        await LoadProfileAsync();
+    }
+
+    private async Task LogoutAsync()
+    {
+        await LogoutAsync(true);
+    }
+
+    private async Task LogoutAsync(bool confirm)
+    {
+        if (!confirm || await _dialogService.ShowConfirmationAsync("Log out", "Are you sure you want to log out?"))
+        {
+            SecureStorage.Remove(Constants.ApiKey);
             await LoadProfileAsync();
         }
+    }
 
-        private async Task LogoutAsync()
-        {
-            await LogoutAsync(true);
-        }
-
-        private async Task LogoutAsync(bool confirm)
-        {
-            if (!confirm || await _dialogService.ShowConfirmationAsync("Log out", "Are you sure you want to log out?"))
-            {
-                SecureStorage.Remove(Constants.ApiKey);
-                await LoadProfileAsync();
-            }
-        }
-
-        private async Task NavigateToUserAsync()
-        {
-            if (IsLoggedIn)
-                await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", User);
-        }
+    private async Task NavigateToUserAsync()
+    {
+        if (IsLoggedIn)
+            await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", User);
     }
 }
