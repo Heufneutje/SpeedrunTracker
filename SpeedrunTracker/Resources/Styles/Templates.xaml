@@ -53,12 +53,13 @@
                     <VisualState Name="Normal"></VisualState>
                     <VisualState Name="Selected">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightHighlight}, Dark={StaticResource Primary}}" />
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                            <Setter TargetName="_nameLabel" Property="Label.TextColor" Value="{StaticResource White}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Label Text="{Binding Name}" />
+            <Label Text="{Binding Name}" x:Name="_nameLabel" />
         </Border>
     </DataTemplate>
 
@@ -73,7 +74,7 @@
 
                 <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
                 <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNullConverter}}" />
-                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ColorFrom.DarkColor}" FontAttributes="Bold" Grid.Column="1" />
+                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ColorFrom.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
             </Grid>
         </ViewCell>

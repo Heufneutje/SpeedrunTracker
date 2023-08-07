@@ -25,7 +25,7 @@
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout>
-            <Label Text="SpeedrunTracker" FontSize="Large" Padding="20" />
+            <Label Text="SpeedrunTracker" FontSize="Title" Padding="20" TextColor="{StaticResource White}" />
             <Image Source="main" HeightRequest="150" />
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
