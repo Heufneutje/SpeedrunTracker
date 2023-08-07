@@ -74,7 +74,7 @@
 
                 <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
                 <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNullConverter}}" />
-                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ColorFrom.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
+                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
             </Grid>
         </ViewCell>
@@ -101,7 +101,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="RunPlayersTemplate" x:DataType="speedrunmodels:User">
-        <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ColorFrom.DarkColor}" Margin="5,0,0,5" />
+        <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ThemeColor}" Margin="5,0,0,5" />
     </DataTemplate>
 
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">

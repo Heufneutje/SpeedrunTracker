@@ -13,7 +13,7 @@
 
         <Image Grid.Column="0" Source="{Binding User.Assets.Image.FixedUserAssetUri}" Margin="10" VerticalOptions="Center" />
         <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
-            <Label Text="{Binding User.DisplayName}" TextColor="{Binding User.NameStyle.ColorFrom.DarkColor}" FontAttributes="Bold" />
+            <Label Text="{Binding User.DisplayName}" TextColor="{Binding User.NameStyle.ThemeColor}" FontAttributes="Bold" />
             <Label Text="{Binding User.Pronouns}" IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />
             <HorizontalStackLayout>
                 <Image Source="{Binding CountryImageSource}" Style="{StaticResource CountryImageStyle}" />

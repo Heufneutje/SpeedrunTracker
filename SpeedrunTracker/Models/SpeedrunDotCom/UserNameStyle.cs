@@ -4,9 +4,19 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
 public class UserNameStyle
 {
+    public UserNameStyleType Style { get; set; }
+
+    [JsonPropertyName("color")]
+    public UserNameStyleColor SolidColor { get; set; }
+
     [JsonPropertyName("color-from")]
-    public UserNameStyleGradient ColorFrom { get; set; }
+    public UserNameStyleColor ColorFrom { get; set; }
 
     [JsonPropertyName("color-to")]
-    public UserNameStyleGradient ColorTo { get; set; }
+    public UserNameStyleColor ColorTo { get; set; }
+
+    [JsonIgnore]
+    public Color ThemeColor => Color.FromArgb(Style == UserNameStyleType.Gradient ?
+        (Application.Current.RequestedTheme == AppTheme.Dark ? ColorFrom.Dark : ColorFrom.Light) :
+        (Application.Current.RequestedTheme == AppTheme.Dark ? SolidColor.Dark : SolidColor.Light));
 }

@@ -65,7 +65,7 @@
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
-                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ColorFrom.DarkColor}" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Examiner" Value="{Binding RunDetails.Examiner.DisplayName}" ImageSource="user" ValueTextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
