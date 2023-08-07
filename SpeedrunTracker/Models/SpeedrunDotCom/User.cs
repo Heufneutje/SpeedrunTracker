@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using static Java.Util.Jar.Attributes;
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
