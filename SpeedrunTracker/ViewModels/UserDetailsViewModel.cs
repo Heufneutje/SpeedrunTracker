@@ -56,9 +56,10 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
 
     public ICommand LoadFullGamePersonalBestsCommand => new AsyncRelayCommand(LoadFullGamePersonalBests);
+
     public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, ILocalFollowService followService) : base(followService)
+    public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, ILocalFollowService followService, IToastService toastService) : base(followService, toastService)
     {
         _browserService = browserService;
         _userRepository = userRepository;
@@ -78,7 +79,11 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
             NotifyPropertyChanged(nameof(ShowRuns));
             _isCurrentlyShowingLevels = showLevels;
-            _allPersonalBests ??= (await _userRepository.GetUserPersonalBestsAsync(User.Id)).Data;
+
+            _allPersonalBests ??= (await ExecuteNetworkTask(_userRepository.GetUserPersonalBestsAsync(User.Id)))?.Data;
+            if (_allPersonalBests == null)
+                return;
+
             IEnumerable<LeaderboardEntry> filteredBests = showLevels ? _allPersonalBests.Where(x => x.Run.LevelId != null) : _allPersonalBests.Where(x => x.Run.LevelId == null);
 
             Dictionary<string, User> players = new();
@@ -108,9 +113,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                             entry.Run.Players[i] = User;
                         else
                         {
-                            if (!players.ContainsKey(playerId))
-                                players.Add(playerId, (await _userRepository.GetUserAsync(playerId)).Data);
-
+                            players.Add(playerId, await GetRunUserAsync(playerId));
                             entry.Run.Players[i] = players[playerId];
                         }
                     }
@@ -131,7 +134,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     {
         User examiner = null;
         if (entry.Run.Status.ExaminerId != null)
-            examiner = (await _userRepository.GetUserAsync(entry.Run.Status.ExaminerId)).Data;
+            examiner = await GetRunUserAsync(entry.Run.Status.ExaminerId);
 
         RunDetails runDetails = new()
         {
@@ -151,6 +154,11 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     private async Task OpenUrl(string url)
     {
         await _browserService.OpenAsync(url);
+    }
+
+    private async Task<User> GetRunUserAsync(string userId)
+    {
+        return (await ExecuteNetworkTask(_userRepository.GetUserAsync(userId)))?.Data ?? User.GetUserNotFoundPlaceholder();
     }
 
     protected override Task FollowAsync(User entity) => _followService.FollowUserAsync(entity);

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using static Java.Util.Jar.Attributes;
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
@@ -37,8 +38,8 @@ public class User : BaseSpeedrunObject
     {
     }
 
-    public User(string name)
+    public static User GetUserNotFoundPlaceholder()
     {
-        Names = new Names() { International = name };
+        return new User() { Names = new Names() { International = "User Not Found" } };
     }
 }

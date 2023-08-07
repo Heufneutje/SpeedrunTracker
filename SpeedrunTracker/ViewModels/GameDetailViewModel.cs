@@ -13,7 +13,7 @@ namespace SpeedrunTracker.ViewModels
         private readonly ILeaderboardRepository _leaderboardRepository;
         private readonly SettingsViewModel _settingsViewModel;
 
-        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, SettingsViewModel settingsViewModel) : base(followService)
+        public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
         {
             _gamesRepository = gamesRepository;
             _leaderboardRepository = leaderboardRepository;
@@ -165,23 +165,33 @@ namespace SpeedrunTracker.ViewModels
 
         public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
 
-        public async Task LoadCategoriesAsync()
+        public async Task<bool> LoadCategoriesAsync()
         {
-            List<Category> categories = (await _gamesRepository.GetGameCategoriesAsync(Game.Id)).Data;
+            List<Category> categories = (await ExecuteNetworkTask(_gamesRepository.GetGameCategoriesAsync(Game.Id)))?.Data;
+            if (categories == null)
+                return false;
+
             _fullGameCategories = categories.Where(x => x.Type == CategoryType.PerGame);
             _levelCategories = categories.Where(x => x.Type == CategoryType.PerLevel);
+            return true;
         }
 
-        public async Task LoadLevelsAsync()
+        public async Task<bool> LoadLevelsAsync()
         {
-            List<Level> levels = new() { new() { Name = "Full Game" } };
-            levels.AddRange((await _gamesRepository.GetGameLevelsAsync(Game.Id)).Data);
-            Levels = levels.AsObservableCollection();
+            List<Level> allLevels = new() { new() { Name = "Full Game" } };
+            List<Level> gameLevels = (await ExecuteNetworkTask(_gamesRepository.GetGameLevelsAsync(Game.Id)))?.Data;
+            if (gameLevels == null)
+                return false;
+
+            allLevels.AddRange(gameLevels);
+            Levels = allLevels.AsObservableCollection();
+            return true;
         }
 
-        public async Task LoadVariablesAsync()
+        public async Task<bool> LoadVariablesAsync()
         {
-            _allVariables = (await _gamesRepository.GetGameVariablesAsync(Game.Id)).Data;
+            _allVariables = (await ExecuteNetworkTask(_gamesRepository.GetGameVariablesAsync(Game.Id)))?.Data;
+            return _allVariables != null;
         }
 
         public async Task LoadLeaderboardAsync()
@@ -197,8 +207,11 @@ namespace SpeedrunTracker.ViewModels
                 variables = $"&{variables}";
 
             Leaderboard leaderboard = (string.IsNullOrEmpty(SelectedLevel.Id) ?
-                await _leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults) :
-                await _leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)).Data;
+                await ExecuteNetworkTask(_leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)) :
+                await ExecuteNetworkTask(_leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)))?.Data;
+
+            if (leaderboard == null)
+                return;
 
             foreach (LeaderboardEntry entry in leaderboard.Runs)
                 for (int i = 0; i < entry.Run.Players.Count; i++)
@@ -217,7 +230,10 @@ namespace SpeedrunTracker.ViewModels
             Category category = _categories.FirstOrDefault(x => x.Id == entry.Run.CategoryId);
             Level level = _levels.FirstOrDefault(x => x.Id == entry.Run.LevelId);
             GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == entry.Run.System.PlatformId);
-            User examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == entry.Run.Status.ExaminerId);
+
+            User examiner = null;
+            if (entry.Run.Status.ExaminerId != null)
+                examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == entry.Run.Status.ExaminerId) ?? User.GetUserNotFoundPlaceholder();
 
             foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
             {

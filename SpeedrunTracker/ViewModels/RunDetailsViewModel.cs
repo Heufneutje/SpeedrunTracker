@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Interfaces;
+using System.Reflection.Emit;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
@@ -80,7 +81,7 @@ namespace SpeedrunTracker.ViewModels
             if (RunDetails.Examiner == null && RunDetails.Run.Status.ExaminerId != null)
             {
                 BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(RunDetails.Run.Status.ExaminerId));
-                RunDetails.Examiner = user?.Data ?? new User("User Not Found");
+                RunDetails.Examiner = user?.Data ?? User.GetUserNotFoundPlaceholder();
             }
         }
     }

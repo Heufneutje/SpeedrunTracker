@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels
 {
-    public abstract class BaseFollowViewModel<T> : BaseViewModel where T : BaseSpeedrunObject
+    public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where T : BaseSpeedrunObject
     {
         protected readonly ILocalFollowService _followService;
         protected T _followEntity;
@@ -26,7 +26,7 @@ namespace SpeedrunTracker.ViewModels
 
         public ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 
-        public BaseFollowViewModel(ILocalFollowService followService)
+        public BaseFollowViewModel(ILocalFollowService followService, IToastService toastService) : base(toastService)
         {
             _followService = followService;
         }

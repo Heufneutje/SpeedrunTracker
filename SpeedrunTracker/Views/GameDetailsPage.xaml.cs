@@ -23,14 +23,40 @@ public partial class GameDetailPage : ContentPage
 
     private async void ContentPage_Appearing(object sender, EventArgs e)
     {
-        if (!_isLoaded)
+        if (_isLoaded)
+            return;
+
+        try
         {
-            await _viewModel.LoadVariablesAsync();
-            await _viewModel.LoadCategoriesAsync();
-            await _viewModel.LoadLevelsAsync();
+            if (!await _viewModel.LoadVariablesAsync())
+            {
+                await NagivateBack();
+                return;
+            }
+
+            if (!await _viewModel.LoadCategoriesAsync())
+            {
+                await NagivateBack();
+                return;
+            }
+
+            if (!await _viewModel.LoadLevelsAsync())
+            {
+                await NagivateBack();
+                return;
+            }
+
             await _viewModel.LoadFollowingStatusAsync();
-            _viewModel.IsRunningBackgroundTask = false;
             _isLoaded = true;
         }
+        finally
+        {
+            _viewModel.IsRunningBackgroundTask = false;
+        }
+    }
+
+    private async Task NagivateBack()
+    {
+        await Shell.Current.Navigation.PopAsync();
     }
 }
