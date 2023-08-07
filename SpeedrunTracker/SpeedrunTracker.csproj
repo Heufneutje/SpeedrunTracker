@@ -51,6 +51,10 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\cross.svg" />
+	  <None Remove="Resources\Images\flags\gb_eng_flag.svg" />
+	  <None Remove="Resources\Images\flags\gb_nir_flag.svg" />
+	  <None Remove="Resources\Images\flags\gb_sct_flag.svg" />
+	  <None Remove="Resources\Images\flags\gb_wls_flag.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

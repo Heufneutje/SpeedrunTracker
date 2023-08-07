@@ -47,7 +47,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public string DisplayName => User?.DisplayName;
 
-    public string CountryImageSource => $"flags/{User?.Location?.Country?.Code}_flag";
+    public string CountryImageSource => $"flags/{User?.Location?.Country?.Code?.Replace("/", "_")}_flag";
 
     public bool ShowRuns => PersonalBests?.Any() == true || IsRunningBackgroundTask;
 
