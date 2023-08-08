@@ -12,12 +12,18 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private readonly IGamesRepository _gamesRepository;
     private readonly ILeaderboardRepository _leaderboardRepository;
     private readonly SettingsViewModel _settingsViewModel;
+    private IEnumerable<Category> _fullGameCategories;
+    private IEnumerable<Category> _levelCategories;
+    private IEnumerable<Variable> _allVariables;
+    private int _leaderboardEntriesVisible;
+    private const int _leaderboardEntriesStepSize = 20;
 
     public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
     {
         _gamesRepository = gamesRepository;
         _leaderboardRepository = leaderboardRepository;
         _settingsViewModel = settingsViewModel;
+        LeaderboardEntries = new RangeObservableCollection<LeaderboardEntry>();
     }
 
     public Game Game
@@ -30,10 +36,6 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             NotifyPropertyChanged(nameof(Platforms));
         }
     }
-
-    private IEnumerable<Category> _fullGameCategories;
-    private IEnumerable<Category> _levelCategories;
-    private IEnumerable<Variable> _allVariables;
 
     private ObservableCollection<Category> _categories;
 
@@ -121,17 +123,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     }
 
     private Leaderboard _leaderboard;
-
-    public Leaderboard Leaderboard
-    {
-        get => _leaderboard;
-        set
-        {
-            _leaderboard = value;
-            NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(IsLeaderboardVisible));
-        }
-    }
+    public RangeObservableCollection<LeaderboardEntry> LeaderboardEntries { get; set; }
 
     private bool _isLoadingLeaderboard;
 
@@ -150,6 +142,21 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public bool HasIndividualLevels => _levels != null && _levels.Count > 1;
 
+    private LeaderboardEntry _selectedLeaderboardEntry;
+
+    public LeaderboardEntry SelectedLeaderboardEntry
+    {
+        get => _selectedLeaderboardEntry;
+        set
+        {
+            if (_selectedLeaderboardEntry != value)
+            {
+                _selectedLeaderboardEntry = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
     public string Platforms
     {
         get
@@ -163,7 +170,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public ICommand ShowLeaderboardCommand => new AsyncRelayCommand(LoadLeaderboardAsync);
 
-    public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
+    public ICommand NavigateToRunCommand => new AsyncRelayCommand(NavigateToRunAsync);
+
+    public ICommand DisplayLeaderboardEntriesCommand => new Command(DisplayLeaderboardEntries);
 
     public async Task<bool> LoadCategoriesAsync()
     {
@@ -197,6 +206,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     public async Task LoadLeaderboardAsync()
     {
         IsLoadingLeaderboard = true;
+        _leaderboardEntriesVisible = 0;
+        _leaderboard = null;
+        LeaderboardEntries.Clear();
 
         List<string> variableValues = new();
         foreach (VariableViewModel vm in Variables)
@@ -206,36 +218,50 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         if (!string.IsNullOrEmpty(variables))
             variables = $"&{variables}";
 
-        Leaderboard leaderboard = (string.IsNullOrEmpty(SelectedLevel.Id) ?
+        _leaderboard = (string.IsNullOrEmpty(SelectedLevel.Id) ?
             await ExecuteNetworkTask(_leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)) :
             await ExecuteNetworkTask(_leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)))?.Data;
 
-        if (leaderboard == null)
-            return;
+        if (_leaderboard != null)
+            DisplayLeaderboardEntries();
 
-        foreach (LeaderboardEntry entry in leaderboard.Runs)
-            for (int i = 0; i < entry.Run.Players.Count; i++)
-            {
-                if (entry.Run.Players[i].PlayerType == PlayerType.User)
-                    entry.Run.Players[i] = leaderboard.Players.Data.FirstOrDefault(x => x.Id == entry.Run.Players[i].Id);
-                entry.TrophyAsset = Game.Assets.GetTrophyAsset(entry.Place);
-            }
-
-        Leaderboard = leaderboard;
         IsLoadingLeaderboard = false;
     }
 
-    private async Task NavigateToRun(LeaderboardEntry entry)
+    private void DisplayLeaderboardEntries()
     {
-        Category category = _categories.FirstOrDefault(x => x.Id == entry.Run.CategoryId);
-        Level level = _levels.FirstOrDefault(x => x.Id == entry.Run.LevelId);
-        GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == entry.Run.System.PlatformId);
+        if (_leaderboard == null)
+            return;
+
+        IEnumerable<LeaderboardEntry> pagedEntries = _leaderboard.Runs.Skip(_leaderboardEntriesVisible).Take(_leaderboardEntriesStepSize);
+        foreach (LeaderboardEntry entry in pagedEntries)
+        {
+            for (int i = 0; i < entry.Run.Players.Count; i++)
+            {
+                if (entry.Run.Players[i].PlayerType == PlayerType.User)
+                    entry.Run.Players[i] = _leaderboard.Players.Data.FirstOrDefault(x => x.Id == entry.Run.Players[i].Id);
+                entry.TrophyAsset = Game.Assets.GetTrophyAsset(entry.Place);
+            }
+        }
+
+        LeaderboardEntries.AddRange(pagedEntries);
+        _leaderboardEntriesVisible += _leaderboardEntriesStepSize;
+    }
+
+    private async Task NavigateToRunAsync()
+    {
+        if (_selectedLeaderboardEntry == null)
+            return;
+
+        Category category = _categories.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.CategoryId);
+        Level level = _levels.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.LevelId);
+        GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.System.PlatformId);
 
         User examiner = null;
-        if (entry.Run.Status.ExaminerId != null)
-            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == entry.Run.Status.ExaminerId) ?? User.GetUserNotFoundPlaceholder();
+        if (_selectedLeaderboardEntry.Run.Status.ExaminerId != null)
+            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.Status.ExaminerId) ?? User.GetUserNotFoundPlaceholder();
 
-        foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
+        foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
         {
             Variable variable = _allVariables.FirstOrDefault(x => x.Id == valuePair.Key);
             if (variable == null)
@@ -245,7 +271,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             if (value == null)
                 continue;
 
-            entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
+            _selectedLeaderboardEntry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
         }
 
         RunDetails runDetails = new()
@@ -254,14 +280,15 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             GameAssets = Game.Assets,
             Examiner = examiner,
             Level = level,
-            Place = entry.Place,
+            Place = _selectedLeaderboardEntry.Place,
             Platform = platform,
             Ruleset = Game.Ruleset,
-            Run = entry.Run,
-            Variables = entry.Run.Variables,
+            Run = _selectedLeaderboardEntry.Run,
+            Variables = _selectedLeaderboardEntry.Run.Variables,
         };
 
         await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
+        SelectedLeaderboardEntry = null;
     }
 
     private void UpdateVariables()

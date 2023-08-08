@@ -144,9 +144,6 @@
 		<MauiXaml Update="Views\GameDetailHeaderView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\LeaderboardView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="Views\UserPersonalBestsView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

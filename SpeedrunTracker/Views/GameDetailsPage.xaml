@@ -14,24 +14,25 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding Game.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
-        <ScrollView>
-            <Grid Padding="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid Padding="20">
+            <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}" ItemsSource="{Binding LeaderboardEntries}" ItemTemplate="{StaticResource LeaderboardTemplate}" RemainingItemsThresholdReachedCommand="{Binding DisplayLeaderboardEntriesCommand}" SelectedItem="{Binding SelectedLeaderboardEntry}" SelectionChangedCommand="{Binding NavigateToRunCommand}">
+                <CollectionView.Header>
+                    <Grid Margin="-10,-10,-10,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
-                    <local:GameDetailHeaderView />
-                </Border>
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
-                    <local:GameDetailFilterView Grid.Row="1" />
-                </Border>
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2" IsVisible="{Binding IsLeaderboardVisible}">
-                    <local:LeaderboardView Grid.Row="2" />
-                </Border>
-            </Grid>
-        </ScrollView>
+                        <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                            <local:GameDetailHeaderView />
+                        </Border>
+                        <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+                            <local:GameDetailFilterView Grid.Row="1" />
+                        </Border>
+                    </Grid>
+                </CollectionView.Header>
+            </CollectionView>
+        </Grid>
     </Grid>
 </ContentPage>

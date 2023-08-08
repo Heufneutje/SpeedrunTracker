@@ -64,20 +64,20 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LeaderboardTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
-        <ViewCell>
-            <Grid Padding="5,20,20,20">
+        <Border Style="{StaticResource TransparentCollectionElementBorder}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
-                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource IsNullConverter}}" />
+                <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
+                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
                 <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
-            </Grid>
-        </ViewCell>
+             </Grid>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="VariablesTemplate" x:DataType="viewmodels:VariableViewModel">
