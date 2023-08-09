@@ -76,7 +76,7 @@
                 <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
                 <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
-             </Grid>
+            </Grid>
         </Border>
     </DataTemplate>
 
@@ -105,7 +105,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
-        <ViewCell Height="100">
+        <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -114,11 +114,11 @@
                 <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
                 <Label Text="{Binding Game.Names.International}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
             </Grid>
-        </ViewCell>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
-        <ViewCell>
+        <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
@@ -142,7 +142,7 @@
                     <Label Text="{Binding Run.Date, StringFormat='{0:yyyy-MM-dd}'}" />
                 </VerticalStackLayout>
             </Grid>
-        </ViewCell>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PersonalBestRunVariablesTemplate" x:DataType="models:RunVariable">

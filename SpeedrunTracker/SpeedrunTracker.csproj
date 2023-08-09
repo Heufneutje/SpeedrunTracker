@@ -96,9 +96,6 @@
 		<Compile Update="Views\GameDetailFilterView.xaml.cs">
 			<DependentUpon>GameDetailFilterView.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Views\UserPersonalBestsView.xaml.cs">
-			<DependentUpon>UserPersonalBestsView.xaml</DependentUpon>
-		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -142,9 +139,6 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\GameDetailHeaderView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\UserPersonalBestsView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\UserDetailHeaderView.xaml">

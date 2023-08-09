@@ -11,6 +11,8 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 {
     private readonly IBrowserService _browserService;
     private readonly IUserRepository _userRepository;
+    private bool? _isCurrentlyShowingLevels;
+    private List<LeaderboardEntry> _allPersonalBests;
 
     public User User
     {
@@ -27,8 +29,6 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private bool? _isCurrentlyShowingLevels;
-    private List<LeaderboardEntry> _allPersonalBests;
     private ObservableCollection<UserPersonalBestsGroup> _personalBests;
 
     public ObservableCollection<UserPersonalBestsGroup> PersonalBests
@@ -45,6 +45,21 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
+    private LeaderboardEntry _selectedEntry;
+
+    public LeaderboardEntry SelectedEntry
+    {
+        get => _selectedEntry;
+        set
+        {
+            if (_selectedEntry != value)
+            {
+                _selectedEntry = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
     public string DisplayName => User?.DisplayName;
 
     public string CountryImageSource => $"flags/{User?.Location?.Country?.Code?.Replace("/", "_")}_flag";
@@ -53,7 +68,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrl);
 
-    public ICommand NavigateToRunCommand => new AsyncRelayCommand<LeaderboardEntry>(NavigateToRun);
+    public ICommand NavigateToRunCommand => new AsyncRelayCommand(NavigateToRun);
 
     public ICommand LoadFullGamePersonalBestsCommand => new AsyncRelayCommand(LoadFullGamePersonalBests);
 
@@ -63,6 +78,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     {
         _browserService = browserService;
         _userRepository = userRepository;
+        PersonalBests = new ObservableCollection<UserPersonalBestsGroup>();
     }
 
     private Task LoadFullGamePersonalBests() => LoadPersonalBests(false);
@@ -113,7 +129,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                             entry.Run.Players[i] = User;
                         else
                         {
-                            players.Add(playerId, await GetRunUserAsync(playerId));
+                            if (!players.ContainsKey(playerId))
+                                players.Add(playerId, await GetRunUserAsync(playerId));
+
                             entry.Run.Players[i] = players[playerId];
                         }
                     }
@@ -130,25 +148,26 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private async Task NavigateToRun(LeaderboardEntry entry)
+    private async Task NavigateToRun()
     {
         User examiner = null;
-        if (entry.Run.Status.ExaminerId != null)
-            examiner = await GetRunUserAsync(entry.Run.Status.ExaminerId);
+        if (SelectedEntry.Run.Status.ExaminerId != null)
+            examiner = await GetRunUserAsync(SelectedEntry.Run.Status.ExaminerId);
 
         RunDetails runDetails = new()
         {
-            Category = entry.Category.Data,
-            GameAssets = entry.Game.Data.Assets,
+            Category = SelectedEntry.Category.Data,
+            GameAssets = SelectedEntry.Game.Data.Assets,
             Examiner = examiner,
-            Level = entry.Level,
-            Place = entry.Place,
-            Platform = entry.Platform,
-            Run = entry.Run,
-            Variables = entry.Run.Variables
+            Level = SelectedEntry.Level,
+            Place = SelectedEntry.Place,
+            Platform = SelectedEntry.Platform,
+            Run = SelectedEntry.Run,
+            Variables = SelectedEntry.Run.Variables
         };
 
         await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
+        SelectedEntry = null;
     }
 
     private async Task OpenUrl(string url)
