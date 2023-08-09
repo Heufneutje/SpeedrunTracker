@@ -2,25 +2,25 @@
 
 public class GameSeriesService : IGameSeriesService
 {
-    private IGameSeriesRepository _gamesSeriesRepository;
+    private IGameSeriesRepository _gameSeriesRepository;
 
-    public GameSeriesService(IGameSeriesRepository gamesSeriesRepository)
+    public GameSeriesService(IGameSeriesRepository gameSeriesRepository)
     {
-        _gamesSeriesRepository = gamesSeriesRepository;
+        _gameSeriesRepository = gameSeriesRepository;
     }
 
     public async Task<GameSeries> GetGameSeriesAsync(string seriesId)
     {
-        return (await _gamesSeriesRepository.GetGameSeriesAsync(seriesId))?.Data;
+        return (await _gameSeriesRepository.GetGameSeriesAsync(seriesId))?.Data;
     }
 
     public Task<PagedData<List<Game>>> GetGameSeriesEntriesAsync(string seriesId, int offset)
     {
-        return _gamesSeriesRepository.GetGameSeriesEntriesAsync(seriesId, offset);
+        return _gameSeriesRepository.GetGameSeriesEntriesAsync(seriesId, offset);
     }
 
     public Task<PagedData<List<GameSeries>>> SearchGameSeriesAsync(string name)
     {
-        return _gamesSeriesRepository.SearchGameSeriesAsync(name);
+        return _gameSeriesRepository.SearchGameSeriesAsync(name);
     }
 }

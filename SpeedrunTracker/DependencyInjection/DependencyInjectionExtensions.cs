@@ -31,7 +31,7 @@ public static class DependencyInjectionExtensions
         services.AddRefitClient<IUserRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<INotificationRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<IGameSeriesRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddSingleton<IGameService, GamesService>();
+        services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<ILeaderboardService, LeaderboardService>();
         services.AddSingleton<IUserService, UserService>();
         services.AddSingleton<INotificationService, NotificationService>();

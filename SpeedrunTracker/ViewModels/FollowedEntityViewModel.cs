@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class FollowedEntityViewModel : BaseNetworkActionViewModel
 {
-    private readonly IGameService _gamesService;
+    private readonly IGameService _gameService;
     private readonly IGameSeriesService _gameSeriesService;
     private readonly IUserService _userService;
     private readonly ILocalFollowService _localFollowService;
@@ -18,9 +18,9 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
-    public FollowedEntityViewModel(IGameService gamesService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
+    public FollowedEntityViewModel(IGameService gameService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
     {
-        _gamesService = gamesService;
+        _gameService = gameService;
         _gameSeriesService = gameSeriesService;
         _userService = userService;
         _localFollowService = localFollowService;
@@ -34,7 +34,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         switch ((EntityType)entity.SearchObject)
         {
             case EntityType.Games:
-                Game game = await ExecuteNetworkTask(_gamesService.GetGameAsync(entity.Id));
+                Game game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
                 if (game != null)
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
                 break;

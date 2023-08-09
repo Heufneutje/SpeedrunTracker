@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameDetailViewModel : BaseFollowViewModel<Game>
 {
-    private readonly IGameService _gamesService;
+    private readonly IGameService _gameService;
     private readonly ILeaderboardService _leaderboardService;
     private readonly IUserService _userService;
     private readonly SettingsViewModel _settingsViewModel;
@@ -19,9 +19,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGameService gamesService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
+    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
     {
-        _gamesService = gamesService;
+        _gameService = gameService;
         _leaderboardService = leaderboardService;
         _userService = userService;
         _settingsViewModel = settingsViewModel;
@@ -178,7 +178,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadCategoriesAsync()
     {
-        List<Category> categories = await ExecuteNetworkTask(_gamesService.GetGameCategoriesAsync(Game.Id));
+        List<Category> categories = await ExecuteNetworkTask(_gameService.GetGameCategoriesAsync(Game.Id));
         if (categories == null)
             return false;
 
@@ -190,7 +190,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     public async Task<bool> LoadLevelsAsync()
     {
         List<Level> allLevels = new() { new() { Name = "Full Game" } };
-        List<Level> gameLevels = await ExecuteNetworkTask(_gamesService.GetGameLevelsAsync(Game.Id));
+        List<Level> gameLevels = await ExecuteNetworkTask(_gameService.GetGameLevelsAsync(Game.Id));
         if (gameLevels == null)
             return false;
 
@@ -201,7 +201,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadVariablesAsync()
     {
-        _allVariables = await ExecuteNetworkTask(_gamesService.GetGameVariablesAsync(Game.Id));
+        _allVariables = await ExecuteNetworkTask(_gameService.GetGameVariablesAsync(Game.Id));
         return _allVariables != null;
     }
 
