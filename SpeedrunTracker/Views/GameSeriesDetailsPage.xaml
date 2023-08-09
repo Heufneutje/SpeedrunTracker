@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
+             x:DataType="viewmodels:GameSeriesDetailViewModel"
+             Title="{Binding Series.Names.International}"
+             Appearing="ContentPage_Appearing"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Image Source="{Binding Series.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Grid Padding="20">
+            <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
+                            ItemsSource="{Binding Games}"
+                            ItemTemplate="{StaticResource GameSeriesEntriesTemplate}"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                            SelectedItem="{Binding SelectedGame}"
+                            SelectionChangedCommand="{Binding NavigateToGameCommand}">
+                <CollectionView.EmptyView>
+                    <Border Style="{StaticResource TransparentCollectionElementBorder}">
+                        <Grid Padding="10">
+                            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </Border>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>

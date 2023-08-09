@@ -24,6 +24,19 @@ public class LocalFollowService : ILocalFollowService
         await _databaseService.Connection.InsertAsync(item);
     }
 
+    public async Task FollowSeriesAsync(GameSeries series)
+    {
+        FollowedEntity item = new()
+        {
+            Id = series.Id,
+            ImageUrl = series.Assets?.CoverSmall?.FixedGameAssetUri,
+            Title = series.Names.International,
+            Subtitle = $"Created: {series.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
+            Type = EntityType.Series
+        };
+        await _databaseService.Connection.InsertAsync(item);
+    }
+
     public async Task FollowUserAsync(User user)
     {
         FollowedEntity item = new()

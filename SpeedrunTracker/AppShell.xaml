@@ -34,6 +34,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" Title="Following" Icon="following" />
         <Tab Title="Search" Icon="search">
             <ShellContent ContentTemplate="{DataTemplate views:GameSearchPage}" Route="SearchGames" Title="Games" />
+            <ShellContent ContentTemplate="{DataTemplate views:GameSeriesSearchPage}" Route="SearchSeries" Title="Series" />
             <ShellContent ContentTemplate="{DataTemplate views:UserSearchPage}" Route="SearchUsers" Title="Users" />
         </Tab>
         <ShellContent ContentTemplate="{DataTemplate views:NotificationsPage}" Route="Notifications" Title="Notifications" Icon="bell" />

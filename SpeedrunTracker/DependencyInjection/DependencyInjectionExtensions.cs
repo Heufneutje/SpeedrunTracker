@@ -32,10 +32,12 @@ public static class DependencyInjectionExtensions
         services.AddRefitClient<ILeaderboardService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<IUserService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<INotificationService>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<IGameSeriesService>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddScoped<IGamesRepository, GamesRepository>();
         services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<IGameSeriesRepository, GameSeriesRepository>();
         services.AddSingleton<IBrowserService, BrowserService>();
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IToastService, ToastService>();
@@ -52,6 +54,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection RegisterViewModels(this IServiceCollection services)
     {
         services.AddSingleton<GameSearchViewModel>();
+        services.AddSingleton<GameSeriesSearchViewModel>();
         services.AddSingleton<UserSearchViewModel>();
         services.AddSingleton<FollowedEntityViewModel>();
         services.AddSingleton<SettingsViewModel>();
@@ -60,6 +63,7 @@ public static class DependencyInjectionExtensions
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
         services.AddTransient<UserDetailsViewModel>();
+        services.AddTransient<GameSeriesDetailViewModel>();
 
         return services;
     }
@@ -67,6 +71,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection RegisterPages(this IServiceCollection services)
     {
         services.AddSingleton<GameSearchPage>();
+        services.AddSingleton<GameSeriesSearchPage>();
         services.AddSingleton<UserSearchPage>();
         services.AddSingleton<FollowingPage>();
         services.AddSingleton<SettingsPage>();
@@ -75,6 +80,7 @@ public static class DependencyInjectionExtensions
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();
+        services.AddTransient<GameSeriesDetailsPage>();
 
         return services;
     }

@@ -55,6 +55,7 @@
 	  <None Remove="Resources\Images\flags\gb_nir_flag.svg" />
 	  <None Remove="Resources\Images\flags\gb_sct_flag.svg" />
 	  <None Remove="Resources\Images\flags\gb_wls_flag.svg" />
+	  <None Remove="Resources\Images\series.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,6 +114,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\GameDetailsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\GameSeriesDetailsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\NotificationsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>

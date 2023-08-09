@@ -6,6 +6,8 @@ public interface ILocalFollowService
 
     Task FollowUserAsync(User user);
 
+    Task FollowSeriesAsync(GameSeries series);
+
     Task UnfollowAsync(string id);
 
     Task<bool> IsFollowingAsync(string id);
