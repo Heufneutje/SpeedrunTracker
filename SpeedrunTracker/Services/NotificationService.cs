@@ -2,15 +2,15 @@
 
 public class NotificationService : INotificationService
 {
-    private INotificationRepository _notificationService;
+    private INotificationRepository _notificationRepository;
 
-    public NotificationService(INotificationRepository notificationService)
+    public NotificationService(INotificationRepository notificationRepository)
     {
-        _notificationService = notificationService;
+        _notificationRepository = notificationRepository;
     }
 
     public async Task<PagedData<List<Notification>>> GetNotificationsAsync(int offset)
     {
-        return await _notificationService.GetNotificationsAsync(await SecureStorage.GetAsync(Constants.ApiKey), offset);
+        return await _notificationRepository.GetNotificationsAsync(await SecureStorage.GetAsync(Constants.ApiKey), offset);
     }
 }

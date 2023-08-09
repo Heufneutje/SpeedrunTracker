@@ -94,7 +94,7 @@ public class ProfileViewModel : BaseViewModel
                 return;
             }
 
-            User = (await _userService.GetUserProfileAsync()).Data;
+            User = await _userService.GetUserProfileAsync();
         }
         catch (Exception ex)
         {

@@ -9,13 +9,13 @@ public class LeaderboardService : ILeaderboardService
         _leaderboardService = leaderboardService;
     }
 
-    public Task<BaseData<Leaderboard>> GetFullGameLeaderboardAsync(string gameId, string categoryId, string variables, int maxResults)
+    public async Task<Leaderboard> GetFullGameLeaderboardAsync(string gameId, string categoryId, string variables, int maxResults)
     {
-        return _leaderboardService.GetFullGameLeaderboardAsync(gameId, categoryId, variables, maxResults);
+        return (await _leaderboardService.GetFullGameLeaderboardAsync(gameId, categoryId, variables, maxResults))?.Data;
     }
 
-    public Task<BaseData<Leaderboard>> GetLevelLeaderboardAsync(string gameId, string levelId, string categoryId, string variables, int maxResults)
+    public async Task<Leaderboard> GetLevelLeaderboardAsync(string gameId, string levelId, string categoryId, string variables, int maxResults)
     {
-        return _leaderboardService.GetLevelLeaderboardAsync(gameId, levelId, categoryId, variables, maxResults);
+        return (await _leaderboardService.GetLevelLeaderboardAsync(gameId, levelId, categoryId, variables, maxResults))?.Data;
     }
 }

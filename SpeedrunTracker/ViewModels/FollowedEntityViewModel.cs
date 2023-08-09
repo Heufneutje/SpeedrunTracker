@@ -34,19 +34,19 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         switch ((EntityType)entity.SearchObject)
         {
             case EntityType.Games:
-                BaseData<Game> game = await ExecuteNetworkTask(_gamesService.GetGameAsync(entity.Id));
+                Game game = await ExecuteNetworkTask(_gamesService.GetGameAsync(entity.Id));
                 if (game != null)
-                    await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game.Data);
+                    await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
                 break;
             case EntityType.Series:
-                BaseData<GameSeries> series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
+                GameSeries series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
                 if (series != null)
-                    await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series.Data);
+                    await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
                 break;
             case EntityType.Users:
-                BaseData<User> user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
+                User user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
                 if (user != null)
-                    await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user.Data);
+                    await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
                 break;
         }
     }

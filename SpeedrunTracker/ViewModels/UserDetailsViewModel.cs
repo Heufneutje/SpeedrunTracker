@@ -96,7 +96,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
             NotifyPropertyChanged(nameof(ShowRuns));
             _isCurrentlyShowingLevels = showLevels;
 
-            _allPersonalBests ??= (await ExecuteNetworkTask(_userService.GetUserPersonalBestsAsync(User.Id)))?.Data;
+            _allPersonalBests ??= await ExecuteNetworkTask(_userService.GetUserPersonalBestsAsync(User.Id));
             if (_allPersonalBests == null)
                 return;
 
@@ -177,7 +177,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     private async Task<User> GetRunUserAsync(string userId)
     {
-        return (await ExecuteNetworkTask(_userService.GetUserAsync(userId)))?.Data ?? User.GetUserNotFoundPlaceholder();
+        return await ExecuteNetworkTask(_userService.GetUserAsync(userId)) ?? User.GetUserNotFoundPlaceholder();
     }
 
     protected override Task FollowAsync(User entity) => _followService.FollowUserAsync(entity);

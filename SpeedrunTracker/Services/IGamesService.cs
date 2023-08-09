@@ -4,11 +4,11 @@ public interface IGamesService
 {
     Task<PagedData<List<Game>>> SearchGamesAsync(string name);
 
-    Task<BaseData<Game>> GetGameAsync(string gameId);
+    Task<Game> GetGameAsync(string gameId);
 
-    Task<BaseData<List<Category>>> GetGameCategoriesAsync(string gameId);
+    Task<List<Category>> GetGameCategoriesAsync(string gameId);
 
-    Task<BaseData<List<Level>>> GetGameLevelsAsync(string gameId);
+    Task<List<Level>> GetGameLevelsAsync(string gameId);
 
-    Task<BaseData<List<Variable>>> GetGameVariablesAsync(string gameId);
+    Task<List<Variable>> GetGameVariablesAsync(string gameId);
 }

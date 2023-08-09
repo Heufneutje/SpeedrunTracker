@@ -97,10 +97,7 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
     public async Task LoadData()
     {
         if (RunDetails.Examiner == null && RunDetails.Run.Status.ExaminerId != null)
-        {
-            BaseData<User> user = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId));
-            RunDetails.Examiner = user?.Data ?? User.GetUserNotFoundPlaceholder();
-        }
+            RunDetails.Examiner = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId)) ?? User.GetUserNotFoundPlaceholder();
     }
 
     private async Task NavigateToUserAsync(User user)

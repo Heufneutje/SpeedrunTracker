@@ -2,35 +2,35 @@
 
 public class GamesService : IGamesService
 {
-    private readonly IGamesRepository _gamesService;
+    private readonly IGamesRepository _gamesRepository;
 
-    public GamesService(IGamesRepository gamesService)
+    public GamesService(IGamesRepository gamesRepository)
     {
-        _gamesService = gamesService;
+        _gamesRepository = gamesRepository;
     }
 
-    public Task<BaseData<Game>> GetGameAsync(string gameId)
+    public async Task<Game> GetGameAsync(string gameId)
     {
-        return _gamesService.GetGameAsync(gameId);
+        return (await _gamesRepository.GetGameAsync(gameId))?.Data;
     }
 
-    public Task<BaseData<List<Category>>> GetGameCategoriesAsync(string gameId)
+    public async Task<List<Category>> GetGameCategoriesAsync(string gameId)
     {
-        return _gamesService.GetGameCategoriesAsync(gameId);
+        return (await _gamesRepository.GetGameCategoriesAsync(gameId))?.Data;
     }
 
-    public Task<BaseData<List<Level>>> GetGameLevelsAsync(string gameId)
+    public async Task<List<Level>> GetGameLevelsAsync(string gameId)
     {
-        return _gamesService.GetGameLevelsAsync(gameId);
+        return (await _gamesRepository.GetGameLevelsAsync(gameId))?.Data;
     }
 
-    public Task<BaseData<List<Variable>>> GetGameVariablesAsync(string gameId)
+    public async Task<List<Variable>> GetGameVariablesAsync(string gameId)
     {
-        return _gamesService.GetGameVariablesAsync(gameId);
+        return (await _gamesRepository.GetGameVariablesAsync(gameId))?.Data;
     }
 
     public Task<PagedData<List<Game>>> SearchGamesAsync(string name)
     {
-        return _gamesService.SearchGamesAsync(name);
+        return _gamesRepository.SearchGamesAsync(name);
     }
 }

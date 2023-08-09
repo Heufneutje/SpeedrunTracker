@@ -2,30 +2,30 @@
 
 public class UserService : IUserService
 {
-    private readonly IUserRepository _userService;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(IUserRepository userService)
+    public UserService(IUserRepository userRepository)
     {
-        _userService = userService;
+        _userRepository = userRepository;
     }
 
-    public Task<BaseData<User>> GetUserAsync(string userId)
+    public async Task<User> GetUserAsync(string userId)
     {
-        return _userService.GetUserAsync(userId);
+        return (await _userRepository.GetUserAsync(userId))?.Data;
     }
 
-    public Task<BaseData<List<LeaderboardEntry>>> GetUserPersonalBestsAsync(string userId)
+    public async Task<List<LeaderboardEntry>> GetUserPersonalBestsAsync(string userId)
     {
-        return _userService.GetUserPersonalBestsAsync(userId);
+        return (await _userRepository.GetUserPersonalBestsAsync(userId))?.Data;
     }
 
-    public async Task<BaseData<User>> GetUserProfileAsync()
+    public async Task<User> GetUserProfileAsync()
     {
-        return await _userService.GetUserProfileAsync(await SecureStorage.GetAsync(Constants.ApiKey));
+        return (await _userRepository.GetUserProfileAsync(await SecureStorage.GetAsync(Constants.ApiKey)))?.Data;
     }
 
     public Task<PagedData<List<User>>> SearchUsersAsync(string name)
     {
-        return _userService.SearchUsersAsync(name);
+        return _userRepository.SearchUsersAsync(name);
     }
 }

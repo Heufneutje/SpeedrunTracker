@@ -2,7 +2,7 @@
 
 public interface ILeaderboardService
 {
-    Task<BaseData<Leaderboard>> GetFullGameLeaderboardAsync(string gameId, string categoryId, string variables, int maxResults);
+    Task<Leaderboard> GetFullGameLeaderboardAsync(string gameId, string categoryId, string variables, int maxResults);
 
-    Task<BaseData<Leaderboard>> GetLevelLeaderboardAsync(string gameId, string levelId, string categoryId, string variables, int maxResults);
+    Task<Leaderboard> GetLevelLeaderboardAsync(string gameId, string levelId, string categoryId, string variables, int maxResults);
 }
