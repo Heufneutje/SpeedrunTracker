@@ -31,11 +31,11 @@ public static class DependencyInjectionExtensions
         services.AddRefitClient<IUserRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<INotificationRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<IGameSeriesRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddScoped<IGamesService, GamesService>();
-        services.AddScoped<ILeaderboardService, LeaderboardService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<INotificationService, NotificationService>();
-        services.AddScoped<IGameSeriesService, GameSeriesService>();
+        services.AddSingleton<IGamesService, GamesService>();
+        services.AddSingleton<ILeaderboardService, LeaderboardService>();
+        services.AddSingleton<IUserService, UserService>();
+        services.AddSingleton<INotificationService, NotificationService>();
+        services.AddSingleton<IGameSeriesService, GameSeriesService>();
         services.AddSingleton<IBrowserService, BrowserService>();
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IToastService, ToastService>();
