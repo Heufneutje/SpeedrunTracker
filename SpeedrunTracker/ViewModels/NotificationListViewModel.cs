@@ -12,17 +12,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
     private int _offset;
     private bool _hasReachedEnd;
 
-    private ObservableCollection<Notification> _notifications;
-
-    public ObservableCollection<Notification> Notifications
-    {
-        get => _notifications;
-        set
-        {
-            _notifications = value;
-            NotifyPropertyChanged();
-        }
-    }
+    public RangedObservableCollection<Notification> Notifications { get; set; }
 
     private Notification _selectedNotification;
 
@@ -44,9 +34,9 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService) : base(toastService)
     {
-        _notifications = new ObservableCollection<Notification>();
         _notificationService = notificationService;
         _browserService = browserService;
+        Notifications = new RangedObservableCollection<Notification>();
     }
 
     private async Task LoadNotificationsAsync()
@@ -58,8 +48,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         if (notifications == null)
             return;
 
-        foreach (Notification notification in notifications.Data)
-            Notifications.Add(notification);
+        Notifications.AddRange(notifications.Data);
 
         if (notifications.Pagination.Size == 0)
             _hasReachedEnd = true;

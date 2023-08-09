@@ -41,7 +41,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
     }
 
-    public RangeObservableCollection<Game> Games { get; set; }
+    public RangedObservableCollection<Game> Games { get; set; }
 
     public ICommand LoadMoreCommand => new AsyncRelayCommand(LoadGamesAsync);
 
@@ -49,7 +49,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public GameSeriesDetailViewModel(ILocalFollowService followService, IToastService toastService, IGameSeriesService gameSeriesService) : base(followService, toastService)
     {
-        Games = new RangeObservableCollection<Game>();
+        Games = new RangedObservableCollection<Game>();
         _gameSeriesService = gameSeriesService;
     }
 

@@ -25,7 +25,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         _leaderboardService = leaderboardService;
         _userService = userService;
         _settingsViewModel = settingsViewModel;
-        LeaderboardEntries = new RangeObservableCollection<LeaderboardEntry>();
+        LeaderboardEntries = new RangedObservableCollection<LeaderboardEntry>();
     }
 
     public Game Game
@@ -125,7 +125,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     }
 
     private Leaderboard _leaderboard;
-    public RangeObservableCollection<LeaderboardEntry> LeaderboardEntries { get; set; }
+    public RangedObservableCollection<LeaderboardEntry> LeaderboardEntries { get; set; }
 
     private bool _isLoadingLeaderboard;
 
