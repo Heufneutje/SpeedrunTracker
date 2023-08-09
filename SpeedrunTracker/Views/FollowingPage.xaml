@@ -9,7 +9,7 @@
              Title="Following"
              Appearing="ContentPage_Appearing">
     <Grid>
-        <Label Text="It looks like you're not following any games or users yet!&#10;&#10;Search for a game or user and hit the Follow button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
+        <Label Text="It looks like you're not following any games, series or users yet!&#10;&#10;Search for a game, series or user and hit the Follow button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
         <StackLayout IsVisible="{Binding HasEntities}">
             <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
             <ListView ItemsSource="{Binding Entities}"
