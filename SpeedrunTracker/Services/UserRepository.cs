@@ -1,6 +1,4 @@
-﻿using SpeedrunTracker.Interfaces;
-
-namespace SpeedrunTracker.Services;
+﻿namespace SpeedrunTracker.Services;
 
 public class UserRepository : IUserRepository
 {

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using SpeedrunTracker.Interfaces;
 
 namespace SpeedrunTracker.Services;
 

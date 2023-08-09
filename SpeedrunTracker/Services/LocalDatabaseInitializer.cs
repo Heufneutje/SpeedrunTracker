@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SpeedrunTracker.Interfaces;
 using SQLite;
 
 namespace SpeedrunTracker.Services;

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Services;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;

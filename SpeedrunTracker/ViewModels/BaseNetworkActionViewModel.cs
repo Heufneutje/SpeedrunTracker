@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core;
 using Refit;
-using SpeedrunTracker.Interfaces;
+using SpeedrunTracker.Services;
 using System.Net;
 
 namespace SpeedrunTracker.ViewModels;

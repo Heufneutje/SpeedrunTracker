@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace SpeedrunTracker.Interfaces;
+namespace SpeedrunTracker.Services;
 
 public interface ILocalDatabaseService
 {

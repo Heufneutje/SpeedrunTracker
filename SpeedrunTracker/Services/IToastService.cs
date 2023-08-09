@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core;
 
-namespace SpeedrunTracker.Interfaces;
+namespace SpeedrunTracker.Services;
 
 public interface IToastService
 {

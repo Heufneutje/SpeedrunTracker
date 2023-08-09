@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Refit;
-using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Repository;
 using SpeedrunTracker.Services;
 using SpeedrunTracker.ViewModels;

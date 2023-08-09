@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
-using SpeedrunTracker.Interfaces;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Services;
 using System.Net;
 using System.Windows.Input;
 

@@ -1,5 +1,4 @@
-﻿using Refit;
-using SpeedrunTracker.Interfaces;
+﻿using SpeedrunTracker.Services;
 
 namespace SpeedrunTracker.Repository;
 

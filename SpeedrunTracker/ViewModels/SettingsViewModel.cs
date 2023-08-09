@@ -1,4 +1,4 @@
-﻿using SpeedrunTracker.Interfaces;
+﻿using SpeedrunTracker.Services;
 using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
