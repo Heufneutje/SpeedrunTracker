@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Services;
 
-public interface IGamesService
+public interface IGameService
 {
     Task<PagedData<List<Game>>> SearchGamesAsync(string name);
 

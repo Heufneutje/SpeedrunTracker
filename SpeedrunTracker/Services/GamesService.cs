@@ -1,10 +1,10 @@
 ﻿namespace SpeedrunTracker.Services;
 
-public class GamesService : IGamesService
+public class GamesService : IGameService
 {
-    private readonly IGamesRepository _gamesRepository;
+    private readonly IGameRepository _gamesRepository;
 
-    public GamesService(IGamesRepository gamesRepository)
+    public GamesService(IGameRepository gamesRepository)
     {
         _gamesRepository = gamesRepository;
     }

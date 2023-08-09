@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Services;
 
-public interface IGamesRepository
+public interface IGameRepository
 {
     [Get("/games?name={name}&embed=platforms,moderators")]
     Task<PagedData<List<Game>>> SearchGamesAsync(string name);

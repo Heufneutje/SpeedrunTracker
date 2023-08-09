@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class FollowedEntityViewModel : BaseNetworkActionViewModel
 {
-    private readonly IGamesService _gamesService;
+    private readonly IGameService _gamesService;
     private readonly IGameSeriesService _gameSeriesService;
     private readonly IUserService _userService;
     private readonly ILocalFollowService _localFollowService;
@@ -18,7 +18,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
-    public FollowedEntityViewModel(IGamesService gamesService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
+    public FollowedEntityViewModel(IGameService gamesService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
     {
         _gamesService = gamesService;
         _gameSeriesService = gameSeriesService;

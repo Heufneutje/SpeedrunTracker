@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameDetailViewModel : BaseFollowViewModel<Game>
 {
-    private readonly IGamesService _gamesService;
+    private readonly IGameService _gamesService;
     private readonly ILeaderboardService _leaderboardService;
     private readonly IUserService _userService;
     private readonly SettingsViewModel _settingsViewModel;
@@ -19,7 +19,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGamesService gamesService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
+    public GameDetailViewModel(IGameService gamesService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
     {
         _gamesService = gamesService;
         _leaderboardService = leaderboardService;
