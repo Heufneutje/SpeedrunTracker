@@ -11,17 +11,19 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 {
     private readonly IGamesRepository _gamesRepository;
     private readonly ILeaderboardRepository _leaderboardRepository;
+    private readonly IUserRepository _userRepository;
     private readonly SettingsViewModel _settingsViewModel;
     private IEnumerable<Category> _fullGameCategories;
     private IEnumerable<Category> _levelCategories;
     private IEnumerable<Variable> _allVariables;
     private int _leaderboardEntriesVisible;
-    private const int _leaderboardEntriesStepSize = 20;
+    private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
+    public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, IUserRepository userRepository, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
     {
         _gamesRepository = gamesRepository;
         _leaderboardRepository = leaderboardRepository;
+        _userRepository = userRepository;
         _settingsViewModel = settingsViewModel;
         LeaderboardEntries = new RangeObservableCollection<LeaderboardEntry>();
     }
@@ -258,8 +260,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.System.PlatformId);
 
         User examiner = null;
-        if (_selectedLeaderboardEntry.Run.Status.ExaminerId != null)
-            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.Status.ExaminerId) ?? User.GetUserNotFoundPlaceholder();
+        string examinerId = _selectedLeaderboardEntry.Run.Status.ExaminerId;
+        if (examinerId != null)
+            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == examinerId) ?? (await ExecuteNetworkTask(_userRepository.GetUserAsync(examinerId)))?.Data ?? User.GetUserNotFoundPlaceholder();
 
         foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
         {
