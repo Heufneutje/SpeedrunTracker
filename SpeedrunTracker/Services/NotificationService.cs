@@ -1,10 +1,10 @@
 ﻿namespace SpeedrunTracker.Services;
 
-public class NotificationRepository : INotificationRepository
+public class NotificationService : INotificationService
 {
-    private INotificationService _notificationService;
+    private INotificationRepository _notificationService;
 
-    public NotificationRepository(INotificationService notificationService)
+    public NotificationService(INotificationRepository notificationService)
     {
         _notificationService = notificationService;
     }

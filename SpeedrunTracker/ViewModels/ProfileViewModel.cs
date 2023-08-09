@@ -10,7 +10,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class ProfileViewModel : BaseViewModel
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
     private readonly IDialogService _dialogService;
     private readonly IToastService _toastService;
 
@@ -74,9 +74,9 @@ public class ProfileViewModel : BaseViewModel
 
     public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
 
-    public ProfileViewModel(IUserRepository userRepository, IDialogService dialogService, IToastService toastService)
+    public ProfileViewModel(IUserService userService, IDialogService dialogService, IToastService toastService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
         _dialogService = dialogService;
         _toastService = toastService;
     }
@@ -94,7 +94,7 @@ public class ProfileViewModel : BaseViewModel
                 return;
             }
 
-            User = (await _userRepository.GetUserProfileAsync()).Data;
+            User = (await _userService.GetUserProfileAsync()).Data;
         }
         catch (Exception ex)
         {

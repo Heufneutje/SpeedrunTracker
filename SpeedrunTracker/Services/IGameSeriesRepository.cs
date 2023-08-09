@@ -1,10 +1,16 @@
-﻿namespace SpeedrunTracker.Services;
+﻿using Refit;
 
-public interface IGameSeriesRepository
+namespace SpeedrunTracker.Services
 {
-    Task<PagedData<List<GameSeries>>> SearchGameSeriesAsync(string name);
+    public interface IGameSeriesRepository
+    {
+        [Get("/series?name={name}")]
+        Task<PagedData<List<GameSeries>>> SearchGameSeriesAsync(string name);
 
-    Task<BaseData<GameSeries>> GetGameSeriesAsync(string seriesId);
+        [Get("/series/{seriesId}")]
+        Task<BaseData<GameSeries>> GetGameSeriesAsync(string seriesId);
 
-    Task<PagedData<List<Game>>> GetGameSeriesEntriesAsync(string seriesId, int offset);
+        [Get("/series/{seriesId}/games?embed=platforms,moderators&offset={offset}")]
+        Task<PagedData<List<Game>>> GetGameSeriesEntriesAsync(string seriesId, int offset);
+    }
 }

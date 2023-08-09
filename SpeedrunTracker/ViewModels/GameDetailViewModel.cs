@@ -9,9 +9,9 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameDetailViewModel : BaseFollowViewModel<Game>
 {
-    private readonly IGamesRepository _gamesRepository;
-    private readonly ILeaderboardRepository _leaderboardRepository;
-    private readonly IUserRepository _userRepository;
+    private readonly IGamesService _gamesService;
+    private readonly ILeaderboardService _leaderboardService;
+    private readonly IUserService _userService;
     private readonly SettingsViewModel _settingsViewModel;
     private IEnumerable<Category> _fullGameCategories;
     private IEnumerable<Category> _levelCategories;
@@ -19,11 +19,11 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGamesRepository gamesRepository, ILeaderboardRepository leaderboardRepository, IUserRepository userRepository, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
+    public GameDetailViewModel(IGamesService gamesService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
     {
-        _gamesRepository = gamesRepository;
-        _leaderboardRepository = leaderboardRepository;
-        _userRepository = userRepository;
+        _gamesService = gamesService;
+        _leaderboardService = leaderboardService;
+        _userService = userService;
         _settingsViewModel = settingsViewModel;
         LeaderboardEntries = new RangeObservableCollection<LeaderboardEntry>();
     }
@@ -178,7 +178,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadCategoriesAsync()
     {
-        List<Category> categories = (await ExecuteNetworkTask(_gamesRepository.GetGameCategoriesAsync(Game.Id)))?.Data;
+        List<Category> categories = (await ExecuteNetworkTask(_gamesService.GetGameCategoriesAsync(Game.Id)))?.Data;
         if (categories == null)
             return false;
 
@@ -190,7 +190,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     public async Task<bool> LoadLevelsAsync()
     {
         List<Level> allLevels = new() { new() { Name = "Full Game" } };
-        List<Level> gameLevels = (await ExecuteNetworkTask(_gamesRepository.GetGameLevelsAsync(Game.Id)))?.Data;
+        List<Level> gameLevels = (await ExecuteNetworkTask(_gamesService.GetGameLevelsAsync(Game.Id)))?.Data;
         if (gameLevels == null)
             return false;
 
@@ -201,7 +201,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadVariablesAsync()
     {
-        _allVariables = (await ExecuteNetworkTask(_gamesRepository.GetGameVariablesAsync(Game.Id)))?.Data;
+        _allVariables = (await ExecuteNetworkTask(_gamesService.GetGameVariablesAsync(Game.Id)))?.Data;
         return _allVariables != null;
     }
 
@@ -221,8 +221,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             variables = $"&{variables}";
 
         _leaderboard = (string.IsNullOrEmpty(SelectedLevel.Id) ?
-            await ExecuteNetworkTask(_leaderboardRepository.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)) :
-            await ExecuteNetworkTask(_leaderboardRepository.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)))?.Data;
+            await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)) :
+            await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)))?.Data;
 
         if (_leaderboard != null)
             DisplayLeaderboardEntries();
@@ -262,7 +262,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         User examiner = null;
         string examinerId = _selectedLeaderboardEntry.Run.Status.ExaminerId;
         if (examinerId != null)
-            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == examinerId) ?? (await ExecuteNetworkTask(_userRepository.GetUserAsync(examinerId)))?.Data ?? User.GetUserNotFoundPlaceholder();
+            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == examinerId) ?? (await ExecuteNetworkTask(_userService.GetUserAsync(examinerId)))?.Data ?? User.GetUserNotFoundPlaceholder();
 
         foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
         {

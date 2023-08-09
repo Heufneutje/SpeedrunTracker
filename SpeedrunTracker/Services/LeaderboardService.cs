@@ -1,12 +1,10 @@
-﻿using SpeedrunTracker.Services;
+﻿namespace SpeedrunTracker.Services;
 
-namespace SpeedrunTracker.Repository;
-
-public class LeaderboardRepository : ILeaderboardRepository
+public class LeaderboardService : ILeaderboardService
 {
-    private readonly ILeaderboardService _leaderboardService;
+    private readonly ILeaderboardRepository _leaderboardService;
 
-    public LeaderboardRepository(ILeaderboardService leaderboardService)
+    public LeaderboardService(ILeaderboardRepository leaderboardService)
     {
         _leaderboardService = leaderboardService;
     }

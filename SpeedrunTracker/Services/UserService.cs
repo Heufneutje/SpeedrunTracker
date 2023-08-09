@@ -1,10 +1,10 @@
 ﻿namespace SpeedrunTracker.Services;
 
-public class UserRepository : IUserRepository
+public class UserService : IUserService
 {
-    private readonly IUserService _userService;
+    private readonly IUserRepository _userService;
 
-    public UserRepository(IUserService userService)
+    public UserService(IUserRepository userService)
     {
         _userService = userService;
     }

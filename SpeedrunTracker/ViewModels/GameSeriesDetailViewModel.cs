@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 {
-    private readonly IGameSeriesRepository _gameSeriesRepository;
+    private readonly IGameSeriesService _gameSeriesService;
     private int _offset;
     private bool _hasReachedEnd;
 
@@ -47,10 +47,10 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public ICommand NavigateToGameCommand => new AsyncRelayCommand(NavigateToGameAsync);
 
-    public GameSeriesDetailViewModel(ILocalFollowService followService, IToastService toastService, IGameSeriesRepository gameSeriesRepository) : base(followService, toastService)
+    public GameSeriesDetailViewModel(ILocalFollowService followService, IToastService toastService, IGameSeriesService gameSeriesService) : base(followService, toastService)
     {
         Games = new RangeObservableCollection<Game>();
-        _gameSeriesRepository = gameSeriesRepository;
+        _gameSeriesService = gameSeriesService;
     }
 
     protected override Task FollowAsync(GameSeries entity) => _followService.FollowSeriesAsync(entity);
@@ -63,7 +63,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         try
         {
             IsRunningBackgroundTask = true;
-            PagedData<List<Game>> games = await _gameSeriesRepository.GetGameSeriesEntriesAsync(Series.Id, _offset);
+            PagedData<List<Game>> games = await _gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset);
             if (games == null)
                 return;
 

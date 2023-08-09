@@ -6,13 +6,13 @@ namespace SpeedrunTracker.ViewModels;
 
 public class UserSearchViewModel : BaseSearchEntityViewModel
 {
-    private IUserRepository _userRepository;
+    private IUserService _userService;
 
     public override string SearchTextPlaceholder => "Search for users...";
 
-    public UserSearchViewModel(IToastService toastService, IUserRepository userRepository) : base(toastService)
+    public UserSearchViewModel(IToastService toastService, IUserService userService) : base(toastService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     protected override async Task NavigateToAsync(Entity entity)
@@ -23,7 +23,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<User>> apiData = await ExecuteNetworkTask(_userRepository.SearchUsersAsync(Query.Trim()));
+        PagedData<List<User>> apiData = await ExecuteNetworkTask(_userService.SearchUsersAsync(Query.Trim()));
         if (apiData == null)
             return null;
 

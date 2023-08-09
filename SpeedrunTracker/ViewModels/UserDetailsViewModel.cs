@@ -10,7 +10,7 @@ namespace SpeedrunTracker.ViewModels;
 public class UserDetailsViewModel : BaseFollowViewModel<User>
 {
     private readonly IBrowserService _browserService;
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
     private bool? _isCurrentlyShowingLevels;
     private List<LeaderboardEntry> _allPersonalBests;
 
@@ -74,10 +74,10 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, ILocalFollowService followService, IToastService toastService) : base(followService, toastService)
+    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IToastService toastService) : base(followService, toastService)
     {
         _browserService = browserService;
-        _userRepository = userRepository;
+        _userService = userService;
         PersonalBests = new ObservableCollection<UserPersonalBestsGroup>();
     }
 
@@ -96,7 +96,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
             NotifyPropertyChanged(nameof(ShowRuns));
             _isCurrentlyShowingLevels = showLevels;
 
-            _allPersonalBests ??= (await ExecuteNetworkTask(_userRepository.GetUserPersonalBestsAsync(User.Id)))?.Data;
+            _allPersonalBests ??= (await ExecuteNetworkTask(_userService.GetUserPersonalBestsAsync(User.Id)))?.Data;
             if (_allPersonalBests == null)
                 return;
 
@@ -177,7 +177,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     private async Task<User> GetRunUserAsync(string userId)
     {
-        return (await ExecuteNetworkTask(_userRepository.GetUserAsync(userId)))?.Data ?? User.GetUserNotFoundPlaceholder();
+        return (await ExecuteNetworkTask(_userService.GetUserAsync(userId)))?.Data ?? User.GetUserNotFoundPlaceholder();
     }
 
     protected override Task FollowAsync(User entity) => _followService.FollowUserAsync(entity);

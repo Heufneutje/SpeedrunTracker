@@ -7,7 +7,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class NotificationListViewModel : BaseNetworkActionViewModel
 {
-    private readonly INotificationRepository _notificationRepository;
+    private readonly INotificationService _notificationService;
     private readonly IBrowserService _browserService;
     private int _offset;
     private bool _hasReachedEnd;
@@ -42,10 +42,10 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
-    public NotificationListViewModel(INotificationRepository notificationRepository, IToastService toastService, IBrowserService browserService) : base(toastService)
+    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService) : base(toastService)
     {
         _notifications = new ObservableCollection<Notification>();
-        _notificationRepository = notificationRepository;
+        _notificationService = notificationService;
         _browserService = browserService;
     }
 
@@ -54,7 +54,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         if (_hasReachedEnd)
             return;
 
-        PagedData<List<Notification>> notifications = await ExecuteNetworkTask(_notificationRepository.GetNotificationsAsync(_offset));
+        PagedData<List<Notification>> notifications = await ExecuteNetworkTask(_notificationService.GetNotificationsAsync(_offset));
         if (notifications == null)
             return;
 

@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Converters;
 
-internal class IsNullConverter : IValueConverter
+public class IsNullConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

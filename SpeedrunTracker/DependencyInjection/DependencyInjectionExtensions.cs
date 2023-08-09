@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Refit;
-using SpeedrunTracker.Repository;
 using SpeedrunTracker.Services;
 using SpeedrunTracker.ViewModels;
 using SpeedrunTracker.Views;
@@ -27,16 +26,16 @@ public static class DependencyInjectionExtensions
             ContentSerializer = new SystemTextJsonContentSerializer(options)
         };
 
-        services.AddRefitClient<IGamesService>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddRefitClient<ILeaderboardService>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddRefitClient<IUserService>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddRefitClient<INotificationService>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddRefitClient<IGameSeriesService>(settings).ConfigureHttpClient(ConfigureHttpClient);
-        services.AddScoped<IGamesRepository, GamesRepository>();
-        services.AddScoped<ILeaderboardRepository, LeaderboardRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<INotificationRepository, NotificationRepository>();
-        services.AddScoped<IGameSeriesRepository, GameSeriesRepository>();
+        services.AddRefitClient<IGamesRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<ILeaderboardRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<IUserRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<INotificationRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddRefitClient<IGameSeriesRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+        services.AddScoped<IGamesService, GamesService>();
+        services.AddScoped<ILeaderboardService, LeaderboardService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IGameSeriesService, GameSeriesService>();
         services.AddSingleton<IBrowserService, BrowserService>();
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IToastService, ToastService>();

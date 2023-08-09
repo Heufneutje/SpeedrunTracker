@@ -6,13 +6,13 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameSearchViewModel : BaseSearchEntityViewModel
 {
-    private IGamesRepository _gamesRepository;
+    private IGamesService _gamesService;
 
     public override string SearchTextPlaceholder => "Search for games...";
 
-    public GameSearchViewModel(IToastService toastService, IGamesRepository gamesRepository) : base(toastService)
+    public GameSearchViewModel(IToastService toastService, IGamesService gamesService) : base(toastService)
     {
-        _gamesRepository = gamesRepository;
+        _gamesService = gamesService;
     }
 
     protected override async Task NavigateToAsync(Entity entity)
@@ -23,7 +23,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<Game>> apiData = await ExecuteNetworkTask(_gamesRepository.SearchGamesAsync(Query.Trim()));
+        PagedData<List<Game>> apiData = await ExecuteNetworkTask(_gamesService.SearchGamesAsync(Query.Trim()));
         if (apiData == null)
             return null;
 

@@ -1,6 +1,9 @@
-﻿namespace SpeedrunTracker.Services;
+﻿using Refit;
+
+namespace SpeedrunTracker.Services;
 
 public interface INotificationRepository
 {
-    Task<PagedData<List<Notification>>> GetNotificationsAsync(int offset);
+    [Get("/notifications?offset={offset}")]
+    Task<PagedData<List<Notification>>> GetNotificationsAsync([Header(Constants.ApiKeyHeader)] string header, int offset);
 }

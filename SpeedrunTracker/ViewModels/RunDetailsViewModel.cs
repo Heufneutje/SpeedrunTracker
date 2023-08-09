@@ -9,7 +9,7 @@ namespace SpeedrunTracker.ViewModels;
 public class RunDetailsViewModel : BaseNetworkActionViewModel
 {
     private readonly IBrowserService _browserService;
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
 
     private RunDetails _runDetails;
 
@@ -84,10 +84,10 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
         _ => string.Empty,
     };
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserRepository userRepository, IToastService toastService) : base(toastService)
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IToastService toastService) : base(toastService)
     {
         _browserService = browserService;
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     private async Task ShowVideo() => await _browserService.OpenAsync(_runDetails.Run.Videos.Links.First().Uri);
@@ -98,7 +98,7 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
     {
         if (RunDetails.Examiner == null && RunDetails.Run.Status.ExaminerId != null)
         {
-            BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(RunDetails.Run.Status.ExaminerId));
+            BaseData<User> user = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId));
             RunDetails.Examiner = user?.Data ?? User.GetUserNotFoundPlaceholder();
         }
     }

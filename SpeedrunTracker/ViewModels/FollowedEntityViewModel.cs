@@ -9,20 +9,20 @@ namespace SpeedrunTracker.ViewModels;
 
 public class FollowedEntityViewModel : BaseNetworkActionViewModel
 {
-    private readonly IGamesRepository _gamesRepository;
-    private readonly IGameSeriesRepository _gameSeriesRepository;
-    private readonly IUserRepository _userRepository;
+    private readonly IGamesService _gamesService;
+    private readonly IGameSeriesService _gameSeriesService;
+    private readonly IUserService _userService;
     private readonly ILocalFollowService _localFollowService;
 
     public ObservableCollection<EntityGroup> Entities { get; set; }
 
     public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
 
-    public FollowedEntityViewModel(IGamesRepository gamesRepository, IGameSeriesRepository gameSeriesRepository, IUserRepository userRepository, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
+    public FollowedEntityViewModel(IGamesService gamesService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
     {
-        _gamesRepository = gamesRepository;
-        _gameSeriesRepository = gameSeriesRepository;
-        _userRepository = userRepository;
+        _gamesService = gamesService;
+        _gameSeriesService = gameSeriesService;
+        _userService = userService;
         _localFollowService = localFollowService;
         Entities = new ObservableCollection<EntityGroup>();
     }
@@ -34,17 +34,17 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         switch ((EntityType)entity.SearchObject)
         {
             case EntityType.Games:
-                BaseData<Game> game = await ExecuteNetworkTask(_gamesRepository.GetGameAsync(entity.Id));
+                BaseData<Game> game = await ExecuteNetworkTask(_gamesService.GetGameAsync(entity.Id));
                 if (game != null)
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game.Data);
                 break;
             case EntityType.Series:
-                BaseData<GameSeries> series = await ExecuteNetworkTask(_gameSeriesRepository.GetGameSeriesAsync(entity.Id));
+                BaseData<GameSeries> series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
                 if (series != null)
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series.Data);
                 break;
             case EntityType.Users:
-                BaseData<User> user = await ExecuteNetworkTask(_userRepository.GetUserAsync(entity.Id));
+                BaseData<User> user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
                 if (user != null)
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user.Data);
                 break;
