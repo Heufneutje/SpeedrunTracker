@@ -19,8 +19,7 @@ public class CacheService : ICacheService
     public async Task SaveCacheItemAsync(string id, CacheItemType type, object cacheObj)
     {
         CacheItem item = await GetCacheItemAsync(id, type);
-        if (item == null)
-            item = new CacheItem() { SpeedrunObjectId = id, Type = type };
+        item ??= new CacheItem() { SpeedrunObjectId = id, Type = type };
 
         item.CachedJson = _jsonSerializationService.Serialize(cacheObj);
         item.LastUpdated = DateTime.Now;

@@ -2,7 +2,7 @@
 
 public abstract class BaseCachableService
 {
-    private ICacheService _cacheService;
+    private readonly ICacheService _cacheService;
 
     public BaseCachableService(ICacheService cacheService)
     {
