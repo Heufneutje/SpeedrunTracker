@@ -13,20 +13,18 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding Series.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
-        <Grid Padding="20">
+        <Border Style="{StaticResource TransparentCollectionElementBorder}" IsVisible="{Binding IsRunningBackgroundTask}">
+            <Grid Padding="10">
+                <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />
+            </Grid>
+        </Border>
+        <Grid Padding="20" IsVisible="{Binding IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                             ItemsSource="{Binding Games}"
                             ItemTemplate="{StaticResource GameSeriesEntriesTemplate}"
                             RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                             SelectedItem="{Binding SelectedGame}"
                             SelectionChangedCommand="{Binding NavigateToGameCommand}">
-                <CollectionView.EmptyView>
-                    <Border Style="{StaticResource TransparentCollectionElementBorder}">
-                        <Grid Padding="10">
-                            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />
-                        </Grid>
-                    </Border>
-                </CollectionView.EmptyView>
             </CollectionView>
         </Grid>
     </Grid>
