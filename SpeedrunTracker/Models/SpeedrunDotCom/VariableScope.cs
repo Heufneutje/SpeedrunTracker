@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class VariableScope
+public record VariableScope
 {
     public VariableScopeType Type { get; set; }
 

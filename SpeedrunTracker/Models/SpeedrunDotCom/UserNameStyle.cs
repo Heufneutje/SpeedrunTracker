@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class UserNameStyle
+public record UserNameStyle
 {
     public UserNameStyleType Style { get; set; }
 

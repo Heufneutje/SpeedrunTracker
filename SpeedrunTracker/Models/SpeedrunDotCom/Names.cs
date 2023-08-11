@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Names
+public record Names
 {
     public string International { get; set; }
     public string Japanese { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class SpeedrunVideos
+public record SpeedrunVideos
 {
     public List<Link> Links { get; set; }
 }

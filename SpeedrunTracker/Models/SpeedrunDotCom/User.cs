@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class User : BaseSpeedrunObject
+public record User : BaseSpeedrunObject
 {
     [JsonPropertyName("rel")]
     public PlayerType PlayerType { get; set; }

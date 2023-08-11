@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class GameAssets
+public record GameAssets
 {
     public Asset Logo { get; set; }
 

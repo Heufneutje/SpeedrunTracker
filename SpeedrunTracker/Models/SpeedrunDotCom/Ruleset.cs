@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Ruleset
+public record Ruleset
 {
     [JsonPropertyName("default-time")]
     public TimingType DefaultTimingType { get; set; }

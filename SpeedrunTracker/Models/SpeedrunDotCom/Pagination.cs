@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Pagination
+public record Pagination
 {
     public int Offset { get; set; }
     public int Max { get; set; }

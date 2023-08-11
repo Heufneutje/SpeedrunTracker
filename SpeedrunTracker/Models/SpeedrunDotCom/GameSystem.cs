@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class GameSystem
+public record GameSystem
 {
     [JsonPropertyName("platform")]
     public string PlatformId { get; set; }

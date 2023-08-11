@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class SpeedrunStatus
+public record SpeedrunStatus
 {
     [JsonPropertyName("status")]
     public SpeedrunStatusType StatusType { get; set; }

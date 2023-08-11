@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Speedrun : BaseSpeedrunObject
+public record Speedrun : BaseSpeedrunObject
 {
     public string Weblink { get; set; }
     public string Comment { get; set; }

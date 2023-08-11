@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Level : BaseSpeedrunObject
+public record Level : BaseSpeedrunObject
 {
     [JsonPropertyName("name")]
     public string Name { get; set; }

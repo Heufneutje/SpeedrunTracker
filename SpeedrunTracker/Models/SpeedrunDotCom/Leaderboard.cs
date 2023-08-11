@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Leaderboard
+public record Leaderboard
 {
     public string Weblink { get; set; }
     public List<LeaderboardEntry> Runs { get; set; }

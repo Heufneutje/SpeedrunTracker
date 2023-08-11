@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Game : BaseGame
+public record Game : BaseGame
 {
     public BaseData<List<GamePlatform>> Platforms { get; set; }
     public Ruleset Ruleset { get; set; }

@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class GamePlatform : BaseSpeedrunObject
+public record GamePlatform : BaseSpeedrunObject
 {
     [JsonPropertyName("name")]
     public string Name { get; set; }

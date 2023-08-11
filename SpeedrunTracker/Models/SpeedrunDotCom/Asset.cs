@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Asset
+public record Asset
 {
     public string Uri { get; set; }
 

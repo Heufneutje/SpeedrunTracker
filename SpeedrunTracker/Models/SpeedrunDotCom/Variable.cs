@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Variable : BaseSpeedrunObject
+public record Variable : BaseSpeedrunObject
 {
     public string Name { get; set; }
     public string Category { get; set; }

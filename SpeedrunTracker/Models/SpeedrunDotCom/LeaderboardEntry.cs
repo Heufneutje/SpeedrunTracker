@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class LeaderboardEntry
+public record LeaderboardEntry
 {
     public int Place { get; set; }
     public Speedrun Run { get; set; }

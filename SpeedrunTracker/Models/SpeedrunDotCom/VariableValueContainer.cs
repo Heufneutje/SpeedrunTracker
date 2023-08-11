@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class VariableValueContainer
+public record VariableValueContainer
 {
     public Dictionary<string, VariableValue> Values { get; set; }
 }

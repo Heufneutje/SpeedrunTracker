@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class Category : BaseSpeedrunObject
+public record Category : BaseSpeedrunObject
 {
     public string Name { get; set; }
     public string Rules { get; set; }

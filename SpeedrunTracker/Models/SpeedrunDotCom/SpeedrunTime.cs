@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class SpeedrunTime
+public record SpeedrunTime
 {
     [JsonPropertyName("primary_t")]
     public double PrimarySeconds { get; set; }

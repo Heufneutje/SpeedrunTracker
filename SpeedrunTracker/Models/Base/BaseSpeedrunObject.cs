@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.Base;
 
-public class BaseSpeedrunObject
+public record BaseSpeedrunObject
 {
     public string Id { get; set; }
 

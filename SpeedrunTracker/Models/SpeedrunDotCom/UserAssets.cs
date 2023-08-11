@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public class UserAssets
+public record UserAssets
 {
     public Asset Image { get; set; }
 }
