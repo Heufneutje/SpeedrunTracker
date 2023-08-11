@@ -25,6 +25,7 @@ public partial class GameSeriesDetailsPage : ContentPage
         if (!_isLoaded)
         {
             await _viewModel.LoadGamesAsync();
+            await _viewModel.LoadFollowingStatusAsync();
             _isLoaded = true;
         }
     }
