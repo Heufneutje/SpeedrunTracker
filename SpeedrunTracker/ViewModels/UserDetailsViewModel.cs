@@ -109,6 +109,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                 List<LeaderboardEntry> entries = group.ToList();
                 foreach (LeaderboardEntry entry in entries)
                 {
+                    if (entry.Run.Variables.Any())
+                        continue;
+
                     foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
                     {
                         Variable variable = entry.Category.Data.Variables.Data.FirstOrDefault(x => x.Id == valuePair.Key);
