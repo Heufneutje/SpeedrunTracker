@@ -1,32 +1,32 @@
 ﻿namespace SpeedrunTracker.Services;
 
-public class GameService : IGameService
+public class GameService : BaseCachableService, IGameService
 {
     private readonly IGameRepository _gameRepository;
 
-    public GameService(IGameRepository gameRepository)
+    public GameService(IGameRepository gameRepository, ICacheService cacheService) : base(cacheService)
     {
         _gameRepository = gameRepository;
     }
 
-    public async Task<Game> GetGameAsync(string gameId)
+    public Task<Game> GetGameAsync(string gameId)
     {
-        return (await _gameRepository.GetGameAsync(gameId))?.Data;
+        return GetCachedResourceAsync(gameId, CacheItemType.Games, _gameRepository.GetGameAsync(gameId));
     }
 
-    public async Task<List<Category>> GetGameCategoriesAsync(string gameId)
+    public Task<List<Category>> GetGameCategoriesAsync(string gameId)
     {
-        return (await _gameRepository.GetGameCategoriesAsync(gameId))?.Data;
+        return GetCachedResourceAsync(gameId, CacheItemType.Categories, _gameRepository.GetGameCategoriesAsync(gameId));
     }
 
-    public async Task<List<Level>> GetGameLevelsAsync(string gameId)
+    public Task<List<Level>> GetGameLevelsAsync(string gameId)
     {
-        return (await _gameRepository.GetGameLevelsAsync(gameId))?.Data;
+        return GetCachedResourceAsync(gameId, CacheItemType.Levels, _gameRepository.GetGameLevelsAsync(gameId));
     }
 
-    public async Task<List<Variable>> GetGameVariablesAsync(string gameId)
+    public Task<List<Variable>> GetGameVariablesAsync(string gameId)
     {
-        return (await _gameRepository.GetGameVariablesAsync(gameId))?.Data;
+        return GetCachedResourceAsync(gameId, CacheItemType.Variables, _gameRepository.GetGameVariablesAsync(gameId));
     }
 
     public Task<PagedData<List<Game>>> SearchGamesAsync(string name)

@@ -1,10 +1,5 @@
-﻿using SQLite;
+﻿namespace SpeedrunTracker.Services;
 
-namespace SpeedrunTracker.Services;
-
-public interface ILocalDatabaseService
+public interface ILocalDatabaseService : IDatabaseService
 {
-    SQLiteAsyncConnection Connection { get; }
-
-    Task InitAsync(string databaseName, SQLiteOpenFlags flags);
 }

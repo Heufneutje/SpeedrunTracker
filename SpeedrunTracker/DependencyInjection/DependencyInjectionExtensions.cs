@@ -39,6 +39,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IBrowserService, BrowserService>();
         services.AddSingleton<IDialogService, DialogService>();
         services.AddSingleton<IToastService, ToastService>();
+        services.AddSingleton<IJsonSerializationService, JsonSerializationService>();
 
         return services;
 
@@ -87,8 +88,10 @@ public static class DependencyInjectionExtensions
     {
         services.AddTransient<IMauiInitializeService, LocalDatabaseInitializer>();
         services.AddSingleton<ILocalDatabaseService, LocalDatabaseService>();
+        services.AddSingleton<ICacheDatabaseService, CacheDatabaseService>();
         services.AddSingleton<ILocalFollowService, LocalFollowService>();
         services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
+        services.AddSingleton<ICacheService, CacheService>();
 
         return services;
     }
