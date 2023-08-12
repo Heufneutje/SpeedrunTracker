@@ -10,6 +10,8 @@ public class AboutViewModel : BaseViewModel
 
     public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrlAsync);
 
+    public string VersionText => $"SpeedrunTracker {App.Version}";
+
     public AboutViewModel(IBrowserService browserService)
     {
         _browserService = browserService;

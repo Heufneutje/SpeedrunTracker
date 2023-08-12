@@ -8,7 +8,7 @@
     <ScrollView>
         <VerticalStackLayout>
             <Image Source="main" WidthRequest="300" />
-            <Label Text="SpeedrunTracker" HorizontalTextAlignment="Center" FontSize="Title" Margin="20" />
+            <Label Text="{Binding VersionText}" HorizontalTextAlignment="Center" FontSize="Title" Margin="20" />
             <Label Text="Created by Stefan Frijters in .NET MAUI with data provided by the speedrun.com REST API." HorizontalTextAlignment="Center" FontSize="Subtitle" Margin="20" />
 
             <!--Replace with hyperlink once they actually work https://github.com/dotnet/maui/issues/4734
