@@ -40,10 +40,14 @@
         <ShellContent ContentTemplate="{DataTemplate views:NotificationsPage}" Route="Notifications" Title="Notifications" Icon="bell" />
     </FlyoutItem>
     <FlyoutItem Title="Profile" FlyoutIcon="user">
-        <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="Profiole" />
+        <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="Profile" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings" FlyoutIcon="gear">
         <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Route="Settings" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About" FlyoutIcon="about">
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" Route="about" />
     </FlyoutItem>
 </Shell>

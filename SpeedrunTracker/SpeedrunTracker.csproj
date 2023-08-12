@@ -50,6 +50,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\about.svg" />
 	  <None Remove="Resources\Images\cross.svg" />
 	  <None Remove="Resources\Images\flags\gb_eng_flag.svg" />
 	  <None Remove="Resources\Images\flags\gb_nir_flag.svg" />
@@ -107,6 +108,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Controls\RunPropertyControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\AboutPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\BaseSearchContentPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>

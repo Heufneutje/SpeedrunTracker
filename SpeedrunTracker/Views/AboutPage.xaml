@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             x:Class="SpeedrunTracker.Views.AboutPage"
+             x:DataType="viewmodels:AboutViewModel"
+             Title="About">
+    <VerticalStackLayout>
+        <Image Source="main" WidthRequest="300" />
+        <Label Text="SpeedrunTracker" HorizontalTextAlignment="Center" FontSize="Title" Margin="20" />
+        <Label Text="Created by Stefan Frijters in .NET MAUI with data provided by the speedrun.com REST API." HorizontalTextAlignment="Center" FontSize="Subtitle" Margin="20" />
+
+        <Label Text="Please report any issues you may encounter on the issue tracker." HorizontalTextAlignment="Center" FontSize="Subtitle" Margin="20" />
+        <Button Text="Issue Tracker" Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/issues" Margin="20" />
+        <!--Replace with hyperlink once they actually work https://github.com/dotnet/maui/issues/4734
+        <Label HorizontalTextAlignment="Center" FontSize="Subtitle" Margin="20">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Please report any issues you may encounter on the " />
+                    <Span Text="issue tracker" TextColor="Aqua" TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/issues" />
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>-->
+    </VerticalStackLayout>
+</ContentPage>

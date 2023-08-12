@@ -59,6 +59,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<ProfileViewModel>();
         services.AddSingleton<NotificationListViewModel>();
+        services.AddSingleton<AboutViewModel>();
         services.AddTransient<GameDetailViewModel>();
         services.AddTransient<RunDetailsViewModel>();
         services.AddTransient<UserDetailsViewModel>();
@@ -76,6 +77,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<SettingsPage>();
         services.AddSingleton<ProfilePage>();
         services.AddSingleton<NotificationsPage>();
+        services.AddSingleton<AboutPage>();
         services.AddTransient<GameDetailPage>();
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();
