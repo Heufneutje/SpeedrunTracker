@@ -22,7 +22,7 @@ public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where 
         }
     }
 
-    public string FollowButtonText => IsFollowing ? "Unfollow" : "Follow";
+    public string FollowButtonText => IsFollowing ? "Unfavorite" : "Favorite";
 
     public ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 

@@ -31,7 +31,7 @@
     </Shell.FlyoutHeader>
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" Title="Following" Icon="following" />
+        <ShellContent ContentTemplate="{DataTemplate views:FollowingPage}" Route="Following" Title="Favorites" Icon="following" />
         <Tab Title="Search" Icon="search">
             <ShellContent ContentTemplate="{DataTemplate views:GameSearchPage}" Route="SearchGames" Title="Games" />
             <ShellContent ContentTemplate="{DataTemplate views:GameSeriesSearchPage}" Route="SearchSeries" Title="Series" />
