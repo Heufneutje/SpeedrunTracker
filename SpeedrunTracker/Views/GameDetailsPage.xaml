@@ -10,7 +10,7 @@
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" />
+        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" />
     </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding Game.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />

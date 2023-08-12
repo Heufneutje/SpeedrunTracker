@@ -9,9 +9,9 @@ public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where 
     protected readonly ILocalFollowService _followService;
     protected T _followEntity;
 
-    private bool _isFollowing;
+    private bool? _isFollowing;
 
-    public bool IsFollowing
+    public bool? IsFollowing
     {
         get => _isFollowing;
         set
@@ -19,10 +19,13 @@ public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where 
             _isFollowing = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(FollowButtonText));
+            NotifyPropertyChanged(nameof(IsFollowingEnabled));
         }
     }
 
-    public string FollowButtonText => IsFollowing ? "Unfavorite" : "Favorite";
+    public bool IsFollowingEnabled => _isFollowing.HasValue;
+
+    public string FollowButtonText => IsFollowing == true ? "Unfavorite" : "Favorite";
 
     public ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 
@@ -38,12 +41,12 @@ public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where 
 
     protected async Task ToggleFollowAsync()
     {
-        if (IsFollowing)
+        if (IsFollowing == true)
             await _followService.UnfollowAsync(_followEntity.Id);
-        else
+        else if (IsFollowing == false)
             await FollowAsync(_followEntity);
 
-        IsFollowing = !IsFollowing;
+        IsFollowing = !(IsFollowing ?? false);
     }
 
     protected abstract Task FollowAsync(T entity);
