@@ -33,6 +33,7 @@
 
     <Color x:Key="LightHighlight">#257eb8</Color>
     <Color x:Key="Gray900Transparent">#99212121</Color>
+    <Color x:Key="Gray100Transparent">#BBE1E1E1</Color>
     <Color x:Key="WhiteTransparent">#BBFFFFFF</Color>
     <Color x:Key="FullTransparent">Transparent</Color>
     <Color x:Key="PrimaryTransparernt">#99008B8B</Color>
