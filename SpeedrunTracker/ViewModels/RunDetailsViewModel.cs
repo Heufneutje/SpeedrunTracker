@@ -69,7 +69,7 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             return RunDetails.Run.Status.StatusType switch
             {
                 SpeedrunStatusType.New => "Verification pending",
-                SpeedrunStatusType.Verified => $"Verified on {RunDetails.Run.Status.VerifyDate:yyyy-MM-dd HH:mm}",
+                SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue ? $"Verified on {RunDetails.Run.Status.VerifyDate:yyyy-MM-dd HH:mm}" : "Verified",
                 SpeedrunStatusType.Rejected => $"Rejected ({RunDetails.Run.Status.Reason ?? string.Empty})",
                 _ => string.Empty,
             };
