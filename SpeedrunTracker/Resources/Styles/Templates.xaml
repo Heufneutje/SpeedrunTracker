@@ -124,6 +124,26 @@
         <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ThemeColor}" Margin="5,0,0,5" />
     </DataTemplate>
 
+    <DataTemplate x:Key="RunVideosTemplate" x:DataType="models:EmbeddableUrl">
+        <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10" />
+            </Border.StrokeShape>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="CommonStates">
+                    <VisualState Name="Normal"></VisualState>
+                    <VisualState Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                            <Setter TargetName="_nameLabel" Property="Label.TextColor" Value="{StaticResource White}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Label Text="{Binding VideoNumberDescription}" x:Name="_nameLabel" />
+        </Border>
+    </DataTemplate>
+
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10">

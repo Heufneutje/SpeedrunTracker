@@ -2,6 +2,7 @@
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using SpeedrunTracker.Services;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -10,6 +11,7 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
 {
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
+    private readonly IEmbedService _embedService;
 
     private RunDetails _runDetails;
 
@@ -22,16 +24,22 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(Title));
             NotifyPropertyChanged(nameof(HasVideo));
+            NotifyPropertyChanged(nameof(HasMultipleVideos));
             NotifyPropertyChanged(nameof(HasInGameTime));
             NotifyPropertyChanged(nameof(HasRealtime));
             NotifyPropertyChanged(nameof(HasRealtimeNoLoads));
             NotifyPropertyChanged(nameof(HasTrophyAsset));
             NotifyPropertyChanged(nameof(StatusImage));
             NotifyPropertyChanged(nameof(StatusDescription));
+
+            VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
+            SelectedVideo = VideoUrls.FirstOrDefault();
         }
     }
 
     public bool HasVideo => _runDetails?.Run?.Videos?.Links?.Any() == true;
+
+    public bool HasMultipleVideos => _runDetails?.Run?.Videos?.Links?.Count > 1;
 
     public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.FixedThemeAssetUri);
 
@@ -45,6 +53,23 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             if (_selectedPlayer != value)
             {
                 _selectedPlayer = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public RangedObservableCollection<EmbeddableUrl> VideoUrls { get; set; }
+
+    private EmbeddableUrl _selectedVideo;
+
+    public EmbeddableUrl SelectedVideo
+    {
+        get => _selectedVideo;
+        set
+        {
+            if (_selectedVideo != value)
+            {
+                _selectedVideo = value;
                 NotifyPropertyChanged();
             }
         }
@@ -87,13 +112,15 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
         _ => string.Empty,
     };
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IToastService toastService) : base(toastService)
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IToastService toastService) : base(toastService)
     {
         _browserService = browserService;
         _userService = userService;
+        _embedService = embedService;
+        VideoUrls = new RangedObservableCollection<EmbeddableUrl>();
     }
 
-    private async Task ShowVideo() => await _browserService.OpenAsync(_runDetails.Run.Videos.Links.First().Uri);
+    private async Task ShowVideo() => await _browserService.OpenAsync(SelectedVideo.Url);
 
     private bool ShouldShowTimingType(TimingType timingType) => RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true && RunDetails?.Ruleset?.DefaultTimingType != timingType;
 

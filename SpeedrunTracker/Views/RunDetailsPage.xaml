@@ -23,7 +23,21 @@
 
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
                     <VerticalStackLayout Padding="10">
-                        <Button Text="Watch Video" Command="{Binding ShowVideoCommand}" IsVisible="{Binding HasVideo}" />
+                        <controls:RunPropertyControl Title="Videos" ImageSource="video" IsValueVisible="False" />
+                        <VerticalStackLayout IsVisible="{Binding HasVideo}">
+                            <CollectionView Margin="0,0,0,10"
+                                            ItemsSource="{Binding VideoUrls}"
+                                            ItemTemplate="{StaticResource RunVideosTemplate}"
+                                            SelectionMode="Single"
+                                            SelectedItem="{Binding SelectedVideo}"
+                                            IsVisible="{Binding HasMultipleVideos}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                            </CollectionView>
+                            <WebView Source="{Binding SelectedVideo.EmbedUrl}" HorizontalOptions="Center" HeightRequest="200"  Margin="0,0,0,10" />
+                            <Button Text="Open External Player" Command="{Binding ShowVideoCommand}" />
+                        </VerticalStackLayout>
                         <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" />
                         <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding RunDetails.Run.Comment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" />
                     </VerticalStackLayout>
