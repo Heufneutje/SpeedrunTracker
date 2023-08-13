@@ -25,12 +25,15 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             NotifyPropertyChanged(nameof(HasInGameTime));
             NotifyPropertyChanged(nameof(HasRealtime));
             NotifyPropertyChanged(nameof(HasRealtimeNoLoads));
+            NotifyPropertyChanged(nameof(HasTrophyAsset));
             NotifyPropertyChanged(nameof(StatusImage));
             NotifyPropertyChanged(nameof(StatusDescription));
         }
     }
 
     public bool HasVideo => _runDetails?.Run?.Videos?.Links?.Any() == true;
+
+    public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.FixedThemeAssetUri);
 
     private User _selectedPlayer;
 
