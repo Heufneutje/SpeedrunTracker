@@ -47,10 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\video.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Images\about.svg" />
 	  <None Remove="Resources\Images\cross.svg" />
 	  <None Remove="Resources\Images\flags\gb_eng_flag.svg" />
@@ -59,6 +55,7 @@
 	  <None Remove="Resources\Images\flags\gb_wls_flag.svg" />
 	  <None Remove="Resources\Images\main.svg" />
 	  <None Remove="Resources\Images\series.svg" />
+	  <None Remove="Resources\Images\video.svg" />
 	  <None Remove="Resources\Images\video2.svg" />
 	</ItemGroup>
 
