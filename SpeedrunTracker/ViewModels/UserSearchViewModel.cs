@@ -6,7 +6,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class UserSearchViewModel : BaseSearchEntityViewModel
 {
-    private IUserService _userService;
+    private readonly IUserService _userService;
 
     public override string SearchTextPlaceholder => "Search for users...";
 

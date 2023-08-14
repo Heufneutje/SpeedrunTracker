@@ -7,7 +7,7 @@ public class EmbedService : IEmbedService
 {
     public List<EmbeddableUrl> GetEmbeddableUrls(SpeedrunVideos videos)
     {
-        List<EmbeddableUrl> urls = new List<EmbeddableUrl>();
+        List<EmbeddableUrl> urls = new();
         foreach (Link link in videos.Links)
         {
             if (link.Uri.Contains("youtube") || link.Uri.Contains("youtu.be"))
