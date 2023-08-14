@@ -105,6 +105,9 @@
 		<MauiXaml Update="AppShell.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Controls\AvatarControl.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Controls\RunPropertyControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

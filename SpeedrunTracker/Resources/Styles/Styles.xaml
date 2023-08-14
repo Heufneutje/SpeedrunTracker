@@ -363,13 +363,11 @@
         <Setter Property="WidthRequest" Value="14" />
     </Style>
 
-    <Style x:Key="ProfileAvatarStyle" TargetType="Border">
-        <Setter Property="StrokeShape">
-            <RoundRectangle CornerRadius="100" />
-        </Setter>
-        <Setter Property="HeightRequest" Value="150" />
-        <Setter Property="WidthRequest" Value="150" />
+    <Style x:Key="ProfileAvatarStyle" TargetType="toolkit:AvatarView">
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="CornerRadius" Value="100" />
         <Setter Property="BackgroundColor" Value="{StaticResource Gray400}" />
+        <Setter Property="BorderColor" Value="{StaticResource Gray400}" />
     </Style>
 
     <Style x:Key="ThresholdCollectionViewStyle" TargetType="CollectionView">

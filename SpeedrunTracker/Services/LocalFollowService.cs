@@ -40,7 +40,7 @@ public class LocalFollowService : ILocalFollowService
         FollowedEntity item = new()
         {
             Id = user.Id,
-            ImageUrl = user.Assets?.Image?.FixedUserAssetUri,
+            ImageUrl = user.Assets?.Image?.FixedUserAssetUri ?? "user",
             Title = user.Names.International,
             Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
             Type = EntityType.Users

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:UserDetailsViewModel"
@@ -11,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" Source="{Binding User.Assets.Image.FixedUserAssetUri}" Margin="10" VerticalOptions="Center" />
+        <controls:AvatarControl Grid.Column="0" ImageSource="{Binding User.Assets.Image.FixedUserAssetUri}" AvatarSize="80" Margin="10" VerticalOptions="Fill" />
         <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
             <Label Text="{Binding User.DisplayName}" TextColor="{Binding User.NameStyle.ThemeColor}" FontAttributes="Bold" />
             <Label Text="{Binding User.Pronouns}" IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />

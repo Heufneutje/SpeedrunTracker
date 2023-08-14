@@ -27,7 +27,6 @@ public class ProfileViewModel : BaseViewModel
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Name));
                 NotifyPropertyChanged(nameof(ImageUri));
-                NotifyPropertyChanged(nameof(ImageMargin));
             }
         }
     }
@@ -64,9 +63,7 @@ public class ProfileViewModel : BaseViewModel
 
     public string Name => _user?.DisplayName ?? "Guest";
 
-    public string ImageUri => _user?.Assets?.Image?.FixedUserAssetUri ?? "user";
-
-    public int ImageMargin => IsLoggedIn ? 0 : 10;
+    public string ImageUri => _user?.Assets?.Image?.FixedUserAssetUri;
 
     public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
 

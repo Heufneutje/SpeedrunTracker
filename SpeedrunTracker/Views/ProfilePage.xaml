@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:ProfileViewModel"
              x:Class="SpeedrunTracker.Views.ProfilePage"
@@ -10,13 +11,7 @@
         <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <Grid RowDefinitions="3*,*" IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
             <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">
-                <Border Style="{StaticResource ProfileAvatarStyle}">
-                    <Image Source="{Binding ImageUri}" Margin="{Binding ImageMargin}">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUserCommand}" />
-                        </Image.GestureRecognizers>
-                    </Image>
-                </Border>
+                <controls:AvatarControl ImageSource="{Binding ImageUri}" AvatarSize="150" Command="{Binding NavigateToUserCommand}" />
                 <Label Text="{Binding Name}" FontSize="Large" HorizontalOptions="Center" Padding="10" />
             </VerticalStackLayout>
 
