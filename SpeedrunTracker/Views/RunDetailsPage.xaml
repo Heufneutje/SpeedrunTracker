@@ -9,6 +9,9 @@
              Appearing="ContentPage_Appearing"
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Command="{Binding ShareCommand}" Order="Secondary" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>

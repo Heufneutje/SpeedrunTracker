@@ -74,7 +74,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IToastService toastService) : base(followService, toastService)
+    public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
+
+    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(followService, shareService, toastService)
     {
         _browserService = browserService;
         _userService = userService;

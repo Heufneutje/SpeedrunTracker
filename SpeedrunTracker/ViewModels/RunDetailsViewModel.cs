@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class RunDetailsViewModel : BaseNetworkActionViewModel
+public class RunDetailsViewModel : BaseShareableViewModel
 {
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
@@ -114,7 +114,11 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
         _ => string.Empty,
     };
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IToastService toastService) : base(toastService)
+    private bool ShouldShowTimingType(TimingType timingType) => RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true && RunDetails?.Ruleset?.DefaultTimingType != timingType;
+
+    public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
+
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService) : base(shareService, toastService)
     {
         _browserService = browserService;
         _userService = userService;
@@ -123,8 +127,6 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
     }
 
     private async Task ShowVideo() => await _browserService.OpenAsync(SelectedVideo.Url);
-
-    private bool ShouldShowTimingType(TimingType timingType) => RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true && RunDetails?.Ruleset?.DefaultTimingType != timingType;
 
     public async Task LoadData()
     {

@@ -47,7 +47,9 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public ICommand NavigateToGameCommand => new AsyncRelayCommand(NavigateToGameAsync);
 
-    public GameSeriesDetailViewModel(ILocalFollowService followService, IToastService toastService, IGameSeriesService gameSeriesService) : base(followService, toastService)
+    public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
+
+    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(followService, shareService, toastService)
     {
         Games = new RangedObservableCollection<Game>();
         _gameSeriesService = gameSeriesService;

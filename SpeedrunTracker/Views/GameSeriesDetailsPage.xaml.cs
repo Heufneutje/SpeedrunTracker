@@ -3,7 +3,7 @@ using SpeedrunTracker.ViewModels;
 namespace SpeedrunTracker.Views;
 
 [QueryProperty(nameof(Series), "Series")]
-public partial class GameSeriesDetailsPage : ContentPage
+public partial class GameSeriesDetailsPage : BaseDetailPage
 {
     private readonly GameSeriesDetailViewModel _viewModel;
     private bool _isLoaded;

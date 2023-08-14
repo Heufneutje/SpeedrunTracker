@@ -19,7 +19,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, toastService)
+    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, shareService, toastService)
     {
         _gameService = gameService;
         _leaderboardService = leaderboardService;
@@ -175,6 +175,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     public ICommand NavigateToRunCommand => new AsyncRelayCommand(NavigateToRunAsync);
 
     public ICommand DisplayLeaderboardEntriesCommand => new Command(DisplayLeaderboardEntries);
+
+    public override ShareDetails ShareDetails => new(Game?.Weblink, Game?.Names?.International);
 
     public async Task<bool> LoadCategoriesAsync()
     {

@@ -9,7 +9,6 @@ public record User : BaseSpeedrunObject
 
     public string Name { get; set; }
     public Names Names { get; set; }
-    public string Weblink { get; set; }
     public string Pronouns { get; set; }
 
     [JsonPropertyName("name-style")]

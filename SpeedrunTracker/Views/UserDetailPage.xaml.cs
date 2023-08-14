@@ -3,7 +3,7 @@ using SpeedrunTracker.ViewModels;
 namespace SpeedrunTracker.Views;
 
 [QueryProperty(nameof(User), "User")]
-public partial class UserDetailPage : ContentPage
+public partial class UserDetailPage : BaseDetailPage
 {
     private readonly UserDetailsViewModel _viewModel;
     private bool _isLoaded;

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<local:BaseDetailPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SpeedrunTracker.Views"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:UserDetailsViewModel"
              x:Class="SpeedrunTracker.Views.UserDetailPage"
              Title="{Binding DisplayName}"
-             Appearing="ContentPage_Appearing"
-             Shell.TabBarIsVisible="False"
-             Shell.FlyoutBehavior="Disabled">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" />
-    </ContentPage.ToolbarItems>
+             Appearing="ContentPage_Appearing">
     <Grid Padding="20">
         <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                         ItemsSource="{Binding PersonalBests}"
@@ -45,4 +40,4 @@
             </CollectionView.Header>
         </CollectionView>
     </Grid>
-</ContentPage>
+</local:BaseDetailPage>

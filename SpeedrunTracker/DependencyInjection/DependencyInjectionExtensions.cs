@@ -41,6 +41,7 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IToastService, ToastService>();
         services.AddSingleton<IJsonSerializationService, JsonSerializationService>();
         services.AddSingleton<IEmbedService, EmbedService>();
+        services.AddSingleton<IShareService, ShareService>();
 
         return services;
 

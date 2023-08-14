@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             x:DataType="viewmodels:BaseFollowViewModel"
+             x:Class="SpeedrunTracker.Views.BaseDetailPage"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" Order="Secondary" />
+        <ToolbarItem Text="Share" Command="{Binding ShareCommand}" Order="Secondary" />
+    </ContentPage.ToolbarItems>
+</ContentPage>

@@ -4,11 +4,8 @@ using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where T : BaseSpeedrunObject
+public abstract class BaseFollowViewModel : BaseShareableViewModel
 {
-    protected readonly ILocalFollowService _followService;
-    protected T _followEntity;
-
     private bool? _isFollowing;
 
     public bool? IsFollowing
@@ -27,9 +24,22 @@ public abstract class BaseFollowViewModel<T> : BaseNetworkActionViewModel where 
 
     public string FollowButtonText => IsFollowing == true ? "Unfavorite" : "Favorite";
 
-    public ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
+    protected BaseFollowViewModel(IShareService shareService, IToastService toastService) : base(shareService, toastService)
+    {
+    }
 
-    public BaseFollowViewModel(ILocalFollowService followService, IToastService toastService) : base(toastService)
+    public abstract ICommand FollowCommand { get; }
+}
+
+public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : BaseSpeedrunObject
+{
+    protected readonly ILocalFollowService _followService;
+
+    protected T _followEntity;
+
+    public override ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
+
+    public BaseFollowViewModel(ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(shareService, toastService)
     {
         _followService = followService;
     }

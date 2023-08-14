@@ -4,7 +4,6 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
 public record Speedrun : BaseSpeedrunObject
 {
-    public string Weblink { get; set; }
     public string Comment { get; set; }
     public SpeedrunVideos Videos { get; set; }
     public SpeedrunStatus Status { get; set; }
