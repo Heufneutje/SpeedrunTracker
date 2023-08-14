@@ -32,7 +32,9 @@ public class RunDetailsViewModel : BaseNetworkActionViewModel
             NotifyPropertyChanged(nameof(StatusImage));
             NotifyPropertyChanged(nameof(StatusDescription));
 
-            VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
+            if (value.Run.Videos?.Links != null)
+                VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
+
             SelectedVideo = VideoUrls.FirstOrDefault();
         }
     }
