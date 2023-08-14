@@ -41,7 +41,7 @@
                             <WebView Source="{Binding SelectedVideo.EmbedUrl}" HorizontalOptions="Center" HeightRequest="200"  Margin="0,0,0,10" />
                             <Button Text="Open External Player" Command="{Binding ShowVideoCommand}" />
                         </VerticalStackLayout>
-                        <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" />
+                        <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" Margin="5,-5,0,5" />
                         <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding RunDetails.Run.Comment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" />
                     </VerticalStackLayout>
                 </Border>
@@ -66,7 +66,7 @@
                         <controls:RunPropertyControl Title="Rank" IsValueVisible="False" ImageSource="trophy" />
                         <HorizontalStackLayout>
                             <Image Source="{Binding RunDetails.TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding HasTrophyAsset}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
-                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="5,-5,0,0" FontAttributes="Bold" />
+                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="5,-5,0,5" FontAttributes="Bold" />
                         </HorizontalStackLayout>
 
                         <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
@@ -83,7 +83,7 @@
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
                         <controls:RunPropertyControl Title="Examiner" IsValueVisible="False" ImageSource="user" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
-                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,0" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
+                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,5" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateToUserCommand}" CommandParameter="{Binding RunDetails.Examiner}" />
                             </Label.GestureRecognizers>
