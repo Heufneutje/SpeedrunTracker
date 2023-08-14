@@ -8,7 +8,7 @@
     <VerticalStackLayout Padding="10">
         <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <VerticalStackLayout IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
-            <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" />
+            <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" IsVisible="{Binding HasIndividualLevels}" />
             <CollectionView Margin="0,-5,0,0"
                         ItemsSource="{Binding Levels}"
                         SelectedItem="{Binding SelectedLevel}"
