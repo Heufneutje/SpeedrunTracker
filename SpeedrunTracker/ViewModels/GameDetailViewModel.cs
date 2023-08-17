@@ -266,18 +266,19 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         if (examinerId != null)
             examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == examinerId) ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId)) ?? User.GetUserNotFoundPlaceholder();
 
-        foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
-        {
-            Variable variable = _allVariables.FirstOrDefault(x => x.Id == valuePair.Key);
-            if (variable == null)
-                continue;
+        if (!_selectedLeaderboardEntry.Run.Variables.Any())
+            foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
+            {
+                Variable variable = _allVariables.FirstOrDefault(x => x.Id == valuePair.Key);
+                if (variable == null)
+                    continue;
 
-            VariableValue value = variable.Values.Values.FirstOrDefault(x => x.Key == valuePair.Value).Value;
-            if (value == null)
-                continue;
+                VariableValue value = variable.Values.Values.FirstOrDefault(x => x.Key == valuePair.Value).Value;
+                if (value == null)
+                    continue;
 
-            _selectedLeaderboardEntry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
-        }
+                _selectedLeaderboardEntry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
+            }
 
         RunDetails runDetails = new()
         {
