@@ -22,7 +22,7 @@
                    Grid.Row="0"
                    HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <StackLayout Grid.Row="1">
+        <VerticalStackLayout Grid.Row="1">
             <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
             <ListView ItemsSource="{Binding Entities}"
                   IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
@@ -37,6 +37,6 @@
                                                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
                 </ListView.Behaviors>
             </ListView>
-        </StackLayout>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>

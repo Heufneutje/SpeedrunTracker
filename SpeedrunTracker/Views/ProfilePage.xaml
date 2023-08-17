@@ -7,7 +7,7 @@
              x:Class="SpeedrunTracker.Views.ProfilePage"
              Title="Profile"
              Appearing="ContentPage_Appearing">
-    <StackLayout>
+    <VerticalStackLayout>
         <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <Grid RowDefinitions="3*,*" IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
             <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">
@@ -22,5 +22,5 @@
                 <Button Text="Logout" HorizontalOptions="Center" WidthRequest="100" IsVisible="{Binding IsLoggedIn}" Command="{Binding LogoutCommand}" />
             </VerticalStackLayout>
         </Grid>
-    </StackLayout>
+    </VerticalStackLayout>
 </ContentPage>
