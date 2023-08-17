@@ -11,12 +11,12 @@
     <DataTemplate x:Key="EntitiesGroupHeaderTemplate">
         <ViewCell>
             <Grid Padding="10" ColumnSpacing="5" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageSource}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
+                <Image Source="{Binding ImageSource, Mode=OneTime}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Text="{Binding EntityType}" Grid.Column="1" FontAttributes="Bold" />
+                <Label Text="{Binding EntityType, Mode=OneTime}" Grid.Column="1" FontAttributes="Bold" />
             </Grid>
         </ViewCell>
     </DataTemplate>
@@ -24,9 +24,9 @@
     <DataTemplate x:Key="EntitiesTemplate" x:DataType="models:Entity">
         <ViewCell Height="100">
             <Grid Padding="10" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageUrl}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                <Label Text="{Binding Subtitle}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+                <Image Source="{Binding ImageUrl, Mode=OneTime}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
+                <Label Text="{Binding Title, Mode=OneTime}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+                <Label Text="{Binding Subtitle, Mode=OneTime}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
             </Grid>
         </ViewCell>
     </DataTemplate>
@@ -35,8 +35,8 @@
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid Padding="10,0,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <Image Source="{Binding Assets.CoverSmall.FixedGameAssetUri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                <Label Text="{Binding Names.International}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                <Label Text="{Binding Released, StringFormat='Released: {0}'}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+                <Label Text="{Binding Names.International, Mode=OneTime}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+                <Label Text="{Binding Released, Mode=OneTime, StringFormat='Released: {0}'}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -57,7 +57,7 @@
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Label Text="{Binding Name}" x:Name="_nameLabel" />
+            <Label Text="{Binding Name, Mode=OneTime}" x:Name="_nameLabel" />
         </Border>
     </DataTemplate>
 
@@ -65,9 +65,9 @@
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid ColumnDefinitions="50,*,Auto">
                 <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
-                <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
-                <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
-                <Label Text="{Binding Run.Times.PrimaryTimeSpan}" Grid.Column="2" />
+                <Label Text="{Binding Place, Mode=OneTime}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
+                <Label Text="{Binding Run.Players[0].DisplayName, Mode=OneTime}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
+                <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" Grid.Column="2" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -87,11 +87,11 @@
     </DataTemplate>
 
     <DataTemplate x:Key="RunVariablesTemplate" x:DataType="models:RunVariable">
-        <controls:RunPropertyControl Title="{Binding Name}" Value="{Binding Value}" ImageSource="category" />
+        <controls:RunPropertyControl Title="{Binding Name, Mode=OneTime}" Value="{Binding Value, Mode=OneTime}" ImageSource="category" />
     </DataTemplate>
 
     <DataTemplate x:Key="RunPlayersTemplate" x:DataType="speedrunmodels:User">
-        <Label Text="{Binding DisplayName}" TextColor="{Binding NameStyle.ThemeColor}" Margin="5,0,0,5" />
+        <Label Text="{Binding DisplayName, Mode=OneTime}" TextColor="{Binding NameStyle.ThemeColor, Mode=OneTime}" Margin="5,0,0,5" />
     </DataTemplate>
 
     <DataTemplate x:Key="RunVideosTemplate" x:DataType="models:EmbeddableUrl">
@@ -110,15 +110,15 @@
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Label Text="{Binding VideoNumberDescription}" x:Name="_nameLabel" />
+            <Label Text="{Binding VideoNumberDescription, Mode=OneTime}" x:Name="_nameLabel" />
         </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
-                <Label Text="{Binding Game.Names.International}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+                <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri, Mode=OneTime}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
+                <Label Text="{Binding Game.Names.International, Mode=OneTime}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
             </Grid>
         </Border>
     </DataTemplate>
@@ -127,20 +127,20 @@
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10" ColumnDefinitions="2*,*,*">
                 <VerticalStackLayout Grid.Column="0">
-                    <Label Text="{Binding Level.Name}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
-                    <Label Text="{Binding Category.Data.Name}" />
+                    <Label Text="{Binding Level.Name, Mode=OneTime}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
+                    <Label Text="{Binding Category.Data.Name, Mode=OneTime}" />
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Run.Variables}" BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
-                        <Label Text="{Binding OrdinalPlace}" FontAttributes="Bold" />
+                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri, Mode=OneTime}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
+                        <Label Text="{Binding OrdinalPlace, Mode=OneTime}" FontAttributes="Bold" />
                     </HorizontalStackLayout>
-                    <Label Text="{Binding Run.Times.PrimaryTimeSpan}" />
+                    <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2">
-                    <Label Text="{Binding Platform.Name}" />
-                    <Label Text="{Binding Run.Date, StringFormat='{0:yyyy-MM-dd}'}" />
+                    <Label Text="{Binding Platform.Name, Mode=OneTime}" />
+                    <Label Text="{Binding Run.Date, Mode=OneTime, StringFormat='{0:yyyy-MM-dd}'}" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
@@ -153,8 +153,8 @@
     <DataTemplate x:Key="NotificationTemplate" x:DataType="speedrunmodels:Notification">
         <VerticalStackLayout>
             <VerticalStackLayout Padding="20">
-                <Label Text="{Binding Created, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
-                <Label Text="{Binding Text}" Padding="0,10,0,0" FontAttributes="{Binding Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
+                <Label Text="{Binding Created, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+                <Label Text="{Binding Text, Mode=OneTime}" Padding="0,10,0,0" FontAttributes="{Binding Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
             </VerticalStackLayout>
             <Line StrokeThickness="1" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         </VerticalStackLayout>
