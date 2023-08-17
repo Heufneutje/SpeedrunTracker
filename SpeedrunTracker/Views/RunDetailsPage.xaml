@@ -15,15 +15,7 @@
     <Grid>
         <Image Source="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>
-            <Grid Padding="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
+            <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Videos" ImageSource="video" IsValueVisible="False" />

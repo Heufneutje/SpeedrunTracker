@@ -10,11 +10,7 @@
     <Shell.SearchHandler>
         <SearchHandler Placeholder="{Binding SearchTextPlaceholder}" Command="{Binding SearchCommand}" Query="{Binding Query}" QueryIcon="search" ClearIcon="cross" />
     </Shell.SearchHandler>-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Grid RowDefinitions="Auto,*">
         <SearchBar x:Name="searchBar"
                    Placeholder="{Binding SearchTextPlaceholder}"
                    SearchCommand="{Binding SearchCommand}"

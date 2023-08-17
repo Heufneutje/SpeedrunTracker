@@ -8,11 +8,7 @@
     FlyoutBackgroundColor="{StaticResource Primary}">
     <Shell.ItemTemplate>
         <DataTemplate>
-            <Grid Style="{StaticResource FlyoutItemStyle}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="150" />
-                </Grid.ColumnDefinitions>
+            <Grid Style="{StaticResource FlyoutItemStyle}" ColumnDefinitions="50,150">
                 <Image Source="{Binding FlyoutIcon}" Margin="10" HeightRequest="30" HorizontalOptions="EndAndExpand">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />

@@ -16,13 +16,7 @@
                         SelectedItem="{Binding SelectedEntry}"
                         SelectionChangedCommand="{Binding NavigateToRunCommand}">
             <CollectionView.Header>
-                <Grid Margin="-10,-10,-10,10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
+                <Grid Margin="-10,-10,-10,10" RowDefinitions="Auto,Auto,*">
                     <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
                         <local:UserDetailHeaderView />
                     </Border>

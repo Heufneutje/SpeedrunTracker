@@ -23,16 +23,7 @@
 
     <DataTemplate x:Key="EntitiesTemplate" x:DataType="models:Entity">
         <ViewCell Height="100">
-            <Grid Padding="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
+            <Grid Padding="10" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <Image Source="{Binding ImageUrl}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
                 <Label Text="{Binding Title}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
                 <Label Text="{Binding Subtitle}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
@@ -42,16 +33,7 @@
 
     <DataTemplate x:Key="GameSeriesEntriesTemplate" x:DataType="srcommodels:Game">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
-            <Grid Padding="10,0,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
+            <Grid Padding="10,0,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
                 <Image Source="{Binding Assets.CoverSmall.FixedGameAssetUri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
                 <Label Text="{Binding Names.International}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
                 <Label Text="{Binding Released, StringFormat='Released: {0}'}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
@@ -81,13 +63,7 @@
 
     <DataTemplate x:Key="LeaderboardTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
+            <Grid ColumnDefinitions="50,*,Auto">
                 <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
                 <Label Text="{Binding Place}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
                 <Label Text="{Binding Run.Players[0].DisplayName}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
@@ -142,11 +118,7 @@
 
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
-            <Grid Padding="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid Padding="10" ColumnDefinitions="Auto,*">
                 <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
                 <Label Text="{Binding Game.Names.International}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
             </Grid>
@@ -155,12 +127,7 @@
 
     <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
-            <Grid Padding="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid Padding="10" ColumnDefinitions="2*,*,*">
                 <VerticalStackLayout Grid.Column="0">
                     <Label Text="{Binding Level.Name}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
                     <Label Text="{Binding Category.Data.Name}" />
