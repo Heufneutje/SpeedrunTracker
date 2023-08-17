@@ -10,17 +10,13 @@
              x:Class="SpeedrunTracker.Resources.Styles.Templates">
     <DataTemplate x:Key="EntitiesGroupHeaderTemplate">
         <ViewCell>
-            <Grid Padding="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid Padding="10" ColumnSpacing="5" ColumnDefinitions="Auto,*">
                 <Image Source="{Binding ImageSource}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Text="{Binding EntityType}" Grid.Column="1" FontAttributes="Bold" Padding="5" />
+                <Label Text="{Binding EntityType}" Grid.Column="1" FontAttributes="Bold"/>
             </Grid>
         </ViewCell>
     </DataTemplate>
