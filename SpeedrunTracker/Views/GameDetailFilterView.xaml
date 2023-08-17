@@ -9,11 +9,9 @@
         <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <VerticalStackLayout IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
             <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" IsVisible="{Binding HasIndividualLevels}" />
-            <CollectionView Margin="0,-5,0,0"
+            <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                         ItemsSource="{Binding Levels}"
                         SelectedItem="{Binding SelectedLevel}"
-                        SelectionMode="Single"
-                        HorizontalOptions="Start"
                         ItemTemplate="{StaticResource CategoryTemplate}"
                         IsVisible="{Binding HasIndividualLevels}">
                 <CollectionView.ItemsLayout>
@@ -21,11 +19,9 @@
                 </CollectionView.ItemsLayout>
             </CollectionView>
             <controls:RunPropertyControl Title="Category" IsValueVisible="False" ImageSource="category" />
-            <CollectionView Margin="0,-5,0,0"
+            <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                         ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}"
-                        SelectionMode="Single"
-                        HorizontalOptions="Start"
                         ItemTemplate="{StaticResource CategoryTemplate}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
