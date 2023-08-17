@@ -57,7 +57,7 @@
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Level" Value="{Binding RunDetails.Level.Name}" ImageSource="world" IsVisible="{Binding RunDetails.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
                         <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
-                        <CollectionView ItemsSource="{Binding RunDetails.Variables}" ItemTemplate="{StaticResource RunVariablesTemplate}" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RunDetails.Variables}" BindableLayout.ItemTemplate="{StaticResource RunVariablesTemplate}" />
                     </VerticalStackLayout>
                 </Border>
 

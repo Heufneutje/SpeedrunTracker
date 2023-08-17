@@ -168,7 +168,7 @@
                 <VerticalStackLayout Grid.Column="0">
                     <Label Text="{Binding Level.Name}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
                     <Label Text="{Binding Category.Data.Name}" />
-                    <CollectionView ItemsSource="{Binding Run.Variables}" ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Run.Variables}" BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
