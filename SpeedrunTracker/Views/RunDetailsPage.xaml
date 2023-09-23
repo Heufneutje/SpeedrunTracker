@@ -13,7 +13,7 @@
         <ToolbarItem Text="Share" Command="{Binding ShareCommand}" Order="Secondary" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <Image Source="{Binding RunDetails.GameAssets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding RunDetails.GameAssets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>
             <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
@@ -57,7 +57,7 @@
                     <VerticalStackLayout Padding="10">
                         <controls:RunPropertyControl Title="Rank" IsValueVisible="False" ImageSource="trophy" />
                         <HorizontalStackLayout>
-                            <Image Source="{Binding RunDetails.TrophyAsset.FixedThemeAssetUri}" IsVisible="{Binding HasTrophyAsset}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
+                            <Image Source="{Binding RunDetails.TrophyAsset.Uri}" IsVisible="{Binding HasTrophyAsset}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
                             <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="5,-5,0,5" FontAttributes="Bold" />
                         </HorizontalStackLayout>
 

@@ -8,7 +8,7 @@
              Title="{Binding Series.Names.International}"
              Appearing="ContentPage_Appearing">
     <Grid>
-        <Image Source="{Binding Series.Assets.Background.FixedThemeAssetUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding Series.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
         <Border Style="{StaticResource TransparentCollectionElementBorder}" IsVisible="{Binding IsRunningBackgroundTask}">
             <Grid Padding="10">
                 <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />

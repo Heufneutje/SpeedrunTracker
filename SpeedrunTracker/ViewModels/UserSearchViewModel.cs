@@ -31,7 +31,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
         {
             Title = x.Names.International,
             Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
-            ImageUrl = x.Assets.Image.FixedUserAssetUri ?? "user",
+            ImageUrl = x.Assets.Image.Uri ?? "user",
             SearchObject = x
         }).ToList();
     }

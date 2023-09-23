@@ -34,7 +34,7 @@
     <DataTemplate x:Key="GameSeriesEntriesTemplate" x:DataType="srcommodels:Game">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid Padding="10,0,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Assets.CoverSmall.FixedGameAssetUri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
+                <Image Source="{Binding Assets.CoverSmall.Uri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
                 <Label Text="{Binding Names.International, Mode=OneTime}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
                 <Label Text="{Binding Released, Mode=OneTime, StringFormat='Released: {0}'}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
             </Grid>
@@ -64,8 +64,8 @@
     <DataTemplate x:Key="LeaderboardTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid ColumnDefinitions="50,*,Auto">
-                <Image Source="{Binding TrophyAsset.FixedThemeAssetUri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
-                <Label Text="{Binding Place, Mode=OneTime}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.FixedThemeAssetUri, Converter={StaticResource Key=IsNullConverter}}" />
+                <Image Source="{Binding TrophyAsset.Uri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
+                <Label Text="{Binding Place, Mode=OneTime}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNullConverter}}" />
                 <Label Text="{Binding Run.Players[0].DisplayName, Mode=OneTime}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
                 <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" Grid.Column="2" />
             </Grid>
@@ -117,7 +117,7 @@
     <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Game.Assets.CoverSmall.FixedGameAssetUri, Mode=OneTime}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
+                <Image Source="{Binding Game.Assets.CoverSmall.Uri, Mode=OneTime}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
                 <Label Text="{Binding Game.Names.International, Mode=OneTime}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
             </Grid>
         </Border>
@@ -133,7 +133,7 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding TrophyAsset.FixedThemeAssetUri, Mode=OneTime}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
+                        <Image Source="{Binding TrophyAsset.Uri, Mode=OneTime}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
                         <Label Text="{Binding OrdinalPlace, Mode=OneTime}" FontAttributes="Bold" />
                     </HorizontalStackLayout>
                     <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" />

@@ -63,7 +63,7 @@ public class ProfileViewModel : BaseViewModel
 
     public string Name => _user?.DisplayName ?? "Guest";
 
-    public string ImageUri => _user?.Assets?.Image?.FixedUserAssetUri;
+    public string ImageUri => _user?.Assets?.Image?.Uri;
 
     public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
 

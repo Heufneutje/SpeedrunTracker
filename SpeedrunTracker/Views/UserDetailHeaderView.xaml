@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <controls:AvatarControl Grid.Column="0" ImageSource="{Binding User.Assets.Image.FixedUserAssetUri}" AvatarSize="80" Margin="10" VerticalOptions="Fill" />
+        <controls:AvatarControl Grid.Column="0" ImageSource="{Binding User.Assets.Image.Uri}" AvatarSize="80" Margin="10" VerticalOptions="Fill" />
         <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
             <Label Text="{Binding User.DisplayName}" TextColor="{Binding User.NameStyle.ThemeColor}" FontAttributes="Bold" />
             <Label Text="{Binding User.Pronouns}" IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />

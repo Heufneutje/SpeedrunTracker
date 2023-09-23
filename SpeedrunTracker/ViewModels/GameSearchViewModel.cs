@@ -31,7 +31,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
         {
             Title = x.Names.International,
             Subtitle = $"Released: {x.Released}",
-            ImageUrl = x.Assets.CoverSmall.FixedGameAssetUri,
+            ImageUrl = x.Assets.CoverSmall.Uri,
             SearchObject = x
         }).ToList();
     }

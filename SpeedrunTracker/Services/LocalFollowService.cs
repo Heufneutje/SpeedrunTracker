@@ -14,7 +14,7 @@ public class LocalFollowService : ILocalFollowService
         FollowedEntity item = new()
         {
             Id = game.Id,
-            ImageUrl = game.Assets?.CoverSmall?.FixedGameAssetUri,
+            ImageUrl = game.Assets?.CoverSmall?.Uri,
             Title = game.Names.International,
             Subtitle = $"Released: {game.Released}",
             Type = EntityType.Games
@@ -27,7 +27,7 @@ public class LocalFollowService : ILocalFollowService
         FollowedEntity item = new()
         {
             Id = series.Id,
-            ImageUrl = series.Assets?.CoverSmall?.FixedGameAssetUri,
+            ImageUrl = series.Assets?.CoverSmall?.Uri,
             Title = series.Names.International,
             Subtitle = $"Created: {series.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
             Type = EntityType.Series
@@ -40,7 +40,7 @@ public class LocalFollowService : ILocalFollowService
         FollowedEntity item = new()
         {
             Id = user.Id,
-            ImageUrl = user.Assets?.Image?.FixedUserAssetUri ?? "user",
+            ImageUrl = user.Assets?.Image?.Uri ?? "user",
             Title = user.Names.International,
             Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
             Type = EntityType.Users

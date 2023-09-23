@@ -43,7 +43,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public bool HasMultipleVideos => _runDetails?.Run?.Videos?.Links?.Count > 1;
 
-    public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.FixedThemeAssetUri);
+    public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.Uri);
 
     private User _selectedPlayer;
 
