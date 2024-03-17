@@ -21,7 +21,7 @@
                 <Label Text="{Binding User.Location.Country.Names.International}" Padding="3,0,0,0" />
             </HorizontalStackLayout>
             <HorizontalStackLayout>
-                <ImageButton Source="youtube" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.YouTube.Uri}" ToolTipProperties.Text="YouTube" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}" Margin="-5,0,0,0">
+                <ImageButton Source="youtube" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.YouTube.Uri}" ToolTipProperties.Text="YouTube" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>
