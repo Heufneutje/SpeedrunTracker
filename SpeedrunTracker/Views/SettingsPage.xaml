@@ -26,26 +26,4 @@
             </VerticalStackLayout>
         </Border>
     </VerticalStackLayout>
-
-    <!-- Replace when TableViews stop being broken: https://github.com/dotnet/maui/issues/5292
-    <TableView Intent="Data">
-        <TableRoot>
-            <TableSection Title="Search Filters">
-                <SwitchCell Text="Games" On="{Binding EnableGameSearch, Mode=TwoWay}" />
-                <SwitchCell Text="Users" On="{Binding EnableUserSearch, Mode=TwoWay}" />
-            </TableSection>
-            <TableSection Title="Maximum Leaderboard Runs">
-                <ViewCell>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Slider Grid.Column="0" Margin="10" Minimum="1" Maximum="1000" Value="{Binding MaxLeaderboardResults, Mode=TwoWay}" />
-                        <Label Grid.Column="1" Margin="10" Text="{Binding MaxLeaderboardResults}" />
-                    </Grid>
-                </ViewCell>
-            </TableSection>
-        </TableRoot>
-    </TableView>-->
 </ContentPage>
