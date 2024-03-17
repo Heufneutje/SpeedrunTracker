@@ -1,6 +1,5 @@
 ﻿using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using SpeedrunTracker.Services;
 
 namespace SpeedrunTracker.ViewModels;
 

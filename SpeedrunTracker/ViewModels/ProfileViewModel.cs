@@ -2,7 +2,6 @@
 using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using SpeedrunTracker.Services;
 using System.Net;
 using System.Windows.Input;
 

@@ -377,8 +377,8 @@
     </Style>
 
     <Style x:Key="CategoryCollectionViewStyle" TargetType="CollectionView">
-        <Setter Property="Margin" Value="0,-5,0,0"/>
-        <Setter Property="HorizontalOptions" Value="Start"/>
-        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="Margin" Value="0,-5,0,0" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="SelectionMode" Value="Single" />
     </Style>
 </ResourceDictionary>

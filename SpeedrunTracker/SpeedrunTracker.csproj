@@ -82,11 +82,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Using Include="SpeedrunTracker.Contracts" />
+		<Using Include="SpeedrunTracker.Contracts.LocalStorage" />
+		<Using Include="SpeedrunTracker.Contracts.Repository" />
+		<Using Include="SpeedrunTracker.Contracts.SpeedrunData" />
 		<Using Include="SpeedrunTracker.Utils" />
 		<Using Include="SpeedrunTracker.Models" />
 		<Using Include="SpeedrunTracker.Models.Base" />
 		<Using Include="SpeedrunTracker.Models.Enum" />
-		<Using Include="SpeedrunTracker.Models.LocalData" />
+		<Using Include="SpeedrunTracker.Models.LocalStorage" />
 		<Using Include="SpeedrunTracker.Models.SpeedrunDotCom" />
 	</ItemGroup>
 

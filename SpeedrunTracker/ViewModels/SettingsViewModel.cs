@@ -1,5 +1,4 @@
-﻿using SpeedrunTracker.Services;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
 
