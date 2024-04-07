@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:markdown="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
              x:DataType="viewmodels:RunDetailsViewModel"
              x:Class="SpeedrunTracker.Views.RunDetailsPage"
              Title="{Binding Title}"
@@ -34,7 +35,8 @@
                             <Button Text="Open External Player" Command="{Binding ShowVideoCommand}" />
                         </VerticalStackLayout>
                         <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" Margin="5,-5,0,5" />
-                        <controls:RunPropertyControl Title="Description" Value="{Binding RunDetails.Run.Comment}" IsVisible="{Binding RunDetails.Run.Comment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" />
+                        <controls:RunPropertyControl Title="Description" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" IsValueVisible="False" />
+                        <markdown:MarkdownView MarkdownText="{Binding RunComment}" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" Margin="5,-5,0,5" />
                     </VerticalStackLayout>
                 </Border>
 

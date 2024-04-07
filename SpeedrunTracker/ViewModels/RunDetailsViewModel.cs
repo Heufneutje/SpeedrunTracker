@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
     private readonly IEmbedService _embedService;
-
+    private readonly IConfiguration _config;
     private RunDetails _runDetails;
 
     public RunDetails RunDetails
@@ -30,6 +31,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
             NotifyPropertyChanged(nameof(HasTrophyAsset));
             NotifyPropertyChanged(nameof(StatusImage));
             NotifyPropertyChanged(nameof(StatusDescription));
+            NotifyPropertyChanged(nameof(RunComment));
 
             if (value.Run.Videos?.Links != null)
                 VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
@@ -43,6 +45,18 @@ public class RunDetailsViewModel : BaseShareableViewModel
     public bool HasMultipleVideos => _runDetails?.Run?.Videos?.Links?.Count > 1;
 
     public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.Uri);
+
+    private string _runComment;
+
+    public string RunComment
+    {
+        get
+        {
+            if (_runComment == null)
+                _runComment = RunDetails?.Run?.Comment?.Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob");
+            return _runComment;
+        }
+    }
 
     private User _selectedPlayer;
 
@@ -117,11 +131,12 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService) : base(shareService, toastService)
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config) : base(shareService, toastService)
     {
         _browserService = browserService;
         _userService = userService;
         _embedService = embedService;
+        _config = config;
         VideoUrls = new RangedObservableCollection<EmbeddableUrl>();
     }
 

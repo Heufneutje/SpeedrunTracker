@@ -49,7 +49,7 @@ public static class DependencyInjectionExtensions
 
         void ConfigureHttpClient(HttpClient client)
         {
-            client.BaseAddress = new Uri(config["speedrun-dot-com:api-base-address"]);
+            client.BaseAddress = new Uri($"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}");
             client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{App.Version}");
         }
     }
