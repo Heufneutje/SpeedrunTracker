@@ -36,7 +36,7 @@
                         </VerticalStackLayout>
                         <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" Margin="5,-5,0,5" />
                         <controls:RunPropertyControl Title="Description" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" IsValueVisible="False" />
-                        <markdown:MarkdownView MarkdownText="{Binding RunComment}" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" Margin="5,-5,0,5" />
+                        <markdown:MarkdownView MarkdownText="{Binding RunComment}" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" Margin="5,-5,0,5" LinkCommand="{Binding OpenLinkCommand}" />
                     </VerticalStackLayout>
                 </Border>
 

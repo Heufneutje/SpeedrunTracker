@@ -94,6 +94,8 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand NavigateToUserCommand => new AsyncRelayCommand<User>(NavigateToUserAsync);
 
+    public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
+
     public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players.First().DisplayName}";
 
     public bool HasInGameTime => ShouldShowTimingType(TimingType.InGame);
@@ -158,5 +160,10 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
         if (!string.IsNullOrEmpty(user.Id))
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+    }
+
+    private async Task OpenLinkAsync(string uri)
+    {
+        await _browserService.OpenAsync(uri);
     }
 }
