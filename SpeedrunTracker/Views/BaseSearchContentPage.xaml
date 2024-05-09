@@ -18,21 +18,20 @@
                    Grid.Row="0"
                    HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <VerticalStackLayout Grid.Row="1">
-            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
-            <ListView ItemsSource="{Binding Entities}"
-                  IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
-                  CachingStrategy="RecycleElement"
-                  VerticalOptions="FillAndExpand"
-                  HasUnevenRows="True"
-                  SelectionMode="None"
-                  ItemTemplate="{StaticResource EntitiesTemplate}">
-                <ListView.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                Command="{Binding NavigateToCommand}"
-                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
-                </ListView.Behaviors>
-            </ListView>
-        </VerticalStackLayout>
+        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" Grid.Row="1" />
+        <ListView ItemsSource="{Binding Entities}"
+      IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
+      CachingStrategy="RecycleElement"
+      VerticalOptions="FillAndExpand"
+      HasUnevenRows="True"
+      SelectionMode="None"
+      ItemTemplate="{StaticResource EntitiesTemplate}"
+                  Grid.Row="1">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                    Command="{Binding NavigateToCommand}"
+                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
+        </ListView>
     </Grid>
 </ContentPage>
