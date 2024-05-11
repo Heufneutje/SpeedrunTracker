@@ -57,7 +57,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
             _offset += notifications.Pagination.Size;
     }
 
-    public async Task RefreshNotificationsAsync()
+    private async Task RefreshNotificationsAsync()
     {
         _offset = 0;
         _hasReachedEnd = false;

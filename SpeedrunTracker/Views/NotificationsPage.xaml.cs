@@ -13,12 +13,11 @@ public partial class NotificationsPage : ContentPage
         BindingContext = _viewModel = viewModel;
     }
 
-    private async void ContentPage_Appearing(object sender, EventArgs e)
+    private void ContentPage_Appearing(object sender, EventArgs e)
     {
         if (!_isLoaded)
         {
             _viewModel.IsRunningBackgroundTask = true;
-            await _viewModel.RefreshNotificationsAsync();
             _isLoaded = true;
         }
     }
