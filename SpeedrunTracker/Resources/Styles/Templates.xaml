@@ -123,24 +123,24 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
+    <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="viewmodels:UserRunViewModel">
         <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
             <Grid Padding="10" ColumnDefinitions="2*,*,*">
                 <VerticalStackLayout Grid.Column="0">
-                    <Label Text="{Binding Level.Name, Mode=OneTime}" IsVisible="{Binding Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
-                    <Label Text="{Binding Category.Data.Name, Mode=OneTime}" />
-                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Run.Variables}" BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
+                    <Label Text="{Binding Entry.Level.Name, Mode=OneTime}" IsVisible="{Binding Entry.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
+                    <Label Text="{Binding Entry.Category.Data.Name, Mode=OneTime}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Entry.Run.Variables}" BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding TrophyAsset.Uri, Mode=OneTime}" IsVisible="{Binding TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
-                        <Label Text="{Binding OrdinalPlace, Mode=OneTime}" FontAttributes="Bold" />
+                        <Image Source="{Binding Entry.TrophyAsset.Uri, Mode=OneTime}" IsVisible="{Binding Entry.TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
+                        <Label Text="{Binding Entry.OrdinalPlace, Mode=OneTime}" FontAttributes="Bold" />
                     </HorizontalStackLayout>
-                    <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" />
+                    <Label Text="{Binding Entry.Run.Times.PrimaryTimeSpan, Mode=OneTime}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="2">
-                    <Label Text="{Binding Platform.Name, Mode=OneTime}" />
-                    <Label Text="{Binding Run.Date, Mode=OneTime, StringFormat='{0:yyyy-MM-dd}'}" />
+                    <Label Text="{Binding Entry.Platform.Name, Mode=OneTime}" />
+                    <Label Text="{Binding FormattedDate, Mode=OneTime}" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
@@ -150,11 +150,11 @@
         <Label Text="{Binding Value}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="NotificationTemplate" x:DataType="speedrunmodels:Notification">
+    <DataTemplate x:Key="NotificationTemplate" x:DataType="viewmodels:NotificationViewModel">
         <VerticalStackLayout>
             <VerticalStackLayout Padding="20">
-                <Label Text="{Binding Created, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
-                <Label Text="{Binding Text, Mode=OneTime}" Padding="0,10,0,0" FontAttributes="{Binding Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
+                <Label Text="{Binding FormattedCreationDate, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+                <Label Text="{Binding Notification.Text, Mode=OneTime}" Padding="0,10,0,0" FontAttributes="{Binding Notification.Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
             </VerticalStackLayout>
             <Line StrokeThickness="1" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         </VerticalStackLayout>

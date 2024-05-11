@@ -11,19 +11,19 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private readonly IGameService _gameService;
     private readonly ILeaderboardService _leaderboardService;
     private readonly IUserService _userService;
-    private readonly SettingsViewModel _settingsViewModel;
+    private readonly ILocalSettingsService _settingsService;
     private IEnumerable<Category> _fullGameCategories;
     private IEnumerable<Category> _levelCategories;
     private IEnumerable<Variable> _allVariables;
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, SettingsViewModel settingsViewModel) : base(followService, shareService, toastService)
+    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService) : base(followService, shareService, toastService)
     {
         _gameService = gameService;
         _leaderboardService = leaderboardService;
         _userService = userService;
-        _settingsViewModel = settingsViewModel;
+        _settingsService = settingsService;
         LeaderboardEntries = new RangedObservableCollection<LeaderboardEntry>();
     }
 
@@ -222,8 +222,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             variables = $"&{variables}";
 
         _leaderboard = string.IsNullOrEmpty(SelectedLevel.Id) ?
-            await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults)) :
-            await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsViewModel.MaxLeaderboardResults));
+            await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults)) :
+            await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults));
 
         if (_leaderboard != null)
             DisplayLeaderboardEntries();

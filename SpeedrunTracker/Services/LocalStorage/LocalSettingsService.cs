@@ -27,6 +27,12 @@ public class LocalSettingsService : ILocalSettingsService
 
             await _databaseService.Connection.InsertAsync(UserSettings);
         }
+
+        if (UserSettings.DateFormat == null)
+            UserSettings.DateFormat = _configuration["defaults:date-format"];
+
+        if (UserSettings.TimeFormat == null)
+            UserSettings.TimeFormat = _configuration["defaults:time-format"];
     }
 
     public async Task SaveSettingsAsync()

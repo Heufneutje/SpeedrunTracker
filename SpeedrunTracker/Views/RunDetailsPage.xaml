@@ -67,8 +67,7 @@
                         <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.IngameTimeSpan}" ImageSource="clock" IsVisible="{Binding HasInGameTime}" />
                         <controls:RunPropertyControl Title="Real Time" Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtime}" />
                         <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtimeNoLoads}" />
-                        <controls:RunPropertyControl Title="Date" Value="{Binding RunDetails.Run.Date, StringFormat=
-                        '{0:yyyy-MM-dd}'}" ImageSource="calendar" IsVisible="{Binding RunDetails.Run.Date, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Date" Value="{Binding FormattedDate}" ImageSource="calendar" IsVisible="{Binding RunDetails.Run.Date, Converter={StaticResource IsNotNullConverter}}" />
                         <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" IsVisible="{Binding RunDetails.Platform, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>

@@ -17,6 +17,17 @@
 
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
+                <Label Text="Date and Time" Style="{StaticResource GroupHeaderLabel}" />
+                <Line />
+                <Label Text="Date Format" Style="{StaticResource SettingsItemSubLabel}" />
+                <Picker ItemsSource="{Binding DateFormats}" SelectedItem="{Binding DateFormat}" Margin="20,5,20,5" />
+                <Label Text="Time Format" Style="{StaticResource SettingsItemSubLabel}" />
+                <Picker ItemsSource="{Binding TimeFormats}" SelectedItem="{Binding TimeFormat}" Margin="20,5,20,5" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Style="{StaticResource TransparentGridElementBorder}">
+            <VerticalStackLayout>
                 <Label Text="Maximum Leaderboard Results" Style="{StaticResource GroupHeaderLabel}" />
                 <Line />
                 <Grid ColumnDefinitions="*,Auto" Margin="0,0,10,0">

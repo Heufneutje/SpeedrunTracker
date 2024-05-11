@@ -8,14 +8,15 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 {
     private readonly INotificationService _notificationService;
     private readonly IBrowserService _browserService;
+    private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
 
-    public RangedObservableCollection<Notification> Notifications { get; set; }
+    public RangedObservableCollection<NotificationViewModel> Notifications { get; set; }
 
-    private Notification _selectedNotification;
+    private NotificationViewModel _selectedNotification;
 
-    public Notification SelectedNotification
+    public NotificationViewModel SelectedNotification
     {
         get => _selectedNotification;
         set
@@ -31,11 +32,12 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
-    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService) : base(toastService)
+    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService, ILocalSettingsService settingsService) : base(toastService)
     {
         _notificationService = notificationService;
         _browserService = browserService;
-        Notifications = new RangedObservableCollection<Notification>();
+        _settingsService = settingsService;
+        Notifications = [];
     }
 
     private async Task LoadNotificationsAsync()
@@ -47,7 +49,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         if (notifications == null)
             return;
 
-        Notifications.AddRange(notifications.Data);
+        Notifications.AddRange(notifications.Data.Select(x => new NotificationViewModel(x, _settingsService.UserSettings.DateFormat, _settingsService.UserSettings.TimeFormat)));
 
         if (notifications.Pagination.Size == 0)
             _hasReachedEnd = true;
@@ -66,7 +68,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     private async Task OpenNotificationLinkAsync()
     {
-        NotificationLink link = SelectedNotification?.Item;
+        NotificationLink link = SelectedNotification?.Notification?.Item;
 
         if (link != null)
             await _browserService.OpenAsync(link.Uri);

@@ -13,6 +13,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
     private readonly IUserService _userService;
     private readonly IEmbedService _embedService;
     private readonly IConfiguration _config;
+    private readonly ILocalSettingsService _settingsService;
     private RunDetails _runDetails;
 
     public RunDetails RunDetails
@@ -98,6 +99,8 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players[0].DisplayName}";
 
+    public string FormattedDate => RunDetails.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
+
     public bool HasInGameTime => ShouldShowTimingType(TimingType.InGame);
 
     public bool HasRealtime => ShouldShowTimingType(TimingType.Realtime);
@@ -114,7 +117,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
             return RunDetails.Run.Status.StatusType switch
             {
                 SpeedrunStatusType.New => "Verification pending",
-                SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue ? $"Verified on {RunDetails.Run.Status.VerifyDate:yyyy-MM-dd HH:mm}" : "Verified",
+                SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue ? $"Verified on {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat)} at {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat)}" : "Verified",
                 SpeedrunStatusType.Rejected => $"Rejected ({RunDetails.Run.Status.Reason ?? string.Empty})",
                 _ => string.Empty,
             };
@@ -133,13 +136,14 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config) : base(shareService, toastService)
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config, ILocalSettingsService settingsService) : base(shareService, toastService)
     {
         _browserService = browserService;
         _userService = userService;
         _embedService = embedService;
         _config = config;
-        VideoUrls = new RangedObservableCollection<EmbeddableUrl>();
+        _settingsService = settingsService;
+        VideoUrls = [];
     }
 
     private async Task ShowVideo() => await _browserService.OpenAsync(SelectedVideo.Url);

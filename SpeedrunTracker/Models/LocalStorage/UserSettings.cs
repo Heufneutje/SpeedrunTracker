@@ -9,4 +9,6 @@ public class UserSettings
 
     public AppTheme Theme { get; set; }
     public int MaxLeaderboardResults { get; set; }
+    public string DateFormat { get; set; }
+    public string TimeFormat { get; set; }
 }

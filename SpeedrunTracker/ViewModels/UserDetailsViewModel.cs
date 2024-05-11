@@ -11,6 +11,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 {
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
+    private readonly ILocalSettingsService _settingsService;
     private bool? _isCurrentlyShowingLevels;
     private List<LeaderboardEntry> _allPersonalBests;
 
@@ -76,11 +77,12 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(followService, shareService, toastService)
+    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService) : base(followService, shareService, toastService)
     {
         _browserService = browserService;
         _userService = userService;
-        PersonalBests = new ObservableCollection<UserPersonalBestsGroup>();
+        _settingsService = settingsService;
+        PersonalBests = [];
     }
 
     private Task LoadFullGamePersonalBests() => LoadPersonalBests(false);
@@ -115,7 +117,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                     await ParseRunPlayersAsync(entry, players);
                 }
 
-                groups.Add(new UserPersonalBestsGroup(entries[0].Game.Data, entries));
+                groups.Add(new UserPersonalBestsGroup(entries[0].Game.Data, entries.Select(x => new UserRunViewModel(x, _settingsService.UserSettings.DateFormat))));
             }
 
             PersonalBests = groups.AsObservableCollection();
