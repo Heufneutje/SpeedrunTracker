@@ -27,8 +27,7 @@
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}" HorizontalOptions="Center" BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}">
-            </VerticalStackLayout>
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}" HorizontalOptions="Start" BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
             <Button Text="Show Leaderboard" Command="{Binding ShowLeaderboardCommand}" Margin="5" IsVisible="{Binding IsLoadingLeaderboard, Converter={StaticResource InverseBoolConverter}}" />
             <ActivityIndicator IsVisible="{Binding IsLoadingLeaderboard}" IsRunning="True" VerticalOptions="CenterAndExpand" />
         </VerticalStackLayout>
