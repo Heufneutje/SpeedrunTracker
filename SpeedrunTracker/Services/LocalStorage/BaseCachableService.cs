@@ -4,7 +4,7 @@ public abstract class BaseCachableService
 {
     private readonly ICacheService _cacheService;
 
-    public BaseCachableService(ICacheService cacheService)
+    protected BaseCachableService(ICacheService cacheService)
     {
         _cacheService = cacheService;
     }

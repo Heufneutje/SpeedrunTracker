@@ -35,7 +35,7 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
     public ICommand SearchCommand => new AsyncRelayCommand(SearchAsync, CanSearch);
     public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateToAsync);
 
-    public BaseSearchEntityViewModel(IToastService toastService) : base(toastService)
+    protected BaseSearchEntityViewModel(IToastService toastService) : base(toastService)
     {
     }
 

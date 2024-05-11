@@ -5,7 +5,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 {
-    private IGameSeriesService _gameSeriesService;
+    private readonly IGameSeriesService _gameSeriesService;
 
     public GameSeriesSearchViewModel(IGameSeriesService gameSeriesService, IToastService toastService) : base(toastService)
     {

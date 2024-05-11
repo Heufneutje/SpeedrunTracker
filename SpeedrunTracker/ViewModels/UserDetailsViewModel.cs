@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using AndroidX.ConstraintLayout.Helper.Widget;
+using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -103,45 +104,18 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
             IEnumerable<LeaderboardEntry> filteredBests = showLevels ? _allPersonalBests.Where(x => x.Run.LevelId != null) : _allPersonalBests.Where(x => x.Run.LevelId == null);
 
-            Dictionary<string, User> players = new();
-            List<UserPersonalBestsGroup> groups = new();
+            Dictionary<string, User> players = [];
+            List<UserPersonalBestsGroup> groups = [];
             foreach (IGrouping<string, LeaderboardEntry> group in filteredBests.GroupBy(x => x.Run.GameId))
             {
                 List<LeaderboardEntry> entries = group.ToList();
-                foreach (LeaderboardEntry entry in entries)
+                foreach (LeaderboardEntry entry in group)
                 {
-                    if (entry.Run.Variables.Any())
-                        continue;
-
-                    foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
-                    {
-                        Variable variable = entry.Category.Data.Variables.Data.FirstOrDefault(x => x.Id == valuePair.Key);
-                        if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
-                            continue;
-
-                        VariableValue value = variable.Values.Values[valuePair.Value];
-                        entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
-                    }
-
-                    for (int i = 0; i < entry.Run.Players.Count; i++)
-                    {
-                        if (entry.Run.Players[i].PlayerType != PlayerType.User)
-                            continue;
-
-                        string playerId = entry.Run.Players[i].Id;
-                        if (playerId == User.Id)
-                            entry.Run.Players[i] = User;
-                        else
-                        {
-                            if (!players.ContainsKey(playerId))
-                                players.Add(playerId, await GetRunUserAsync(playerId));
-
-                            entry.Run.Players[i] = players[playerId];
-                        }
-                    }
+                    ParseRunVariables(entry);
+                    await ParseRunPlayersAsync(entry, players);
                 }
 
-                groups.Add(new UserPersonalBestsGroup(entries.First().Game.Data, entries));
+                groups.Add(new UserPersonalBestsGroup(entries[0].Game.Data, entries));
             }
 
             PersonalBests = groups.AsObservableCollection();
@@ -149,6 +123,39 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         finally
         {
             IsRunningBackgroundTask = false;
+        }
+    }
+
+    private void ParseRunVariables(LeaderboardEntry entry)
+    {
+        foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
+        {
+            Variable variable = entry.Category.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
+            if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
+                continue;
+
+            VariableValue value = variable.Values.Values[valuePair.Value];
+            entry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
+        }
+    }
+
+    private async Task ParseRunPlayersAsync(LeaderboardEntry entry, Dictionary<string, User> players)
+    {
+        for (int i = 0; i < entry.Run.Players.Count; i++)
+        {
+            if (entry.Run.Players[i].PlayerType != PlayerType.User)
+                continue;
+
+            string playerId = entry.Run.Players[i].Id;
+            if (playerId == User.Id)
+                entry.Run.Players[i] = User;
+            else
+            {
+                if (!players.ContainsKey(playerId))
+                    players.Add(playerId, await GetRunUserAsync(playerId));
+
+                entry.Run.Players[i] = players[playerId];
+            }
         }
     }
 

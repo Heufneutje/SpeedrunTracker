@@ -2,7 +2,7 @@
 
 public class NotificationService : INotificationService
 {
-    private INotificationRepository _notificationRepository;
+    private readonly INotificationRepository _notificationRepository;
 
     public NotificationService(INotificationRepository notificationRepository)
     {

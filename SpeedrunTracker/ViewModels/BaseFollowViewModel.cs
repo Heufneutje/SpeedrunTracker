@@ -38,7 +38,7 @@ public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : Bas
 
     public override ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 
-    public BaseFollowViewModel(ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(shareService, toastService)
+    protected BaseFollowViewModel(ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(shareService, toastService)
     {
         _followService = followService;
     }

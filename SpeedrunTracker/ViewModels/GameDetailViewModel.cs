@@ -88,7 +88,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             _levels = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(HasIndividualLevels));
-            SelectedLevel = Levels.First();
+            SelectedLevel = Levels[0];
         }
     }
 
@@ -242,7 +242,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             for (int i = 0; i < entry.Run.Players.Count; i++)
             {
                 if (entry.Run.Players[i].PlayerType == PlayerType.User)
-                    entry.Run.Players[i] = _leaderboard.Players.Data.FirstOrDefault(x => x.Id == entry.Run.Players[i].Id);
+                    entry.Run.Players[i] = _leaderboard.Players.Data.Find(x => x.Id == entry.Run.Players[i].Id);
                 entry.TrophyAsset = Game.Assets.GetTrophyAsset(entry.Place);
             }
         }
@@ -258,12 +258,12 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
         Category category = _categories.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.CategoryId);
         Level level = _levels.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.LevelId);
-        GamePlatform platform = Game.Platforms.Data.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.System.PlatformId);
+        GamePlatform platform = Game.Platforms.Data.Find(x => x.Id == _selectedLeaderboardEntry.Run.System.PlatformId);
 
         User examiner = null;
         string examinerId = _selectedLeaderboardEntry.Run.Status.ExaminerId;
         if (examinerId != null)
-            examiner = Game.Moderators.Data.FirstOrDefault(x => x.Id == examinerId) ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId)) ?? User.GetUserNotFoundPlaceholder();
+            examiner = Game.Moderators.Data.Find(x => x.Id == examinerId) ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId)) ?? User.GetUserNotFoundPlaceholder();
 
         if (!_selectedLeaderboardEntry.Run.Variables.Any())
             foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)

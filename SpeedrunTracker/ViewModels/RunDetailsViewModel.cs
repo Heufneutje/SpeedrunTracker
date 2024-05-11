@@ -96,7 +96,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
 
-    public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players.First().DisplayName}";
+    public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players[0].DisplayName}";
 
     public bool HasInGameTime => ShouldShowTimingType(TimingType.InGame);
 

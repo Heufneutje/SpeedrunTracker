@@ -30,7 +30,7 @@ public class VariableViewModel : BaseViewModel
             NotifyPropertyChanged();
 
             if (value.Any())
-                SelectedValue = value.First();
+                SelectedValue = value[0];
         }
     }
 }

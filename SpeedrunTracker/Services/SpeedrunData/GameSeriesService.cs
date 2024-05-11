@@ -2,7 +2,7 @@
 
 public class GameSeriesService : IGameSeriesService
 {
-    private IGameSeriesRepository _gameSeriesRepository;
+    private readonly IGameSeriesRepository _gameSeriesRepository;
 
     public GameSeriesService(IGameSeriesRepository gameSeriesRepository)
     {

@@ -59,7 +59,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
         foreach (IGrouping<EntityType, FollowedEntity> grouping in followedEntities.OrderBy(x => x.Type).GroupBy(x => x.Type))
         {
-            entities.Add(new EntityGroup(grouping.Key, grouping.ToList().Select(x => new Entity()
+            entities.Add(new EntityGroup(grouping.Key, grouping.Select(x => new Entity()
             {
                 Id = x.Id,
                 Title = x.Title,

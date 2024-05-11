@@ -8,14 +8,14 @@ public class EmbedService : IEmbedService
     public List<EmbeddableUrl> GetEmbeddableUrls(SpeedrunVideos videos)
     {
         List<EmbeddableUrl> urls = new();
-        foreach (Link link in videos.Links)
+        foreach (string uri in videos.Links.Select(x => x.Uri))
         {
-            if (link.Uri.Contains("youtube") || link.Uri.Contains("youtu.be"))
-                urls.Add(HandleYouTube(link.Uri));
-            else if (link.Uri.Contains("twitch"))
-                urls.Add(HandleTwitch(link.Uri));
+            if (uri.Contains("youtube") || uri.Contains("youtu.be"))
+                urls.Add(HandleYouTube(uri));
+            else if (uri.Contains("twitch"))
+                urls.Add(HandleTwitch(uri));
             else
-                urls.Add(HandleUnknown(link.Uri));
+                urls.Add(HandleUnknown(uri));
         }
 
         if (urls.Count > 1)
@@ -28,7 +28,7 @@ public class EmbedService : IEmbedService
     {
         Uri uri = new(url);
         NameValueCollection query = HttpUtility.ParseQueryString(uri.Query);
-        string videoId = query.AllKeys.Contains("v") ? query["v"] : uri.Segments.Last();
+        string videoId = query.AllKeys.Contains("v") ? query["v"] : uri.Segments[^1];
         return new EmbeddableUrl()
         {
             Url = url,
@@ -40,7 +40,7 @@ public class EmbedService : IEmbedService
     private EmbeddableUrl HandleTwitch(string url)
     {
         Uri uri = new(url);
-        string videoId = uri.Segments.Last();
+        string videoId = uri.Segments[^1];
         return new EmbeddableUrl()
         {
             Url = url,

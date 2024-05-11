@@ -5,7 +5,7 @@ namespace SpeedrunTracker.ViewModels;
 
 public class GameSearchViewModel : BaseSearchEntityViewModel
 {
-    private IGameService _gameService;
+    private readonly IGameService _gameService;
 
     public override string SearchTextPlaceholder => "Search for games...";
 

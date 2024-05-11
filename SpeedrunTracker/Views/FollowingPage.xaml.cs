@@ -4,7 +4,7 @@ namespace SpeedrunTracker.Views;
 
 public partial class FollowingPage : ContentPage
 {
-    private FollowedEntityViewModel _viewModel;
+    private readonly FollowedEntityViewModel _viewModel;
 
     public FollowingPage(FollowedEntityViewModel viewModel)
     {
