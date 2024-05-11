@@ -27,7 +27,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
 
         if (_currentNetworkAccess != NetworkAccess.Internet)
         {
-            await _toastService.ShowToastAsync("No internet access");
+            await _toastService.ShowToastAsync("No internet access.");
             return null;
         }
 
