@@ -10,23 +10,21 @@
              Appearing="ContentPage_Appearing">
     <Grid>
         <Label Text="It looks like you have not yet added any games, series or users to your favorites!&#10;&#10;Search for a game, series or user and hit the Favorite button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
-        <VerticalStackLayout IsVisible="{Binding HasEntities}">
-            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
-            <ListView ItemsSource="{Binding Entities}"
-                  IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
-                  CachingStrategy="RecycleElement"
-                  VerticalOptions="FillAndExpand"
-                  IsGroupingEnabled="True"
-                  HasUnevenRows="True"
-                  SelectionMode="None"
-                  GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
-                  ItemTemplate="{StaticResource EntitiesTemplate}">
-                <ListView.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                    Command="{Binding NavigateToCommand}"
-                                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
-                </ListView.Behaviors>
-            </ListView>
-        </VerticalStackLayout>
+        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
+        <ListView ItemsSource="{Binding Entities}"
+          IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
+          CachingStrategy="RecycleElement"
+          VerticalOptions="FillAndExpand"
+          IsGroupingEnabled="True"
+          HasUnevenRows="True"
+          SelectionMode="None"
+          GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
+          ItemTemplate="{StaticResource EntitiesTemplate}">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                            Command="{Binding NavigateToCommand}"
+                                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+            </ListView.Behaviors>
+        </ListView>
     </Grid>
 </ContentPage>
