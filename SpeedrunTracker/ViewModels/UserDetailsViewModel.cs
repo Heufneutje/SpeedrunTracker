@@ -46,9 +46,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private LeaderboardEntry _selectedEntry;
+    private UserRunViewModel _selectedEntry;
 
-    public LeaderboardEntry SelectedEntry
+    public UserRunViewModel SelectedEntry
     {
         get => _selectedEntry;
         set
@@ -164,19 +164,20 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     private async Task NavigateToRun()
     {
         User examiner = null;
-        if (SelectedEntry.Run.Status.ExaminerId != null)
-            examiner = await GetRunUserAsync(SelectedEntry.Run.Status.ExaminerId);
+        LeaderboardEntry leaderboardEntry = SelectedEntry.Entry;
+        if (leaderboardEntry.Run.Status.ExaminerId != null)
+            examiner = await GetRunUserAsync(leaderboardEntry.Run.Status.ExaminerId);
 
         RunDetails runDetails = new()
         {
-            Category = SelectedEntry.Category.Data,
-            GameAssets = SelectedEntry.Game.Data.Assets,
+            Category = leaderboardEntry.Category.Data,
+            GameAssets = leaderboardEntry.Game.Data.Assets,
             Examiner = examiner,
-            Level = SelectedEntry.Level,
-            Place = SelectedEntry.Place,
-            Platform = SelectedEntry.Platform,
-            Run = SelectedEntry.Run,
-            Variables = SelectedEntry.Run.Variables
+            Level = leaderboardEntry.Level,
+            Place = leaderboardEntry.Place,
+            Platform = leaderboardEntry.Platform,
+            Run = leaderboardEntry.Run,
+            Variables = leaderboardEntry.Run.Variables
         };
 
         await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
