@@ -3,6 +3,7 @@ using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -92,15 +93,18 @@ public class ProfileViewModel : BaseViewModel
 
             User = await _userService.GetUserProfileAsync();
         }
+        catch (HttpRequestException httpEx)
+        {
+            await HandleUnknownError(httpEx);
+        }
         catch (Exception ex)
         {
             if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-            {
                 await _toastService.ShowToastAsync("The provided API key is invalid.");
-                await LogoutAsync(false);
-            }
             else
-                await _toastService.ShowToastAsync($"An error occurred while getting profile data: {ex.Message}");
+                await HandleUnknownError(ex);
+
+            await LogoutAsync(false);
         }
         finally
         {
@@ -128,10 +132,17 @@ public class ProfileViewModel : BaseViewModel
 
     private async Task LogoutAsync(bool confirm)
     {
-        if (!confirm || await _dialogService.ShowConfirmationAsync("Log out", "Are you sure you want to log out?"))
+        try
         {
-            SecureStorage.Remove(Constants.ApiKey);
-            await LoadProfileAsync();
+            if (!confirm || await _dialogService.ShowConfirmationAsync("Log out", "Are you sure you want to log out?"))
+            {
+                SecureStorage.Remove(Constants.ApiKey);
+                await LoadProfileAsync();
+            }
+        }
+        catch (Exception)
+        {
+            // Prevent crash.
         }
     }
 
@@ -139,5 +150,10 @@ public class ProfileViewModel : BaseViewModel
     {
         if (IsLoggedIn)
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", User);
+    }
+
+    private async Task HandleUnknownError(Exception ex)
+    {
+        await _toastService.ShowToastAsync($"An error occurred while getting profile data: {ex.Message}");
     }
 }
