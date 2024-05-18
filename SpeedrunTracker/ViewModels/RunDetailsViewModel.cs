@@ -53,8 +53,10 @@ public class RunDetailsViewModel : BaseShareableViewModel
     {
         get
         {
-            if (_runComment == null)
-                _runComment = RunDetails?.Run?.Comment?.Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob");
+            if (_runComment == null && RunDetails?.Run?.Comment != null)
+                _runComment = RunDetails.Run.Comment
+                    .Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob")
+                    .MarkdownifyUrls();
             return _runComment;
         }
     }
