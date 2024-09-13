@@ -45,6 +45,9 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
                 case HttpStatusCode.NotFound:
                     // We're letting each specific case handle itself. One case in which this happens is a run that was verified by a deleted user.
                     break;
+                case HttpStatusCode.InternalServerError:
+                    await _toastService.ShowToastAsync("Received an unknown error from the speedrun.com API.", ToastDuration.Long);
+                    break;
                 default:
                     await _toastService.ShowToastAsync(apiEx.Message);
                     break;
