@@ -287,7 +287,6 @@
     <Style TargetType="markdown:MarkdownView">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="PlaceholderBackgroundColor" Value="Transparent" />
         <Setter Property="TextFontSize" Value="14" />
         <Setter Property="TextFontFace" Value="OpenSansRegular" />
     </Style>
