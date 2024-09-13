@@ -1,18 +1,79 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Refit;
 using SpeedrunTracker.Services;
 using SpeedrunTracker.Services.LocalStorage;
 using SpeedrunTracker.Services.SpeedrunData;
 using SpeedrunTracker.ViewModels;
 using SpeedrunTracker.Views;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SpeedrunTracker.DependencyInjection;
+namespace SpeedrunTracker.Extensions;
 
-public static class DependencyInjectionExtensions
+public static class BuilderExtensions
 {
-    public static IServiceCollection AddSpeedrunTrackerServices(this IServiceCollection services, IConfiguration config)
+    public static MauiApp BuildApp(this MauiAppBuilder builder)
+    {
+        IConfiguration config = AddConfiguration(builder);
+
+        AddFramework(builder);
+        AddPlatformSpecificHandlers();
+        AddLogging(builder);
+        AddRepositories(builder.Services, config);
+        AddServices(builder.Services);
+        AddLocalStorage(builder.Services);
+        AddViewModels(builder.Services);
+        AddPages(builder.Services);
+
+        return builder.Build();
+    }
+
+    private static void AddFramework(MauiAppBuilder builder)
+    {
+        builder
+           .UseMauiCommunityToolkit()
+           .UseMauiApp<App>()
+           .ConfigureFonts(fonts =>
+           {
+               fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+               fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+           });
+    }
+
+    private static void AddPlatformSpecificHandlers()
+    {
+#if ANDROID
+        Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
+        {
+            handler.PlatformView.MaxWidth = int.MaxValue;
+        });
+#endif
+    }
+
+    private static void AddLogging(MauiAppBuilder builder)
+    {
+#if DEBUG
+        builder.Logging.AddDebug();
+#endif
+    }
+
+    private static IConfiguration AddConfiguration(MauiAppBuilder builder)
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        using Stream stream = assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json");
+
+        IConfigurationRoot config = new ConfigurationBuilder()
+                    .AddJsonStream(stream)
+                    .Build();
+
+        builder.Configuration.AddConfiguration(config);
+        return config;
+    }
+
+    private static void AddRepositories(IServiceCollection services, IConfiguration config)
     {
         JsonSerializerOptions options = new()
         {
@@ -33,6 +94,16 @@ public static class DependencyInjectionExtensions
         services.AddRefitClient<IUserRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<INotificationRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<IGameSeriesRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
+
+        void ConfigureHttpClient(HttpClient client)
+        {
+            client.BaseAddress = new Uri($"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}");
+            client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{App.Version}");
+        }
+    }
+
+    private static void AddServices(IServiceCollection services)
+    {
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<ILeaderboardService, LeaderboardService>();
         services.AddSingleton<IUserService, UserService>();
@@ -44,17 +115,9 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<IJsonSerializationService, JsonSerializationService>();
         services.AddSingleton<IEmbedService, EmbedService>();
         services.AddSingleton<IShareService, ShareService>();
-
-        return services;
-
-        void ConfigureHttpClient(HttpClient client)
-        {
-            client.BaseAddress = new Uri($"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}");
-            client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{App.Version}");
-        }
     }
 
-    public static IServiceCollection RegisterViewModels(this IServiceCollection services)
+    private static void AddViewModels(IServiceCollection services)
     {
         services.AddSingleton<GameSearchViewModel>();
         services.AddSingleton<GameSeriesSearchViewModel>();
@@ -68,11 +131,9 @@ public static class DependencyInjectionExtensions
         services.AddTransient<RunDetailsViewModel>();
         services.AddTransient<UserDetailsViewModel>();
         services.AddTransient<GameSeriesDetailViewModel>();
-
-        return services;
     }
 
-    public static IServiceCollection RegisterPages(this IServiceCollection services)
+    private static void AddPages(IServiceCollection services)
     {
         services.AddSingleton<GameSearchPage>();
         services.AddSingleton<GameSeriesSearchPage>();
@@ -86,11 +147,9 @@ public static class DependencyInjectionExtensions
         services.AddTransient<RunDetailsPage>();
         services.AddTransient<UserDetailPage>();
         services.AddTransient<GameSeriesDetailsPage>();
-
-        return services;
     }
 
-    public static IServiceCollection AddLocalStorage(this IServiceCollection services)
+    private static void AddLocalStorage(IServiceCollection services)
     {
         services.AddTransient<IMauiInitializeService, LocalDatabaseInitializer>();
         services.AddSingleton<ILocalDatabaseService, LocalDatabaseService>();
@@ -98,7 +157,5 @@ public static class DependencyInjectionExtensions
         services.AddSingleton<ILocalFollowService, LocalFollowService>();
         services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
         services.AddSingleton<ICacheService, CacheService>();
-
-        return services;
     }
 }
