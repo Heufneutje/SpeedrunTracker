@@ -64,7 +64,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         try
         {
             IsRunningBackgroundTask = true;
-            PagedData<List<Game>> games = await _gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset);
+            PagedData<List<Game>> games = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset));
             if (games == null)
                 return;
 
