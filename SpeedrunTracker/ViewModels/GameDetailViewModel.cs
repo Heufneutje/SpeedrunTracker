@@ -214,19 +214,27 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         LeaderboardEntries.Clear();
 
         List<string> variableValues = new();
-        foreach (VariableViewModel vm in Variables)
-            variableValues.Add($"var-{vm.VariableId}={vm.SelectedValue.Id}");
-        string variables = string.Join('&', variableValues);
+        string variables = string.Empty;
 
-        if (!string.IsNullOrEmpty(variables))
-            variables = $"&{variables}";
+        if (Variables != null)
+        {
+            foreach (VariableViewModel vm in Variables)
+                variableValues.Add($"var-{vm.VariableId}={vm.SelectedValue.Id}");
+            variables = string.Join('&', variableValues);
+        }
 
-        _leaderboard = string.IsNullOrEmpty(SelectedLevel.Id) ?
-            await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults)) :
-            await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults));
+        if (SelectedCategory != null)
+        {
+            if (!string.IsNullOrEmpty(variables))
+                variables = $"&{variables}";
 
-        if (_leaderboard != null)
-            DisplayLeaderboardEntries();
+            _leaderboard = string.IsNullOrEmpty(SelectedLevel.Id) ?
+                await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults)) :
+                await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults));
+
+            if (_leaderboard != null)
+                DisplayLeaderboardEntries();
+        }
 
         IsLoadingLeaderboard = false;
     }
