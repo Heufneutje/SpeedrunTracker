@@ -7,7 +7,7 @@
     x:Class="SpeedrunTracker.AppShell"
     FlyoutBackgroundColor="{StaticResource Primary}">
     <Shell.ItemTemplate>
-        <DataTemplate>
+        <DataTemplate x:DataType="FlyoutItem">
             <Grid Style="{StaticResource FlyoutItemStyle}" ColumnDefinitions="50,150">
                 <Image Source="{Binding FlyoutIcon}" Margin="10" HeightRequest="30" HorizontalOptions="EndAndExpand">
                     <Image.Behaviors>
