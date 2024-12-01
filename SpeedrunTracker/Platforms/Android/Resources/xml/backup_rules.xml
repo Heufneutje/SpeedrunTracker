@@ -1,0 +1,3 @@
+﻿<full-backup-content>
+	<include domain="database" path="speedruntracker.db3" />
+</full-backup-content>
