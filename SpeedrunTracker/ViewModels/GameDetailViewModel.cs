@@ -82,7 +82,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         get => _levels ?? [];
         set
         {
-            if (_levels == null || _levels.SequenceEqualOrNull(value))
+            if (_levels != null && _levels.SequenceEqualOrNull(value))
                 return;
 
             _levels = value;
@@ -115,7 +115,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         get => _variables ?? [];
         set
         {
-            if (_variables == null || _variables.SequenceEqualOrNull(value))
+            if (_variables != null && _variables.SequenceEqualOrNull(value))
                 return;
 
             _variables = value;
