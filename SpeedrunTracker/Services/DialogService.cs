@@ -12,8 +12,8 @@ public class DialogService : IDialogService
     public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Yes", string cancel = "No")
     {
         Page? mainPage = GetMainPage();
-        return mainPage != null ? await mainPage.DisplayAlert(title, message, accept, cancel) : false;
+        return mainPage != null && await mainPage.DisplayAlert(title, message, accept, cancel);
     }
 
-    private Page? GetMainPage() => Application.Current?.Windows[0].Page;
+    private static Page? GetMainPage() => Application.Current?.Windows[0].Page;
 }

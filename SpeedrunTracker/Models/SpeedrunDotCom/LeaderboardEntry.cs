@@ -7,43 +7,47 @@ public record LeaderboardEntry
 {
     public int Place { get; set; }
     public required Speedrun Run { get; set; }
-    public BaseData<BaseGame> Game { get; set; }
+    public BaseData<BaseGame>? Game { get; set; }
 
     // For some ungodly reason it's a single object when there is a level and an empty list if there's not.
     [JsonPropertyName("level")]
-    public BaseData<object> LevelJson { get; set; }
+    public BaseData<object>? LevelJson { get; set; }
 
-    public BaseData<Category> Category { get; set; }
+    public BaseData<Category>? Category { get; set; }
 
     // For some ungodly reason it's a single object when there is a platform and an empty list if there's not.
     [JsonPropertyName("platform")]
-    public BaseData<object> PlatformJson { get; set; }
+    public BaseData<object>? PlatformJson { get; set; }
 
-    private Level _level;
+    private Level? _level;
 
     [JsonIgnore]
-    public Level Level
+    public Level? Level
     {
         get
         {
-            _level ??= Run.LevelId == null ? null : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString());
+            _level ??= Run.LevelId == null || LevelJson?.Data == null 
+                ? null
+                : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString()!);
             return _level;
         }
     }
 
-    private GamePlatform _platform;
+    private GamePlatform? _platform;
 
     [JsonIgnore]
-    public GamePlatform Platform
+    public GamePlatform? Platform
     {
         get
         {
-            _platform ??= Run?.System?.PlatformId == null ? null : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString());
+            _platform ??= Run?.System?.PlatformId == null || PlatformJson?.Data == null
+                ? null
+                : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString()!);
             return _platform;
         }
     }
 
-    private string _ordinalPlace;
+    private string? _ordinalPlace;
 
     [JsonIgnore]
     public string OrdinalPlace
@@ -55,10 +59,10 @@ public record LeaderboardEntry
         }
     }
 
-    private Asset _trophyAsset;
+    private Asset? _trophyAsset;
 
     [JsonIgnore]
-    public Asset TrophyAsset
+    public Asset? TrophyAsset
     {
         get
         {

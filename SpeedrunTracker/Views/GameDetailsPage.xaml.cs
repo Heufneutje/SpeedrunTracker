@@ -8,7 +8,7 @@ public partial class GameDetailPage : BaseDetailPage
     private readonly GameDetailViewModel _viewModel;
     private bool _isLoaded;
 
-    public Game Game
+    public Game? Game
     {
         get => _viewModel.Game;
         set => _viewModel.Game = value;
@@ -55,7 +55,7 @@ public partial class GameDetailPage : BaseDetailPage
         }
     }
 
-    private async Task NagivateBack()
+    private static async Task NagivateBack()
     {
         await Shell.Current.Navigation.PopAsync();
     }

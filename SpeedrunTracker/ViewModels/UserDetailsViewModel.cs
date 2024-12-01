@@ -116,7 +116,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                     await ParseRunPlayersAsync(entry, players);
                 }
 
-                groups.Add(new UserPersonalBestsGroup(entries[0].Game.Data, entries.Select(x => new UserRunViewModel(x, _settingsService.UserSettings.DateFormat))));
+                BaseGame? game = entries[0].Game?.Data;
+                if (game != null)
+                    groups.Add(new UserPersonalBestsGroup(game, entries.Select(x => new UserRunViewModel(x, _settingsService.UserSettings.DateFormat))));
             }
 
             PersonalBests = groups.AsObservableCollection();
@@ -127,11 +129,11 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private void ParseRunVariables(LeaderboardEntry entry)
+    private static void ParseRunVariables(LeaderboardEntry entry)
     {
         foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
         {
-            Variable? variable = entry.Category.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
+            Variable? variable = entry.Category?.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
             if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
                 continue;
 
@@ -172,8 +174,8 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
         RunDetails runDetails = new()
         {
-            Category = leaderboardEntry.Category.Data,
-            GameAssets = leaderboardEntry.Game.Data.Assets,
+            Category = leaderboardEntry.Category?.Data,
+            GameAssets = leaderboardEntry.Game?.Data.Assets,
             Examiner = examiner,
             Level = leaderboardEntry.Level,
             Place = leaderboardEntry.Place,

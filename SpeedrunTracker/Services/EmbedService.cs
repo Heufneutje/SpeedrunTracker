@@ -28,7 +28,7 @@ public class EmbedService : IEmbedService
     {
         Uri uri = new(url);
         NameValueCollection query = HttpUtility.ParseQueryString(uri.Query);
-        string? videoId = query.AllKeys.Contains("v") == true ? query["v"] : uri.Segments[^1];
+        string? videoId = query.AllKeys.Contains("v") ? query["v"] : uri.Segments[^1];
         return new EmbeddableUrl()
         {
             Url = url,

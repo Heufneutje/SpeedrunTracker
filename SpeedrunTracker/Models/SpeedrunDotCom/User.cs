@@ -30,7 +30,16 @@ public record User : BaseSpeedrunObject
     public UserAssets? Assets { get; set; }
 
     [JsonIgnore]
-    public string? DisplayName => PlayerType == PlayerType.Guest ? Name : string.IsNullOrEmpty(Names?.International) ? Names?.Japanese : Names?.International;
+    public string? DisplayName
+    {
+        get
+        {
+            if (PlayerType == PlayerType.Guest)
+                return Name;
+
+            return string.IsNullOrEmpty(Names?.International) ? Names?.Japanese : Names.International;
+        }
+    }
 
     public static User GetUserNotFoundPlaceholder()
     {

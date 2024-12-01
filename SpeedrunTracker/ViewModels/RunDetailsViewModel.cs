@@ -99,7 +99,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
 
-    public string? Title => RunDetails == null ? "RunDetails" : $"{_runDetails?.Category.Name} in {_runDetails?.Run?.Times?.PrimaryTimeSpan} by {_runDetails?.Run.Players[0].DisplayName}";
+    public string? Title => RunDetails == null ? "RunDetails" : $"{_runDetails?.Category?.Name} in {_runDetails?.Run?.Times?.PrimaryTimeSpan} by {_runDetails?.Run.Players[0].DisplayName}";
 
     public string? FormattedDate => RunDetails?.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
 
@@ -151,7 +151,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
     private async Task ShowVideo()
     {
         if (!string.IsNullOrEmpty(_selectedVideo?.Url))
-        await _browserService.OpenAsync(_selectedVideo.Url);
+            await _browserService.OpenAsync(_selectedVideo.Url);
     }
 
 
