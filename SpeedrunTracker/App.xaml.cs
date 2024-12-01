@@ -1,9 +1,8 @@
-﻿
-namespace SpeedrunTracker;
+﻿namespace SpeedrunTracker;
 
 public partial class App : Application
 {
-    public const string Version = "1.0.3";
+    public const string Version = "1.0.4";
 
     public App(ILocalSettingsService settingsService)
     {
