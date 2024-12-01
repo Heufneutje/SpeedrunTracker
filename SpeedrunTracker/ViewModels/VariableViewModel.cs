@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.ViewModels;
 
-public class VariableViewModel : BaseViewModel
+public class VariableViewModel : BaseViewModel, INamedSpeedrunModel
 {
     public required string VariableId { get; set; }
     public required string Name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record VariableValue
+public record VariableValue : INamedSpeedrunModel
 {
     [JsonPropertyName("label")]
     public required string Name { get; set; }
