@@ -45,7 +45,15 @@
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="Resources\Splash\**" />
+	  <Compile Remove="Resources\Splash\**" />
+	  <EmbeddedResource Remove="Resources\Splash\**" />
+	  <MauiCss Remove="Resources\Splash\**" />
+	  <MauiXaml Remove="Resources\Splash\**" />
+	  <None Remove="Resources\Splash\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -170,9 +178,5 @@
 		<MauiXaml Update="Views\UserDetailHeaderView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 </Project>
