@@ -2,7 +2,7 @@
 
 namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record Speedrun : BaseSpeedrunObject
+public record Speedrun : BaseSpeedrunModel
 {
     public string? Comment { get; set; }
     public SpeedrunVideos? Videos { get; set; }

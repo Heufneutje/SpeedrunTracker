@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record Notification : BaseSpeedrunObject
+public record Notification : BaseSpeedrunModel
 {
     public DateTime Created { get; set; }
     public NotificationStatusType Status { get; set; }

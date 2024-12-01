@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.Base;
 
-public record BaseSpeedrunObject
+public record BaseSpeedrunModel
 {
     public string Id { get; set; }
 
@@ -8,7 +8,7 @@ public record BaseSpeedrunObject
 
     public List<Link> Links { get; set; }
 
-    public BaseSpeedrunObject()
+    public BaseSpeedrunModel()
     {
         Id = string.Empty;
         Links = [];

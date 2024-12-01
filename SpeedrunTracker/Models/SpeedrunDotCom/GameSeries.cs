@@ -1,6 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record GameSeries : BaseSpeedrunObject
+public record GameSeries : BaseSpeedrunModel
 {
     public required Names Names { get; set; }
     public required GameAssets Assets { get; set; }

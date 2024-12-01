@@ -30,7 +30,7 @@ public abstract class BaseFollowViewModel : BaseShareableViewModel
     public abstract ICommand FollowCommand { get; }
 }
 
-public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : BaseSpeedrunObject
+public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : BaseSpeedrunModel
 {
     protected readonly ILocalFollowService _followService;
 

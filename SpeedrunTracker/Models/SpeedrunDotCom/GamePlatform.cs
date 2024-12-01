@@ -1,9 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-namespace SpeedrunTracker.Models.SpeedrunDotCom;
-
-public record GamePlatform : BaseSpeedrunObject
+public record GamePlatform : BaseNamedSpeedrunModel
 {
-    [JsonPropertyName("name")]
-    public required string Name { get; set; }
 }
