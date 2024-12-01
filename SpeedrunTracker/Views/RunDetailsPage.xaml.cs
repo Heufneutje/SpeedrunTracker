@@ -8,7 +8,7 @@ public partial class RunDetailsPage : ContentPage
     private readonly RunDetailsViewModel _viewModel;
     private bool _isLoaded;
 
-    public RunDetails RunDetails { get; set; }
+    public RunDetails? RunDetails { get; set; }
 
     public RunDetailsPage(RunDetailsViewModel viewModel)
     {

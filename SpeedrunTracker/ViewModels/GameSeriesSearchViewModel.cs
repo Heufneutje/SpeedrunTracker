@@ -14,23 +14,23 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 
     public override string SearchTextPlaceholder => "Search for game series...";
 
-    protected override async Task NavigateToAsync(Entity entity)
+    protected override async Task NavigateToAsync(Entity? entity)
     {
-        if (entity.SearchObject is GameSeries series)
+        if (entity?.SearchObject is GameSeries series)
             await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
     }
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<GameSeries>> apiData = await ExecuteNetworkTask(_gameSeriesService.SearchGameSeriesAsync(Query.Trim()));
+        PagedData<List<GameSeries>>? apiData = await ExecuteNetworkTask(_gameSeriesService.SearchGameSeriesAsync(Query.Trim()));
         if (apiData == null)
-            return null;
+            return [];
 
         return apiData.Data.Select(x => new Entity()
         {
             Title = x.Names.International,
             Subtitle = $"Created: {x.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
-            ImageUrl = x.Assets.CoverSmall.Uri,
+            ImageUrl = x.Assets?.CoverSmall?.Uri,
             SearchObject = x
         }).ToList();
     }

@@ -8,9 +8,9 @@ public partial class GameSeriesDetailsPage : BaseDetailPage
     private readonly GameSeriesDetailViewModel _viewModel;
     private bool _isLoaded;
 
-    public GameSeries Series
+    public GameSeries? Series
     {
-        get => _viewModel.Series;
+        get => _viewModel?.Series;
         set => _viewModel.Series = value;
     }
 

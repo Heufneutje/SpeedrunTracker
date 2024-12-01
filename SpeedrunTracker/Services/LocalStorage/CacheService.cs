@@ -1,19 +1,17 @@
 ﻿namespace SpeedrunTracker.Services.LocalStorage;
 
-public class CacheService : ICacheService
+public class CacheService : BaseDatabaseService, ICacheService
 {
-    private readonly ICacheDatabaseService _databaseService;
     private readonly IJsonSerializationService _jsonSerializationService;
 
-    public CacheService(ICacheDatabaseService databaseService, IJsonSerializationService jsonSerializationService)
+    public CacheService(ICacheDatabaseService databaseService, IJsonSerializationService jsonSerializationService) : base(databaseService)
     {
-        _databaseService = databaseService;
         _jsonSerializationService = jsonSerializationService;
     }
 
     public Task<CacheItem> GetCacheItemAsync(string id, CacheItemType type)
     {
-        return _databaseService.Connection.Table<CacheItem>().FirstOrDefaultAsync(x => x.SpeedrunObjectId == id && x.Type == type);
+        return GetConnection().Table<CacheItem>().FirstOrDefaultAsync(x => x.SpeedrunObjectId == id && x.Type == type);
     }
 
     public async Task SaveCacheItemAsync(string id, CacheItemType type, object cacheObj)
@@ -25,13 +23,16 @@ public class CacheService : ICacheService
         item.LastUpdated = DateTime.Now;
 
         if (item.Id == 0)
-            await _databaseService.Connection.InsertAsync(item);
+            await GetConnection().InsertAsync(item);
         else
-            await _databaseService.Connection.UpdateAsync(item);
+            await GetConnection().UpdateAsync(item);
     }
 
-    public T DeserializeCacheItem<T>(CacheItem cacheItem)
+    public T? DeserializeCacheItem<T>(CacheItem cacheItem)
     {
+        if (cacheItem.CachedJson == null)
+            return default;
+
         return _jsonSerializationService.Deserialize<T>(cacheItem.CachedJson);
     }
 }

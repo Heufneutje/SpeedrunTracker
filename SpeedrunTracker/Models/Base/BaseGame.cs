@@ -2,7 +2,7 @@
 
 public record BaseGame : BaseSpeedrunObject
 {
-    public Names Names { get; set; }
-    public GameAssets Assets { get; set; }
+    public required Names Names { get; set; }
+    public required GameAssets Assets { get; set; }
     public int Released { get; set; }
 }

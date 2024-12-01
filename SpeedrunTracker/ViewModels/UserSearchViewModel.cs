@@ -14,23 +14,23 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
         _userService = userService;
     }
 
-    protected override async Task NavigateToAsync(Entity entity)
+    protected override async Task NavigateToAsync(Entity? entity)
     {
-        if (entity.SearchObject is User user)
+        if (entity?.SearchObject is User user)
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
     }
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<User>> apiData = await ExecuteNetworkTask(_userService.SearchUsersAsync(Query.Trim()));
+        PagedData<List<User>>? apiData = await ExecuteNetworkTask(_userService.SearchUsersAsync(Query.Trim()));
         if (apiData == null)
-            return null;
+            return [];
 
         return apiData.Data.Select(x => new Entity()
         {
-            Title = x.Names.International,
+            Title = x.Names?.International,
             Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
-            ImageUrl = x.Assets.Image.Uri ?? "user",
+            ImageUrl = x.Assets?.Image?.Uri ?? "user",
             SearchObject = x
         }).ToList();
     }

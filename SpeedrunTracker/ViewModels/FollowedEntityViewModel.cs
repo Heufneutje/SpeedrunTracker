@@ -28,22 +28,25 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
     public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateAsync);
 
-    private async Task NavigateAsync(Entity entity)
+    private async Task NavigateAsync(Entity? entity)
     {
-        switch ((EntityType)entity.SearchObject)
+        if (entity == null)
+            return;
+
+        switch ((EntityType?)entity.SearchObject)
         {
             case EntityType.Games:
-                Game game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
+                Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
                 if (game != null)
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
                 break;
             case EntityType.Series:
-                GameSeries series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
+                GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
                 if (series != null)
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
                 break;
             case EntityType.Users:
-                User user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
+                User? user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
                 if (user != null)
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
                 break;
@@ -61,7 +64,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         {
             entities.Add(new EntityGroup(grouping.Key, grouping.Select(x => new Entity()
             {
-                Id = x.Id,
+                Id = x.Id ?? string.Empty,
                 Title = x.Title,
                 Subtitle = x.Subtitle,
                 ImageUrl = x.ImageUrl,

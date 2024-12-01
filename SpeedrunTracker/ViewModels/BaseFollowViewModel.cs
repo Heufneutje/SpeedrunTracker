@@ -34,7 +34,7 @@ public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : Bas
 {
     protected readonly ILocalFollowService _followService;
 
-    protected T _followEntity;
+    protected T? _followEntity;
 
     public override ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 
@@ -45,11 +45,15 @@ public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : Bas
 
     public async Task LoadFollowingStatusAsync()
     {
-        IsFollowing = await _followService.IsFollowingAsync(_followEntity.Id);
+        if (_followEntity != null)
+            IsFollowing = await _followService.IsFollowingAsync(_followEntity.Id);
     }
 
     protected async Task ToggleFollowAsync()
     {
+        if (_followEntity == null)
+            return;
+
         if (IsFollowing == true)
             await _followService.UnfollowAsync(_followEntity.Id);
         else if (IsFollowing == false)

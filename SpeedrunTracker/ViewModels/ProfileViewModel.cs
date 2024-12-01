@@ -3,7 +3,6 @@ using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -14,9 +13,9 @@ public class ProfileViewModel : BaseViewModel
     private readonly IDialogService _dialogService;
     private readonly IToastService _toastService;
 
-    private User _user;
+    private User? _user;
 
-    public User User
+    public User? User
     {
         get => _user;
         set
@@ -46,9 +45,9 @@ public class ProfileViewModel : BaseViewModel
         }
     }
 
-    private string _apiKey;
+    private string? _apiKey;
 
-    public string ApiKey
+    public string? ApiKey
     {
         get => _apiKey;
         set
@@ -63,7 +62,7 @@ public class ProfileViewModel : BaseViewModel
 
     public string Name => _user?.DisplayName ?? "Guest";
 
-    public string ImageUri => _user?.Assets?.Image?.Uri;
+    public string? ImageUri => _user?.Assets?.Image?.Uri;
 
     public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
 
@@ -148,7 +147,7 @@ public class ProfileViewModel : BaseViewModel
 
     private async Task NavigateToUserAsync()
     {
-        if (IsLoggedIn)
+        if (IsLoggedIn && User != null)
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", User);
     }
 

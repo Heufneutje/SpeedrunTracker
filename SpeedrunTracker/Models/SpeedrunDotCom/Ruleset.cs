@@ -9,4 +9,9 @@ public record Ruleset
 
     [JsonPropertyName("run-times")]
     public List<TimingType> TimingTypes { get; set; }
+
+    public Ruleset()
+    {
+        TimingTypes = [];
+    }
 }

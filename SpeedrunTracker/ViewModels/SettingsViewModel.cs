@@ -24,11 +24,14 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    public ThemeSetting Theme
+    public ThemeSetting? Theme
     {
         get => Themes.FirstOrDefault(x => x.Theme == _settingsService.UserSettings.Theme);
         set
         {
+            if (value == null || Application.Current == null)
+                return;
+
             if (_settingsService.UserSettings.Theme != value.Theme)
             {
                 _settingsService.UserSettings.Theme = value.Theme;
@@ -39,11 +42,14 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    public FormatSetting DateFormat
+    public FormatSetting? DateFormat
     {
         get => DateFormats.FirstOrDefault(x => x.FormatString == _settingsService.UserSettings.DateFormat);
         set
         {
+            if (value == null)
+                return;
+
             if (_settingsService.UserSettings.DateFormat != value.FormatString)
             {
                 _settingsService.UserSettings.DateFormat = value.FormatString;
@@ -53,11 +59,14 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    public FormatSetting TimeFormat
+    public FormatSetting? TimeFormat
     {
         get => TimeFormats.FirstOrDefault(x => x.FormatString == _settingsService.UserSettings.TimeFormat);
         set
         {
+            if (value == null)
+                return;
+
             if (_settingsService.UserSettings.TimeFormat != value.FormatString)
             {
                 _settingsService.UserSettings.TimeFormat = value.FormatString;
@@ -67,7 +76,7 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
-    private ObservableCollection<ThemeSetting> _themeSettings;
+    private ObservableCollection<ThemeSetting>? _themeSettings;
 
     public ObservableCollection<ThemeSetting> Themes
     {
@@ -79,7 +88,7 @@ public class SettingsViewModel : BaseViewModel
         }.AsObservableCollection();
     }
 
-    private ObservableCollection<FormatSetting> _dateFormats;
+    private ObservableCollection<FormatSetting>? _dateFormats;
 
     public ObservableCollection<FormatSetting> DateFormats
     {
@@ -91,7 +100,7 @@ public class SettingsViewModel : BaseViewModel
         }.AsObservableCollection();
     }
 
-    private ObservableCollection<FormatSetting> _timeFormats;
+    private ObservableCollection<FormatSetting>? _timeFormats;
 
     public ObservableCollection<FormatSetting> TimeFormats
     {

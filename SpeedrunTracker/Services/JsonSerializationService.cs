@@ -24,7 +24,7 @@ public class JsonSerializationService : IJsonSerializationService
         return JsonSerializer.Serialize(obj, _options);
     }
 
-    public T Deserialize<T>(string json)
+    public T? Deserialize<T>(string json)
     {
         return JsonSerializer.Deserialize<T>(json, _options);
     }

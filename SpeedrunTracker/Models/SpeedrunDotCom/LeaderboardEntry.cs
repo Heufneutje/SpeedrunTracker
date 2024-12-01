@@ -6,7 +6,7 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 public record LeaderboardEntry
 {
     public int Place { get; set; }
-    public Speedrun Run { get; set; }
+    public required Speedrun Run { get; set; }
     public BaseData<BaseGame> Game { get; set; }
 
     // For some ungodly reason it's a single object when there is a level and an empty list if there's not.

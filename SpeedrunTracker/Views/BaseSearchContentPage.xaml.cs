@@ -9,6 +9,6 @@ public partial class BaseSearchContentPage : ContentPage
 
     protected void searchBar_SearchButtonPressed(object sender, EventArgs e)
     {
-        (sender as SearchBar).Unfocus();
+        (sender as SearchBar)?.Unfocus();
     }
 }

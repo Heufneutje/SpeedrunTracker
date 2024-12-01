@@ -2,5 +2,5 @@
 
 public record Asset
 {
-    public string Uri { get; set; }
+    public required string Uri { get; set; }
 }

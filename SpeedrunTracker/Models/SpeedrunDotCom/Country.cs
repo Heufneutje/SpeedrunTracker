@@ -2,6 +2,6 @@
 
 public record Country
 {
-    public string Code { get; set; }
-    public Names Names { get; set; }
+    public required string Code { get; set; }
+    public required Names Names { get; set; }
 }

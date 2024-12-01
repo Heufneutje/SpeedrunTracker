@@ -6,5 +6,5 @@ public interface ICacheService
 
     Task SaveCacheItemAsync(string id, CacheItemType type, object cacheObj);
 
-    T DeserializeCacheItem<T>(CacheItem cacheItem);
+    T? DeserializeCacheItem<T>(CacheItem cacheItem);
 }

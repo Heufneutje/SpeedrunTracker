@@ -1,12 +1,9 @@
-﻿namespace SpeedrunTracker.Services.LocalStorage;
+﻿ namespace SpeedrunTracker.Services.LocalStorage;
 
-public class LocalFollowService : ILocalFollowService
+public class LocalFollowService : BaseDatabaseService, ILocalFollowService
 {
-    private readonly ILocalDatabaseService _databaseService;
-
-    public LocalFollowService(ILocalDatabaseService databaseService)
+    public LocalFollowService(ILocalDatabaseService databaseService) : base(databaseService)
     {
-        _databaseService = databaseService;
     }
 
     public async Task FollowGameAsync(BaseGame game)
@@ -19,7 +16,7 @@ public class LocalFollowService : ILocalFollowService
             Subtitle = $"Released: {game.Released}",
             Type = EntityType.Games
         };
-        await _databaseService.Connection.InsertAsync(item);
+        await GetConnection().InsertAsync(item);
     }
 
     public async Task FollowSeriesAsync(GameSeries series)
@@ -32,7 +29,7 @@ public class LocalFollowService : ILocalFollowService
             Subtitle = $"Created: {series.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
             Type = EntityType.Series
         };
-        await _databaseService.Connection.InsertAsync(item);
+        await GetConnection().InsertAsync(item);
     }
 
     public async Task FollowUserAsync(User user)
@@ -41,25 +38,25 @@ public class LocalFollowService : ILocalFollowService
         {
             Id = user.Id,
             ImageUrl = user.Assets?.Image?.Uri ?? "user",
-            Title = user.Names.International,
+            Title = user.Names?.International,
             Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
             Type = EntityType.Users
         };
-        await _databaseService.Connection.InsertAsync(item);
+        await GetConnection().InsertAsync(item);
     }
 
     public async Task<List<FollowedEntity>> GetFollowedEntitiesAsync()
     {
-        return await _databaseService.Connection.Table<FollowedEntity>().OrderBy(x => x.Title).ToListAsync();
+        return await GetConnection().Table<FollowedEntity>().OrderBy(x => x.Title).ToListAsync();
     }
 
     public async Task<bool> IsFollowingAsync(string id)
     {
-        return await _databaseService.Connection.Table<FollowedEntity>().Where(x => x.Id == id).CountAsync() > 0;
+        return await GetConnection().Table<FollowedEntity>().Where(x => x.Id == id).CountAsync() > 0;
     }
 
     public async Task UnfollowAsync(string id)
     {
-        await _databaseService.Connection.Table<FollowedEntity>().DeleteAsync(x => x.Id == id);
+        await GetConnection().Table<FollowedEntity>().DeleteAsync(x => x.Id == id);
     }
 }

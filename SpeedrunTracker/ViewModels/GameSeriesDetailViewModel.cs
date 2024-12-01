@@ -12,7 +12,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
     private int _offset;
     private bool _hasReachedEnd;
 
-    public GameSeries Series
+    public GameSeries? Series
     {
         get => _followEntity;
         set
@@ -25,9 +25,9 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
     }
 
-    private Game _selectedGame;
+    private Game? _selectedGame;
 
-    public Game SelectedGame
+    public Game? SelectedGame
     {
         get => _selectedGame;
         set
@@ -50,7 +50,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(followService, shareService, toastService)
     {
-        Games = new RangedObservableCollection<Game>();
+        Games = [];
         _gameSeriesService = gameSeriesService;
     }
 
@@ -58,13 +58,13 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public async Task LoadGamesAsync()
     {
-        if (_hasReachedEnd)
+        if (_hasReachedEnd || Series == null)
             return;
 
         try
         {
             IsRunningBackgroundTask = true;
-            PagedData<List<Game>> games = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset));
+            PagedData<List<Game>>? games = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset));
             if (games == null)
                 return;
 
@@ -86,7 +86,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         if (_selectedGame == null)
             return;
 
-        await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", SelectedGame);
+        await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", _selectedGame);
         SelectedGame = null;
     }
 }

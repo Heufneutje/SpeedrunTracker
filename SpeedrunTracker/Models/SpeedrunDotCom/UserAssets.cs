@@ -2,5 +2,5 @@
 
 public record UserAssets
 {
-    public Asset Image { get; set; }
+    public Asset? Image { get; set; }
 }

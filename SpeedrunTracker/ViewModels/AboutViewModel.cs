@@ -16,8 +16,9 @@ public class AboutViewModel : BaseViewModel
         _browserService = browserService;
     }
 
-    private async Task OpenUrlAsync(string url)
+    private async Task OpenUrlAsync(string? url)
     {
-        await _browserService.OpenAsync(url);
+        if (!string.IsNullOrEmpty(url))
+            await _browserService.OpenAsync(url);
     }
 }

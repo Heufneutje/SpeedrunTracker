@@ -1,5 +1,4 @@
-﻿using AndroidX.ConstraintLayout.Helper.Widget;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -13,9 +12,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     private readonly IUserService _userService;
     private readonly ILocalSettingsService _settingsService;
     private bool? _isCurrentlyShowingLevels;
-    private List<LeaderboardEntry> _allPersonalBests;
+    private List<LeaderboardEntry>? _allPersonalBests;
 
-    public User User
+    public User? User
     {
         get => _followEntity;
         set
@@ -30,11 +29,11 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private ObservableCollection<UserPersonalBestsGroup> _personalBests;
+    private ObservableCollection<UserPersonalBestsGroup>? _personalBests;
 
     public ObservableCollection<UserPersonalBestsGroup> PersonalBests
     {
-        get => _personalBests;
+        get => _personalBests ?? [];
         set
         {
             if (_personalBests != value)
@@ -46,9 +45,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private UserRunViewModel _selectedEntry;
+    private UserRunViewModel? _selectedEntry;
 
-    public UserRunViewModel SelectedEntry
+    public UserRunViewModel? SelectedEntry
     {
         get => _selectedEntry;
         set
@@ -61,7 +60,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    public string DisplayName => User?.DisplayName;
+    public string? DisplayName => User?.DisplayName;
 
     public string CountryImageSource => $"flags/{User?.Location?.Country?.Code?.Replace("/", "_")}_flag";
 
@@ -94,7 +93,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         IsRunningBackgroundTask = true;
         try
         {
-            if (_isCurrentlyShowingLevels == true && showLevels || _isCurrentlyShowingLevels == false && !showLevels)
+            if (_isCurrentlyShowingLevels == true && showLevels || _isCurrentlyShowingLevels == false && !showLevels || User == null)
                 return;
 
             NotifyPropertyChanged(nameof(ShowRuns));
@@ -108,7 +107,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
             Dictionary<string, User> players = [];
             List<UserPersonalBestsGroup> groups = [];
-            foreach (IGrouping<string, LeaderboardEntry> group in filteredBests.GroupBy(x => x.Run.GameId))
+            foreach (IGrouping<string?, LeaderboardEntry> group in filteredBests.GroupBy(x => x.Run.GameId))
             {
                 List<LeaderboardEntry> entries = group.ToList();
                 foreach (LeaderboardEntry entry in group)
@@ -132,7 +131,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     {
         foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
         {
-            Variable variable = entry.Category.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
+            Variable? variable = entry.Category.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
             if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
                 continue;
 
@@ -149,7 +148,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                 continue;
 
             string playerId = entry.Run.Players[i].Id;
-            if (playerId == User.Id)
+            if (playerId == User?.Id)
                 entry.Run.Players[i] = User;
             else
             {
@@ -163,9 +162,12 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     private async Task NavigateToRun()
     {
-        User examiner = null;
-        LeaderboardEntry leaderboardEntry = SelectedEntry.Entry;
-        if (leaderboardEntry.Run.Status.ExaminerId != null)
+        User? examiner = null;
+        LeaderboardEntry? leaderboardEntry = SelectedEntry?.Entry;
+        if (leaderboardEntry == null)
+            return;
+
+        if (leaderboardEntry.Run.Status?.ExaminerId != null)
             examiner = await GetRunUserAsync(leaderboardEntry.Run.Status.ExaminerId);
 
         RunDetails runDetails = new()
@@ -184,9 +186,10 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         SelectedEntry = null;
     }
 
-    private async Task OpenUrl(string url)
+    private async Task OpenUrl(string? url)
     {
-        await _browserService.OpenAsync(url);
+        if (!string.IsNullOrEmpty(url))
+            await _browserService.OpenAsync(url);
     }
 
     private async Task<User> GetRunUserAsync(string userId)

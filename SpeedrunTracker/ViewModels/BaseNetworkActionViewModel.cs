@@ -15,12 +15,12 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
         Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
     }
 
-    private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    private void Connectivity_ConnectivityChanged(object? sender, ConnectivityChangedEventArgs e)
     {
         _currentNetworkAccess = e.NetworkAccess;
     }
 
-    protected async Task<T> ExecuteNetworkTask<T>(Task<T> task) where T : class
+    protected async Task<T?> ExecuteNetworkTask<T>(Task<T> task) where T : class?
     {
         if (_currentNetworkAccess == null || _currentNetworkAccess != NetworkAccess.Internet)
             _currentNetworkAccess = Connectivity.Current.NetworkAccess;

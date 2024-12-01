@@ -9,7 +9,7 @@ public class GameSeriesService : IGameSeriesService
         _gameSeriesRepository = gameSeriesRepository;
     }
 
-    public async Task<GameSeries> GetGameSeriesAsync(string seriesId)
+    public async Task<GameSeries?> GetGameSeriesAsync(string seriesId)
     {
         return (await _gameSeriesRepository.GetGameSeriesAsync(seriesId))?.Data;
     }

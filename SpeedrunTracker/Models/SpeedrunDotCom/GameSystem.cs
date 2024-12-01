@@ -5,10 +5,10 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 public record GameSystem
 {
     [JsonPropertyName("platform")]
-    public string PlatformId { get; set; }
+    public required string PlatformId { get; set; }
 
     public bool Emulated { get; set; }
 
     [JsonPropertyName("region")]
-    public string RegionId { get; set; }
+    public string? RegionId { get; set; }
 }

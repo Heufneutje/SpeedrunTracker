@@ -63,8 +63,9 @@ public static class BuilderExtensions
     private static IConfiguration AddConfiguration(MauiAppBuilder builder)
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using Stream stream = assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json");
-
+        using Stream? stream = assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json") ??
+            throw new ApplicationException("appsettings.json file is missing");
+        
         IConfigurationRoot config = new ConfigurationBuilder()
                     .AddJsonStream(stream)
                     .Build();

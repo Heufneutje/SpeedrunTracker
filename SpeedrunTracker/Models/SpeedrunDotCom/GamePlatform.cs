@@ -5,5 +5,5 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 public record GamePlatform : BaseSpeedrunObject
 {
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }

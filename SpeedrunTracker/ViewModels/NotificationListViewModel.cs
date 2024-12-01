@@ -14,9 +14,9 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public RangedObservableCollection<NotificationViewModel> Notifications { get; set; }
 
-    private NotificationViewModel _selectedNotification;
+    private NotificationViewModel? _selectedNotification;
 
-    public NotificationViewModel SelectedNotification
+    public NotificationViewModel? SelectedNotification
     {
         get => _selectedNotification;
         set
@@ -45,7 +45,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         if (_hasReachedEnd)
             return;
 
-        PagedData<List<Notification>> notifications = await ExecuteNetworkTask(_notificationService.GetNotificationsAsync(_offset));
+        PagedData<List<Notification>>? notifications = await ExecuteNetworkTask(_notificationService.GetNotificationsAsync(_offset));
         if (notifications == null)
             return;
 
@@ -68,7 +68,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     private async Task OpenNotificationLinkAsync()
     {
-        NotificationLink link = SelectedNotification?.Notification?.Item;
+        NotificationLink? link = SelectedNotification?.Notification?.Item;
 
         if (link != null)
             await _browserService.OpenAsync(link.Uri);

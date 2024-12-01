@@ -14,9 +14,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
     private readonly IEmbedService _embedService;
     private readonly IConfiguration _config;
     private readonly ILocalSettingsService _settingsService;
-    private RunDetails _runDetails;
+    private RunDetails? _runDetails;
 
-    public RunDetails RunDetails
+    public RunDetails? RunDetails
     {
         get => _runDetails;
         set
@@ -34,7 +34,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
             NotifyPropertyChanged(nameof(StatusDescription));
             NotifyPropertyChanged(nameof(RunComment));
 
-            if (value.Run.Videos?.Links != null)
+            if (value?.Run.Videos?.Links != null)
                 VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
 
             SelectedVideo = VideoUrls.FirstOrDefault();
@@ -47,9 +47,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.Uri);
 
-    private string _runComment;
+    private string? _runComment;
 
-    public string RunComment
+    public string? RunComment
     {
         get
         {
@@ -61,9 +61,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
         }
     }
 
-    private User _selectedPlayer;
+    private User? _selectedPlayer;
 
-    public User SelectedPlayer
+    public User? SelectedPlayer
     {
         get => _selectedPlayer;
         set
@@ -78,9 +78,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public RangedObservableCollection<EmbeddableUrl> VideoUrls { get; set; }
 
-    private EmbeddableUrl _selectedVideo;
+    private EmbeddableUrl? _selectedVideo;
 
-    public EmbeddableUrl SelectedVideo
+    public EmbeddableUrl? SelectedVideo
     {
         get => _selectedVideo;
         set
@@ -99,9 +99,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
 
-    public string Title => RunDetails == null ? "RunDetails" : $"{_runDetails.Category.Name} in {_runDetails.Run.Times.PrimaryTimeSpan} by {_runDetails.Run.Players[0].DisplayName}";
+    public string? Title => RunDetails == null ? "RunDetails" : $"{_runDetails?.Category.Name} in {_runDetails?.Run?.Times?.PrimaryTimeSpan} by {_runDetails?.Run.Players[0].DisplayName}";
 
-    public string FormattedDate => RunDetails.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
+    public string? FormattedDate => RunDetails?.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
 
     public bool HasInGameTime => ShouldShowTimingType(TimingType.InGame);
 
@@ -109,14 +109,14 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public bool HasRealtimeNoLoads => ShouldShowTimingType(TimingType.RealtimeNoLoads);
 
-    public string StatusDescription
+    public string? StatusDescription
     {
         get
         {
             if (RunDetails == null)
                 return null;
 
-            return RunDetails.Run.Status.StatusType switch
+            return RunDetails.Run.Status?.StatusType switch
             {
                 SpeedrunStatusType.New => "Verification pending",
                 SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue ? $"Verified on {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat)} at {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat)}" : "Verified",
@@ -148,15 +148,20 @@ public class RunDetailsViewModel : BaseShareableViewModel
         VideoUrls = [];
     }
 
-    private async Task ShowVideo() => await _browserService.OpenAsync(SelectedVideo.Url);
+    private async Task ShowVideo()
+    {
+        if (!string.IsNullOrEmpty(_selectedVideo?.Url))
+        await _browserService.OpenAsync(_selectedVideo.Url);
+    }
+
 
     public async Task LoadData()
     {
-        if (RunDetails.Examiner == null && RunDetails.Run.Status.ExaminerId != null)
+        if (RunDetails?.Examiner == null && RunDetails?.Run.Status?.ExaminerId != null)
             RunDetails.Examiner = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId)) ?? User.GetUserNotFoundPlaceholder();
     }
 
-    private async Task NavigateToUserAsync(User user)
+    private async Task NavigateToUserAsync(User? user)
     {
         if (user == null)
         {
@@ -164,12 +169,13 @@ public class RunDetailsViewModel : BaseShareableViewModel
             SelectedPlayer = null;
         }
 
-        if (!string.IsNullOrEmpty(user.Id))
+        if (!string.IsNullOrEmpty(user?.Id))
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
     }
 
-    private async Task OpenLinkAsync(string uri)
+    private async Task OpenLinkAsync(string? uri)
     {
-        await _browserService.OpenAsync(uri);
+        if (!string.IsNullOrEmpty(uri))
+            await _browserService.OpenAsync(uri);
     }
 }

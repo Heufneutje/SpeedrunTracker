@@ -2,22 +2,21 @@
 
 namespace SpeedrunTracker.Services.LocalStorage;
 
-public class LocalSettingsService : ILocalSettingsService
+public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
 {
     private readonly IConfiguration _configuration;
-    private readonly ILocalDatabaseService _databaseService;
 
-    public LocalSettingsService(IConfiguration configuration, ILocalDatabaseService databaseService)
+    public LocalSettingsService(IConfiguration configuration, ILocalDatabaseService databaseService) : base(databaseService)
     {
         _configuration = configuration;
-        _databaseService = databaseService;
+        UserSettings = new();
     }
 
     public UserSettings UserSettings { get; set; }
 
     public async Task LoadSettingsAsync()
     {
-        UserSettings = await _databaseService.Connection.Table<UserSettings>().FirstOrDefaultAsync();
+        UserSettings = await GetConnection().Table<UserSettings>().FirstOrDefaultAsync();
         if (UserSettings == null)
         {
             UserSettings = new()
@@ -25,7 +24,7 @@ public class LocalSettingsService : ILocalSettingsService
                 MaxLeaderboardResults = Convert.ToInt32(_configuration["defaults:max-leaderboard-results"])
             };
 
-            await _databaseService.Connection.InsertAsync(UserSettings);
+            await GetConnection().InsertAsync(UserSettings);
         }
 
         if (UserSettings.DateFormat == null)
@@ -37,6 +36,6 @@ public class LocalSettingsService : ILocalSettingsService
 
     public async Task SaveSettingsAsync()
     {
-        await _databaseService.Connection.UpdateAsync(UserSettings);
+        await GetConnection().UpdateAsync(UserSettings);
     }
 }

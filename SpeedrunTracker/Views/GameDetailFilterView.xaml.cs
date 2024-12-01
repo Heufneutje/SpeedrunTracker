@@ -11,7 +11,7 @@ public partial class GameDetailFilterView : ContentView
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        GameDetailViewModel vm = BindingContext as GameDetailViewModel;
-        await vm.LoadLeaderboardAsync();
+        if (BindingContext is GameDetailViewModel vm)
+            await vm.LoadLeaderboardAsync();
     }
 }

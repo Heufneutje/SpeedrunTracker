@@ -2,5 +2,5 @@
 
 public record PagedData<T> : BaseData<T>
 {
-    public Pagination Pagination { get; set; }
+    public required Pagination Pagination { get; set; }
 }

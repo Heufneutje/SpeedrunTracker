@@ -4,7 +4,7 @@ public interface IGameService
 {
     Task<PagedData<List<Game>>> SearchGamesAsync(string name);
 
-    Task<Game> GetGameAsync(string gameId);
+    Task<Game?> GetGameAsync(string gameId);
 
     Task<List<Category>> GetGameCategoriesAsync(string gameId);
 

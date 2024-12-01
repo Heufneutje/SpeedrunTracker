@@ -16,7 +16,7 @@ public record SpeedrunTime
     [JsonPropertyName("ingame_t")]
     public double IngameSeconds { get; set; }
 
-    private string _primaryTimeSpan;
+    private string? _primaryTimeSpan;
 
     [JsonIgnore]
     public string PrimaryTimeSpan
@@ -28,7 +28,7 @@ public record SpeedrunTime
         }
     }
 
-    private string _realtimeTimeSpan;
+    private string? _realtimeTimeSpan;
 
     [JsonIgnore]
     public string RealtimeTimeSpan
@@ -40,7 +40,7 @@ public record SpeedrunTime
         }
     }
 
-    private string _realtimeNoLoadsTimeSpan;
+    private string? _realtimeNoLoadsTimeSpan;
 
     [JsonIgnore]
     public string RealtimeNoLoadsTimeSpan
@@ -52,7 +52,7 @@ public record SpeedrunTime
         }
     }
 
-    private string _ingameTimeSpan;
+    private string? _ingameTimeSpan;
 
     [JsonIgnore]
     public string IngameTimeSpan

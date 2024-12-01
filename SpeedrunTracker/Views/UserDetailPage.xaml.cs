@@ -8,7 +8,7 @@ public partial class UserDetailPage : BaseDetailPage
     private readonly UserDetailsViewModel _viewModel;
     private bool _isLoaded;
 
-    public User User
+    public User? User
     {
         get => _viewModel.User;
         set => _viewModel.User = value;

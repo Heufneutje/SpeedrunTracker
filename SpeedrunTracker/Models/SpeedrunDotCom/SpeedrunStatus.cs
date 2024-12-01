@@ -8,10 +8,10 @@ public record SpeedrunStatus
     public SpeedrunStatusType StatusType { get; set; }
 
     [JsonPropertyName("examiner")]
-    public string ExaminerId { get; set; }
+    public string? ExaminerId { get; set; }
 
     [JsonPropertyName("verify-date")]
     public DateTime? VerifyDate { get; set; }
 
-    public string Reason { get; set; }
+    public string? Reason { get; set; }
 }

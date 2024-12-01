@@ -14,5 +14,5 @@ public interface IUserRepository
     Task<BaseData<List<LeaderboardEntry>>> GetUserPersonalBestsAsync(string userId);
 
     [Get("/profile")]
-    Task<BaseData<User>> GetUserProfileAsync([Header(Constants.ApiKeyHeader)] string header);
+    Task<BaseData<User>> GetUserProfileAsync([Header(Constants.ApiKeyHeader)] string? header);
 }

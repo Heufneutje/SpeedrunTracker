@@ -8,7 +8,7 @@ public record UserNameStyleColor
     [JsonIgnore]
     public string Light { get; set; }
 
-    public string Dark { get; set; }
+    public string? Dark { get; set; }
 
     public UserNameStyleColor()
     {

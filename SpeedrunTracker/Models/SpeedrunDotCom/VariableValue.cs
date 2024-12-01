@@ -5,7 +5,7 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 public record VariableValue
 {
     [JsonPropertyName("label")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
-    public string Rules { get; set; }
+    public string? Rules { get; set; }
 }

@@ -4,12 +4,12 @@ namespace SpeedrunTracker.ViewModels;
 
 public class VariableViewModel : BaseViewModel
 {
-    public string VariableId { get; set; }
-    public string Name { get; set; }
+    public required string VariableId { get; set; }
+    public required string Name { get; set; }
 
-    private ViewVariableValue _selectedValue;
+    private ViewVariableValue? _selectedValue;
 
-    public ViewVariableValue SelectedValue
+    public ViewVariableValue? SelectedValue
     {
         get => _selectedValue;
         set
@@ -19,11 +19,11 @@ public class VariableViewModel : BaseViewModel
         }
     }
 
-    private ObservableCollection<ViewVariableValue> _values;
+    private ObservableCollection<ViewVariableValue>? _values;
 
     public ObservableCollection<ViewVariableValue> Values
     {
-        get => _values;
+        get => _values ?? [];
         set
         {
             _values = value;

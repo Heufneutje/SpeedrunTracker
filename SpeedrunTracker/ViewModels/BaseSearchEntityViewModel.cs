@@ -18,11 +18,11 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
         }
     }
 
-    private string _query;
+    private string? _query;
 
     public string Query
     {
-        get => _query;
+        get => _query ?? string.Empty;
         set
         {
             _query = value;
@@ -37,6 +37,7 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
 
     protected BaseSearchEntityViewModel(IToastService toastService) : base(toastService)
     {
+        _entities = [];
     }
 
     private async Task SearchAsync()
@@ -57,7 +58,7 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
 
     protected abstract Task<List<Entity>> SearchEntitiesAsync();
 
-    protected abstract Task NavigateToAsync(Entity entity);
+    protected abstract Task NavigateToAsync(Entity? entity);
 
     public bool CanSearch() => !IsRunningBackgroundTask;
 }

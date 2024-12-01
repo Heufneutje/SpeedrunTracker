@@ -4,7 +4,7 @@ namespace SpeedrunTracker.Services.LocalStorage;
 
 public class LocalDatabaseService : ILocalDatabaseService
 {
-    public SQLiteAsyncConnection Connection { get; private set; }
+    public SQLiteAsyncConnection? Connection { get; private set; }
 
     public async Task InitAsync(string databaseName, SQLiteOpenFlags flags)
     {

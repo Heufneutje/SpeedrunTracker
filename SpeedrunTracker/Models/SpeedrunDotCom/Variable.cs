@@ -4,10 +4,10 @@ namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
 public record Variable : BaseSpeedrunObject
 {
-    public string Name { get; set; }
-    public string Category { get; set; }
-    public VariableValueContainer Values { get; set; }
-    public VariableScope Scope { get; set; }
+    public required string Name { get; set; }
+    public required string Category { get; set; }
+    public required VariableValueContainer Values { get; set; }
+    public required VariableScope Scope { get; set; }
 
     [JsonPropertyName("is-subcategory")]
     public bool IsSubcategory { get; set; }

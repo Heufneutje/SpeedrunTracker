@@ -6,13 +6,14 @@ public class DialogService : IDialogService
 {
     public Task ShowAlertAsync(string title, string message, string cancel = "OK")
     {
-        return GetMainPage()?.DisplayAlert(title, message, cancel);
+        return GetMainPage()?.DisplayAlert(title, message, cancel) ?? Task.CompletedTask;
     }
 
-    public Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Yes", string cancel = "No")
+    public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Yes", string cancel = "No")
     {
-        return GetMainPage()?.DisplayAlert(title, message, accept, cancel);
+        Page? mainPage = GetMainPage();
+        return mainPage != null ? await mainPage.DisplayAlert(title, message, accept, cancel) : false;
     }
 
-    private Page GetMainPage() => Application.Current.Windows[0].Page;
+    private Page? GetMainPage() => Application.Current?.Windows[0].Page;
 }

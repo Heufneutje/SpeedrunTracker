@@ -2,6 +2,6 @@
 
 public record Link
 {
-    public string Rel { get; set; }
-    public string Uri { get; set; }
+    public string? Rel { get; set; }
+    public required string Uri { get; set; }
 }
