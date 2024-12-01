@@ -68,7 +68,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.0.22" />
+		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.1.0" />
 		<PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
