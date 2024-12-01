@@ -2,7 +2,7 @@
 
 public partial class App : Application
 {
-    public const string Version = "1.0.5";
+    public const string Version = "1.0.6";
 
     public App(ILocalSettingsService settingsService)
     {
