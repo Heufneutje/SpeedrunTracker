@@ -7,7 +7,7 @@
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding FollowButtonText}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" Order="Secondary" />
-        <ToolbarItem Text="Share" Command="{Binding ShareCommand}" Order="Secondary" />
+        <ToolbarItem Text="{Binding FollowButtonText}" IconImageSource="{Binding FollowButtonIconSource}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" />
+        <ToolbarItem Text="Share" IconImageSource="share" Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
 </ContentPage>

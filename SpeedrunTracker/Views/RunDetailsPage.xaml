@@ -11,7 +11,7 @@
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Share" Command="{Binding ShareCommand}" Order="Secondary" />
+        <ToolbarItem IconImageSource="share" Text="Share" Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
     <Grid>
         <Image Source="{Binding RunDetails.GameAssets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />

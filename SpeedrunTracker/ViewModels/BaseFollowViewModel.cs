@@ -15,6 +15,7 @@ public abstract class BaseFollowViewModel : BaseShareableViewModel
             _isFollowing = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(FollowButtonText));
+            NotifyPropertyChanged(nameof(FollowButtonIconSource));
             NotifyPropertyChanged(nameof(IsFollowingEnabled));
         }
     }
@@ -22,6 +23,8 @@ public abstract class BaseFollowViewModel : BaseShareableViewModel
     public bool IsFollowingEnabled => _isFollowing.HasValue;
 
     public string FollowButtonText => IsFollowing == true ? "Unfavorite" : "Favorite";
+
+    public string FollowButtonIconSource => IsFollowing == true ? "favorite_enabled" : "favorite_disabled";
 
     protected BaseFollowViewModel(IShareService shareService, IToastService toastService) : base(shareService, toastService)
     {
