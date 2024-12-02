@@ -5,8 +5,10 @@
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:UserDetailsViewModel"
              x:Class="SpeedrunTracker.Views.UserDetailPage"
-             Title="{Binding DisplayName}"
              Appearing="ContentPage_Appearing">
+    <Shell.TitleView>
+        <Label Text="{Binding DisplayName}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" />
+    </Shell.TitleView>
     <Grid Padding="20">
         <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                         ItemsSource="{Binding PersonalBests}"

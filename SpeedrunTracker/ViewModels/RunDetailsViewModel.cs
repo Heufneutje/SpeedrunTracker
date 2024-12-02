@@ -99,7 +99,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
 
-    public string? Title => RunDetails == null ? "RunDetails" : $"{_runDetails?.Category?.Name} in {_runDetails?.Run?.Times?.PrimaryTimeSpan} by {_runDetails?.Run.Players[0].DisplayName}";
+    public string? Title => _runDetails == null ? "RunDetails" : $"{_runDetails.OrdinalPlace} - {_runDetails.Category?.Name} in {_runDetails.Run.Times?.PrimaryTimeSpan}";
+
+    public string? SubTitle => _runDetails == null ? "by <unknown>" : $"by {string.Join(" and ", _runDetails.Run.Players.Select(x => x.DisplayName))}";
 
     public string? FormattedDate => RunDetails?.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
 

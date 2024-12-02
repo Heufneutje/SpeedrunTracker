@@ -5,8 +5,10 @@
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
              x:DataType="viewmodels:GameSeriesDetailViewModel"
-             Title="{Binding Series.Names.International}"
              Appearing="ContentPage_Appearing">
+    <Shell.TitleView>
+        <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" />
+    </Shell.TitleView>
     <Grid>
         <Image Source="{Binding Series.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
         <Border Style="{StaticResource TransparentCollectionElementBorder}" IsVisible="{Binding IsRunningBackgroundTask}">
