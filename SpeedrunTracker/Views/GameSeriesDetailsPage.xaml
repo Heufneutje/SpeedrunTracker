@@ -11,12 +11,7 @@
     </Shell.TitleView>
     <Grid>
         <Image Source="{Binding Series.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
-        <Border Style="{StaticResource TransparentCollectionElementBorder}" IsVisible="{Binding IsRunningBackgroundTask}">
-            <Grid Padding="10">
-                <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />
-            </Grid>
-        </Border>
-        <Grid Padding="20" IsVisible="{Binding IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+        <Grid Padding="20">
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                             ItemsSource="{Binding Games}"
                             ItemTemplate="{StaticResource GameSeriesEntriesTemplate}"

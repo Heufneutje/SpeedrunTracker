@@ -1,4 +1,5 @@
-﻿using SpeedrunTracker.Extensions;
+﻿using CommunityToolkit.Maui.Core;
+using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
@@ -7,7 +8,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IGameSeriesService _gameSeriesService;
 
-    public GameSeriesSearchViewModel(IGameSeriesService gameSeriesService, IToastService toastService) : base(toastService)
+    public GameSeriesSearchViewModel(IGameSeriesService gameSeriesService, IToastService toastService, IPopupService popupService) : base(toastService, popupService)
     {
         _gameSeriesService = gameSeriesService;
     }
@@ -17,7 +18,10 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
     protected override async Task NavigateToAsync(Entity? entity)
     {
         if (entity?.SearchObject is GameSeries series)
+        {
+            ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
+        }
     }
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()

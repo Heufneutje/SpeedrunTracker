@@ -17,7 +17,6 @@ public partial class GameDetailPage : BaseDetailPage
     public GameDetailPage(GameDetailViewModel viewModel)
     {
         InitializeComponent();
-        viewModel.IsRunningBackgroundTask = true;
         BindingContext = _viewModel = viewModel;
     }
 
@@ -46,12 +45,12 @@ public partial class GameDetailPage : BaseDetailPage
                 return;
             }
 
-            await _viewModel.LoadFollowingStatusAsync();
+            await _viewModel.LoadFollowingStatusAsync();            
             _isLoaded = true;
         }
         finally
         {
-            _viewModel.IsRunningBackgroundTask = false;
+            _viewModel.CloseActivityIndicator();
         }
     }
 

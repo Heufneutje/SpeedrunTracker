@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -15,15 +16,15 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
     public ObservableCollection<EntityGroup> Entities { get; set; }
 
-    public bool HasEntities => Entities?.Any() == true && !IsRunningBackgroundTask;
+    public bool HasEntities => Entities?.Any() == true;
 
-    public FollowedEntityViewModel(IGameService gameService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService) : base(toastService)
+    public FollowedEntityViewModel(IGameService gameService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService, IPopupService popupService) : base(toastService, popupService)
     {
         _gameService = gameService;
         _gameSeriesService = gameSeriesService;
         _userService = userService;
         _localFollowService = localFollowService;
-        Entities = new ObservableCollection<EntityGroup>();
+        Entities = [];
     }
 
     public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateAsync);
@@ -33,31 +34,41 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         if (entity == null)
             return;
 
+        ShowActivityIndicator();
         switch ((EntityType?)entity.SearchObject)
         {
             case EntityType.Games:
                 Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
                 if (game != null)
+                {
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
+                    return;
+                }
                 break;
             case EntityType.Series:
                 GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
                 if (series != null)
+                {
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
+                    return;
+                }
                 break;
             case EntityType.Users:
                 User? user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
                 if (user != null)
+                {
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+                    return;
+                }
                 break;
         }
+
+        CloseActivityIndicator();
     }
 
     public async Task LoadFollowedEntities()
     {
-        IsRunningBackgroundTask = true;
-
-        List<EntityGroup> entities = new();
+        List<EntityGroup> entities = [];
         List<FollowedEntity> followedEntities = await _localFollowService.GetFollowedEntitiesAsync();
 
         foreach (IGrouping<EntityType, FollowedEntity> grouping in followedEntities.OrderBy(x => x.Type).GroupBy(x => x.Type))
@@ -73,7 +84,6 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         }
 
         Entities = entities.AsObservableCollection();
-        IsRunningBackgroundTask = false;
         NotifyPropertyChanged(nameof(Entities));
         NotifyPropertyChanged(nameof(HasEntities));
     }

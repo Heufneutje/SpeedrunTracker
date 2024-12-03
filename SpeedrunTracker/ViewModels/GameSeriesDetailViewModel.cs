@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
 
-    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService) : base(followService, shareService, toastService)
+    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
     {
         Games = [];
         _gameSeriesService = gameSeriesService;
@@ -63,7 +64,6 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
         try
         {
-            IsRunningBackgroundTask = true;
             PagedData<List<Game>>? games = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset));
             if (games == null)
                 return;
@@ -77,7 +77,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
         finally
         {
-            IsRunningBackgroundTask = false;
+            CloseActivityIndicator();
         }
     }
 
@@ -86,6 +86,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         if (_selectedGame == null)
             return;
 
+        ShowActivityIndicator();
         await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", _selectedGame);
         SelectedGame = null;
     }

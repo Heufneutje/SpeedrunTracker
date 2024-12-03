@@ -36,7 +36,7 @@
                                     <LinearItemsLayout Orientation="Horizontal" />
                                 </CollectionView.ItemsLayout>
                             </CollectionView>
-                            <WebView Source="{Binding SelectedVideo.EmbedUrl}" HorizontalOptions="Center" HeightRequest="200"  Margin="0,0,0,10" />
+                            <WebView Source="{Binding SelectedVideo.EmbedUrl}" HorizontalOptions="Center" HeightRequest="200"  Margin="0,0,0,10" Navigated="WebView_Navigated" />
                             <Button Text="Open External Player" Command="{Binding ShowVideoCommand}" />
                         </VerticalStackLayout>
                         <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" Margin="5,-5,0,5" />

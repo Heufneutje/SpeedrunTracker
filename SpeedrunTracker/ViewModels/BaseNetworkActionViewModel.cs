@@ -9,7 +9,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
     protected readonly IToastService _toastService;
     private NetworkAccess? _currentNetworkAccess;
 
-    protected BaseNetworkActionViewModel(IToastService toastService)
+    protected BaseNetworkActionViewModel(IToastService toastService, IPopupService popupService) : base(popupService)
     {
         _toastService = toastService;
         Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;

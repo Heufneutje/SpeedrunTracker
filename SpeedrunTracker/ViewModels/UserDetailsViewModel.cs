@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -76,7 +77,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService) : base(followService, shareService, toastService)
+    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
     {
         _browserService = browserService;
         _userService = userService;
@@ -90,7 +91,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     private async Task LoadPersonalBests(bool showLevels)
     {
-        IsRunningBackgroundTask = true;
+        ShowActivityIndicator();
         try
         {
             if (_isCurrentlyShowingLevels == true && showLevels || _isCurrentlyShowingLevels == false && !showLevels || User == null)
@@ -125,7 +126,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
         finally
         {
-            IsRunningBackgroundTask = false;
+            CloseActivityIndicator();
         }
     }
 
@@ -168,6 +169,8 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         LeaderboardEntry? leaderboardEntry = SelectedEntry?.Entry;
         if (leaderboardEntry == null)
             return;
+
+        ShowActivityIndicator();
 
         if (leaderboardEntry.Run.Status?.ExaminerId != null)
             examiner = await GetRunUserAsync(leaderboardEntry.Run.Status.ExaminerId);

@@ -25,11 +25,10 @@
 
                     <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1" Padding="5">
                         <Grid RowDefinitions="*" ColumnDefinitions="*">
-                            <Grid ColumnDefinitions="*,*" IsVisible="{Binding IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+                            <Grid ColumnDefinitions="*,*">
                                 <Button Text="Show Full Game PBs" Grid.Column="0" Margin="5" Command="{Binding LoadFullGamePersonalBestsCommand}" />
                                 <Button Text="Show Level PBs" Grid.Column="1" Margin="5" Command="{Binding LoadLevelPersonalBestsCommand}" />
                             </Grid>
-                            <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="True" VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </Border>
                 </Grid>

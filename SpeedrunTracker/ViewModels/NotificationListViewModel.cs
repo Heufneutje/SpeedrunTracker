@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -11,6 +12,17 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
     private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
+
+    private bool _isRefreshing;
+    public bool IsRefreshing
+    {
+        get => _isRefreshing;
+        set
+        {
+            _isRefreshing = value;
+            NotifyPropertyChanged();
+        }
+    }
 
     public RangedObservableCollection<NotificationViewModel> Notifications { get; set; }
 
@@ -32,7 +44,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
-    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService, ILocalSettingsService settingsService) : base(toastService)
+    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService, ILocalSettingsService settingsService, IPopupService popupService) : base(toastService, popupService)
     {
         _notificationService = notificationService;
         _browserService = browserService;
@@ -63,7 +75,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         _hasReachedEnd = false;
         Notifications.Clear();
         await LoadNotificationsAsync();
-        IsRunningBackgroundTask = false;
+        IsRefreshing = false;
     }
 
     private async Task OpenNotificationLinkAsync()

@@ -10,9 +10,7 @@
              Appearing="ContentPage_Appearing">
     <Grid>
         <Label Text="It looks like you have not yet added any games, series or users to your favorites!&#10;&#10;Search for a game, series or user and hit the Favorite button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
-        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
         <ListView ItemsSource="{Binding Entities}"
-          IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
           CachingStrategy="RecycleElement"
           VerticalOptions="FillAndExpand"
           IsGroupingEnabled="True"

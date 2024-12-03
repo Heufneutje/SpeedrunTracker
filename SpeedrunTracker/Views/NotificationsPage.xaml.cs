@@ -17,7 +17,7 @@ public partial class NotificationsPage : ContentPage
     {
         if (!_isLoaded)
         {
-            _viewModel.IsRunningBackgroundTask = true;
+            _viewModel.IsRefreshing = true;
             _isLoaded = true;
         }
     }

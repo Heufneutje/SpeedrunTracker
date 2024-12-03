@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
@@ -23,17 +24,6 @@ public class RunDetailsViewModel : BaseShareableViewModel
         {
             _runDetails = value;
             NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(Title));
-            NotifyPropertyChanged(nameof(SubTitle));
-            NotifyPropertyChanged(nameof(HasVideo));
-            NotifyPropertyChanged(nameof(HasMultipleVideos));
-            NotifyPropertyChanged(nameof(HasInGameTime));
-            NotifyPropertyChanged(nameof(HasRealtime));
-            NotifyPropertyChanged(nameof(HasRealtimeNoLoads));
-            NotifyPropertyChanged(nameof(HasTrophyAsset));
-            NotifyPropertyChanged(nameof(StatusImage));
-            NotifyPropertyChanged(nameof(StatusDescription));
-            NotifyPropertyChanged(nameof(RunComment));
 
             if (value?.Run.Videos?.Links != null)
                 VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
@@ -141,7 +131,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config, ILocalSettingsService settingsService) : base(shareService, toastService)
+    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config, ILocalSettingsService settingsService, IPopupService popupService) : base(shareService, toastService, popupService)
     {
         _browserService = browserService;
         _userService = userService;
@@ -162,6 +152,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
     {
         if (RunDetails?.Examiner == null && RunDetails?.Run.Status?.ExaminerId != null)
             RunDetails.Examiner = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId)) ?? User.GetUserNotFoundPlaceholder();
+
+        if (!HasVideo)
+            CloseActivityIndicator();
     }
 
     private async Task NavigateToUserAsync(User? user)
@@ -173,7 +166,10 @@ public class RunDetailsViewModel : BaseShareableViewModel
         }
 
         if (!string.IsNullOrEmpty(user?.Id))
+        {
+            ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+        }
     }
 
     private async Task OpenLinkAsync(string? uri)

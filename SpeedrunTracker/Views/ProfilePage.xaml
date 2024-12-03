@@ -8,8 +8,7 @@
              Title="Profile"
              Appearing="ContentPage_Appearing">
     <VerticalStackLayout>
-        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
-        <Grid RowDefinitions="3*,*" IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+        <Grid RowDefinitions="3*,*">
             <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">
                 <controls:AvatarControl ImageSource="{Binding ImageUri}" AvatarSize="150" Command="{Binding NavigateToUserCommand}" />
                 <Label Text="{Binding Name}" TextColor="{Binding User.NameStyle.ThemeColor}" FontSize="Large" HorizontalOptions="Center" Padding="10" />

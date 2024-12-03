@@ -1,4 +1,5 @@
-﻿using SpeedrunTracker.Extensions;
+﻿using CommunityToolkit.Maui.Core;
+using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
@@ -9,7 +10,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
 
     public override string SearchTextPlaceholder => "Search for users...";
 
-    public UserSearchViewModel(IToastService toastService, IUserService userService) : base(toastService)
+    public UserSearchViewModel(IToastService toastService, IUserService userService, IPopupService popupService) : base(toastService, popupService)
     {
         _userService = userService;
     }
@@ -17,7 +18,10 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
     protected override async Task NavigateToAsync(Entity? entity)
     {
         if (entity?.SearchObject is User user)
+        {
+            ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+        }
     }
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()

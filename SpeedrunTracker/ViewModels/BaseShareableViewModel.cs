@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
@@ -11,7 +12,7 @@ public abstract class BaseShareableViewModel : BaseNetworkActionViewModel
 
     public ICommand ShareCommand => new AsyncRelayCommand(ShareAsync);
 
-    protected BaseShareableViewModel(IShareService shareService, IToastService toastService) : base(toastService)
+    protected BaseShareableViewModel(IShareService shareService, IToastService toastService, IPopupService popupService) : base(toastService, popupService)
     {
         _shareService = shareService;
     }

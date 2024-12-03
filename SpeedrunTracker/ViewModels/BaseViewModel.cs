@@ -1,26 +1,35 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Maui.Core;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace SpeedrunTracker.ViewModels;
 
 public abstract class BaseViewModel : INotifyPropertyChanged
 {
-    private bool _isRunningBackgroundTask;
-
-    public bool IsRunningBackgroundTask
-    {
-        get => _isRunningBackgroundTask;
-        set
-        {
-            _isRunningBackgroundTask = value;
-            NotifyPropertyChanged();
-        }
-    }
+    private readonly IPopupService? _popupService;
+    public bool IsRunningBackgroundTask { get; private set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected BaseViewModel(IPopupService? popupService = null)
+    {
+        _popupService = popupService;
+    }
 
     protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public void ShowActivityIndicator(string loadingText = "Loading...")
+    {
+        IsRunningBackgroundTask = true;
+        _popupService?.ShowPopup<SpinnerPopupViewModel>(onPresenting => onPresenting.LoadingText = loadingText);
+    }
+
+    public void CloseActivityIndicator()
+    {
+        IsRunningBackgroundTask = false;
+        _popupService?.ClosePopup();
     }
 }

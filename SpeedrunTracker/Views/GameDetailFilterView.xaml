@@ -6,8 +6,7 @@
              x:DataType="viewmodels:GameDetailViewModel"
              x:Class="SpeedrunTracker.Views.GameDetailFilterView">
     <VerticalStackLayout Padding="10">
-        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" />
-        <VerticalStackLayout IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}">
+        <VerticalStackLayout>
             <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" IsVisible="{Binding HasIndividualLevels}" />
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                         ItemsSource="{Binding Levels}"
@@ -28,8 +27,7 @@
                 </CollectionView.ItemsLayout>
             </CollectionView>
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}" HorizontalOptions="Start" BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
-            <Button Text="Show Leaderboard" Command="{Binding ShowLeaderboardCommand}" Margin="5" IsVisible="{Binding IsLoadingLeaderboard, Converter={StaticResource InverseBoolConverter}}" />
-            <ActivityIndicator IsVisible="{Binding IsLoadingLeaderboard}" IsRunning="True" VerticalOptions="CenterAndExpand" />
+            <Button Text="Show Leaderboard" Command="{Binding ShowLeaderboardCommand}" Margin="5" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

@@ -18,9 +18,7 @@
                    Grid.Row="0"
                    HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <ActivityIndicator IsVisible="{Binding IsRunningBackgroundTask}" IsRunning="{Binding IsRunningBackgroundTask}" VerticalOptions="CenterAndExpand" Grid.Row="1" />
         <ListView ItemsSource="{Binding Entities}"
-      IsVisible="{Binding Path=IsRunningBackgroundTask, Converter={StaticResource InverseBoolConverter}}"
       CachingStrategy="RecycleElement"
       VerticalOptions="FillAndExpand"
       HasUnevenRows="True"

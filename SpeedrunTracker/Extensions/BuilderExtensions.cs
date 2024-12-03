@@ -116,6 +116,7 @@ public static class BuilderExtensions
         services.AddSingleton<IJsonSerializationService, JsonSerializationService>();
         services.AddSingleton<IEmbedService, EmbedService>();
         services.AddSingleton<IShareService, ShareService>();
+        services.AddTransientPopup<SpinnerPopup, SpinnerPopupViewModel>();
     }
 
     private static void AddViewModels(IServiceCollection services)

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -18,13 +19,13 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService) : base(followService, shareService, toastService)
+    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
     {
         _gameService = gameService;
         _leaderboardService = leaderboardService;
         _userService = userService;
         _settingsService = settingsService;
-        LeaderboardEntries = new RangedObservableCollection<LeaderboardEntry>();
+        LeaderboardEntries = [];
     }
 
     public Game? Game
@@ -126,21 +127,6 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private Leaderboard? _leaderboard;
     public RangedObservableCollection<LeaderboardEntry> LeaderboardEntries { get; set; }
 
-    private bool _isLoadingLeaderboard;
-
-    public bool IsLoadingLeaderboard
-    {
-        get => _isLoadingLeaderboard;
-        set
-        {
-            _isLoadingLeaderboard = value;
-            NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(IsLeaderboardVisible));
-        }
-    }
-
-    public bool IsLeaderboardVisible => IsLoadingLeaderboard || _leaderboard != null;
-
     public bool HasIndividualLevels => _levels != null && _levels.Count > 1;
 
     private LeaderboardEntry? _selectedLeaderboardEntry;
@@ -220,7 +206,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         if (Game == null)
             return;
 
-        IsLoadingLeaderboard = true;
+        ShowActivityIndicator();
+
         _leaderboardEntriesVisible = 0;
         _leaderboard = null;
         LeaderboardEntries.Clear();
@@ -248,7 +235,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
                 DisplayLeaderboardEntries();
         }
 
-        IsLoadingLeaderboard = false;
+        CloseActivityIndicator();
     }
 
     private void DisplayLeaderboardEntries()
@@ -280,6 +267,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         Category? category = _categories?.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.CategoryId);
         if (category == null)
             return;
+
+        ShowActivityIndicator();
 
         Level? level = _levels?.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.LevelId);
         GamePlatform? platform = Game.Platforms.Data.Find(x => x.Id == _selectedLeaderboardEntry.Run.System?.PlatformId);

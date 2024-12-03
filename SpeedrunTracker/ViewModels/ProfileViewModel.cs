@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
@@ -70,7 +71,7 @@ public class ProfileViewModel : BaseViewModel
 
     public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
 
-    public ProfileViewModel(IUserService userService, IDialogService dialogService, IToastService toastService)
+    public ProfileViewModel(IUserService userService, IDialogService dialogService, IToastService toastService, IPopupService popupService) : base(popupService)
     {
         _userService = userService;
         _dialogService = dialogService;
@@ -79,7 +80,7 @@ public class ProfileViewModel : BaseViewModel
 
     public async Task LoadProfileAsync()
     {
-        IsRunningBackgroundTask = true;
+        ShowActivityIndicator();
 
         try
         {
@@ -107,7 +108,7 @@ public class ProfileViewModel : BaseViewModel
         }
         finally
         {
-            IsRunningBackgroundTask = false;
+            CloseActivityIndicator();
         }
     }
 

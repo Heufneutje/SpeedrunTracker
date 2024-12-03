@@ -26,4 +26,9 @@ public partial class RunDetailsPage : ContentPage
             _isLoaded = true;
         }
     }
+
+    private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+    {
+        _viewModel.CloseActivityIndicator();
+    }
 }
