@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup
     x:Class="SpeedrunTracker.Views.SpinnerPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
