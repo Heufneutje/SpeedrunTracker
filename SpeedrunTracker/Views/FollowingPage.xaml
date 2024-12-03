@@ -6,8 +6,11 @@
              xmlns:local="clr-namespace:SpeedrunTracker.Views"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              Title="Favorites"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             mtk:LeakMonitorBehavior.Cascade="True"
+             mtk:TearDownBehavior.Cascade="True">
     <Grid>
         <Label Text="It looks like you have not yet added any games, series or users to your favorites!&#10;&#10;Search for a game, series or user and hit the Favorite button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
         <ListView ItemsSource="{Binding Entities}"

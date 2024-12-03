@@ -74,6 +74,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AdamE.MemoryToolkit.Maui" Version="1.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.1.0" />

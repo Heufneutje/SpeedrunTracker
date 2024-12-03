@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SpeedrunTracker.Views"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
              x:DataType="viewmodels:GameSeriesDetailViewModel"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             mtk:LeakMonitorBehavior.Cascade="True"
+             mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
         <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
     </Shell.TitleView>

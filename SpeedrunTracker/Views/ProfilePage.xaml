@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:DataType="viewmodels:ProfileViewModel"
              x:Class="SpeedrunTracker.Views.ProfilePage"
              Title="Profile"
-             Appearing="ContentPage_Appearing">
+             Appearing="ContentPage_Appearing"
+             mtk:LeakMonitorBehavior.Cascade="True"
+             mtk:TearDownBehavior.Cascade="True">
     <VerticalStackLayout>
         <Grid RowDefinitions="3*,*">
             <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">

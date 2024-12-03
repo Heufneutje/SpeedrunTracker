@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MemoryToolkit.Maui;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -41,6 +42,10 @@ public static class BuilderExtensions
                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
            });
+
+#if DEBUG
+        builder.UseLeakDetection();
+#endif
     }
 
     private static void AddPlatformSpecificHandlers()
@@ -56,7 +61,7 @@ public static class BuilderExtensions
     private static void AddLogging(MauiAppBuilder builder)
     {
 #if DEBUG
-        builder.Logging.AddDebug();
+        builder.Logging.AddDebug();        
 #endif
     }
 

@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:DataType="viewmodels:BaseSearchEntityViewModel"
              x:Class="SpeedrunTracker.Views.BaseSearchContentPage"
-             Title="Search">
+             Title="Search"
+             mtk:LeakMonitorBehavior.Cascade="True" 
+             mtk:TearDownBehavior.Cascade="True">
     <!-- Move to SearchHandlers when https://github.com/dotnet/maui/issues/8716 is fixed.
     <Shell.SearchHandler>
         <SearchHandler Placeholder="{Binding SearchTextPlaceholder}" Command="{Binding SearchCommand}" Query="{Binding Query}" QueryIcon="search" ClearIcon="cross" />

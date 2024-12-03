@@ -4,11 +4,14 @@
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:markdown="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
+             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:DataType="viewmodels:RunDetailsViewModel"
              x:Class="SpeedrunTracker.Views.RunDetailsPage"
              Appearing="ContentPage_Appearing"
              Shell.TabBarIsVisible="False"
-             Shell.FlyoutBehavior="Disabled">
+             Shell.FlyoutBehavior="Disabled"
+             mtk:LeakMonitorBehavior.Cascade="True" 
+             mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
         <VerticalStackLayout>
             <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="1" FontAutoScalingEnabled="True" />
