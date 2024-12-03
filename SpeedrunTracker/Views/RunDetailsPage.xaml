@@ -11,8 +11,8 @@
              Shell.FlyoutBehavior="Disabled">
     <Shell.TitleView>
         <VerticalStackLayout>
-            <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" />
-            <Label Text="{Binding SubTitle}" TextColor="White" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" />
+            <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="1" FontAutoScalingEnabled="True" />
+            <Label Text="{Binding SubTitle}" TextColor="White" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="1" FontAutoScalingEnabled="True" />
         </VerticalStackLayout>
     </Shell.TitleView>
     <ContentPage.ToolbarItems>

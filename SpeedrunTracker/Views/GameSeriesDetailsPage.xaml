@@ -7,7 +7,7 @@
              x:DataType="viewmodels:GameSeriesDetailViewModel"
              Appearing="ContentPage_Appearing">
     <Shell.TitleView>
-        <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" />
+        <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
     </Shell.TitleView>
     <Grid>
         <Image Source="{Binding Series.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
