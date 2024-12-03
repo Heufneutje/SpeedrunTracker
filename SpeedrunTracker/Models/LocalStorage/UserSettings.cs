@@ -11,4 +11,5 @@ public class UserSettings
     public int MaxLeaderboardResults { get; set; }
     public string? DateFormat { get; set; }
     public string? TimeFormat { get; set; }
+    public bool? DisplayBackgrounds { get; set; }
 }

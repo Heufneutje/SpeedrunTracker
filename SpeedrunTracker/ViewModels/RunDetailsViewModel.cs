@@ -24,6 +24,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
         {
             _runDetails = value;
             NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(BackgroundUri));
 
             if (value?.Run.Videos?.Links != null)
                 VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
@@ -129,6 +130,8 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     private bool ShouldShowTimingType(TimingType timingType) => RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true && RunDetails?.Ruleset?.DefaultTimingType != timingType;
 
+    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? RunDetails?.GameAssets?.Background?.Uri : null;
+
     public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
 
     public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config, ILocalSettingsService settingsService, IPopupService popupService) : base(shareService, toastService, popupService)
@@ -146,7 +149,6 @@ public class RunDetailsViewModel : BaseShareableViewModel
         if (!string.IsNullOrEmpty(_selectedVideo?.Url))
             await _browserService.OpenAsync(_selectedVideo.Url);
     }
-
 
     public async Task LoadData()
     {

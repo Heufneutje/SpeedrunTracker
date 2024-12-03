@@ -19,7 +19,7 @@
         <ToolbarItem IconImageSource="share" Text="Share" Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <Image Source="{Binding RunDetails.GameAssets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding BackgroundUri}" Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>
             <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                 <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">

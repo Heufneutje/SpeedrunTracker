@@ -7,10 +7,10 @@
              x:Class="SpeedrunTracker.Views.GameDetailPage"
              Appearing="ContentPage_Appearing">
     <Shell.TitleView>
-        <Label Text="{Binding Game.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True"/>
+        <Label Text="{Binding Game.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
     </Shell.TitleView>
     <Grid>
-        <Image Source="{Binding Game.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding BackgroundUri}" Style="{StaticResource CustomBackgroundImage}" />
         <Grid Padding="20">
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}" ItemsSource="{Binding LeaderboardEntries}" ItemTemplate="{StaticResource LeaderboardTemplate}" RemainingItemsThresholdReachedCommand="{Binding DisplayLeaderboardEntriesCommand}" SelectedItem="{Binding SelectedLeaderboardEntry}" SelectionChangedCommand="{Binding NavigateToRunCommand}">
                 <CollectionView.Header>

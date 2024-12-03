@@ -76,6 +76,20 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
+    public bool DisplayBackgrounds
+    {
+        get => _settingsService.UserSettings.DisplayBackgrounds ?? false;
+        set
+        {
+            if (_settingsService.UserSettings.DisplayBackgrounds != value)
+            {
+                _settingsService.UserSettings.DisplayBackgrounds = value;
+                _hasChanges = true;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
     private ObservableCollection<ThemeSetting>? _themeSettings;
 
     public ObservableCollection<ThemeSetting> Themes

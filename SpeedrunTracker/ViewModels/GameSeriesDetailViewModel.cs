@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
+using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ namespace SpeedrunTracker.ViewModels;
 public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 {
     private readonly IGameSeriesService _gameSeriesService;
+    private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
 
@@ -22,6 +24,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
             {
                 _followEntity = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(BackgroundUri));
             }
         }
     }
@@ -49,10 +52,13 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
 
-    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
+    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.Uri : null;
+
+    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService, IPopupService popupService, ILocalSettingsService settingsService) : base(followService, shareService, toastService, popupService)
     {
         Games = [];
         _gameSeriesService = gameSeriesService;
+        _settingsService = settingsService;
     }
 
     protected override Task FollowAsync(GameSeries entity) => _followService.FollowSeriesAsync(entity);

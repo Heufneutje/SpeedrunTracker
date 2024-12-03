@@ -10,7 +10,7 @@
         <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
     </Shell.TitleView>
     <Grid>
-        <Image Source="{Binding Series.Assets.Background.Uri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding BackgroundUri}" Style="{StaticResource CustomBackgroundImage}" />
         <Grid Padding="20">
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                             ItemsSource="{Binding Games}"

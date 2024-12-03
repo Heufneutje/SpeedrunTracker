@@ -21,7 +21,8 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
         {
             UserSettings = new()
             {
-                MaxLeaderboardResults = Convert.ToInt32(_configuration["defaults:max-leaderboard-results"])
+                MaxLeaderboardResults = _configuration.GetValue<int>("defaults:max-leaderboard-results"),
+                DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds")
             };
 
             await GetConnection().InsertAsync(UserSettings);
@@ -32,6 +33,9 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
 
         if (UserSettings.TimeFormat == null)
             UserSettings.TimeFormat = _configuration["defaults:time-format"];
+
+        if (UserSettings.DisplayBackgrounds == null)
+            UserSettings.DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds");
     }
 
     public async Task SaveSettingsAsync()

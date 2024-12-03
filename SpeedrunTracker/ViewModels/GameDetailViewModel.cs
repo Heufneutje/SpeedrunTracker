@@ -36,6 +36,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             _followEntity = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(Platforms));
+            NotifyPropertyChanged(nameof(BackgroundUri));
         }
     }
 
@@ -162,6 +163,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     public ICommand DisplayLeaderboardEntriesCommand => new Command(DisplayLeaderboardEntries);
 
     public override ShareDetails ShareDetails => new(Game?.Weblink, Game?.Names?.International);
+
+    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? Game?.Assets?.Background?.Uri : null;
 
     public async Task<bool> LoadCategoriesAsync()
     {
