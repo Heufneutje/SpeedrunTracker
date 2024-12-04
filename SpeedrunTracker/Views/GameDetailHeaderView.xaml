@@ -8,13 +8,27 @@
              mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Suppress="True">
     <Grid ColumnDefinitions="100,*">
-        <Image Grid.Column="0" Source="{Binding Game.Assets.CoverSmall.Uri}" Margin="10" />
-        <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
-            <Grid ColumnDefinitions="100,*" RowDefinitions="Auto,Auto">
-                <Label Text="Released:" Grid.Column="0" Grid.Row="0" FontAttributes="Bold" />
-                <Label Text="{Binding Game.Released}" Grid.Column="1" Grid.Row="0" />
-                <Label Text="Platforms:" Grid.Column="0" Grid.Row="1" FontAttributes="Bold" />
-                <Label Text="{Binding Platforms}" Grid.Column="1" Grid.Row="1" />
+        <Image Grid.Column="0"
+               Source="{Binding Game.Assets.CoverSmall.Uri}"
+               Margin="10" />
+        <VerticalStackLayout Grid.Column="1"
+                             Margin="0,10,0,0">
+            <Grid ColumnDefinitions="100,*"
+                  RowDefinitions="Auto,Auto">
+                <Label Text="Released:"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding Game.Released}"
+                       Grid.Column="1"
+                       Grid.Row="0" />
+                <Label Text="Platforms:"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding Platforms}"
+                       Grid.Column="1"
+                       Grid.Row="1" />
             </Grid>
         </VerticalStackLayout>
     </Grid>

@@ -9,16 +9,43 @@
              Appearing="ContentPage_Appearing">
     <VerticalStackLayout>
         <Grid RowDefinitions="3*,*">
-            <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" Margin="0,50,0,0">
-                <controls:AvatarControl ImageSource="{Binding ImageUri}" AvatarSize="150" Command="{Binding NavigateToUserCommand}" />
-                <Label Text="{Binding Name}" TextColor="{Binding User.NameStyle.ThemeColor}" FontSize="Large" HorizontalOptions="Center" Padding="10" />
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Grid.Row="0"
+                                 Margin="0,50,0,0">
+                <controls:AvatarControl ImageSource="{Binding ImageUri}"
+                                        AvatarSize="150"
+                                        Command="{Binding NavigateToUserCommand}" />
+                <Label Text="{Binding Name}"
+                       TextColor="{Binding User.NameStyle.ThemeColor}"
+                       FontSize="Large"
+                       HorizontalOptions="Center"
+                       Padding="10" />
             </VerticalStackLayout>
 
-            <VerticalStackLayout Grid.Row="1" Margin="0,40,0,0">
-                <Label Text="Enter your API key below to link your speedrun.com profile." HorizontalOptions="Center" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
-                <Entry x:Name="_apiKeyEntry" Placeholder="API Key" IsPassword="True" HorizontalOptions="Center" WidthRequest="300" Margin="20" Text="{Binding ApiKey, Mode=TwoWay}" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
-                <Button Text="Login" HorizontalOptions="Center" WidthRequest="100" IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" Command="{Binding LoginCommand}" Clicked="Button_Clicked" />
-                <Button Text="Logout" HorizontalOptions="Center" WidthRequest="100" IsVisible="{Binding IsLoggedIn}" Command="{Binding LogoutCommand}" />
+            <VerticalStackLayout Grid.Row="1"
+                                 Margin="0,40,0,0">
+                <Label Text="Enter your API key below to link your speedrun.com profile."
+                       HorizontalOptions="Center"
+                       IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                <Entry x:Name="_apiKeyEntry"
+                       Placeholder="API Key"
+                       IsPassword="True"
+                       HorizontalOptions="Center"
+                       WidthRequest="300"
+                       Margin="20"
+                       Text="{Binding ApiKey, Mode=TwoWay}"
+                       IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
+                <Button Text="Login"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}"
+                        Command="{Binding LoginCommand}"
+                        Clicked="Button_Clicked" />
+                <Button Text="Logout"
+                        HorizontalOptions="Center"
+                        WidthRequest="100"
+                        IsVisible="{Binding IsLoggedIn}"
+                        Command="{Binding LogoutCommand}" />
             </VerticalStackLayout>
         </Grid>
     </VerticalStackLayout>

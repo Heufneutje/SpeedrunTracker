@@ -10,10 +10,13 @@ public class GameService : BaseCachableService, IGameService
     private readonly ExclusionCollection _archivedVariables;
     private readonly ExclusionCollection _archivedLevels;
 
-    public GameService(IGameRepository gameRepository, ICacheService cacheService, IConfiguration configuration) : base(cacheService)
+    public GameService(IGameRepository gameRepository, ICacheService cacheService, IConfiguration configuration)
+        : base(cacheService)
     {
         _gameRepository = gameRepository;
-        _archivedCategories = ExclusionCollection.ParseExclusions(configuration["speedrun-dot-com:archived-categories"]!);
+        _archivedCategories = ExclusionCollection.ParseExclusions(
+            configuration["speedrun-dot-com:archived-categories"]!
+        );
         _archivedVariables = ExclusionCollection.ParseExclusions(configuration["speedrun-dot-com:archived-variables"]!);
         _archivedLevels = ExclusionCollection.ParseExclusions(configuration["speedrun-dot-com:archived-levels"]!);
     }
@@ -25,7 +28,11 @@ public class GameService : BaseCachableService, IGameService
 
     public async Task<List<Category>> GetGameCategoriesAsync(string gameId)
     {
-        List<Category>? categories = await GetCachedResourceAsync(gameId, CacheItemType.Categories, _gameRepository.GetGameCategoriesAsync(gameId));
+        List<Category>? categories = await GetCachedResourceAsync(
+            gameId,
+            CacheItemType.Categories,
+            _gameRepository.GetGameCategoriesAsync(gameId)
+        );
         if (categories == null)
             return [];
 
@@ -34,7 +41,11 @@ public class GameService : BaseCachableService, IGameService
 
     public async Task<List<Level>> GetGameLevelsAsync(string gameId)
     {
-        List<Level>? levels = await GetCachedResourceAsync(gameId, CacheItemType.Levels, _gameRepository.GetGameLevelsAsync(gameId));
+        List<Level>? levels = await GetCachedResourceAsync(
+            gameId,
+            CacheItemType.Levels,
+            _gameRepository.GetGameLevelsAsync(gameId)
+        );
         if (levels == null)
             return [];
 
@@ -43,7 +54,11 @@ public class GameService : BaseCachableService, IGameService
 
     public async Task<List<Variable>> GetGameVariablesAsync(string gameId)
     {
-        List<Variable>? variables = await GetCachedResourceAsync(gameId, CacheItemType.Variables, _gameRepository.GetGameVariablesAsync(gameId));
+        List<Variable>? variables = await GetCachedResourceAsync(
+            gameId,
+            CacheItemType.Variables,
+            _gameRepository.GetGameVariablesAsync(gameId)
+        );
         if (variables == null)
             return [];
 

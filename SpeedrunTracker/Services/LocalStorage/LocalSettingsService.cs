@@ -6,7 +6,8 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
 {
     private readonly IConfiguration _configuration;
 
-    public LocalSettingsService(IConfiguration configuration, ILocalDatabaseService databaseService) : base(databaseService)
+    public LocalSettingsService(IConfiguration configuration, ILocalDatabaseService databaseService)
+        : base(databaseService)
     {
         _configuration = configuration;
         UserSettings = new();
@@ -22,7 +23,7 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
             UserSettings = new()
             {
                 MaxLeaderboardResults = _configuration.GetValue<int>("defaults:max-leaderboard-results"),
-                DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds")
+                DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds"),
             };
 
             await GetConnection().InsertAsync(UserSettings);

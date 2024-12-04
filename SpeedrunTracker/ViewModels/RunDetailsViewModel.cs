@@ -1,10 +1,10 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -46,8 +46,8 @@ public class RunDetailsViewModel : BaseShareableViewModel
         get
         {
             if (_runComment == null && RunDetails?.Run?.Comment != null)
-                _runComment = RunDetails.Run.Comment
-                    .Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob")
+                _runComment = RunDetails
+                    .Run.Comment.Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob")
                     .MarkdownifyUrls();
             return _runComment;
         }
@@ -91,9 +91,15 @@ public class RunDetailsViewModel : BaseShareableViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
 
-    public string? Title => _runDetails == null ? "RunDetails" : $"{_runDetails.Category?.Name} in {_runDetails.Run.Times?.PrimaryTimeSpan}";
+    public string? Title =>
+        _runDetails == null
+            ? "RunDetails"
+            : $"{_runDetails.Category?.Name} in {_runDetails.Run.Times?.PrimaryTimeSpan}";
 
-    public string? SubTitle => _runDetails == null ? "by <unknown>" : $"by {string.Join(" and ", _runDetails.Run.Players.Select(x => x.DisplayName))}";
+    public string? SubTitle =>
+        _runDetails == null
+            ? "by <unknown>"
+            : $"by {string.Join(" and ", _runDetails.Run.Players.Select(x => x.DisplayName))}";
 
     public string? FormattedDate => RunDetails?.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
 
@@ -113,28 +119,44 @@ public class RunDetailsViewModel : BaseShareableViewModel
             return RunDetails.Run.Status?.StatusType switch
             {
                 SpeedrunStatusType.New => "Verification pending",
-                SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue ? $"Verified on {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat)} at {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat)}" : "Verified",
+                SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue
+                    ? $"Verified on {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat)} at {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat)}"
+                    : "Verified",
                 SpeedrunStatusType.Rejected => $"Rejected ({RunDetails.Run.Status.Reason ?? string.Empty})",
                 _ => string.Empty,
             };
         }
     }
 
-    public string StatusImage => (RunDetails?.Run?.Status?.StatusType) switch
-    {
-        SpeedrunStatusType.New => "hourglass",
-        SpeedrunStatusType.Verified => "verified",
-        SpeedrunStatusType.Rejected => "rejected",
-        _ => string.Empty,
-    };
+    public string StatusImage =>
+        (RunDetails?.Run?.Status?.StatusType) switch
+        {
+            SpeedrunStatusType.New => "hourglass",
+            SpeedrunStatusType.Verified => "verified",
+            SpeedrunStatusType.Rejected => "rejected",
+            _ => string.Empty,
+        };
 
-    private bool ShouldShowTimingType(TimingType timingType) => RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true && RunDetails?.Ruleset?.DefaultTimingType != timingType;
+    private bool ShouldShowTimingType(TimingType timingType) =>
+        RunDetails?.Ruleset?.TimingTypes?.Contains(timingType) == true
+        && RunDetails?.Ruleset?.DefaultTimingType != timingType;
 
-    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? RunDetails?.GameAssets?.Background?.Uri : null;
+    public string? BackgroundUri =>
+        _settingsService.UserSettings.DisplayBackgrounds == true ? RunDetails?.GameAssets?.Background?.Uri : null;
 
     public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
 
-    public RunDetailsViewModel(IBrowserService browserService, IUserService userService, IEmbedService embedService, IShareService shareService, IToastService toastService, IConfiguration config, ILocalSettingsService settingsService, IPopupService popupService) : base(shareService, toastService, popupService)
+    public RunDetailsViewModel(
+        IBrowserService browserService,
+        IUserService userService,
+        IEmbedService embedService,
+        IShareService shareService,
+        IToastService toastService,
+        IConfiguration config,
+        ILocalSettingsService settingsService,
+        IPopupService popupService
+    )
+        : base(shareService, toastService, popupService)
     {
         _browserService = browserService;
         _userService = userService;
@@ -153,7 +175,9 @@ public class RunDetailsViewModel : BaseShareableViewModel
     public async Task LoadData()
     {
         if (RunDetails?.Examiner == null && RunDetails?.Run.Status?.ExaminerId != null)
-            RunDetails.Examiner = await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId)) ?? User.GetUserNotFoundPlaceholder();
+            RunDetails.Examiner =
+                await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId))
+                ?? User.GetUserNotFoundPlaceholder();
 
         if (!HasVideo)
             CloseActivityIndicator();

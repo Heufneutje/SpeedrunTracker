@@ -9,30 +9,52 @@
     <VerticalStackLayout Padding="10">
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
-                <Label Text="Interface" Style="{StaticResource GroupHeaderLabel}" />
-                <Label Text="Theme" Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding Themes}" SelectedItem="{Binding Theme}" Margin="20,5,20,5" />
-                <Label Text="Display Backgrounds" Style="{StaticResource SettingsItemSubLabel}" />
-                <Switch IsToggled="{Binding DisplayBackgrounds}" HorizontalOptions="Start" Margin="15,5,20,5" />
+                <Label Text="Interface"
+                       Style="{StaticResource GroupHeaderLabel}" />
+                <Label Text="Theme"
+                       Style="{StaticResource SettingsItemSubLabel}" />
+                <Picker ItemsSource="{Binding Themes}"
+                        SelectedItem="{Binding Theme}"
+                        Margin="20,5,20,5" />
+                <Label Text="Display Backgrounds"
+                       Style="{StaticResource SettingsItemSubLabel}" />
+                <Switch IsToggled="{Binding DisplayBackgrounds}"
+                        HorizontalOptions="Start"
+                        Margin="15,5,20,5" />
             </VerticalStackLayout>
         </Border>
 
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
-                <Label Text="Date and Time" Style="{StaticResource GroupHeaderLabel}" />
-                <Label Text="Date Format" Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding DateFormats}" SelectedItem="{Binding DateFormat}" Margin="20,5,20,5" />
-                <Label Text="Time Format" Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding TimeFormats}" SelectedItem="{Binding TimeFormat}" Margin="20,5,20,5" />
+                <Label Text="Date and Time"
+                       Style="{StaticResource GroupHeaderLabel}" />
+                <Label Text="Date Format"
+                       Style="{StaticResource SettingsItemSubLabel}" />
+                <Picker ItemsSource="{Binding DateFormats}"
+                        SelectedItem="{Binding DateFormat}"
+                        Margin="20,5,20,5" />
+                <Label Text="Time Format"
+                       Style="{StaticResource SettingsItemSubLabel}" />
+                <Picker ItemsSource="{Binding TimeFormats}"
+                        SelectedItem="{Binding TimeFormat}"
+                        Margin="20,5,20,5" />
             </VerticalStackLayout>
         </Border>
 
         <Border Style="{StaticResource TransparentGridElementBorder}">
             <VerticalStackLayout>
-                <Label Text="Maximum Leaderboard Results" Style="{StaticResource GroupHeaderLabel}" />
-                <Grid ColumnDefinitions="*,Auto" Margin="0,0,10,0">
-                    <Slider Grid.Column="0" Margin="10" Minimum="1" Maximum="1000" Value="{Binding MaxLeaderboardResults, Mode=TwoWay}" />
-                    <Label Grid.Column="1" Margin="10" Text="{Binding MaxLeaderboardResults}" />
+                <Label Text="Maximum Leaderboard Results"
+                       Style="{StaticResource GroupHeaderLabel}" />
+                <Grid ColumnDefinitions="*,Auto"
+                      Margin="0,0,10,0">
+                    <Slider Grid.Column="0"
+                            Margin="10"
+                            Minimum="1"
+                            Maximum="1000"
+                            Value="{Binding MaxLeaderboardResults, Mode=TwoWay}" />
+                    <Label Grid.Column="1"
+                           Margin="10"
+                           Text="{Binding MaxLeaderboardResults}" />
                 </Grid>
             </VerticalStackLayout>
         </Border>

@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Maui;
+﻿using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using CommunityToolkit.Maui;
 using MemoryToolkit.Maui;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -8,9 +11,6 @@ using SpeedrunTracker.Services.LocalStorage;
 using SpeedrunTracker.Services.SpeedrunData;
 using SpeedrunTracker.ViewModels;
 using SpeedrunTracker.Views;
-using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace SpeedrunTracker.Extensions;
 
@@ -35,13 +35,13 @@ public static class BuilderExtensions
     private static void AddFramework(MauiAppBuilder builder)
     {
         builder
-           .UseMauiCommunityToolkit()
-           .UseMauiApp<App>()
-           .ConfigureFonts(fonts =>
-           {
-               fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-               fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-           });
+            .UseMauiCommunityToolkit()
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
 
 #if DEBUG
         builder.UseLeakDetection();
@@ -51,29 +51,31 @@ public static class BuilderExtensions
     private static void AddPlatformSpecificHandlers()
     {
 #if ANDROID
-        Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping("FullWidth", (handler, control) =>
-        {
-            handler.PlatformView.MaxWidth = int.MaxValue;
-        });
+        Microsoft.Maui.Handlers.SearchBarHandler.Mapper.AppendToMapping(
+            "FullWidth",
+            (handler, control) =>
+            {
+                handler.PlatformView.MaxWidth = int.MaxValue;
+            }
+        );
 #endif
     }
 
     private static void AddLogging(MauiAppBuilder builder)
     {
 #if DEBUG
-        builder.Logging.AddDebug();        
+        builder.Logging.AddDebug();
 #endif
     }
 
     private static IConfiguration AddConfiguration(MauiAppBuilder builder)
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using Stream? stream = assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json") ??
-            throw new FileNotFoundException("appsettings.json file is missing");
-        
-        IConfigurationRoot config = new ConfigurationBuilder()
-                    .AddJsonStream(stream)
-                    .Build();
+        using Stream? stream =
+            assembly.GetManifestResourceStream("SpeedrunTracker.appsettings.json")
+            ?? throw new FileNotFoundException("appsettings.json file is missing");
+
+        IConfigurationRoot config = new ConfigurationBuilder().AddJsonStream(stream).Build();
 
         builder.Configuration.AddConfiguration(config);
         return config;
@@ -84,16 +86,10 @@ public static class BuilderExtensions
         JsonSerializerOptions options = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Converters =
-            {
-                new JsonStringEnumMemberConverter()
-            }
+            Converters = { new JsonStringEnumMemberConverter() },
         };
 
-        RefitSettings settings = new()
-        {
-            ContentSerializer = new SystemTextJsonContentSerializer(options)
-        };
+        RefitSettings settings = new() { ContentSerializer = new SystemTextJsonContentSerializer(options) };
 
         services.AddRefitClient<IGameRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
         services.AddRefitClient<ILeaderboardRepository>(settings).ConfigureHttpClient(ConfigureHttpClient);
@@ -103,7 +99,9 @@ public static class BuilderExtensions
 
         void ConfigureHttpClient(HttpClient client)
         {
-            client.BaseAddress = new Uri($"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}");
+            client.BaseAddress = new Uri(
+                $"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}"
+            );
             client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{App.Version}");
         }
     }

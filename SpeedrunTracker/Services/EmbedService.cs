@@ -33,7 +33,7 @@ public class EmbedService : IEmbedService
         {
             Url = url,
             EmbedUrl = $"https://www.youtube.com/embed/{videoId}",
-            EmbedType = EmbedType.Unknown
+            EmbedType = EmbedType.Unknown,
         };
     }
 
@@ -44,8 +44,9 @@ public class EmbedService : IEmbedService
         return new EmbeddableUrl()
         {
             Url = url,
-            EmbedUrl = $"https://player.twitch.tv/?autoplay=false&enableExtensions=true&parent=speedruntracker&video={videoId}",
-            EmbedType = EmbedType.Twitch
+            EmbedUrl =
+                $"https://player.twitch.tv/?autoplay=false&enableExtensions=true&parent=speedruntracker&video={videoId}",
+            EmbedType = EmbedType.Twitch,
         };
     }
 
@@ -55,7 +56,7 @@ public class EmbedService : IEmbedService
         {
             Url = url,
             EmbedUrl = url,
-            EmbedType = EmbedType.Unknown
+            EmbedType = EmbedType.Unknown,
         };
     }
 }

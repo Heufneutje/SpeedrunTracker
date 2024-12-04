@@ -10,24 +10,43 @@
              Appearing="ContentPage_Appearing"
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
-             mtk:LeakMonitorBehavior.Cascade="True" 
+             mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
         <VerticalStackLayout>
-            <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="1" FontAutoScalingEnabled="True" />
-            <Label Text="{Binding SubTitle}" TextColor="White" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="1" FontAutoScalingEnabled="True" />
+            <Label Text="{Binding Title}"
+                   TextColor="White"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center"
+                   MaxLines="1"
+                   FontAutoScalingEnabled="True" />
+            <Label Text="{Binding SubTitle}"
+                   TextColor="White"
+                   FontSize="Small"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center"
+                   MaxLines="1"
+                   FontAutoScalingEnabled="True" />
         </VerticalStackLayout>
     </Shell.TitleView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="share" Text="Share" Command="{Binding ShareCommand}" />
+        <ToolbarItem IconImageSource="share"
+                     Text="Share"
+                     Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <Image Source="{Binding BackgroundUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding BackgroundUri}"
+               Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>
-            <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+            <Grid Padding="10"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                <Border Style="{StaticResource TransparentGridElementBorder}"
+                        Grid.Row="0">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Videos" ImageSource="video" IsValueVisible="False" />
+                        <controls:RunPropertyControl Title="Videos"
+                                                     ImageSource="video"
+                                                     IsValueVisible="False" />
                         <VerticalStackLayout IsVisible="{Binding HasVideo}">
                             <CollectionView Margin="0,0,0,10"
                                             ItemsSource="{Binding VideoUrls}"
@@ -39,54 +58,116 @@
                                     <LinearItemsLayout Orientation="Horizontal" />
                                 </CollectionView.ItemsLayout>
                             </CollectionView>
-                            <WebView Source="{Binding SelectedVideo.EmbedUrl}" HorizontalOptions="Center" HeightRequest="200"  Margin="0,0,0,10" Navigated="WebView_Navigated" />
-                            <Button Text="Open External Player" Command="{Binding ShowVideoCommand}" />
+                            <WebView Source="{Binding SelectedVideo.EmbedUrl}"
+                                     HorizontalOptions="Center"
+                                     HeightRequest="200"
+                                     Margin="0,0,0,10"
+                                     Navigated="WebView_Navigated" />
+                            <Button Text="Open External Player"
+                                    Command="{Binding ShowVideoCommand}" />
                         </VerticalStackLayout>
-                        <Label Text="No Video Available" IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}" Margin="5,-5,0,5" />
-                        <controls:RunPropertyControl Title="Description" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" ImageSource="comment" IsValueVisible="False" />
-                        <markdown:MarkdownView MarkdownText="{Binding RunComment}" IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}" Margin="5,-5,0,5" LinkCommand="{Binding OpenLinkCommand}" />
+                        <Label Text="No Video Available"
+                               IsVisible="{Binding Path=HasVideo, Converter={StaticResource InverseBoolConverter}}"
+                               Margin="5,-5,0,5" />
+                        <controls:RunPropertyControl Title="Description"
+                                                     IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}"
+                                                     ImageSource="comment"
+                                                     IsValueVisible="False" />
+                        <markdown:MarkdownView MarkdownText="{Binding RunComment}"
+                                               IsVisible="{Binding RunComment, Converter={StaticResource IsNotNullConverter}}"
+                                               Margin="5,-5,0,5"
+                                               LinkCommand="{Binding OpenLinkCommand}" />
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1">
+                <Border Style="{StaticResource TransparentGridElementBorder}"
+                        Grid.Row="1">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Players" ImageSource="user" IsValueVisible="False" />
-                        <CollectionView ItemsSource="{Binding RunDetails.Run.Players}" ItemTemplate="{StaticResource RunPlayersTemplate}" SelectionMode="Single" SelectedItem="{Binding SelectedPlayer}" SelectionChangedCommand="{Binding NavigateToUserCommand}" />
+                        <controls:RunPropertyControl Title="Players"
+                                                     ImageSource="user"
+                                                     IsValueVisible="False" />
+                        <CollectionView ItemsSource="{Binding RunDetails.Run.Players}"
+                                        ItemTemplate="{StaticResource RunPlayersTemplate}"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding SelectedPlayer}"
+                                        SelectionChangedCommand="{Binding NavigateToUserCommand}" />
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="2">
+                <Border Style="{StaticResource TransparentGridElementBorder}"
+                        Grid.Row="2">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Level" Value="{Binding RunDetails.Level.Name}" ImageSource="world" IsVisible="{Binding RunDetails.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
-                        <controls:RunPropertyControl Title="Category" Value="{Binding RunDetails.Category.Name}" ImageSource="category" />
-                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RunDetails.Variables}" BindableLayout.ItemTemplate="{StaticResource RunVariablesTemplate}" />
+                        <controls:RunPropertyControl Title="Level"
+                                                     Value="{Binding RunDetails.Level.Name}"
+                                                     ImageSource="world"
+                                                     IsVisible="{Binding RunDetails.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Category"
+                                                     Value="{Binding RunDetails.Category.Name}"
+                                                     ImageSource="category" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RunDetails.Variables}"
+                                             BindableLayout.ItemTemplate="{StaticResource RunVariablesTemplate}" />
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="3">
+                <Border Style="{StaticResource TransparentGridElementBorder}"
+                        Grid.Row="3">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Rank" IsValueVisible="False" ImageSource="trophy" />
+                        <controls:RunPropertyControl Title="Rank"
+                                                     IsValueVisible="False"
+                                                     ImageSource="trophy" />
                         <HorizontalStackLayout>
-                            <Image Source="{Binding RunDetails.TrophyAsset.Uri}" IsVisible="{Binding HasTrophyAsset}" Style="{StaticResource TrophyImageStyle}" Margin="5,-5,0,0" />
-                            <Label Text="{Binding RunDetails.OrdinalPlace}" Margin="5,-5,0,5" FontAttributes="Bold" />
+                            <Image Source="{Binding RunDetails.TrophyAsset.Uri}"
+                                   IsVisible="{Binding HasTrophyAsset}"
+                                   Style="{StaticResource TrophyImageStyle}"
+                                   Margin="5,-5,0,0" />
+                            <Label Text="{Binding RunDetails.OrdinalPlace}"
+                                   Margin="5,-5,0,5"
+                                   FontAttributes="Bold" />
                         </HorizontalStackLayout>
 
-                        <controls:RunPropertyControl Title="Time" Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}" ImageSource="clock" />
-                        <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.IngameTimeSpan}" ImageSource="clock" IsVisible="{Binding HasInGameTime}" />
-                        <controls:RunPropertyControl Title="Real Time" Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtime}" />
-                        <controls:RunPropertyControl Title="In-Game Time" Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}" ImageSource="clock" IsVisible="{Binding HasRealtimeNoLoads}" />
-                        <controls:RunPropertyControl Title="Date" Value="{Binding FormattedDate}" ImageSource="calendar" IsVisible="{Binding RunDetails.Run.Date, Converter={StaticResource IsNotNullConverter}}" />
-                        <controls:RunPropertyControl Title="Platform" Value="{Binding RunDetails.Platform.Name}" ImageSource="platform" IsVisible="{Binding RunDetails.Platform, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Time"
+                                                     Value="{Binding RunDetails.Run.Times.PrimaryTimeSpan}"
+                                                     ImageSource="clock" />
+                        <controls:RunPropertyControl Title="In-Game Time"
+                                                     Value="{Binding RunDetails.Run.Times.IngameTimeSpan}"
+                                                     ImageSource="clock"
+                                                     IsVisible="{Binding HasInGameTime}" />
+                        <controls:RunPropertyControl Title="Real Time"
+                                                     Value="{Binding RunDetails.Run.Times.RealtimeTimeSpan}"
+                                                     ImageSource="clock"
+                                                     IsVisible="{Binding HasRealtime}" />
+                        <controls:RunPropertyControl Title="In-Game Time"
+                                                     Value="{Binding RunDetails.Run.Times.RealtimeNoLoadsTimeSpan}"
+                                                     ImageSource="clock"
+                                                     IsVisible="{Binding HasRealtimeNoLoads}" />
+                        <controls:RunPropertyControl Title="Date"
+                                                     Value="{Binding FormattedDate}"
+                                                     ImageSource="calendar"
+                                                     IsVisible="{Binding RunDetails.Run.Date, Converter={StaticResource IsNotNullConverter}}" />
+                        <controls:RunPropertyControl Title="Platform"
+                                                     Value="{Binding RunDetails.Platform.Name}"
+                                                     ImageSource="platform"
+                                                     IsVisible="{Binding RunDetails.Platform, Converter={StaticResource IsNotNullConverter}}" />
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="4">
+                <Border Style="{StaticResource TransparentGridElementBorder}"
+                        Grid.Row="4">
                     <VerticalStackLayout Padding="10">
-                        <controls:RunPropertyControl Title="Status" Value="{Binding StatusDescription}" ImageSource="{Binding StatusImage}" />
-                        <controls:RunPropertyControl Title="Examiner" IsValueVisible="False" ImageSource="user" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
-                        <Label Text="{Binding RunDetails.Examiner.DisplayName}" TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}" Margin="5,-5,0,5" IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
+                        <controls:RunPropertyControl Title="Status"
+                                                     Value="{Binding StatusDescription}"
+                                                     ImageSource="{Binding StatusImage}" />
+                        <controls:RunPropertyControl Title="Examiner"
+                                                     IsValueVisible="False"
+                                                     ImageSource="user"
+                                                     IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
+                        <Label Text="{Binding RunDetails.Examiner.DisplayName}"
+                               TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}"
+                               Margin="5,-5,0,5"
+                               IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NavigateToUserCommand}" CommandParameter="{Binding RunDetails.Examiner}" />
+                                <TapGestureRecognizer Command="{Binding NavigateToUserCommand}"
+                                                      CommandParameter="{Binding RunDetails.Examiner}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </VerticalStackLayout>

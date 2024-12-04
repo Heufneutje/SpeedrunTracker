@@ -4,8 +4,8 @@ namespace SpeedrunTracker.ViewModels;
 
 public class VariableViewModel : BaseViewModel, INamedSpeedrunModel
 {
-    public required string VariableId { get; set; }
-    public required string Name { get; set; }
+    public string VariableId { get; set; }
+    public string Name { get; set; }
 
     private ViewVariableValue? _selectedValue;
 

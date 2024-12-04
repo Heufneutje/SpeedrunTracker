@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -14,6 +14,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
     private bool _hasReachedEnd;
 
     private bool _isRefreshing;
+
     public bool IsRefreshing
     {
         get => _isRefreshing;
@@ -44,7 +45,14 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
 
     public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
-    public NotificationListViewModel(INotificationService notificationService, IToastService toastService, IBrowserService browserService, ILocalSettingsService settingsService, IPopupService popupService) : base(toastService, popupService)
+    public NotificationListViewModel(
+        INotificationService notificationService,
+        IToastService toastService,
+        IBrowserService browserService,
+        ILocalSettingsService settingsService,
+        IPopupService popupService
+    )
+        : base(toastService, popupService)
     {
         _notificationService = notificationService;
         _browserService = browserService;
@@ -57,11 +65,19 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         if (_hasReachedEnd)
             return;
 
-        PagedData<List<Notification>>? notifications = await ExecuteNetworkTask(_notificationService.GetNotificationsAsync(_offset));
+        PagedData<List<Notification>>? notifications = await ExecuteNetworkTask(
+            _notificationService.GetNotificationsAsync(_offset)
+        );
         if (notifications == null)
             return;
 
-        Notifications.AddRange(notifications.Data.Select(x => new NotificationViewModel(x, _settingsService.UserSettings.DateFormat, _settingsService.UserSettings.TimeFormat)));
+        Notifications.AddRange(
+            notifications.Data.Select(x => new NotificationViewModel(
+                x,
+                _settingsService.UserSettings.DateFormat,
+                _settingsService.UserSettings.TimeFormat
+            ))
+        );
 
         if (notifications.Pagination.Size == 0)
             _hasReachedEnd = true;

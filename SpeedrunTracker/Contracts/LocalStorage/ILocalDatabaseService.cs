@@ -1,5 +1,3 @@
 ﻿namespace SpeedrunTracker.Contracts.LocalStorage;
 
-public interface ILocalDatabaseService : IDatabaseService
-{
-}
+public interface ILocalDatabaseService : IDatabaseService { }

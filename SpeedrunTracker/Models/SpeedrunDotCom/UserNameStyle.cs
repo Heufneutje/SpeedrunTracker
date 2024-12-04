@@ -16,7 +16,10 @@ public record UserNameStyle
     public UserNameStyleColor? ColorTo { get; set; }
 
     [JsonIgnore]
-    public Color ThemeColor => Color.FromArgb(Style == UserNameStyleType.Gradient ?
-        (Application.Current?.RequestedTheme == AppTheme.Dark ? ColorFrom?.Dark : ColorFrom?.Light) :
-        (Application.Current?.RequestedTheme == AppTheme.Dark ? SolidColor?.Dark : SolidColor?.Light));
+    public Color ThemeColor =>
+        Color.FromArgb(
+            Style == UserNameStyleType.Gradient
+                ? (Application.Current?.RequestedTheme == AppTheme.Dark ? ColorFrom?.Dark : ColorFrom?.Light)
+                : (Application.Current?.RequestedTheme == AppTheme.Dark ? SolidColor?.Dark : SolidColor?.Light)
+        );
 }

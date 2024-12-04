@@ -13,5 +13,5 @@ public enum VariableScopeType
     AllLevels,
 
     [EnumMember(Value = "single-level")]
-    SingleLevel
+    SingleLevel,
 }

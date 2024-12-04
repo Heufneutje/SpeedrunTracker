@@ -7,10 +7,8 @@ public class ShareService : IShareService
         if (string.IsNullOrEmpty(shareDetails.Uri))
             return;
 
-        await Share.Default.RequestAsync(new ShareTextRequest()
-        {
-            Text = shareDetails.Uri,
-            Title = shareDetails.Title
-        });
+        await Share.Default.RequestAsync(
+            new ShareTextRequest() { Text = shareDetails.Uri, Title = shareDetails.Title }
+        );
     }
 }

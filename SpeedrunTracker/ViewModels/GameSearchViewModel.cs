@@ -10,7 +10,8 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
 
     public override string SearchTextPlaceholder => "Search for games...";
 
-    public GameSearchViewModel(IToastService toastService, IGameService gameService, IPopupService popupService) : base(toastService, popupService)
+    public GameSearchViewModel(IToastService toastService, IGameService gameService, IPopupService popupService)
+        : base(toastService, popupService)
     {
         _gameService = gameService;
     }
@@ -30,12 +31,15 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
         if (apiData == null)
             return [];
 
-        return apiData.Data.OrderBy(x => x.IsRomhack).Select(x => new Entity()
-        {
-            Title = x.Names.International,
-            Subtitle = $"Released: {x.Released}",
-            ImageUrl = x.Assets?.CoverSmall?.Uri,
-            SearchObject = x
-        }).ToList();
+        return apiData
+            .Data.OrderBy(x => x.IsRomhack)
+            .Select(x => new Entity()
+            {
+                Title = x.Names.International,
+                Subtitle = $"Released: {x.Released}",
+                ImageUrl = x.Assets?.CoverSmall?.Uri,
+                SearchObject = x,
+            })
+            .ToList();
     }
 }

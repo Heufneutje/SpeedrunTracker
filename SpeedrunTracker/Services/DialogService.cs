@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration;
-
-namespace SpeedrunTracker.Services;
+﻿namespace SpeedrunTracker.Services;
 
 public class DialogService : IDialogService
 {
@@ -9,7 +7,12 @@ public class DialogService : IDialogService
         return GetMainPage()?.DisplayAlert(title, message, cancel) ?? Task.CompletedTask;
     }
 
-    public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = "Yes", string cancel = "No")
+    public async Task<bool> ShowConfirmationAsync(
+        string title,
+        string message,
+        string accept = "Yes",
+        string cancel = "No"
+    )
     {
         Page? mainPage = GetMainPage();
         return mainPage != null && await mainPage.DisplayAlert(title, message, accept, cancel);

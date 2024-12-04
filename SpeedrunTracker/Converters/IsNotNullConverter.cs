@@ -14,4 +14,3 @@ public class IsNotNullConverter : IValueConverter
         throw new NotSupportedException();
     }
 }
-

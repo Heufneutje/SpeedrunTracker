@@ -2,5 +2,6 @@
 
 public enum PlayerType
 {
-    User, Guest
+    User,
+    Guest,
 }

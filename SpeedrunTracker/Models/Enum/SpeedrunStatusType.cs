@@ -4,5 +4,5 @@ public enum SpeedrunStatusType
 {
     New,
     Verified,
-    Rejected
+    Rejected,
 }

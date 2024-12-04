@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -36,7 +36,8 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
     public ICommand SearchCommand => new AsyncRelayCommand(SearchAsync, CanSearch);
     public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateToAsync);
 
-    protected BaseSearchEntityViewModel(IToastService toastService, IPopupService popupService) : base(toastService, popupService)
+    protected BaseSearchEntityViewModel(IToastService toastService, IPopupService popupService)
+        : base(toastService, popupService)
     {
         _entities = [];
     }

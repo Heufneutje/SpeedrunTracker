@@ -9,7 +9,12 @@ public abstract class BaseCachableService
         _cacheService = cacheService;
     }
 
-    protected async Task<T?> GetCachedResourceAsync<T>(string gameId, CacheItemType itemType, Task<BaseData<T>?> repositoryAction) where T : class
+    protected async Task<T?> GetCachedResourceAsync<T>(
+        string gameId,
+        CacheItemType itemType,
+        Task<BaseData<T>?> repositoryAction
+    )
+        where T : class
     {
         CacheItem cacheItem = await _cacheService.GetCacheItemAsync(gameId, itemType);
         if (cacheItem != null && !cacheItem.IsExpired)

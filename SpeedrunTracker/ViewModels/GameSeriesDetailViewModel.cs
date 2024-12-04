@@ -1,10 +1,9 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
-using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -52,9 +51,18 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
 
-    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.Uri : null;
+    public string? BackgroundUri =>
+        _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.Uri : null;
 
-    public GameSeriesDetailViewModel(IGameSeriesService gameSeriesService, ILocalFollowService followService, IShareService shareService, IToastService toastService, IPopupService popupService, ILocalSettingsService settingsService) : base(followService, shareService, toastService, popupService)
+    public GameSeriesDetailViewModel(
+        IGameSeriesService gameSeriesService,
+        ILocalFollowService followService,
+        IShareService shareService,
+        IToastService toastService,
+        IPopupService popupService,
+        ILocalSettingsService settingsService
+    )
+        : base(followService, shareService, toastService, popupService)
     {
         Games = [];
         _gameSeriesService = gameSeriesService;
@@ -70,7 +78,9 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
         try
         {
-            PagedData<List<Game>>? games = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset));
+            PagedData<List<Game>>? games = await ExecuteNetworkTask(
+                _gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset)
+            );
             if (games == null)
                 return;
 

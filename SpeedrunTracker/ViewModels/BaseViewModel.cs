@@ -1,6 +1,6 @@
-﻿using CommunityToolkit.Maui.Core;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using CommunityToolkit.Maui.Core;
 
 namespace SpeedrunTracker.ViewModels;
 

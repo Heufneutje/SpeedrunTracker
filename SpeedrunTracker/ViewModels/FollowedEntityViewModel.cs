@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -18,7 +18,15 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
 
     public bool HasEntities => Entities?.Any() == true;
 
-    public FollowedEntityViewModel(IGameService gameService, IGameSeriesService gameSeriesService, IUserService userService, ILocalFollowService localFollowService, IToastService toastService, IPopupService popupService) : base(toastService, popupService)
+    public FollowedEntityViewModel(
+        IGameService gameService,
+        IGameSeriesService gameSeriesService,
+        IUserService userService,
+        ILocalFollowService localFollowService,
+        IToastService toastService,
+        IPopupService popupService
+    )
+        : base(toastService, popupService)
     {
         _gameService = gameService;
         _gameSeriesService = gameSeriesService;
@@ -45,6 +53,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
                     return;
                 }
                 break;
+
             case EntityType.Series:
                 GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
                 if (series != null)
@@ -53,6 +62,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
                     return;
                 }
                 break;
+
             case EntityType.Users:
                 User? user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
                 if (user != null)
@@ -71,16 +81,25 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         List<EntityGroup> entities = [];
         List<FollowedEntity> followedEntities = await _localFollowService.GetFollowedEntitiesAsync();
 
-        foreach (IGrouping<EntityType, FollowedEntity> grouping in followedEntities.OrderBy(x => x.Type).GroupBy(x => x.Type))
+        foreach (
+            IGrouping<EntityType, FollowedEntity> grouping in followedEntities.OrderBy(x => x.Type).GroupBy(x => x.Type)
+        )
         {
-            entities.Add(new EntityGroup(grouping.Key, grouping.Select(x => new Entity()
-            {
-                Id = x.Id ?? string.Empty,
-                Title = x.Title,
-                Subtitle = x.Subtitle,
-                ImageUrl = x.ImageUrl,
-                SearchObject = grouping.Key
-            }).ToList()));
+            entities.Add(
+                new EntityGroup(
+                    grouping.Key,
+                    grouping
+                        .Select(x => new Entity()
+                        {
+                            Id = x.Id ?? string.Empty,
+                            Title = x.Title,
+                            Subtitle = x.Subtitle,
+                            ImageUrl = x.ImageUrl,
+                            SearchObject = grouping.Key,
+                        })
+                        .ToList()
+                )
+            );
         }
 
         Entities = entities.AsObservableCollection();

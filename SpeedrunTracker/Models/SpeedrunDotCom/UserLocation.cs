@@ -4,4 +4,3 @@ public record UserLocation
 {
     public Country? Country { get; set; }
 }
-

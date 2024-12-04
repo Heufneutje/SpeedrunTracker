@@ -8,7 +8,12 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IGameSeriesService _gameSeriesService;
 
-    public GameSeriesSearchViewModel(IGameSeriesService gameSeriesService, IToastService toastService, IPopupService popupService) : base(toastService, popupService)
+    public GameSeriesSearchViewModel(
+        IGameSeriesService gameSeriesService,
+        IToastService toastService,
+        IPopupService popupService
+    )
+        : base(toastService, popupService)
     {
         _gameSeriesService = gameSeriesService;
     }
@@ -26,16 +31,20 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<GameSeries>>? apiData = await ExecuteNetworkTask(_gameSeriesService.SearchGameSeriesAsync(Query.Trim()));
+        PagedData<List<GameSeries>>? apiData = await ExecuteNetworkTask(
+            _gameSeriesService.SearchGameSeriesAsync(Query.Trim())
+        );
         if (apiData == null)
             return [];
 
-        return apiData.Data.Select(x => new Entity()
-        {
-            Title = x.Names.International,
-            Subtitle = $"Created: {x.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
-            ImageUrl = x.Assets?.CoverSmall?.Uri,
-            SearchObject = x
-        }).ToList();
+        return apiData
+            .Data.Select(x => new Entity()
+            {
+                Title = x.Names.International,
+                Subtitle = $"Created: {x.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
+                ImageUrl = x.Assets?.CoverSmall?.Uri,
+                SearchObject = x,
+            })
+            .ToList();
     }
 }

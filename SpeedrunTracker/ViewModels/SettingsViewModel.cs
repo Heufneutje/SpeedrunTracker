@@ -94,37 +94,40 @@ public class SettingsViewModel : BaseViewModel
 
     public ObservableCollection<ThemeSetting> Themes
     {
-        get => _themeSettings ??= new List<ThemeSetting>
-        {
-            new("System default", AppTheme.Unspecified),
-            new("Light", AppTheme.Light),
-            new("Dark", AppTheme.Dark)
-        }.AsObservableCollection();
+        get =>
+            _themeSettings ??= new List<ThemeSetting>
+            {
+                new("System default", AppTheme.Unspecified),
+                new("Light", AppTheme.Light),
+                new("Dark", AppTheme.Dark),
+            }.AsObservableCollection();
     }
 
     private ObservableCollection<FormatSetting>? _dateFormats;
 
     public ObservableCollection<FormatSetting> DateFormats
     {
-        get => _dateFormats ??= new List<FormatSetting>()
-        {
-            new("1999-12-31", "yyyy-MM-dd"),
-            new("31 Dec 1999", "dd MMM yyyy"),
-            new("Dec 31 1999", "MMM dd yyyy")
-        }.AsObservableCollection();
+        get =>
+            _dateFormats ??= new List<FormatSetting>()
+            {
+                new("1999-12-31", "yyyy-MM-dd"),
+                new("31 Dec 1999", "dd MMM yyyy"),
+                new("Dec 31 1999", "MMM dd yyyy"),
+            }.AsObservableCollection();
     }
 
     private ObservableCollection<FormatSetting>? _timeFormats;
 
     public ObservableCollection<FormatSetting> TimeFormats
     {
-        get => _timeFormats ??= new List<FormatSetting>()
-        {
-            new("23:59", "HH:mm"),
-            new("23:59:59", "HH:mm:ss"),
-            new("11:59 PM", "hh:mm tt"),
-            new("11:59:59 PM", "hh:mm:ss tt")
-        }.AsObservableCollection();
+        get =>
+            _timeFormats ??= new List<FormatSetting>()
+            {
+                new("23:59", "HH:mm"),
+                new("23:59:59", "HH:mm:ss"),
+                new("11:59 PM", "hh:mm tt"),
+                new("11:59:59 PM", "hh:mm:ss tt"),
+            }.AsObservableCollection();
     }
 
     public SettingsViewModel(ILocalSettingsService settingsService)

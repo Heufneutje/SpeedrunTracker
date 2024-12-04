@@ -1,48 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
-             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
-             xmlns:basemodels="clr-namespace:SpeedrunTracker.Models.Base"
-             xmlns:models="clr-namespace:SpeedrunTracker.Models"
-             xmlns:speedrunmodels="clr-namespace:SpeedrunTracker.Models.SpeedrunDotCom"
-             x:Class="SpeedrunTracker.Resources.Styles.Templates">
-    <DataTemplate x:Key="EntitiesGroupHeaderTemplate" x:DataType="models:EntityGroup">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                    xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
+                    xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+                    xmlns:basemodels="clr-namespace:SpeedrunTracker.Models.Base"
+                    xmlns:models="clr-namespace:SpeedrunTracker.Models"
+                    xmlns:speedrunmodels="clr-namespace:SpeedrunTracker.Models.SpeedrunDotCom"
+                    x:Class="SpeedrunTracker.Resources.Styles.Templates">
+    <DataTemplate x:Key="EntitiesGroupHeaderTemplate"
+                  x:DataType="models:EntityGroup">
         <ViewCell>
-            <Grid Padding="10" ColumnSpacing="5" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageSource, Mode=OneTime}" Grid.Column="0" WidthRequest="20" HeightRequest="20" Aspect="AspectFit">
+            <Grid Padding="10"
+                  ColumnSpacing="5"
+                  ColumnDefinitions="Auto,*">
+                <Image Source="{Binding ImageSource, Mode=OneTime}"
+                       Grid.Column="0"
+                       WidthRequest="20"
+                       HeightRequest="20"
+                       Aspect="AspectFit">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </Image.Behaviors>
                 </Image>
-                <Label Text="{Binding EntityType, Mode=OneTime}" Grid.Column="1" FontAttributes="Bold" />
+                <Label Text="{Binding EntityType, Mode=OneTime}"
+                       Grid.Column="1"
+                       FontAttributes="Bold" />
             </Grid>
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="EntitiesTemplate" x:DataType="models:Entity">
+    <DataTemplate x:Key="EntitiesTemplate"
+                  x:DataType="models:Entity">
         <ViewCell Height="100">
-            <Grid Padding="10" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageUrl, Mode=OneTime}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                <Label Text="{Binding Title, Mode=OneTime}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                <Label Text="{Binding Subtitle, Mode=OneTime}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+            <Grid Padding="10"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="Auto,*">
+                <Image Source="{Binding ImageUrl, Mode=OneTime}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       WidthRequest="50"
+                       HeightRequest="80"
+                       Aspect="AspectFit" />
+                <Label Text="{Binding Title, Mode=OneTime}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="Large"
+                       Margin="10,10,0,0" />
+                <Label Text="{Binding Subtitle, Mode=OneTime}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Margin="10,0,0,10" />
             </Grid>
         </ViewCell>
     </DataTemplate>
 
-    <DataTemplate x:Key="GameSeriesEntriesTemplate" x:DataType="speedrunmodels:Game">
+    <DataTemplate x:Key="GameSeriesEntriesTemplate"
+                  x:DataType="speedrunmodels:Game">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
-            <Grid Padding="10,0,10,0" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Assets.CoverSmall.Uri}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="80" Aspect="AspectFit" />
-                <Label Text="{Binding Names.International, Mode=OneTime}" Grid.Row="0" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
-                <Label Text="{Binding Released, Mode=OneTime, StringFormat='Released: {0}'}" Grid.Row="1" Grid.Column="1" Margin="10,0,0,10" />
+            <Grid Padding="10,0,10,0"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="Auto,*">
+                <Image Source="{Binding Assets.CoverSmall.Uri}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       WidthRequest="50"
+                       HeightRequest="80"
+                       Aspect="AspectFit" />
+                <Label Text="{Binding Names.International, Mode=OneTime}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="Large"
+                       Margin="10,10,0,0" />
+                <Label Text="{Binding Released, Mode=OneTime, StringFormat='Released: {0}'}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Margin="10,0,0,10" />
             </Grid>
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="CategoryTemplate" x:DataType="basemodels:INamedSpeedrunModel">
-        <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
+    <DataTemplate x:Key="CategoryTemplate"
+                  x:DataType="basemodels:INamedSpeedrunModel">
+        <Border Padding="10"
+                Margin="5"
+                Style="{StaticResource TransparentBackground}">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
@@ -51,30 +95,48 @@
                     <VisualState Name="Normal"></VisualState>
                     <VisualState Name="Selected">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                            <Setter TargetName="_nameLabel" Property="Label.TextColor" Value="{StaticResource White}" />
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource Primary}" />
+                            <Setter TargetName="_nameLabel"
+                                    Property="Label.TextColor"
+                                    Value="{StaticResource White}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Label Text="{Binding Name, Mode=OneTime}" x:Name="_nameLabel" />
+            <Label Text="{Binding Name, Mode=OneTime}"
+                   x:Name="_nameLabel" />
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="LeaderboardTemplate" x:DataType="speedrunmodels:LeaderboardEntry">
+    <DataTemplate x:Key="LeaderboardTemplate"
+                  x:DataType="speedrunmodels:LeaderboardEntry">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid ColumnDefinitions="50,*,Auto">
-                <Image Source="{Binding TrophyAsset.Uri}" Grid.Column="0" IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNotNullConverter}}" Style="{StaticResource Key=TrophyImageStyle}" />
-                <Label Text="{Binding Place, Mode=OneTime}" Grid.Column="0" HorizontalTextAlignment="Center" IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNullConverter}}" />
-                <Label Text="{Binding Run.Players[0].DisplayName, Mode=OneTime}" TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}" FontAttributes="Bold" Grid.Column="1" />
-                <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}" Grid.Column="2" />
+                <Image Source="{Binding TrophyAsset.Uri}"
+                       Grid.Column="0"
+                       IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNotNullConverter}}"
+                       Style="{StaticResource Key=TrophyImageStyle}" />
+                <Label Text="{Binding Place, Mode=OneTime}"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="Center"
+                       IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNullConverter}}" />
+                <Label Text="{Binding Run.Players[0].DisplayName, Mode=OneTime}"
+                       TextColor="{Binding Run.Players[0].NameStyle.ThemeColor}"
+                       FontAttributes="Bold"
+                       Grid.Column="1" />
+                <Label Text="{Binding Run.Times.PrimaryTimeSpan, Mode=OneTime}"
+                       Grid.Column="2" />
             </Grid>
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="VariablesTemplate" x:DataType="viewmodels:VariableViewModel">
+    <DataTemplate x:Key="VariablesTemplate"
+                  x:DataType="viewmodels:VariableViewModel">
         <VerticalStackLayout>
-            <controls:RunPropertyControl Title="{Binding Name}" IsValueVisible="False" ImageSource="category" />
+            <controls:RunPropertyControl Title="{Binding Name}"
+                                         IsValueVisible="False"
+                                         ImageSource="category" />
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                             ItemsSource="{Binding Values}"
                             SelectedItem="{Binding SelectedValue}"
@@ -86,16 +148,25 @@
         </VerticalStackLayout>
     </DataTemplate>
 
-    <DataTemplate x:Key="RunVariablesTemplate" x:DataType="models:RunVariable">
-        <controls:RunPropertyControl Title="{Binding Name, Mode=OneTime}" Value="{Binding Value, Mode=OneTime}" ImageSource="category" />
+    <DataTemplate x:Key="RunVariablesTemplate"
+                  x:DataType="models:RunVariable">
+        <controls:RunPropertyControl Title="{Binding Name, Mode=OneTime}"
+                                     Value="{Binding Value, Mode=OneTime}"
+                                     ImageSource="category" />
     </DataTemplate>
 
-    <DataTemplate x:Key="RunPlayersTemplate" x:DataType="speedrunmodels:User">
-        <Label Text="{Binding DisplayName, Mode=OneTime}" TextColor="{Binding NameStyle.ThemeColor, Mode=OneTime}" Margin="5,0,0,5" />
+    <DataTemplate x:Key="RunPlayersTemplate"
+                  x:DataType="speedrunmodels:User">
+        <Label Text="{Binding DisplayName, Mode=OneTime}"
+               TextColor="{Binding NameStyle.ThemeColor, Mode=OneTime}"
+               Margin="5,0,0,5" />
     </DataTemplate>
 
-    <DataTemplate x:Key="RunVideosTemplate" x:DataType="models:EmbeddableUrl">
-        <Border Padding="10" Margin="5" Style="{StaticResource TransparentBackground}">
+    <DataTemplate x:Key="RunVideosTemplate"
+                  x:DataType="models:EmbeddableUrl">
+        <Border Padding="10"
+                Margin="5"
+                Style="{StaticResource TransparentBackground}">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10" />
             </Border.StrokeShape>
@@ -104,37 +175,60 @@
                     <VisualState Name="Normal"></VisualState>
                     <VisualState Name="Selected">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                            <Setter TargetName="_nameLabel" Property="Label.TextColor" Value="{StaticResource White}" />
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource Primary}" />
+                            <Setter TargetName="_nameLabel"
+                                    Property="Label.TextColor"
+                                    Value="{StaticResource White}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Label Text="{Binding VideoNumberDescription, Mode=OneTime}" x:Name="_nameLabel" />
+            <Label Text="{Binding VideoNumberDescription, Mode=OneTime}"
+                   x:Name="_nameLabel" />
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate" x:DataType="models:UserPersonalBestsGroup">
-        <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
-            <Grid Padding="10" ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Game.Assets.CoverSmall.Uri, Mode=OneTime}"  Grid.Column="0" Grid.RowSpan="2" WidthRequest="50" HeightRequest="60" Aspect="AspectFit" />
-                <Label Text="{Binding Game.Names.International, Mode=OneTime}" Grid.Column="1" FontSize="Large" Margin="10,10,0,0" />
+    <DataTemplate x:Key="PersonalBestsGroupHeaderTemplate"
+                  x:DataType="models:UserPersonalBestsGroup">
+        <Border Style="{StaticResource TransparentCollectionElementBorder}"
+                Padding="0">
+            <Grid Padding="10"
+                  ColumnDefinitions="Auto,*">
+                <Image Source="{Binding Game.Assets.CoverSmall.Uri, Mode=OneTime}"
+                       Grid.Column="0"
+                       Grid.RowSpan="2"
+                       WidthRequest="50"
+                       HeightRequest="60"
+                       Aspect="AspectFit" />
+                <Label Text="{Binding Game.Names.International, Mode=OneTime}"
+                       Grid.Column="1"
+                       FontSize="Large"
+                       Margin="10,10,0,0" />
             </Grid>
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestsTemplate" x:DataType="viewmodels:UserRunViewModel">
-        <Border Style="{StaticResource TransparentCollectionElementBorder}" Padding="0">
-            <Grid Padding="10" ColumnDefinitions="2*,*,*">
+    <DataTemplate x:Key="PersonalBestsTemplate"
+                  x:DataType="viewmodels:UserRunViewModel">
+        <Border Style="{StaticResource TransparentCollectionElementBorder}"
+                Padding="0">
+            <Grid Padding="10"
+                  ColumnDefinitions="2*,*,*">
                 <VerticalStackLayout Grid.Column="0">
-                    <Label Text="{Binding Entry.Level.Name, Mode=OneTime}" IsVisible="{Binding Entry.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
+                    <Label Text="{Binding Entry.Level.Name, Mode=OneTime}"
+                           IsVisible="{Binding Entry.Run.LevelId, Converter={StaticResource IsNotNullConverter}}" />
                     <Label Text="{Binding Entry.Category.Data.Name, Mode=OneTime}" />
-                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Entry.Run.Variables}" BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Entry.Run.Variables}"
+                                         BindableLayout.ItemTemplate="{StaticResource PersonalBestRunVariablesTemplate}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding Entry.TrophyAsset.Uri, Mode=OneTime}" IsVisible="{Binding Entry.TrophyAsset, Converter={StaticResource IsNotNullConverter}}" Style="{StaticResource TrophyImageStyle}" />
-                        <Label Text="{Binding Entry.OrdinalPlace, Mode=OneTime}" FontAttributes="Bold" />
+                        <Image Source="{Binding Entry.TrophyAsset.Uri, Mode=OneTime}"
+                               IsVisible="{Binding Entry.TrophyAsset, Converter={StaticResource IsNotNullConverter}}"
+                               Style="{StaticResource TrophyImageStyle}" />
+                        <Label Text="{Binding Entry.OrdinalPlace, Mode=OneTime}"
+                               FontAttributes="Bold" />
                     </HorizontalStackLayout>
                     <Label Text="{Binding Entry.Run.Times.PrimaryTimeSpan, Mode=OneTime}" />
                 </VerticalStackLayout>
@@ -146,17 +240,23 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="PersonalBestRunVariablesTemplate" x:DataType="models:RunVariable">
+    <DataTemplate x:Key="PersonalBestRunVariablesTemplate"
+                  x:DataType="models:RunVariable">
         <Label Text="{Binding Value}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="NotificationTemplate" x:DataType="viewmodels:NotificationViewModel">
+    <DataTemplate x:Key="NotificationTemplate"
+                  x:DataType="viewmodels:NotificationViewModel">
         <VerticalStackLayout>
             <VerticalStackLayout Padding="20">
-                <Label Text="{Binding FormattedCreationDate, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}" TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
-                <Label Text="{Binding Notification.Text, Mode=OneTime}" Padding="0,10,0,0" FontAttributes="{Binding Notification.Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
+                <Label Text="{Binding FormattedCreationDate, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+                <Label Text="{Binding Notification.Text, Mode=OneTime}"
+                       Padding="0,10,0,0"
+                       FontAttributes="{Binding Notification.Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
             </VerticalStackLayout>
-            <Line StrokeThickness="1" BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+            <Line StrokeThickness="1"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         </VerticalStackLayout>
     </DataTemplate>
 </ResourceDictionary>

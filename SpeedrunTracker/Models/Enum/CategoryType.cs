@@ -8,5 +8,5 @@ public enum CategoryType
     PerGame,
 
     [EnumMember(Value = "per-level")]
-    PerLevel
+    PerLevel,
 }

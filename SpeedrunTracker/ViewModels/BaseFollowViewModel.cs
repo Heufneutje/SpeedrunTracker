@@ -1,6 +1,6 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -27,14 +27,14 @@ public abstract class BaseFollowViewModel : BaseShareableViewModel
 
     public string FollowButtonIconSource => IsFollowing == true ? "favorite_enabled" : "favorite_disabled";
 
-    protected BaseFollowViewModel(IShareService shareService, IToastService toastService, IPopupService popupService) : base(shareService, toastService, popupService)
-    {
-    }
+    protected BaseFollowViewModel(IShareService shareService, IToastService toastService, IPopupService popupService)
+        : base(shareService, toastService, popupService) { }
 
     public abstract ICommand FollowCommand { get; }
 }
 
-public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : BaseSpeedrunModel
+public abstract class BaseFollowViewModel<T> : BaseFollowViewModel
+    where T : BaseSpeedrunModel
 {
     protected readonly ILocalFollowService _followService;
 
@@ -42,7 +42,13 @@ public abstract class BaseFollowViewModel<T> : BaseFollowViewModel where T : Bas
 
     public override ICommand FollowCommand => new AsyncRelayCommand(ToggleFollowAsync);
 
-    protected BaseFollowViewModel(ILocalFollowService followService, IShareService shareService, IToastService toastService, IPopupService popupService) : base(shareService, toastService, popupService)
+    protected BaseFollowViewModel(
+        ILocalFollowService followService,
+        IShareService shareService,
+        IToastService toastService,
+        IPopupService popupService
+    )
+        : base(shareService, toastService, popupService)
     {
         _followService = followService;
     }

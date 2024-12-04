@@ -12,10 +12,7 @@ public class JsonSerializationService : IJsonSerializationService
         _options = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Converters =
-            {
-                new JsonStringEnumMemberConverter()
-            }
+            Converters = { new JsonStringEnumMemberConverter() },
         };
     }
 

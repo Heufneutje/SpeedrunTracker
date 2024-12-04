@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -77,7 +77,16 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
 
-    public UserDetailsViewModel(IBrowserService browserService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
+    public UserDetailsViewModel(
+        IBrowserService browserService,
+        IUserService userService,
+        ILocalFollowService followService,
+        IShareService shareService,
+        IToastService toastService,
+        ILocalSettingsService settingsService,
+        IPopupService popupService
+    )
+        : base(followService, shareService, toastService, popupService)
     {
         _browserService = browserService;
         _userService = userService;
@@ -94,7 +103,11 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         ShowActivityIndicator();
         try
         {
-            if (_isCurrentlyShowingLevels == true && showLevels || _isCurrentlyShowingLevels == false && !showLevels || User == null)
+            if (
+                _isCurrentlyShowingLevels == true && showLevels
+                || _isCurrentlyShowingLevels == false && !showLevels
+                || User == null
+            )
                 return;
 
             NotifyPropertyChanged(nameof(ShowRuns));
@@ -104,7 +117,9 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
             if (_allPersonalBests == null)
                 return;
 
-            IEnumerable<LeaderboardEntry> filteredBests = showLevels ? _allPersonalBests.Where(x => x.Run.LevelId != null) : _allPersonalBests.Where(x => x.Run.LevelId == null);
+            IEnumerable<LeaderboardEntry> filteredBests = showLevels
+                ? _allPersonalBests.Where(x => x.Run.LevelId != null)
+                : _allPersonalBests.Where(x => x.Run.LevelId == null);
 
             Dictionary<string, User> players = [];
             List<UserPersonalBestsGroup> groups = [];
@@ -119,7 +134,12 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
 
                 BaseGame? game = entries[0].Game?.Data;
                 if (game != null)
-                    groups.Add(new UserPersonalBestsGroup(game, entries.Select(x => new UserRunViewModel(x, _settingsService.UserSettings.DateFormat))));
+                    groups.Add(
+                        new UserPersonalBestsGroup(
+                            game,
+                            entries.Select(x => new UserRunViewModel(x, _settingsService.UserSettings.DateFormat))
+                        )
+                    );
             }
 
             PersonalBests = groups.AsObservableCollection();
@@ -184,7 +204,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
             Place = leaderboardEntry.Place,
             Platform = leaderboardEntry.Platform,
             Run = leaderboardEntry.Run,
-            Variables = leaderboardEntry.Run.Variables
+            Variables = leaderboardEntry.Run.Variables,
         };
 
         await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);

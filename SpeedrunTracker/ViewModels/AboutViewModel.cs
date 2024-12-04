@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 

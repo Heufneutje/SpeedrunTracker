@@ -2,5 +2,6 @@
 
 public enum UserNameStyleType
 {
-    Solid, Gradient
+    Solid,
+    Gradient,
 }

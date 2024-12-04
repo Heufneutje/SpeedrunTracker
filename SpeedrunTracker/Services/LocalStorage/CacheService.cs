@@ -4,7 +4,8 @@ public class CacheService : BaseDatabaseService, ICacheService
 {
     private readonly IJsonSerializationService _jsonSerializationService;
 
-    public CacheService(ICacheDatabaseService databaseService, IJsonSerializationService jsonSerializationService) : base(databaseService)
+    public CacheService(ICacheDatabaseService databaseService, IJsonSerializationService jsonSerializationService)
+        : base(databaseService)
     {
         _jsonSerializationService = jsonSerializationService;
     }

@@ -45,7 +45,7 @@ public partial class GameDetailPage : BaseDetailPage
                 return;
             }
 
-            await _viewModel.LoadFollowingStatusAsync();            
+            await _viewModel.LoadFollowingStatusAsync();
             _isLoaded = true;
         }
         finally

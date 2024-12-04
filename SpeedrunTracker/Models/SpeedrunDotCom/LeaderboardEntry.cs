@@ -26,9 +26,10 @@ public record LeaderboardEntry
     {
         get
         {
-            _level ??= Run.LevelId == null || LevelJson?.Data == null 
-                ? null
-                : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString()!);
+            _level ??=
+                Run.LevelId == null || LevelJson?.Data == null
+                    ? null
+                    : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString()!);
             return _level;
         }
     }
@@ -40,9 +41,10 @@ public record LeaderboardEntry
     {
         get
         {
-            _platform ??= Run?.System?.PlatformId == null || PlatformJson?.Data == null
-                ? null
-                : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString()!);
+            _platform ??=
+                Run?.System?.PlatformId == null || PlatformJson?.Data == null
+                    ? null
+                    : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString()!);
             return _platform;
         }
     }

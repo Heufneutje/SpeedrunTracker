@@ -2,5 +2,8 @@
 
 public enum CacheItemType
 {
-    Categories, Games, Levels, Variables
+    Categories,
+    Games,
+    Levels,
+    Variables,
 }

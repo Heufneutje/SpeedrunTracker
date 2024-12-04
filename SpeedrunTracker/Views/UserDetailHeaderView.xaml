@@ -15,36 +15,71 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <controls:AvatarControl Grid.Column="0" ImageSource="{Binding User.Assets.Image.Uri}" AvatarSize="80" Margin="10" VerticalOptions="Fill" />
-        <VerticalStackLayout Grid.Column="1" Margin="0,10,0,0">
-            <Label Text="{Binding User.DisplayName}" TextColor="{Binding User.NameStyle.ThemeColor}" FontAttributes="Bold" />
-            <Label Text="{Binding User.Pronouns}" IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />
+        <controls:AvatarControl Grid.Column="0"
+                                ImageSource="{Binding User.Assets.Image.Uri}"
+                                AvatarSize="80"
+                                Margin="10"
+                                VerticalOptions="Fill" />
+        <VerticalStackLayout Grid.Column="1"
+                             Margin="0,10,0,0">
+            <Label Text="{Binding User.DisplayName}"
+                   TextColor="{Binding User.NameStyle.ThemeColor}"
+                   FontAttributes="Bold" />
+            <Label Text="{Binding User.Pronouns}"
+                   IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />
             <HorizontalStackLayout>
-                <Image Source="{Binding CountryImageSource}" Style="{StaticResource CountryImageStyle}" />
-                <Label Text="{Binding User.Location.Country.Names.International}" Padding="3,0,0,0" />
+                <Image Source="{Binding CountryImageSource}"
+                       Style="{StaticResource CountryImageStyle}" />
+                <Label Text="{Binding User.Location.Country.Names.International}"
+                       Padding="3,0,0,0" />
             </HorizontalStackLayout>
             <HorizontalStackLayout>
-                <ImageButton Source="youtube" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.YouTube.Uri}" ToolTipProperties.Text="YouTube" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}">
+                <ImageButton Source="youtube"
+                             Command="{Binding OpenUrlCommand}"
+                             CommandParameter="{Binding User.YouTube.Uri}"
+                             ToolTipProperties.Text="YouTube"
+                             Style="{StaticResource UserProfileButtonStyle}"
+                             IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-                <ImageButton Source="twitch" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.Twitch.Uri}" ToolTipProperties.Text="Twitch" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.Twitch, Converter={StaticResource IsNotNullConverter}}">
+                <ImageButton Source="twitch"
+                             Command="{Binding OpenUrlCommand}"
+                             CommandParameter="{Binding User.Twitch.Uri}"
+                             ToolTipProperties.Text="Twitch"
+                             Style="{StaticResource UserProfileButtonStyle}"
+                             IsVisible="{Binding User.Twitch, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-                <ImageButton Source="twitter" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.Twitter.Uri}" ToolTipProperties.Text="Twitter" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.Twitter, Converter={StaticResource IsNotNullConverter}}">
+                <ImageButton Source="twitter"
+                             Command="{Binding OpenUrlCommand}"
+                             CommandParameter="{Binding User.Twitter.Uri}"
+                             ToolTipProperties.Text="Twitter"
+                             Style="{StaticResource UserProfileButtonStyle}"
+                             IsVisible="{Binding User.Twitter, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-                <ImageButton Source="hitbox" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.Hitbox.Uri}" ToolTipProperties.Text="Hitbox" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.Hitbox, Converter={StaticResource IsNotNullConverter}}">
+                <ImageButton Source="hitbox"
+                             Command="{Binding OpenUrlCommand}"
+                             CommandParameter="{Binding User.Hitbox.Uri}"
+                             ToolTipProperties.Text="Hitbox"
+                             Style="{StaticResource UserProfileButtonStyle}"
+                             IsVisible="{Binding User.Hitbox, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>
                 </ImageButton>
-                <ImageButton Source="srl" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding User.SpeedRunsLive.Uri}" ToolTipProperties.Text="SpeedRunsLive" Style="{StaticResource UserProfileButtonStyle}" IsVisible="{Binding User.SpeedRunsLive, Converter={StaticResource IsNotNullConverter}}">
+                <ImageButton Source="srl"
+                             Command="{Binding OpenUrlCommand}"
+                             CommandParameter="{Binding User.SpeedRunsLive.Uri}"
+                             ToolTipProperties.Text="SpeedRunsLive"
+                             Style="{StaticResource UserProfileButtonStyle}"
+                             IsVisible="{Binding User.SpeedRunsLive, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
                     </ImageButton.Behaviors>

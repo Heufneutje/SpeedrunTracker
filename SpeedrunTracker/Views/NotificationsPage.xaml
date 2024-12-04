@@ -6,15 +6,15 @@
              x:Class="SpeedrunTracker.Views.NotificationsPage"
              Title="Notifications"
              Appearing="ContentPage_Appearing">
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-        <CollectionView
-                VerticalOptions="FillAndExpand"
-                SelectionMode="Single"
-                ItemsSource="{Binding Notifications}"
-                RemainingItemsThreshold="5"
-                RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
-                ItemTemplate="{StaticResource NotificationTemplate}"
-                SelectedItem="{Binding SelectedNotification, Mode=TwoWay}"
-                SelectionChangedCommand="{Binding OpenLinkCommand}" />
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <CollectionView VerticalOptions="FillAndExpand"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Notifications}"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                        ItemTemplate="{StaticResource NotificationTemplate}"
+                        SelectedItem="{Binding SelectedNotification, Mode=TwoWay}"
+                        SelectionChangedCommand="{Binding OpenLinkCommand}" />
     </RefreshView>
 </ContentPage>

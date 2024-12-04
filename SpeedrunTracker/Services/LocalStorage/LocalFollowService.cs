@@ -1,10 +1,9 @@
-﻿ namespace SpeedrunTracker.Services.LocalStorage;
+﻿namespace SpeedrunTracker.Services.LocalStorage;
 
 public class LocalFollowService : BaseDatabaseService, ILocalFollowService
 {
-    public LocalFollowService(ILocalDatabaseService databaseService) : base(databaseService)
-    {
-    }
+    public LocalFollowService(ILocalDatabaseService databaseService)
+        : base(databaseService) { }
 
     public async Task FollowGameAsync(BaseGame game)
     {
@@ -14,7 +13,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
             ImageUrl = game.Assets?.CoverSmall?.Uri,
             Title = game.Names.International,
             Subtitle = $"Released: {game.Released}",
-            Type = EntityType.Games
+            Type = EntityType.Games,
         };
         await GetConnection().InsertAsync(item);
     }
@@ -27,7 +26,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
             ImageUrl = series.Assets?.CoverSmall?.Uri,
             Title = series.Names.International,
             Subtitle = $"Created: {series.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
-            Type = EntityType.Series
+            Type = EntityType.Series,
         };
         await GetConnection().InsertAsync(item);
     }
@@ -40,7 +39,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
             ImageUrl = user.Assets?.Image?.Uri ?? "user",
             Title = user.Names?.International,
             Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
-            Type = EntityType.Users
+            Type = EntityType.Users,
         };
         await GetConnection().InsertAsync(item);
     }

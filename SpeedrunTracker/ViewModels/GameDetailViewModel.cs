@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -19,7 +19,17 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
 
-    public GameDetailViewModel(IGameService gameService, ILeaderboardService leaderboardService, IUserService userService, ILocalFollowService followService, IShareService shareService, IToastService toastService, ILocalSettingsService settingsService, IPopupService popupService) : base(followService, shareService, toastService, popupService)
+    public GameDetailViewModel(
+        IGameService gameService,
+        ILeaderboardService leaderboardService,
+        IUserService userService,
+        ILocalFollowService followService,
+        IShareService shareService,
+        IToastService toastService,
+        ILocalSettingsService settingsService,
+        IPopupService popupService
+    )
+        : base(followService, shareService, toastService, popupService)
     {
         _gameService = gameService;
         _leaderboardService = leaderboardService;
@@ -106,7 +116,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
             _selectedLevel = value;
             NotifyPropertyChanged();
-            Categories = string.IsNullOrEmpty(value?.Id) ? (_fullGameCategories ?? []).AsObservableCollection() : (_levelCategories ?? []).AsObservableCollection();
+            Categories = string.IsNullOrEmpty(value?.Id)
+                ? (_fullGameCategories ?? []).AsObservableCollection()
+                : (_levelCategories ?? []).AsObservableCollection();
         }
     }
 
@@ -164,7 +176,8 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public override ShareDetails ShareDetails => new(Game?.Weblink, Game?.Names?.International);
 
-    public string? BackgroundUri => _settingsService.UserSettings.DisplayBackgrounds == true ? Game?.Assets?.Background?.Uri : null;
+    public string? BackgroundUri =>
+        _settingsService.UserSettings.DisplayBackgrounds == true ? Game?.Assets?.Background?.Uri : null;
 
     public async Task<bool> LoadCategoriesAsync()
     {
@@ -230,9 +243,24 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             if (!string.IsNullOrEmpty(variables))
                 variables = $"&{variables}";
 
-            _leaderboard = string.IsNullOrEmpty(SelectedLevel?.Id) ?
-                await ExecuteNetworkTask(_leaderboardService.GetFullGameLeaderboardAsync(Game.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults)) :
-                await ExecuteNetworkTask(_leaderboardService.GetLevelLeaderboardAsync(Game.Id, SelectedLevel.Id, SelectedCategory.Id, variables, _settingsService.UserSettings.MaxLeaderboardResults));
+            _leaderboard = string.IsNullOrEmpty(SelectedLevel?.Id)
+                ? await ExecuteNetworkTask(
+                    _leaderboardService.GetFullGameLeaderboardAsync(
+                        Game.Id,
+                        SelectedCategory.Id,
+                        variables,
+                        _settingsService.UserSettings.MaxLeaderboardResults
+                    )
+                )
+                : await ExecuteNetworkTask(
+                    _leaderboardService.GetLevelLeaderboardAsync(
+                        Game.Id,
+                        SelectedLevel.Id,
+                        SelectedCategory.Id,
+                        variables,
+                        _settingsService.UserSettings.MaxLeaderboardResults
+                    )
+                );
 
             if (_leaderboard != null)
                 DisplayLeaderboardEntries();
@@ -246,7 +274,9 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         if (_leaderboard == null)
             return;
 
-        IEnumerable<LeaderboardEntry> pagedEntries = _leaderboard.Runs.Skip(_leaderboardEntriesVisible).Take(_leaderboardEntriesStepSize);
+        IEnumerable<LeaderboardEntry> pagedEntries = _leaderboard
+            .Runs.Skip(_leaderboardEntriesVisible)
+            .Take(_leaderboardEntriesStepSize);
         foreach (LeaderboardEntry entry in pagedEntries)
         {
             for (int i = 0; i < entry.Run.Players.Count; i++)
@@ -274,12 +304,17 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         ShowActivityIndicator();
 
         Level? level = _levels?.FirstOrDefault(x => x.Id == _selectedLeaderboardEntry.Run.LevelId);
-        GamePlatform? platform = Game.Platforms.Data.Find(x => x.Id == _selectedLeaderboardEntry.Run.System?.PlatformId);
+        GamePlatform? platform = Game.Platforms.Data.Find(x =>
+            x.Id == _selectedLeaderboardEntry.Run.System?.PlatformId
+        );
 
         User? examiner = null;
         string? examinerId = _selectedLeaderboardEntry.Run.Status?.ExaminerId;
         if (examinerId != null)
-            examiner = Game.Moderators.Data.Find(x => x.Id == examinerId) ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId)) ?? User.GetUserNotFoundPlaceholder();
+            examiner =
+                Game.Moderators.Data.Find(x => x.Id == examinerId)
+                ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId))
+                ?? User.GetUserNotFoundPlaceholder();
 
         if (!_selectedLeaderboardEntry.Run.Variables.Any())
             foreach (KeyValuePair<string, string> valuePair in _selectedLeaderboardEntry.Run.Values)
@@ -317,9 +352,15 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
         List<VariableViewModel> variablesVMs = new();
         IEnumerable<Variable> variables = (_allVariables ?? []).Where(x => x.IsSubcategory);
         if (string.IsNullOrEmpty(_selectedLevel?.Id))
-            variables = variables.Where(x => x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.FullGame);
+            variables = variables.Where(x =>
+                x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.FullGame
+            );
         else
-            variables = variables.Where(x => x.Scope.Type == VariableScopeType.Global || x.Scope.Type == VariableScopeType.AllLevels || x.Scope.Type == VariableScopeType.SingleLevel && x.Scope.Level == _selectedLevel?.Id);
+            variables = variables.Where(x =>
+                x.Scope.Type == VariableScopeType.Global
+                || x.Scope.Type == VariableScopeType.AllLevels
+                || x.Scope.Type == VariableScopeType.SingleLevel && x.Scope.Level == _selectedLevel?.Id
+            );
 
         foreach (Variable variable in variables.Where(x => x.Category == null || x.Category == _selectedCategory?.Id))
         {
@@ -327,12 +368,14 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             {
                 VariableId = variable.Id,
                 Name = variable.Name,
-                Values = variable.Values.Values.Select(x => new ViewVariableValue()
-                {
-                    Id = x.Key,
-                    Name = x.Value.Name,
-                    Rules = x.Value.Rules
-                }).AsObservableCollection()
+                Values = variable
+                    .Values.Values.Select(x => new ViewVariableValue()
+                    {
+                        Id = x.Key,
+                        Name = x.Value.Name,
+                        Rules = x.Value.Rules,
+                    })
+                    .AsObservableCollection(),
             };
             variablesVMs.Add(vm);
         }

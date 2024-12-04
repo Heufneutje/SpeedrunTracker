@@ -2,5 +2,7 @@
 
 public enum EmbedType
 {
-    Unknown, YouTube, Twitch
+    Unknown,
+    YouTube,
+    Twitch,
 }

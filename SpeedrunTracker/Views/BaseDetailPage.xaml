@@ -10,7 +10,12 @@
              mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Cascade="True">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding FollowButtonText}" IconImageSource="{Binding FollowButtonIconSource}" Command="{Binding FollowCommand}" IsEnabled="{Binding IsFollowingEnabled}" />
-        <ToolbarItem Text="Share" IconImageSource="share" Command="{Binding ShareCommand}" />
+        <ToolbarItem Text="{Binding FollowButtonText}"
+                     IconImageSource="{Binding FollowButtonIconSource}"
+                     Command="{Binding FollowCommand}"
+                     IsEnabled="{Binding IsFollowingEnabled}" />
+        <ToolbarItem Text="Share"
+                     IconImageSource="share"
+                     Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
 </ContentPage>

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <local:BaseDetailPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SpeedrunTracker.Views"
-             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
-             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
-             x:DataType="viewmodels:UserDetailsViewModel"
-             x:Class="SpeedrunTracker.Views.UserDetailPage"
-             Appearing="ContentPage_Appearing"
-             mtk:LeakMonitorBehavior.Cascade="True"
-             mtk:TearDownBehavior.Cascade="True">
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:local="clr-namespace:SpeedrunTracker.Views"
+                      xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+                      xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
+                      x:DataType="viewmodels:UserDetailsViewModel"
+                      x:Class="SpeedrunTracker.Views.UserDetailPage"
+                      Appearing="ContentPage_Appearing"
+                      mtk:LeakMonitorBehavior.Cascade="True"
+                      mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
-        <Label Text="{Binding DisplayName}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
+        <Label Text="{Binding DisplayName}"
+               TextColor="White"
+               FontSize="Medium"
+               FontAttributes="Bold"
+               VerticalTextAlignment="Center"
+               MaxLines="2"
+               FontAutoScalingEnabled="True" />
     </Shell.TitleView>
     <Grid Padding="20">
         <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
@@ -21,16 +27,27 @@
                         SelectedItem="{Binding SelectedEntry}"
                         SelectionChangedCommand="{Binding NavigateToRunCommand}">
             <CollectionView.Header>
-                <Grid Margin="-10,-10,-10,10" RowDefinitions="Auto,Auto,*">
-                    <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="0">
+                <Grid Margin="-10,-10,-10,10"
+                      RowDefinitions="Auto,Auto,*">
+                    <Border Style="{StaticResource TransparentGridElementBorder}"
+                            Grid.Row="0">
                         <local:UserDetailHeaderView />
                     </Border>
 
-                    <Border Style="{StaticResource TransparentGridElementBorder}" Grid.Row="1" Padding="5">
-                        <Grid RowDefinitions="*" ColumnDefinitions="*">
+                    <Border Style="{StaticResource TransparentGridElementBorder}"
+                            Grid.Row="1"
+                            Padding="5">
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*">
                             <Grid ColumnDefinitions="*,*">
-                                <Button Text="Show Full Game PBs" Grid.Column="0" Margin="5" Command="{Binding LoadFullGamePersonalBestsCommand}" />
-                                <Button Text="Show Level PBs" Grid.Column="1" Margin="5" Command="{Binding LoadLevelPersonalBestsCommand}" />
+                                <Button Text="Show Full Game PBs"
+                                        Grid.Column="0"
+                                        Margin="5"
+                                        Command="{Binding LoadFullGamePersonalBestsCommand}" />
+                                <Button Text="Show Level PBs"
+                                        Grid.Column="1"
+                                        Margin="5"
+                                        Command="{Binding LoadLevelPersonalBestsCommand}" />
                             </Grid>
                         </Grid>
                     </Border>

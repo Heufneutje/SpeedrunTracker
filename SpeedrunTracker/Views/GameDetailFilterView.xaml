@@ -10,27 +10,36 @@
              mtk:TearDownBehavior.Suppress="True">
     <VerticalStackLayout Padding="10">
         <VerticalStackLayout>
-            <controls:RunPropertyControl Title="Full Game / Individual Level" IsValueVisible="False" ImageSource="world" IsVisible="{Binding HasIndividualLevels}" />
+            <controls:RunPropertyControl Title="Full Game / Individual Level"
+                                         IsValueVisible="False"
+                                         ImageSource="world"
+                                         IsVisible="{Binding HasIndividualLevels}" />
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
-                        ItemsSource="{Binding Levels}"
-                        SelectedItem="{Binding SelectedLevel}"
-                        ItemTemplate="{StaticResource CategoryTemplate}"
-                        IsVisible="{Binding HasIndividualLevels}">
+                            ItemsSource="{Binding Levels}"
+                            SelectedItem="{Binding SelectedLevel}"
+                            ItemTemplate="{StaticResource CategoryTemplate}"
+                            IsVisible="{Binding HasIndividualLevels}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
-            <controls:RunPropertyControl Title="Category" IsValueVisible="False" ImageSource="category" />
+            <controls:RunPropertyControl Title="Category"
+                                         IsValueVisible="False"
+                                         ImageSource="category" />
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
-                        ItemsSource="{Binding Categories}"
-                        SelectedItem="{Binding SelectedCategory}"
-                        ItemTemplate="{StaticResource CategoryTemplate}">
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding SelectedCategory}"
+                            ItemTemplate="{StaticResource CategoryTemplate}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}" HorizontalOptions="Start" BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
-            <Button Text="Show Leaderboard" Command="{Binding ShowLeaderboardCommand}" Margin="5" />
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}"
+                                 HorizontalOptions="Start"
+                                 BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
+            <Button Text="Show Leaderboard"
+                    Command="{Binding ShowLeaderboardCommand}"
+                    Margin="5" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

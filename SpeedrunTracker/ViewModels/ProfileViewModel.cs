@@ -1,10 +1,10 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using System.Net;
+using System.Windows.Input;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
-using System.Net;
-using System.Windows.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -71,7 +71,13 @@ public class ProfileViewModel : BaseViewModel
 
     public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
 
-    public ProfileViewModel(IUserService userService, IDialogService dialogService, IToastService toastService, IPopupService popupService) : base(popupService)
+    public ProfileViewModel(
+        IUserService userService,
+        IDialogService dialogService,
+        IToastService toastService,
+        IPopupService popupService
+    )
+        : base(popupService)
     {
         _userService = userService;
         _dialogService = dialogService;

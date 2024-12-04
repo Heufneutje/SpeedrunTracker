@@ -3,6 +3,4 @@
 namespace SpeedrunTracker.Converters;
 
 [AcceptEmptyServiceProvider]
-public class MyItemTappedEventArgsConverter : ItemTappedEventArgsConverter
-{
-}
+public class MyItemTappedEventArgsConverter : ItemTappedEventArgsConverter { }

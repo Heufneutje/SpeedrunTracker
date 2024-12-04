@@ -4,9 +4,23 @@ namespace SpeedrunTracker.Controls;
 
 public partial class AvatarControl : ContentView
 {
-    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(AvatarControl));
-    public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(AvatarControl));
-    public static readonly BindableProperty AvatarSizeProperty = BindableProperty.Create(nameof(AvatarSize), typeof(double), typeof(AvatarControl));
+    public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(
+        nameof(ImageSource),
+        typeof(string),
+        typeof(AvatarControl)
+    );
+
+    public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+        nameof(Command),
+        typeof(ICommand),
+        typeof(AvatarControl)
+    );
+
+    public static readonly BindableProperty AvatarSizeProperty = BindableProperty.Create(
+        nameof(AvatarSize),
+        typeof(double),
+        typeof(AvatarControl)
+    );
 
     public string ImageSource
     {

@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <local:BaseDetailPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SpeedrunTracker.Views"
-             xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
-             xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
-             x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
-             x:DataType="viewmodels:GameSeriesDetailViewModel"
-             Appearing="ContentPage_Appearing"
-             mtk:LeakMonitorBehavior.Cascade="True"
-             mtk:TearDownBehavior.Cascade="True">
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:local="clr-namespace:SpeedrunTracker.Views"
+                      xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+                      xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
+                      x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
+                      x:DataType="viewmodels:GameSeriesDetailViewModel"
+                      Appearing="ContentPage_Appearing"
+                      mtk:LeakMonitorBehavior.Cascade="True"
+                      mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
-        <Label Text="{Binding Series.Names.International}" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" MaxLines="2" FontAutoScalingEnabled="True" />
+        <Label Text="{Binding Series.Names.International}"
+               TextColor="White"
+               FontSize="Medium"
+               FontAttributes="Bold"
+               VerticalTextAlignment="Center"
+               MaxLines="2"
+               FontAutoScalingEnabled="True" />
     </Shell.TitleView>
     <Grid>
-        <Image Source="{Binding BackgroundUri}" Style="{StaticResource CustomBackgroundImage}" />
+        <Image Source="{Binding BackgroundUri}"
+               Style="{StaticResource CustomBackgroundImage}" />
         <Grid Padding="20">
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                             ItemsSource="{Binding Games}"

@@ -11,6 +11,9 @@ public class NotificationService : INotificationService
 
     public async Task<PagedData<List<Notification>>> GetNotificationsAsync(int offset)
     {
-        return await _notificationRepository.GetNotificationsAsync(await SecureStorage.GetAsync(Constants.ApiKey), offset);
+        return await _notificationRepository.GetNotificationsAsync(
+            await SecureStorage.GetAsync(Constants.ApiKey),
+            offset
+        );
     }
 }

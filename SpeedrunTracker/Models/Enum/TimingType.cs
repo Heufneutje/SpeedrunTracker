@@ -11,5 +11,5 @@ public enum TimingType
     RealtimeNoLoads,
 
     [EnumMember(Value = "ingame")]
-    InGame
+    InGame,
 }

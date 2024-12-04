@@ -5,9 +5,9 @@ namespace SpeedrunTracker.Views;
 
 public partial class SpinnerPopup : Popup
 {
-	public SpinnerPopup(SpinnerPopupViewModel viewModel)
-	{
-		InitializeComponent();
-		BindingContext = viewModel;
-	}
+    public SpinnerPopup(SpinnerPopupViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 }

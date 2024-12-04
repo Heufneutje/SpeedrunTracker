@@ -19,10 +19,18 @@ public class LocalDatabaseInitializer : IMauiInitializeService
         ILocalSettingsService settingsService = services.GetRequiredService<ILocalSettingsService>();
 
         Task.Run(async () =>
-        {
-            await databaseService.InitAsync(_configuration["storage:db-name"]!, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-            await cacheService.InitAsync(_configuration["storage:db-name"]!, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-            await settingsService.LoadSettingsAsync();
-        }).GetAwaiter().GetResult();
+            {
+                await databaseService.InitAsync(
+                    _configuration["storage:db-name"]!,
+                    SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache
+                );
+                await cacheService.InitAsync(
+                    _configuration["storage:db-name"]!,
+                    SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache
+                );
+                await settingsService.LoadSettingsAsync();
+            })
+            .GetAwaiter()
+            .GetResult();
     }
 }

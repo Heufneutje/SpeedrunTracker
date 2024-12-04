@@ -2,5 +2,7 @@
 
 public enum EntityType
 {
-    Games, Series, Users
+    Games,
+    Series,
+    Users,
 }

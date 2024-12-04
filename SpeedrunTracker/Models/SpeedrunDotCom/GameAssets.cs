@@ -34,7 +34,7 @@ public record GameAssets
             2 => TrophySecondPlace,
             3 => TrophyThirdPlace,
             4 => TrophyFouthPlace,
-            _ => null
+            _ => null,
         };
     }
 }

@@ -7,5 +7,5 @@ public enum NotificationLinkType
     Post,
     Resource,
     Run,
-    Thread
+    Thread,
 }

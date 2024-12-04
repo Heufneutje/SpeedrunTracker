@@ -12,19 +12,22 @@
              mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Suppress="True">
     <Grid>
-        <Label Text="It looks like you have not yet added any games, series or users to your favorites!&#10;&#10;Search for a game, series or user and hit the Favorite button to add them to this list." Padding="10" FontSize="Medium" IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
+        <Label Text="It looks like you have not yet added any games, series or users to your favorites!&#10;&#10;Search for a game, series or user and hit the Favorite button to add them to this list."
+               Padding="10"
+               FontSize="Medium"
+               IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
         <ListView ItemsSource="{Binding Entities}"
-          CachingStrategy="RecycleElement"
-          VerticalOptions="FillAndExpand"
-          IsGroupingEnabled="True"
-          HasUnevenRows="True"
-          SelectionMode="None"
-          GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
-          ItemTemplate="{StaticResource EntitiesTemplate}">
+                  CachingStrategy="RecycleElement"
+                  VerticalOptions="FillAndExpand"
+                  IsGroupingEnabled="True"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
+                  ItemTemplate="{StaticResource EntitiesTemplate}">
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                            Command="{Binding NavigateToCommand}"
-                                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                                                Command="{Binding NavigateToCommand}"
+                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>

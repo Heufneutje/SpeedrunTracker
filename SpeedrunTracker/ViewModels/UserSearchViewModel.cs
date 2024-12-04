@@ -10,7 +10,8 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
 
     public override string SearchTextPlaceholder => "Search for users...";
 
-    public UserSearchViewModel(IToastService toastService, IUserService userService, IPopupService popupService) : base(toastService, popupService)
+    public UserSearchViewModel(IToastService toastService, IUserService userService, IPopupService popupService)
+        : base(toastService, popupService)
     {
         _userService = userService;
     }
@@ -30,12 +31,14 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
         if (apiData == null)
             return [];
 
-        return apiData.Data.Select(x => new Entity()
-        {
-            Title = x.Names?.International,
-            Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
-            ImageUrl = x.Assets?.Image?.Uri ?? "user",
-            SearchObject = x
-        }).ToList();
+        return apiData
+            .Data.Select(x => new Entity()
+            {
+                Title = x.Names?.International,
+                Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
+                ImageUrl = x.Assets?.Image?.Uri ?? "user",
+                SearchObject = x,
+            })
+            .ToList();
     }
 }

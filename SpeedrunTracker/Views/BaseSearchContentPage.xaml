@@ -7,7 +7,7 @@
              x:DataType="viewmodels:BaseSearchEntityViewModel"
              x:Class="SpeedrunTracker.Views.BaseSearchContentPage"
              Title="Search"
-             mtk:LeakMonitorBehavior.Cascade="True" 
+             mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Cascade="True">
     <!-- Move to SearchHandlers when https://github.com/dotnet/maui/issues/8716 is fixed.
     <Shell.SearchHandler>
@@ -22,16 +22,16 @@
                    HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
         <ListView ItemsSource="{Binding Entities}"
-      CachingStrategy="RecycleElement"
-      VerticalOptions="FillAndExpand"
-      HasUnevenRows="True"
-      SelectionMode="None"
-      ItemTemplate="{StaticResource EntitiesTemplate}"
+                  CachingStrategy="RecycleElement"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  ItemTemplate="{StaticResource EntitiesTemplate}"
                   Grid.Row="1">
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                    Command="{Binding NavigateToCommand}"
-                                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                                                Command="{Binding NavigateToCommand}"
+                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>
