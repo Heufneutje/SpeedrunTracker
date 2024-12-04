@@ -16,7 +16,9 @@
                FontAttributes="Bold"
                VerticalTextAlignment="Center"
                MaxLines="2"
-               FontAutoScalingEnabled="True" />
+               FontAutoScalingEnabled="True"
+               LineBreakMode="TailTruncation"
+               ToolTipProperties.Text="{Binding DisplayName}" />
     </Shell.TitleView>
     <Grid Padding="20">
         <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"

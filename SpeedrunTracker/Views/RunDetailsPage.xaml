@@ -13,21 +13,23 @@
              mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Cascade="True">
     <Shell.TitleView>
-        <VerticalStackLayout>
+        <VerticalStackLayout ToolTipProperties.Text="{Binding FullTitle}">
             <Label Text="{Binding Title}"
                    TextColor="White"
                    FontSize="Medium"
                    FontAttributes="Bold"
                    VerticalTextAlignment="Center"
                    MaxLines="1"
-                   FontAutoScalingEnabled="True" />
+                   FontAutoScalingEnabled="True"
+                   LineBreakMode="TailTruncation" />
             <Label Text="{Binding SubTitle}"
                    TextColor="White"
                    FontSize="Small"
                    FontAttributes="Bold"
                    VerticalTextAlignment="Center"
                    MaxLines="1"
-                   FontAutoScalingEnabled="True" />
+                   FontAutoScalingEnabled="True"
+                   LineBreakMode="TailTruncation" />
         </VerticalStackLayout>
     </Shell.TitleView>
     <ContentPage.ToolbarItems>

@@ -101,6 +101,8 @@ public class RunDetailsViewModel : BaseShareableViewModel
             ? "by <unknown>"
             : $"by {string.Join(" and ", _runDetails.Run.Players.Select(x => x.DisplayName))}";
 
+    public string FullTitle => $"{Title} {SubTitle}";
+
     public string? FormattedDate => RunDetails?.Run.Date?.ToString(_settingsService.UserSettings.DateFormat);
 
     public bool HasInGameTime => ShouldShowTimingType(TimingType.InGame);

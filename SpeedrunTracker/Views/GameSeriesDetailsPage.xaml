@@ -16,7 +16,9 @@
                FontAttributes="Bold"
                VerticalTextAlignment="Center"
                MaxLines="2"
-               FontAutoScalingEnabled="True" />
+               FontAutoScalingEnabled="True"
+               LineBreakMode="TailTruncation"
+               ToolTipProperties.Text="{Binding Series.Names.International}" />
     </Shell.TitleView>
     <Grid>
         <Image Source="{Binding BackgroundUri}"
