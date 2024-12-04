@@ -97,7 +97,7 @@ public class SettingsViewModel : BaseViewModel
         get =>
             _themeSettings ??= new List<ThemeSetting>
             {
-                new("System default", AppTheme.Unspecified),
+                new("System Default", AppTheme.Unspecified),
                 new("Light", AppTheme.Light),
                 new("Dark", AppTheme.Dark),
             }.AsObservableCollection();

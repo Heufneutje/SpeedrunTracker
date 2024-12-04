@@ -6,57 +6,90 @@
              x:Class="SpeedrunTracker.Views.SettingsPage"
              Title="Settings"
              Disappearing="ContentPage_Disappearing">
-    <VerticalStackLayout Padding="10">
-        <Border Style="{StaticResource TransparentGridElementBorder}">
-            <VerticalStackLayout>
-                <Label Text="Interface"
-                       Style="{StaticResource GroupHeaderLabel}" />
-                <Label Text="Theme"
-                       Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding Themes}"
-                        SelectedItem="{Binding Theme}"
-                        Margin="20,5,20,5" />
-                <Label Text="Display Backgrounds"
-                       Style="{StaticResource SettingsItemSubLabel}" />
-                <Switch IsToggled="{Binding DisplayBackgrounds}"
-                        HorizontalOptions="Start"
-                        Margin="15,5,20,5" />
-            </VerticalStackLayout>
-        </Border>
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Border Style="{StaticResource TransparentGridElementBorder}">
+                <Grid ColumnDefinitions="2*,*"
+                      RowDefinitions="Auto,Auto,Auto"
+                      Padding="0,0,20,10">
+                    <Label Text="Interface"
+                           Style="{StaticResource GroupHeaderLabel}"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2" />
+                    <Label Text="Theme"
+                           Style="{StaticResource SettingsItemSubLabel}"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalOptions="Center" />
+                    <Picker ItemsSource="{Binding Themes}"
+                            SelectedItem="{Binding Theme}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalOptions="Center" />
+                    <Label Text="Display Backgrounds"
+                           Style="{StaticResource SettingsItemSubLabel}"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           VerticalOptions="Center" />
+                    <Switch IsToggled="{Binding DisplayBackgrounds}"
+                            HorizontalOptions="Start"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            VerticalOptions="Center"
+                            Margin="-10,0,0,0"/>
+                </Grid>
+            </Border>
 
-        <Border Style="{StaticResource TransparentGridElementBorder}">
-            <VerticalStackLayout>
-                <Label Text="Date and Time"
-                       Style="{StaticResource GroupHeaderLabel}" />
-                <Label Text="Date Format"
-                       Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding DateFormats}"
-                        SelectedItem="{Binding DateFormat}"
-                        Margin="20,5,20,5" />
-                <Label Text="Time Format"
-                       Style="{StaticResource SettingsItemSubLabel}" />
-                <Picker ItemsSource="{Binding TimeFormats}"
-                        SelectedItem="{Binding TimeFormat}"
-                        Margin="20,5,20,5" />
-            </VerticalStackLayout>
-        </Border>
+            <Border Style="{StaticResource TransparentGridElementBorder}">
+                <Grid ColumnDefinitions="2*,*"
+                      RowDefinitions="Auto,Auto,Auto"
+                      Padding="0,0,20,10">
+                    <Label Text="Date and Time"
+                           Style="{StaticResource GroupHeaderLabel}"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2" />
+                    <Label Text="Date Format"
+                           Style="{StaticResource SettingsItemSubLabel}"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalOptions="Center" />
+                    <Picker ItemsSource="{Binding DateFormats}"
+                            SelectedItem="{Binding DateFormat}"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalOptions="Center" />
+                    <Label Text="Time Format"
+                           Style="{StaticResource SettingsItemSubLabel}"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           VerticalOptions="Center" />
+                    <Picker ItemsSource="{Binding TimeFormats}"
+                            SelectedItem="{Binding TimeFormat}"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            VerticalOptions="Center" />
+                </Grid>
+            </Border>
 
-        <Border Style="{StaticResource TransparentGridElementBorder}">
-            <VerticalStackLayout>
-                <Label Text="Maximum Leaderboard Results"
-                       Style="{StaticResource GroupHeaderLabel}" />
+            <Border Style="{StaticResource TransparentGridElementBorder}">
                 <Grid ColumnDefinitions="*,Auto"
-                      Margin="0,0,10,0">
-                    <Slider Grid.Column="0"
-                            Margin="10"
-                            Minimum="1"
+                      RowDefinitions="Auto,Auto"
+                      Padding="0,0,20,10">
+                    <Label Text="Maximum Leaderboard Results"
+                           Style="{StaticResource GroupHeaderLabel}"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2" />
+                    <Slider Minimum="1"
                             Maximum="1000"
-                            Value="{Binding MaxLeaderboardResults, Mode=TwoWay}" />
-                    <Label Grid.Column="1"
-                           Margin="10"
+                            Value="{Binding MaxLeaderboardResults, Mode=TwoWay}"
+                            Margin="10,0,0,0"
+                            Grid.Row="1"
+                            Grid.Column="0" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
                            Text="{Binding MaxLeaderboardResults}" />
                 </Grid>
-            </VerticalStackLayout>
-        </Border>
-    </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
