@@ -8,7 +8,7 @@
              x:DataType="viewmodels:UserDetailsViewModel"
              x:Class="SpeedrunTracker.Views.UserDetailHeaderView"
              mtk:LeakMonitorBehavior.Cascade="True"
-             mtk:TearDownBehavior.Cascade="True">
+             mtk:TearDownBehavior.Suppress="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
