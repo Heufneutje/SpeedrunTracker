@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
+             xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
@@ -28,8 +29,8 @@
             <Label Text="{Binding User.Pronouns}"
                    IsVisible="{Binding User.Pronouns, Converter={StaticResource IsNotNullConverter}}" />
             <HorizontalStackLayout>
-                <Image Source="{Binding CountryImageSource}"
-                       Style="{StaticResource CountryImageStyle}" />
+                <ffil:CachedImage Source="{Binding CountryImageSource}"
+                                  Style="{StaticResource CountryImageStyle}" />
                 <Label Text="{Binding User.Location.Country.Names.International}"
                        Padding="3,0,0,0" />
             </HorizontalStackLayout>

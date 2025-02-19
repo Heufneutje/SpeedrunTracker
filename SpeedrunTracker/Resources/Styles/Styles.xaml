@@ -2,6 +2,7 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
                     xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                     xmlns:markdown="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
@@ -500,11 +501,9 @@
     </Style>
 
     <Style x:Key="CustomBackgroundImage"
-           TargetType="Image">
-        <Setter Property="VerticalOptions"
-                Value="FillAndExpand" />
-        <Setter Property="HorizontalOptions"
-                Value="FillAndExpand" />
+           TargetType="ffil:CachedImage">
+        <Setter Property="VerticalOptions" />
+        <Setter Property="HorizontalOptions" />
         <Setter Property="Aspect"
                 Value="AspectFill" />
     </Style>
@@ -549,8 +548,7 @@
 
     <Style x:Key="ThresholdCollectionViewStyle"
            TargetType="CollectionView">
-        <Setter Property="VerticalOptions"
-                Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" />
         <Setter Property="RemainingItemsThreshold"
                 Value="5" />
         <Setter Property="SelectionMode"

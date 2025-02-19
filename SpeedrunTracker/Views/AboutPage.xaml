@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:Class="SpeedrunTracker.Views.AboutPage"
              x:DataType="viewmodels:AboutViewModel"
              Title="About">
     <ScrollView>
         <VerticalStackLayout>
-            <Image Source="main"
-                   WidthRequest="300" />
+            <ffil:CachedImage Source="main"
+                              WidthRequest="300" />
             <Label Text="{Binding VersionText}"
                    HorizontalTextAlignment="Center"
                    FontSize="Title"

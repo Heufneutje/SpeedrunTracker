@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
+             xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:markdown="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
              xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
@@ -38,8 +39,8 @@
                      Command="{Binding ShareCommand}" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <Image Source="{Binding BackgroundUri}"
-               Style="{StaticResource CustomBackgroundImage}" />
+        <ffil:CachedImage Source="{Binding BackgroundUri}"
+                          Style="{StaticResource CustomBackgroundImage}" />
         <ScrollView>
             <Grid Padding="10"
                   RowDefinitions="Auto,Auto,Auto,Auto,Auto">
@@ -118,10 +119,10 @@
                                                      IsValueVisible="False"
                                                      ImageSource="trophy" />
                         <HorizontalStackLayout>
-                            <Image Source="{Binding RunDetails.TrophyAsset.Uri}"
-                                   IsVisible="{Binding HasTrophyAsset}"
-                                   Style="{StaticResource TrophyImageStyle}"
-                                   Margin="5,-5,0,0" />
+                            <ffil:CachedImage Source="{Binding RunDetails.TrophyAsset.Uri}"
+                                              IsVisible="{Binding HasTrophyAsset}"
+                                              Style="{StaticResource TrophyImageStyle}"
+                                              Margin="5,-5,0,0" />
                             <Label Text="{Binding RunDetails.OrdinalPlace}"
                                    Margin="5,-5,0,5"
                                    FontAttributes="Bold" />

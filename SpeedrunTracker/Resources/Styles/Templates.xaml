@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                     xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
                     xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
@@ -14,15 +15,15 @@
             <Grid Padding="10"
                   ColumnSpacing="5"
                   ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageSource, Mode=OneTime}"
-                       Grid.Column="0"
-                       WidthRequest="20"
-                       HeightRequest="20"
-                       Aspect="AspectFit">
-                    <Image.Behaviors>
+                <ffil:CachedImage Source="{Binding ImageSource, Mode=OneTime}"
+                                  Grid.Column="0"
+                                  WidthRequest="20"
+                                  HeightRequest="20"
+                                  Aspect="AspectFit">
+                    <ffil:CachedImage.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
-                    </Image.Behaviors>
-                </Image>
+                    </ffil:CachedImage.Behaviors>
+                </ffil:CachedImage>
                 <Label Text="{Binding EntityType, Mode=OneTime}"
                        Grid.Column="1"
                        FontAttributes="Bold" />
@@ -36,13 +37,13 @@
             <Grid Padding="10"
                   RowDefinitions="Auto,Auto"
                   ColumnDefinitions="Auto,*">
-                <Image Source="{Binding ImageUrl, Mode=OneTime}"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Grid.RowSpan="2"
-                       WidthRequest="50"
-                       HeightRequest="80"
-                       Aspect="AspectFit" />
+                <ffil:CachedImage Source="{Binding ImageUrl, Mode=OneTime}"
+                                  Grid.Row="0"
+                                  Grid.Column="0"
+                                  Grid.RowSpan="2"
+                                  WidthRequest="50"
+                                  HeightRequest="80"
+                                  Aspect="AspectFit" />
                 <Label Text="{Binding Title, Mode=OneTime}"
                        Grid.Row="0"
                        Grid.Column="1"
@@ -62,13 +63,13 @@
             <Grid Padding="10,0,10,0"
                   RowDefinitions="Auto,Auto"
                   ColumnDefinitions="Auto,*">
-                <Image Source="{Binding Assets.CoverSmall.Uri}"
-                       Grid.Row="0"
-                       Grid.Column="0"
-                       Grid.RowSpan="2"
-                       WidthRequest="50"
-                       HeightRequest="80"
-                       Aspect="AspectFit" />
+                <ffil:CachedImage Source="{Binding Assets.CoverSmall.Uri}"
+                                  Grid.Row="0"
+                                  Grid.Column="0"
+                                  Grid.RowSpan="2"
+                                  WidthRequest="50"
+                                  HeightRequest="80"
+                                  Aspect="AspectFit" />
                 <Label Text="{Binding Names.International, Mode=OneTime}"
                        Grid.Row="0"
                        Grid.Column="1"
@@ -113,10 +114,10 @@
                   x:DataType="speedrunmodels:LeaderboardEntry">
         <Border Style="{StaticResource TransparentCollectionElementBorder}">
             <Grid ColumnDefinitions="50,*,Auto">
-                <Image Source="{Binding TrophyAsset.Uri}"
-                       Grid.Column="0"
-                       IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNotNullConverter}}"
-                       Style="{StaticResource Key=TrophyImageStyle}" />
+                <ffil:CachedImage Source="{Binding TrophyAsset.Uri}"
+                                  Grid.Column="0"
+                                  IsVisible="{Binding TrophyAsset.Uri, Converter={StaticResource Key=IsNotNullConverter}}"
+                                  Style="{StaticResource Key=TrophyImageStyle}" />
                 <Label Text="{Binding Place, Mode=OneTime}"
                        Grid.Column="0"
                        HorizontalTextAlignment="Center"
@@ -225,9 +226,9 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Column="1">
                     <HorizontalStackLayout>
-                        <Image Source="{Binding Entry.TrophyAsset.Uri, Mode=OneTime}"
-                               IsVisible="{Binding Entry.TrophyAsset, Converter={StaticResource IsNotNullConverter}}"
-                               Style="{StaticResource TrophyImageStyle}" />
+                        <ffil:CachedImage Source="{Binding Entry.TrophyAsset.Uri, Mode=OneTime}"
+                                          IsVisible="{Binding Entry.TrophyAsset, Converter={StaticResource IsNotNullConverter}}"
+                                          Style="{StaticResource TrophyImageStyle}" />
                         <Label Text="{Binding Entry.OrdinalPlace, Mode=OneTime}"
                                FontAttributes="Bold" />
                     </HorizontalStackLayout>

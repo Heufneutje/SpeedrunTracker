@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
        xmlns:views="clr-namespace:SpeedrunTracker.Views"
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        x:Class="SpeedrunTracker.AppShell"
@@ -9,14 +10,13 @@
         <DataTemplate x:DataType="BaseShellItem">
             <Grid Style="{StaticResource FlyoutItemStyle}"
                   ColumnDefinitions="50,150">
-                <Image Source="{Binding FlyoutIcon}"
-                       Margin="10"
-                       HeightRequest="30"
-                       HorizontalOptions="EndAndExpand">
-                    <Image.Behaviors>
+                <ffil:CachedImage Source="{Binding FlyoutIcon}"
+                                  Margin="10"
+                                  HeightRequest="30">
+                    <ffil:CachedImage.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                    </Image.Behaviors>
-                </Image>
+                    </ffil:CachedImage.Behaviors>
+                </ffil:CachedImage>
                 <Label Grid.Column="1"
                        Text="{Binding Title}"
                        Style="{StaticResource FlyoutItemLabelStyle}" />
@@ -30,9 +30,9 @@
                    FontSize="Title"
                    Padding="20"
                    TextColor="{StaticResource White}" />
-            <Image Source="main"
-                   HeightRequest="150"
-                   HorizontalOptions="Center" />
+            <ffil:CachedImage Source="main"
+                              HeightRequest="150"
+                              HorizontalOptions="Center" />
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
