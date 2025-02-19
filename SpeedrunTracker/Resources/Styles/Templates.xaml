@@ -140,7 +140,8 @@
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                             ItemsSource="{Binding Values}"
                             SelectedItem="{Binding SelectedValue}"
-                            ItemTemplate="{StaticResource CategoryTemplate}">
+                            ItemTemplate="{StaticResource CategoryTemplate}"
+                            HorizontalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>

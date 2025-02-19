@@ -6,6 +6,7 @@
              xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:DataType="viewmodels:BaseSearchEntityViewModel"
              x:Class="SpeedrunTracker.Views.BaseSearchContentPage"
+             x:Name="BaseSearchContentPageName"
              Title="Search"
              mtk:LeakMonitorBehavior.Cascade="True"
              mtk:TearDownBehavior.Cascade="True">
@@ -19,11 +20,9 @@
                    SearchCommand="{Binding SearchCommand}"
                    Text="{Binding Query}"
                    Grid.Row="0"
-                   HorizontalOptions="FillAndExpand"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
         <ListView ItemsSource="{Binding Entities}"
                   CachingStrategy="RecycleElement"
-                  VerticalOptions="FillAndExpand"
                   HasUnevenRows="True"
                   SelectionMode="None"
                   ItemTemplate="{StaticResource EntitiesTemplate}"
@@ -31,7 +30,8 @@
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
                                                 Command="{Binding NavigateToCommand}"
-                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                                BindingContext="{Binding Source={x:Reference BaseSearchContentPageName}, Path=BindingContext}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>

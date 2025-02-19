@@ -18,7 +18,8 @@
                             ItemsSource="{Binding Levels}"
                             SelectedItem="{Binding SelectedLevel}"
                             ItemTemplate="{StaticResource CategoryTemplate}"
-                            IsVisible="{Binding HasIndividualLevels}">
+                            IsVisible="{Binding HasIndividualLevels}"
+                            HorizontalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
@@ -29,7 +30,8 @@
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
                             ItemsSource="{Binding Categories}"
                             SelectedItem="{Binding SelectedCategory}"
-                            ItemTemplate="{StaticResource CategoryTemplate}">
+                            ItemTemplate="{StaticResource CategoryTemplate}"
+                            HorizontalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>

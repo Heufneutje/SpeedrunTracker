@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpeedrunTracker.Views.FollowingPage"
              x:DataType="viewmodels:FollowedEntityViewModel"
+             x:Name="FollowingPageName"
              xmlns:local="clr-namespace:SpeedrunTracker.Views"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -18,7 +19,6 @@
                IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
         <ListView ItemsSource="{Binding Entities}"
                   CachingStrategy="RecycleElement"
-                  VerticalOptions="FillAndExpand"
                   IsGroupingEnabled="True"
                   HasUnevenRows="True"
                   SelectionMode="None"
@@ -27,7 +27,8 @@
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
                                                 Command="{Binding NavigateToCommand}"
-                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}" />
+                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                                BindingContext="{Binding Source={x:Reference FollowingPageName}, Path=BindingContext}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>
