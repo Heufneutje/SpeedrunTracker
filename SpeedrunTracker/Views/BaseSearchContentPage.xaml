@@ -26,12 +26,13 @@
                   HasUnevenRows="True"
                   SelectionMode="None"
                   ItemTemplate="{StaticResource EntitiesTemplate}"
-                  Grid.Row="1">
+                  Grid.Row="1"
+                  x:Name="entitiesListView">
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
                                                 Command="{Binding NavigateToCommand}"
                                                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                                BindingContext="{Binding Source={x:Reference BaseSearchContentPageName}, Path=BindingContext}" />
+                                                BindingContext="{Binding Path=BindingContext, Source={x:Reference entitiesListView}, x:DataType=ListView}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>

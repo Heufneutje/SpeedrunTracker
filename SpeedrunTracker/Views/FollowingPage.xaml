@@ -23,12 +23,13 @@
                   HasUnevenRows="True"
                   SelectionMode="None"
                   GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
-                  ItemTemplate="{StaticResource EntitiesTemplate}">
+                  ItemTemplate="{StaticResource EntitiesTemplate}"
+                  x:Name="entitiesListView">
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
                                                 Command="{Binding NavigateToCommand}"
                                                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                                BindingContext="{Binding Source={x:Reference FollowingPageName}, Path=BindingContext}" />
+                                                BindingContext="{Binding Path=BindingContext, Source={x:Reference entitiesListView}, x:DataType=ListView}" />
             </ListView.Behaviors>
         </ListView>
     </Grid>
