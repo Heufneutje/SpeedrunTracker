@@ -161,6 +161,7 @@
                   x:DataType="speedrunmodels:User">
         <Label Text="{Binding DisplayName, Mode=OneTime}"
                TextColor="{Binding NameStyle.ThemeColor, Mode=OneTime}"
+               TextDecorations="Underline"
                Margin="5,0,0,5" />
     </DataTemplate>
 

@@ -166,6 +166,7 @@
                                                      IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}" />
                         <Label Text="{Binding RunDetails.Examiner.DisplayName}"
                                TextColor="{Binding RunDetails.Examiner.NameStyle.ThemeColor}"
+                               TextDecorations="Underline"
                                Margin="5,-5,0,5"
                                IsVisible="{Binding RunDetails.Examiner, Converter={StaticResource IsNotNullConverter}}">
                             <Label.GestureRecognizers>
