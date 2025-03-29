@@ -67,9 +67,15 @@ public abstract class BaseFollowViewModel<T> : BaseFollowViewModel
             return;
 
         if (IsFollowing == true)
+        {
             await _followService.UnfollowAsync(_followEntity.Id);
+            await _toastService.ShowToastAsync($"Removed \"{_followEntity.DisplayName}\" from your favorites.");
+        }
         else if (IsFollowing == false)
+        {
             await FollowAsync(_followEntity);
+            await _toastService.ShowToastAsync($"Added \"{_followEntity.DisplayName}\" to your favorites.");
+        }
 
         IsFollowing = !(IsFollowing ?? false);
     }

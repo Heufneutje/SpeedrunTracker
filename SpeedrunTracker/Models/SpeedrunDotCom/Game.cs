@@ -8,6 +8,9 @@ public record Game : BaseGame
     public Ruleset? Ruleset { get; set; }
     public BaseData<List<User>> Moderators { get; set; }
 
+    [JsonIgnore]
+    public override string DisplayName => Names.International;
+
     [JsonPropertyName("romhack")]
     public bool IsRomhack { get; set; }
 

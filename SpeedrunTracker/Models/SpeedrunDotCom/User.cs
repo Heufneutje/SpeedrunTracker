@@ -30,14 +30,14 @@ public record User : BaseSpeedrunModel
     public UserAssets? Assets { get; set; }
 
     [JsonIgnore]
-    public string? DisplayName
+    public override string DisplayName
     {
         get
         {
             if (PlayerType == PlayerType.Guest)
-                return Name;
+                return Name ?? string.Empty;
 
-            return string.IsNullOrEmpty(Names?.International) ? Names?.Japanese : Names.International;
+            return (string.IsNullOrEmpty(Names?.International) ? Names?.Japanese : Names.International) ?? string.Empty;
         }
     }
 

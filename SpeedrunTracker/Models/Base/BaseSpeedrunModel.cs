@@ -1,6 +1,8 @@
-﻿namespace SpeedrunTracker.Models.Base;
+﻿using System.Text.Json.Serialization;
 
-public record BaseSpeedrunModel
+namespace SpeedrunTracker.Models.Base;
+
+public abstract record BaseSpeedrunModel
 {
     public string Id { get; set; }
 
@@ -8,7 +10,10 @@ public record BaseSpeedrunModel
 
     public List<Link> Links { get; set; }
 
-    public BaseSpeedrunModel()
+    [JsonIgnore]
+    public virtual string DisplayName => Id;
+
+    protected BaseSpeedrunModel()
     {
         Id = string.Empty;
         Links = [];
