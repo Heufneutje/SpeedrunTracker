@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SpeedrunTracker.Utils/SpeedrunTracker.Utils.csproj" />
+  <Project Path="SpeedrunTracker/SpeedrunTracker.csproj">
+    <Deploy />
+  </Project>
+</Solution>
