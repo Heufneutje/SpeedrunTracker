@@ -18,6 +18,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
     private IEnumerable<Variable>? _allVariables;
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
+    private bool _replaceEntries;
 
     public GameDetailViewModel(
         IGameService gameService,
@@ -226,7 +227,7 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
 
         _leaderboardEntriesVisible = 0;
         _leaderboard = null;
-        LeaderboardEntries.Clear();
+        _replaceEntries = true;
 
         List<string> variableValues = new();
         string variables = string.Empty;
@@ -288,7 +289,14 @@ public class GameDetailViewModel : BaseFollowViewModel<Game>
             }
         }
 
-        LeaderboardEntries.AddRange(pagedEntries);
+        if (_replaceEntries)
+        {
+            LeaderboardEntries.ReplaceRange(pagedEntries);
+            _replaceEntries = false;
+        }
+        else
+            LeaderboardEntries.AddRange(pagedEntries);
+
         _leaderboardEntriesVisible += _leaderboardEntriesStepSize;
     }
 
