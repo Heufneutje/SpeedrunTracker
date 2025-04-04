@@ -5,6 +5,7 @@ public class NotificationViewModel
     public Notification Notification { get; set; }
     public string? DateFormat { get; set; }
     public string? TimeFormat { get; set; }
+    public bool IsUnread => Notification.Status == NotificationStatusType.Unread;
 
     public string FormattedCreationDate =>
         $"{Notification.Created.ToString(DateFormat)} {Notification.Created.ToString(TimeFormat)}";

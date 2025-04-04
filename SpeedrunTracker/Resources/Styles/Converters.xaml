@@ -7,5 +7,4 @@
     <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
     <converters:IsNullConverter x:Key="IsNullConverter" />
     <converters:MyItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
-    <converters:NotificationStatusToFontAttributesConverter x:Key="NotificationStatusToFontAttributesConverter" />
 </ResourceDictionary>

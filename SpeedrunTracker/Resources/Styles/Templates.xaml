@@ -251,13 +251,25 @@
     <DataTemplate x:Key="NotificationTemplate"
                   x:DataType="viewmodels:NotificationViewModel">
         <VerticalStackLayout>
-            <VerticalStackLayout Padding="20">
+            <Grid Padding="20"
+                  ColumnSpacing="10"
+                  ColumnDefinitions="10,*"
+                  RowDefinitions="auto,auto">
+                <Ellipse Grid.Column="0"
+                         IsVisible="{Binding IsUnread}"
+                         BackgroundColor="{StaticResource Primary}"
+                         Grid.RowSpan="2"
+                         HeightRequest="10"
+                         WidthRequest="10"
+                         VerticalOptions="Center"/>
                 <Label Text="{Binding FormattedCreationDate, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}"
-                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}" />
+                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
                 <Label Text="{Binding Notification.Text, Mode=OneTime}"
-                       Padding="0,10,0,0"
-                       FontAttributes="{Binding Notification.Status, Converter={StaticResource NotificationStatusToFontAttributesConverter}}" />
-            </VerticalStackLayout>
+                       Grid.Row="1"
+                       Grid.Column="1"/>
+            </Grid>
             <Line StrokeThickness="1"
                   BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         </VerticalStackLayout>
