@@ -104,7 +104,7 @@ public static class BuilderExtensions
             client.BaseAddress = new Uri(
                 $"{config["speedrun-dot-com:base-address"]}{config["speedrun-dot-com:api-address"]}"
             );
-            client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{App.Version}");
+            client.DefaultRequestHeaders.Add("User-Agent", $"Heufneutje-SpeedrunTracker/{AppInfo.VersionString}");
         }
     }
 

@@ -9,7 +9,7 @@ public class AboutViewModel : BaseViewModel
 
     public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrlAsync);
 
-    public string VersionText => $"SpeedrunTracker {App.Version}";
+    public string VersionText => $"SpeedrunTracker {AppInfo.VersionString}";
 
     public AboutViewModel(IBrowserService browserService)
     {
