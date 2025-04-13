@@ -8,6 +8,7 @@
                x:DataType="viewmodels:SpinnerPopupViewModel">
     <VerticalStackLayout Padding="20">
         <ActivityIndicator IsRunning="True" />
-        <Label Text="{Binding LoadingText}" />
+        <Label Text="{Binding LoadingText}"
+               Style="{StaticResource IndicatorLabelStyle}" />
     </VerticalStackLayout>
 </toolkit:Popup>

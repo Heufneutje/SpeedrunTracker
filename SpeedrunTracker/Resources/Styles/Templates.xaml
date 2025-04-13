@@ -257,7 +257,7 @@
                   RowDefinitions="auto,auto">
                 <Ellipse Grid.Column="0"
                          IsVisible="{Binding IsUnread}"
-                         BackgroundColor="{StaticResource Primary}"
+                         BackgroundColor="{StaticResource LightHighlight}"
                          Grid.RowSpan="2"
                          HeightRequest="10"
                          WidthRequest="10"

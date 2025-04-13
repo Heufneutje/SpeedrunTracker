@@ -10,7 +10,7 @@
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color"
-                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                Value="{StaticResource White}" />
     </Style>
 
     <Style TargetType="IndicatorView">
@@ -502,8 +502,6 @@
 
     <Style x:Key="CustomBackgroundImage"
            TargetType="ffil:CachedImage">
-        <Setter Property="VerticalOptions" />
-        <Setter Property="HorizontalOptions" />
         <Setter Property="Aspect"
                 Value="AspectFill" />
     </Style>
@@ -548,7 +546,6 @@
 
     <Style x:Key="ThresholdCollectionViewStyle"
            TargetType="CollectionView">
-        <Setter Property="VerticalOptions" />
         <Setter Property="RemainingItemsThreshold"
                 Value="5" />
         <Setter Property="SelectionMode"
@@ -563,5 +560,13 @@
                 Value="Start" />
         <Setter Property="SelectionMode"
                 Value="Single" />
+    </Style>
+
+    <Style x:Key="IndicatorLabelStyle"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource White}" />
+        <Setter Property="FontAttributes"
+                Value="Bold" />
     </Style>
 </ResourceDictionary>
