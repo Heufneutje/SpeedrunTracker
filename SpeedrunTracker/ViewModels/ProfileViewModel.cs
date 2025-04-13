@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
@@ -8,68 +9,26 @@ using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class ProfileViewModel : BaseViewModel
+public partial class ProfileViewModel : BaseViewModel
 {
     private readonly IUserService _userService;
     private readonly IDialogService _dialogService;
     private readonly IToastService _toastService;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Name))]
+    [NotifyPropertyChangedFor(nameof(ImageUri))]
     private User? _user;
 
-    public User? User
-    {
-        get => _user;
-        set
-        {
-            if (_user != value)
-            {
-                _user = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(Name));
-                NotifyPropertyChanged(nameof(ImageUri));
-            }
-        }
-    }
-
+    [ObservableProperty]
     private bool _isLoggedIn;
 
-    public bool IsLoggedIn
-    {
-        get => _isLoggedIn;
-        set
-        {
-            if (_isLoggedIn != value)
-            {
-                _isLoggedIn = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
-
+    [ObservableProperty]
     private string? _apiKey;
 
-    public string? ApiKey
-    {
-        get => _apiKey;
-        set
-        {
-            if (_apiKey != value)
-            {
-                _apiKey = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
+    public string Name => User?.DisplayName ?? "Guest";
 
-    public string Name => _user?.DisplayName ?? "Guest";
-
-    public string? ImageUri => _user?.Assets?.Image?.Uri;
-
-    public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
-
-    public ICommand LogoutCommand => new AsyncRelayCommand(LogoutAsync);
-
-    public ICommand NavigateToUserCommand => new AsyncRelayCommand(NavigateToUserAsync);
+    public string? ImageUri => User?.Assets?.Image?.Uri;
 
     public ProfileViewModel(
         IUserService userService,
@@ -91,7 +50,7 @@ public class ProfileViewModel : BaseViewModel
         try
         {
             IsLoggedIn = !string.IsNullOrEmpty(await SecureStorage.GetAsync(Constants.ApiKey));
-            if (!_isLoggedIn)
+            if (!IsLoggedIn)
             {
                 User = null;
                 return;
@@ -118,6 +77,7 @@ public class ProfileViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
     private async Task LoginAsync()
     {
         if (string.IsNullOrEmpty(ApiKey))
@@ -131,6 +91,7 @@ public class ProfileViewModel : BaseViewModel
         await LoadProfileAsync();
     }
 
+    [RelayCommand]
     private async Task LogoutAsync()
     {
         await LogoutAsync(true);
@@ -152,6 +113,7 @@ public class ProfileViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
     private async Task NavigateToUserAsync()
     {
         if (IsLoggedIn && User != null)

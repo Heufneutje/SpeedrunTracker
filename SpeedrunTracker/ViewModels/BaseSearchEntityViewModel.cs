@@ -1,40 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
+public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewModel
 {
+    [ObservableProperty]
     private ObservableCollection<Entity> _entities;
 
-    public ObservableCollection<Entity> Entities
-    {
-        get => _entities;
-        set
-        {
-            _entities = value;
-            NotifyPropertyChanged();
-        }
-    }
-
+    [ObservableProperty]
     private string? _query;
 
-    public string Query
-    {
-        get => _query ?? string.Empty;
-        set
-        {
-            _query = value;
-            NotifyPropertyChanged();
-        }
-    }
-
     public abstract string SearchTextPlaceholder { get; }
-
-    public ICommand SearchCommand => new AsyncRelayCommand(SearchAsync, CanSearch);
-    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateToAsync);
 
     protected BaseSearchEntityViewModel(IToastService toastService, IPopupService popupService)
         : base(toastService, popupService)
@@ -42,6 +21,7 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
         _entities = [];
     }
 
+    [RelayCommand(CanExecute = nameof(CanSearch))]
     private async Task SearchAsync()
     {
         ShowActivityIndicator("Searching...");
@@ -57,9 +37,10 @@ public abstract class BaseSearchEntityViewModel : BaseNetworkActionViewModel
             CloseActivityIndicator();
         }
     }
-
+   
     protected abstract Task<List<Entity>> SearchEntitiesAsync();
 
+    [RelayCommand]
     protected abstract Task NavigateToAsync(Entity? entity);
 
     public bool CanSearch() => !IsRunningBackgroundTask;

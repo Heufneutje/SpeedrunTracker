@@ -27,7 +27,7 @@
                   x:Name="entitiesListView">
             <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                Command="{Binding NavigateToCommand}"
+                                                Command="{Binding NavigateCommand}"
                                                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
                                                 BindingContext="{Binding Path=BindingContext, Source={x:Reference entitiesListView}, x:DataType=ListView}" />
             </ListView.Behaviors>

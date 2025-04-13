@@ -40,7 +40,7 @@
                                  HorizontalOptions="Start"
                                  BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
             <Button Text="Show Leaderboard"
-                    Command="{Binding ShowLeaderboardCommand}"
+                    Command="{Binding LoadLeaderboardCommand}"
                     Margin="5" />
         </VerticalStackLayout>
     </VerticalStackLayout>

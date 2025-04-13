@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Extensions;
@@ -8,36 +8,23 @@ using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class RunDetailsViewModel : BaseShareableViewModel
+public partial class RunDetailsViewModel : BaseShareableViewModel
 {
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
     private readonly IEmbedService _embedService;
     private readonly IConfiguration _config;
     private readonly ILocalSettingsService _settingsService;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BackgroundUri))]
     private RunDetails? _runDetails;
 
-    public RunDetails? RunDetails
-    {
-        get => _runDetails;
-        set
-        {
-            _runDetails = value;
-            NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(BackgroundUri));
+    public bool HasVideo => RunDetails?.Run?.Videos?.Links?.Count > 0;
 
-            if (value?.Run.Videos?.Links != null)
-                VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
+    public bool HasMultipleVideos => RunDetails?.Run?.Videos?.Links?.Count > 1;
 
-            SelectedVideo = VideoUrls.FirstOrDefault();
-        }
-    }
-
-    public bool HasVideo => _runDetails?.Run?.Videos?.Links?.Any() == true;
-
-    public bool HasMultipleVideos => _runDetails?.Run?.Videos?.Links?.Count > 1;
-
-    public bool HasTrophyAsset => !string.IsNullOrEmpty(_runDetails?.TrophyAsset?.Uri);
+    public bool HasTrophyAsset => !string.IsNullOrEmpty(RunDetails?.TrophyAsset?.Uri);
 
     private string? _runComment;
 
@@ -53,53 +40,23 @@ public class RunDetailsViewModel : BaseShareableViewModel
         }
     }
 
+    [ObservableProperty]
     private User? _selectedPlayer;
-
-    public User? SelectedPlayer
-    {
-        get => _selectedPlayer;
-        set
-        {
-            if (_selectedPlayer != value)
-            {
-                _selectedPlayer = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
 
     public RangedObservableCollection<EmbeddableUrl> VideoUrls { get; set; }
 
+    [ObservableProperty]
     private EmbeddableUrl? _selectedVideo;
 
-    public EmbeddableUrl? SelectedVideo
-    {
-        get => _selectedVideo;
-        set
-        {
-            if (_selectedVideo != value)
-            {
-                _selectedVideo = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
-
-    public ICommand ShowVideoCommand => new AsyncRelayCommand(ShowVideo);
-
-    public ICommand NavigateToUserCommand => new AsyncRelayCommand<User>(NavigateToUserAsync);
-
-    public ICommand OpenLinkCommand => new AsyncRelayCommand<string>(OpenLinkAsync);
-
     public string? Title =>
-        _runDetails == null
+        RunDetails == null
             ? "RunDetails"
-            : $"{_runDetails.Category?.Name} in {_runDetails.Run.Times?.PrimaryTimeSpan}";
+            : $"{RunDetails.Category?.Name} in {RunDetails.Run.Times?.PrimaryTimeSpan}";
 
     public string? SubTitle =>
-        _runDetails == null
+        RunDetails == null
             ? "by <unknown>"
-            : $"by {string.Join(" and ", _runDetails.Run.Players.Select(x => x.DisplayName))}";
+            : $"by {string.Join(" and ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
 
     public string FullTitle => $"{Title} {SubTitle}";
 
@@ -168,13 +125,22 @@ public class RunDetailsViewModel : BaseShareableViewModel
         VideoUrls = [];
     }
 
-    private async Task ShowVideo()
+    partial void OnRunDetailsChanged(RunDetails? value)
     {
-        if (!string.IsNullOrEmpty(_selectedVideo?.Url))
-            await _browserService.OpenAsync(_selectedVideo.Url);
+        if (value?.Run.Videos?.Links != null)
+            VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
+
+        SelectedVideo = VideoUrls.FirstOrDefault();
     }
 
-    public async Task LoadData()
+    [RelayCommand]
+    private async Task ShowVideoAsync()
+    {
+        if (!string.IsNullOrEmpty(SelectedVideo?.Url))
+            await _browserService.OpenAsync(SelectedVideo.Url);
+    }
+
+    public async Task LoadDataAsync()
     {
         if (RunDetails?.Examiner == null && RunDetails?.Run.Status?.ExaminerId != null)
             RunDetails.Examiner =
@@ -185,6 +151,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
             CloseActivityIndicator();
     }
 
+    [RelayCommand]
     private async Task NavigateToUserAsync(User? user)
     {
         if (user == null)
@@ -200,6 +167,7 @@ public class RunDetailsViewModel : BaseShareableViewModel
         }
     }
 
+    [RelayCommand]
     private async Task OpenLinkAsync(string? uri)
     {
         if (!string.IsNullOrEmpty(uri))

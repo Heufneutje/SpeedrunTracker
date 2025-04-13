@@ -7,13 +7,13 @@
              Title="Notifications"
              Appearing="ContentPage_Appearing">
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                 Command="{Binding RefreshCommand}">
+                 Command="{Binding RefreshNotificationsCommand}">
         <CollectionView SelectionMode="Single"
                         ItemsSource="{Binding Notifications}"
                         RemainingItemsThreshold="5"
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadNotificationsCommand}"
                         ItemTemplate="{StaticResource NotificationTemplate}"
                         SelectedItem="{Binding SelectedNotification, Mode=TwoWay}"
-                        SelectionChangedCommand="{Binding OpenLinkCommand}" />
+                        SelectionChangedCommand="{Binding OpenNotificationLinkCommand}" />
     </RefreshView>
 </ContentPage>

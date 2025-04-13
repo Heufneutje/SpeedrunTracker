@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class NotificationListViewModel : BaseNetworkActionViewModel
+public partial class NotificationListViewModel : BaseNetworkActionViewModel
 {
     private readonly INotificationService _notificationService;
     private readonly IBrowserService _browserService;
@@ -13,37 +13,13 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
     private int _offset;
     private bool _hasReachedEnd;
 
+    [ObservableProperty]
     private bool _isRefreshing;
-
-    public bool IsRefreshing
-    {
-        get => _isRefreshing;
-        set
-        {
-            _isRefreshing = value;
-            NotifyPropertyChanged();
-        }
-    }
 
     public RangedObservableCollection<NotificationViewModel> Notifications { get; set; }
 
+    [ObservableProperty]
     private NotificationViewModel? _selectedNotification;
-
-    public NotificationViewModel? SelectedNotification
-    {
-        get => _selectedNotification;
-        set
-        {
-            _selectedNotification = value;
-            NotifyPropertyChanged();
-        }
-    }
-
-    public ICommand LoadMoreCommand => new AsyncRelayCommand(LoadNotificationsAsync);
-
-    public ICommand RefreshCommand => new AsyncRelayCommand(RefreshNotificationsAsync);
-
-    public ICommand OpenLinkCommand => new AsyncRelayCommand(OpenNotificationLinkAsync);
 
     public NotificationListViewModel(
         INotificationService notificationService,
@@ -60,6 +36,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         Notifications = [];
     }
 
+    [RelayCommand]
     private async Task LoadNotificationsAsync()
     {
         if (_hasReachedEnd)
@@ -85,6 +62,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
             _offset += notifications.Pagination.Size;
     }
 
+    [RelayCommand]
     private async Task RefreshNotificationsAsync()
     {
         _offset = 0;
@@ -94,6 +72,7 @@ public class NotificationListViewModel : BaseNetworkActionViewModel
         IsRefreshing = false;
     }
 
+    [RelayCommand]
     private async Task OpenNotificationLinkAsync()
     {
         NotificationLink? link = SelectedNotification?.Notification?.Item;

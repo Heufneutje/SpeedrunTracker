@@ -1,36 +1,21 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class VariableViewModel : BaseViewModel, INamedSpeedrunModel
+public partial class VariableViewModel : BaseViewModel, INamedSpeedrunModel
 {
-    public string VariableId { get; set; }
-    public string Name { get; set; }
+    public required string VariableId { get; set; }
+    public required string Name { get; set; }
 
+    [ObservableProperty]
     private ViewVariableValue? _selectedValue;
 
-    public ViewVariableValue? SelectedValue
+    [ObservableProperty]
+    private List<ViewVariableValue>? _values;
+
+    partial void OnValuesChanged(List<ViewVariableValue>? value)
     {
-        get => _selectedValue;
-        set
-        {
-            _selectedValue = value;
-            NotifyPropertyChanged();
-        }
-    }
-
-    private ObservableCollection<ViewVariableValue>? _values;
-
-    public ObservableCollection<ViewVariableValue> Values
-    {
-        get => _values ?? [];
-        set
-        {
-            _values = value;
-            NotifyPropertyChanged();
-
-            if (value.Any())
-                SelectedValue = value[0];
-        }
+        if (value?.Count > 0)
+            SelectedValue = value[0];
     }
 }

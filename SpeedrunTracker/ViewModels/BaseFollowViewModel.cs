@@ -1,27 +1,20 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public abstract class BaseFollowViewModel : BaseShareableViewModel
+public abstract partial class BaseFollowViewModel : BaseShareableViewModel
 {
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsFollowingEnabled))]
+    [NotifyPropertyChangedFor(nameof(FollowButtonText))]
+    [NotifyPropertyChangedFor(nameof(FollowButtonIconSource))]
+    [NotifyPropertyChangedFor(nameof(IsFollowingEnabled))]
     private bool? _isFollowing;
 
-    public bool? IsFollowing
-    {
-        get => _isFollowing;
-        set
-        {
-            _isFollowing = value;
-            NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(FollowButtonText));
-            NotifyPropertyChanged(nameof(FollowButtonIconSource));
-            NotifyPropertyChanged(nameof(IsFollowingEnabled));
-        }
-    }
-
-    public bool IsFollowingEnabled => _isFollowing.HasValue;
+    public bool IsFollowingEnabled => IsFollowing.HasValue;
 
     public string FollowButtonText => IsFollowing == true ? "Unfavorite" : "Favorite";
 
@@ -33,7 +26,7 @@ public abstract class BaseFollowViewModel : BaseShareableViewModel
     public abstract ICommand FollowCommand { get; }
 }
 
-public abstract class BaseFollowViewModel<T> : BaseFollowViewModel
+public abstract partial class BaseFollowViewModel<T> : BaseFollowViewModel
     where T : BaseSpeedrunModel
 {
     protected readonly ILocalFollowService _followService;

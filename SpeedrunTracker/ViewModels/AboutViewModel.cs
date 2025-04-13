@@ -1,13 +1,10 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class AboutViewModel : BaseViewModel
+public partial class AboutViewModel : BaseViewModel
 {
     private readonly IBrowserService _browserService;
-
-    public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrlAsync);
 
     public string VersionText => $"SpeedrunTracker {AppInfo.VersionString}";
 
@@ -16,6 +13,7 @@ public class AboutViewModel : BaseViewModel
         _browserService = browserService;
     }
 
+    [RelayCommand]
     private async Task OpenUrlAsync(string? url)
     {
         if (!string.IsNullOrEmpty(url))

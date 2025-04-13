@@ -1,58 +1,38 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
+public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 {
     private readonly IGameSeriesService _gameSeriesService;
     private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
 
-    public GameSeries? Series
-    {
-        get => _followEntity;
-        set
-        {
-            if (_followEntity != value)
-            {
-                _followEntity = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(BackgroundUri));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BackgroundUri))]
+    private GameSeries? _series;
 
+    [ObservableProperty]
     private Game? _selectedGame;
 
-    public Game? SelectedGame
-    {
-        get => _selectedGame;
-        set
-        {
-            if (_selectedGame != value)
-            {
-                _selectedGame = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
-
     public RangedObservableCollection<Game> Games { get; set; }
-
-    public ICommand LoadMoreCommand => new AsyncRelayCommand(LoadGamesAsync);
-
-    public ICommand NavigateToGameCommand => new AsyncRelayCommand(NavigateToGameAsync);
 
     public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
 
     public string? BackgroundUri =>
         _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.Uri : null;
+
+    partial void OnSeriesChanged(GameSeries? value)
+    {
+        _followEntity = value;
+    }
 
     public GameSeriesDetailViewModel(
         IGameSeriesService gameSeriesService,
@@ -71,6 +51,7 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     protected override Task FollowAsync(GameSeries entity) => _followService.FollowSeriesAsync(entity);
 
+    [RelayCommand]
     public async Task LoadGamesAsync()
     {
         if (_hasReachedEnd || Series == null)
@@ -97,13 +78,14 @@ public class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
     }
 
+    [RelayCommand]
     private async Task NavigateToGameAsync()
     {
-        if (_selectedGame == null)
+        if (SelectedGame == null)
             return;
 
         ShowActivityIndicator();
-        await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", _selectedGame);
+        await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", SelectedGame);
         SelectedGame = null;
     }
 }

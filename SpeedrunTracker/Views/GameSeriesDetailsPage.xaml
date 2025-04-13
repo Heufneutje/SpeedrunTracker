@@ -28,7 +28,7 @@
             <CollectionView Style="{StaticResource ThresholdCollectionViewStyle}"
                             ItemsSource="{Binding Games}"
                             ItemTemplate="{StaticResource GameSeriesEntriesTemplate}"
-                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadGamesCommand}"
                             SelectedItem="{Binding SelectedGame}"
                             SelectionChangedCommand="{Binding NavigateToGameCommand}">
             </CollectionView>

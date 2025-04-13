@@ -18,21 +18,6 @@
                    HorizontalTextAlignment="Center"
                    FontSize="Subtitle"
                    Margin="20" />
-
-            <!--Replace with hyperlink once they actually work https://github.com/dotnet/maui/issues/4734
-            <Label HorizontalTextAlignment="Center" FontSize="Subtitle" Margin="20">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Please report any issues you may encounter on the " />
-                        <Span Text="issue tracker" TextColor="Aqua" TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/issues" />
-                            </Span.GestureRecognizers>
-                        </Span>
-                        <Span Text="." />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>-->
             <Label Text="Please report any issues you may encounter on the issue tracker."
                    HorizontalTextAlignment="Center"
                    FontSize="Subtitle"

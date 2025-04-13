@@ -10,7 +10,7 @@ public class SpinnerPopupViewModel : BaseViewModel
         set
         {
             _loadingText = value;
-            NotifyPropertyChanged();
+            OnPropertyChanged();
         }
     }
 }

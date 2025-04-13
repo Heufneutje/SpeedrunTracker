@@ -1,13 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class UserDetailsViewModel : BaseFollowViewModel<User>
+public partial class UserDetailsViewModel : BaseFollowViewModel<User>
 {
     private readonly IBrowserService _browserService;
     private readonly IUserService _userService;
@@ -15,65 +16,23 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
     private bool? _isCurrentlyShowingLevels;
     private List<LeaderboardEntry>? _allPersonalBests;
 
-    public User? User
-    {
-        get => _followEntity;
-        set
-        {
-            if (_followEntity != value)
-            {
-                _followEntity = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(DisplayName));
-                NotifyPropertyChanged(nameof(CountryImageSource));
-            }
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(DisplayName))]
+    [NotifyPropertyChangedFor(nameof(CountryImageSource))]
+    private User? _user;
 
-    private ObservableCollection<UserPersonalBestsGroup>? _personalBests;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowRuns))]
+    private List<UserPersonalBestsGroup>? _personalBests;
 
-    public ObservableCollection<UserPersonalBestsGroup> PersonalBests
-    {
-        get => _personalBests ?? [];
-        set
-        {
-            if (_personalBests != value)
-            {
-                _personalBests = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(ShowRuns));
-            }
-        }
-    }
-
+    [ObservableProperty]
     private UserRunViewModel? _selectedEntry;
-
-    public UserRunViewModel? SelectedEntry
-    {
-        get => _selectedEntry;
-        set
-        {
-            if (_selectedEntry != value)
-            {
-                _selectedEntry = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
 
     public string? DisplayName => User?.DisplayName;
 
     public string CountryImageSource => $"flags/{User?.Location?.Country?.Code?.Replace("/", "_")}_flag";
 
     public bool ShowRuns => PersonalBests?.Any() == true || IsRunningBackgroundTask;
-
-    public ICommand OpenUrlCommand => new AsyncRelayCommand<string>(OpenUrl);
-
-    public ICommand NavigateToRunCommand => new AsyncRelayCommand(NavigateToRun);
-
-    public ICommand LoadFullGamePersonalBestsCommand => new AsyncRelayCommand(LoadFullGamePersonalBests);
-
-    public ICommand LoadLevelPersonalBestsCommand => new AsyncRelayCommand(LoadLevelPersonalBests);
 
     public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
 
@@ -94,8 +53,15 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         PersonalBests = [];
     }
 
+    partial void OnUserChanged(User? value)
+    {
+        _followEntity = value;
+    }
+
+    [RelayCommand]
     private Task LoadFullGamePersonalBests() => LoadPersonalBests(false);
 
+    [RelayCommand]
     private Task LoadLevelPersonalBests() => LoadPersonalBests(true);
 
     private async Task LoadPersonalBests(bool showLevels)
@@ -110,7 +76,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
             )
                 return;
 
-            NotifyPropertyChanged(nameof(ShowRuns));
+            OnPropertyChanged(nameof(ShowRuns));
             _isCurrentlyShowingLevels = showLevels;
 
             _allPersonalBests ??= await ExecuteNetworkTask(_userService.GetUserPersonalBestsAsync(User.Id));
@@ -142,7 +108,7 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
                     );
             }
 
-            PersonalBests = groups.AsObservableCollection();
+            PersonalBests = groups.ToList();
         }
         finally
         {
@@ -183,7 +149,8 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         }
     }
 
-    private async Task NavigateToRun()
+    [RelayCommand]
+    private async Task NavigateToRunAsync()
     {
         User? examiner = null;
         LeaderboardEntry? leaderboardEntry = SelectedEntry?.Entry;
@@ -211,7 +178,8 @@ public class UserDetailsViewModel : BaseFollowViewModel<User>
         SelectedEntry = null;
     }
 
-    private async Task OpenUrl(string? url)
+    [RelayCommand]
+    private async Task OpenUrlAsync(string? url)
     {
         if (!string.IsNullOrEmpty(url))
             await _browserService.OpenAsync(url);

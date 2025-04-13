@@ -19,7 +19,7 @@ public class SettingsViewModel : BaseViewModel
             {
                 _settingsService.UserSettings.MaxLeaderboardResults = value;
                 _hasChanges = true;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -36,7 +36,7 @@ public class SettingsViewModel : BaseViewModel
             {
                 _settingsService.UserSettings.Theme = value.Theme;
                 _hasChanges = true;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
                 Application.Current.UserAppTheme = value.Theme;
             }
         }
@@ -54,7 +54,7 @@ public class SettingsViewModel : BaseViewModel
             {
                 _settingsService.UserSettings.DateFormat = value.FormatString;
                 _hasChanges = true;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -71,7 +71,7 @@ public class SettingsViewModel : BaseViewModel
             {
                 _settingsService.UserSettings.TimeFormat = value.FormatString;
                 _hasChanges = true;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
@@ -85,7 +85,7 @@ public class SettingsViewModel : BaseViewModel
             {
                 _settingsService.UserSettings.DisplayBackgrounds = value;
                 _hasChanges = true;
-                NotifyPropertyChanged();
+                OnPropertyChanged();
             }
         }
     }

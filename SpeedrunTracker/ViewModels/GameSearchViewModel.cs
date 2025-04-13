@@ -27,7 +27,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
 
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
-        PagedData<List<Game>>? apiData = await ExecuteNetworkTask(_gameService.SearchGamesAsync(Query.Trim()));
+        PagedData<List<Game>>? apiData = await ExecuteNetworkTask(_gameService.SearchGamesAsync(Query?.Trim() ?? string.Empty));
         if (apiData == null)
             return [];
 

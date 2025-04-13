@@ -21,7 +21,7 @@ public partial class RunDetailsPage : ContentPage
         if (!_isLoaded)
         {
             _viewModel.RunDetails = RunDetails;
-            await _viewModel.LoadData();
+            await _viewModel.LoadDataAsync();
             BindingContext = _viewModel;
             _isLoaded = true;
         }

@@ -1,22 +1,23 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class FollowedEntityViewModel : BaseNetworkActionViewModel
+public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
 {
     private readonly IGameService _gameService;
     private readonly IGameSeriesService _gameSeriesService;
     private readonly IUserService _userService;
     private readonly ILocalFollowService _localFollowService;
 
-    public ObservableCollection<EntityGroup> Entities { get; set; }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasEntities))]
+    private List<EntityGroup> _entities;
 
-    public bool HasEntities => Entities?.Any() == true;
+    public bool HasEntities => Entities?.Count > 0;
 
     public FollowedEntityViewModel(
         IGameService gameService,
@@ -35,8 +36,7 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
         Entities = [];
     }
 
-    public ICommand NavigateToCommand => new AsyncRelayCommand<Entity>(NavigateAsync);
-
+    [RelayCommand]
     private async Task NavigateAsync(Entity? entity)
     {
         if (entity == null)
@@ -102,8 +102,6 @@ public class FollowedEntityViewModel : BaseNetworkActionViewModel
             );
         }
 
-        Entities = entities.AsObservableCollection();
-        NotifyPropertyChanged(nameof(Entities));
-        NotifyPropertyChanged(nameof(HasEntities));
+        Entities = entities;
     }
 }
