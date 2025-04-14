@@ -285,6 +285,13 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         SelectedLeaderboardEntry = null;
     }
 
+    [RelayCommand]
+    private void ShowImagePopup()
+    {
+        if (Game?.Assets?.CoverSmall?.Uri != null)
+            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.Uri);
+    }
+
     private void UpdateVariables()
     {
         List<VariableViewModel> variablesVMs = new();

@@ -24,4 +24,14 @@ public abstract class BaseViewModel : ObservableObject
         IsRunningBackgroundTask = false;
         _popupService?.ClosePopup();
     }
+
+    public void ShowPopup<T>(Action<T> onPresenting) where T : BaseViewModel
+    {
+        _popupService?.ShowPopup(onPresenting);
+    }
+
+    public void ClosePopup()
+    {
+        _popupService?.ClosePopup();
+    }
 }

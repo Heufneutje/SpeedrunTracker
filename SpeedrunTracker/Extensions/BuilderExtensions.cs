@@ -122,6 +122,7 @@ public static class BuilderExtensions
         services.AddSingleton<IEmbedService, EmbedService>();
         services.AddSingleton<IShareService, ShareService>();
         services.AddTransientPopup<SpinnerPopup, SpinnerPopupViewModel>();
+        services.AddTransientPopup<ImagePopup, ImagePopupViewModel>();
     }
 
     private static void AddViewModels(IServiceCollection services)

@@ -2,8 +2,8 @@
 
 namespace SpeedrunTracker.ViewModels;
 
-public partial class SpinnerPopupViewModel : BaseViewModel
+public partial class ImagePopupViewModel : BaseViewModel
 {
     [ObservableProperty]
-    private string _loadingText = "Loading...";
+    private string? _imageSource;
 }

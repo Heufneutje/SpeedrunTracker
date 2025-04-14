@@ -153,6 +153,9 @@
 		<MauiXaml Update="Views\GameSeriesDetailsPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Views\ImagePopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\NotificationsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

@@ -57,12 +57,12 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     }
 
     [RelayCommand]
-    private Task LoadFullGamePersonalBests() => LoadPersonalBests(false);
+    private Task LoadFullGamePersonalBests() => LoadPersonalBestsAsync(false);
 
     [RelayCommand]
-    private Task LoadLevelPersonalBests() => LoadPersonalBests(true);
+    private Task LoadLevelPersonalBests() => LoadPersonalBestsAsync(true);
 
-    private async Task LoadPersonalBests(bool showLevels)
+    private async Task LoadPersonalBestsAsync(bool showLevels)
     {
         ShowActivityIndicator();
         try
@@ -181,6 +181,13 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     {
         if (!string.IsNullOrEmpty(url))
             await _browserService.OpenAsync(url);
+    }
+
+    [RelayCommand]
+    private void ShowAvatarPopup()
+    {
+        if (User?.Assets?.Image != null)
+            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.Uri);
     }
 
     private async Task<User> GetRunUserAsync(string userId)

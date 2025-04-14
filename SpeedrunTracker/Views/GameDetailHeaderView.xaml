@@ -11,7 +11,11 @@
     <Grid ColumnDefinitions="100,*">
         <ffil:CachedImage Grid.Column="0"
                           Source="{Binding Game.Assets.CoverSmall.Uri}"
-                          Margin="10" />
+                          Margin="10">
+            <ffil:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ShowImagePopupCommand}" />
+            </ffil:CachedImage.GestureRecognizers>        
+        </ffil:CachedImage>
         <VerticalStackLayout Grid.Column="1"
                              Margin="0,10,0,0">
             <Grid ColumnDefinitions="100,*"

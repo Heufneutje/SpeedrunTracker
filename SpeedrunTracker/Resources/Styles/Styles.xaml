@@ -569,4 +569,11 @@
         <Setter Property="FontAttributes"
                 Value="Bold" />
     </Style>
+
+    <Style x:Key="PopupStyle"
+           TargetType="toolkit:Popup">
+        <Setter Property="Color"
+                Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+    </Style>
+           
 </ResourceDictionary>
