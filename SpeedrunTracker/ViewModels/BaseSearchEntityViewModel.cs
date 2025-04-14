@@ -29,7 +29,7 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
         try
         {
             List<Entity> data = await SearchEntitiesAsync();
-            if (data != null)
+            if (data is not null)
                 Entities = data.AsObservableCollection();
         }
         finally

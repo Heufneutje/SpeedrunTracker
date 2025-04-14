@@ -64,7 +64,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     private Leaderboard? _leaderboard;
     public RangedObservableCollection<LeaderboardEntry> LeaderboardEntries { get; set; }
 
-    public bool HasIndividualLevels => Levels != null && Levels.Count > 1;
+    public bool HasIndividualLevels => Levels is not null && Levels.Count > 1;
 
     [ObservableProperty]
     private LeaderboardEntry? _selectedLeaderboardEntry;
@@ -73,7 +73,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     {
         get
         {
-            if (Game?.Platforms == null)
+            if (Game?.Platforms is null)
                 return string.Empty;
 
             return string.Join(", ", Game.Platforms.Data.Select(x => x.Name));
@@ -109,11 +109,11 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadCategoriesAsync()
     {
-        if (Game == null)
+        if (Game is null)
             return false;
 
         List<Category>? categories = await ExecuteNetworkTask(_gameService.GetGameCategoriesAsync(Game.Id));
-        if (categories == null)
+        if (categories is null)
             return false;
 
         _fullGameCategories = categories.Where(x => x.Type == CategoryType.PerGame);
@@ -123,12 +123,12 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadLevelsAsync()
     {
-        if (Game == null)
+        if (Game is null)
             return false;
 
         List<Level> allLevels = new() { new() { Name = "Full Game" } };
         List<Level>? gameLevels = await ExecuteNetworkTask(_gameService.GetGameLevelsAsync(Game.Id));
-        if (gameLevels == null)
+        if (gameLevels is null)
             return false;
 
         allLevels.AddRange(gameLevels);
@@ -138,17 +138,17 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
 
     public async Task<bool> LoadVariablesAsync()
     {
-        if (Game == null)
+        if (Game is null)
             return false;
 
         _allVariables = await ExecuteNetworkTask(_gameService.GetGameVariablesAsync(Game.Id));
-        return _allVariables != null;
+        return _allVariables is not null;
     }
 
     [RelayCommand]
     public async Task LoadLeaderboardAsync()
     {
-        if (Game == null)
+        if (Game is null)
             return;
 
         ShowActivityIndicator();
@@ -160,14 +160,14 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         List<string> variableValues = new();
         string variables = string.Empty;
 
-        if (Variables != null)
+        if (Variables is not null)
         {
             foreach (VariableViewModel vm in Variables)
                 variableValues.Add($"var-{vm.VariableId}={vm.SelectedValue?.Id}");
             variables = string.Join('&', variableValues);
         }
 
-        if (SelectedCategory != null)
+        if (SelectedCategory is not null)
         {
             if (!string.IsNullOrEmpty(variables))
                 variables = $"&{variables}";
@@ -191,7 +191,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
                     )
                 );
 
-            if (_leaderboard != null)
+            if (_leaderboard is not null)
                 DisplayLeaderboardEntries();
         }
 
@@ -201,7 +201,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     [RelayCommand]
     private void DisplayLeaderboardEntries()
     {
-        if (_leaderboard == null)
+        if (_leaderboard is null)
             return;
 
         IEnumerable<LeaderboardEntry> pagedEntries = _leaderboard
@@ -232,11 +232,11 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     [RelayCommand]
     private async Task NavigateToRunAsync()
     {
-        if (SelectedLeaderboardEntry == null || Game == null)
+        if (SelectedLeaderboardEntry is null || Game is null)
             return;
 
         Category? category = Categories?.FirstOrDefault(x => x.Id == SelectedLeaderboardEntry.Run.CategoryId);
-        if (category == null)
+        if (category is null)
             return;
 
         ShowActivityIndicator();
@@ -248,7 +248,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
 
         User? examiner = null;
         string? examinerId = SelectedLeaderboardEntry.Run.Status?.ExaminerId;
-        if (examinerId != null)
+        if (examinerId is not null)
             examiner =
                 Game.Moderators.Data.Find(x => x.Id == examinerId)
                 ?? await ExecuteNetworkTask(_userService.GetUserAsync(examinerId))
@@ -258,11 +258,11 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
             foreach (KeyValuePair<string, string> valuePair in SelectedLeaderboardEntry.Run.Values)
             {
                 Variable? variable = _allVariables?.FirstOrDefault(x => x.Id == valuePair.Key);
-                if (variable == null)
+                if (variable is null)
                     continue;
 
                 VariableValue value = variable.Values.Values.FirstOrDefault(x => x.Key == valuePair.Value).Value;
-                if (value == null)
+                if (value is null)
                     continue;
 
                 SelectedLeaderboardEntry.Run.Variables.Add(new(variable.Name, value.Name, variable.IsSubcategory));
@@ -288,7 +288,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     [RelayCommand]
     private void ShowImagePopup()
     {
-        if (Game?.Assets?.CoverSmall?.Uri != null)
+        if (Game?.Assets?.CoverSmall?.Uri is not null)
             ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.Uri);
     }
 
@@ -307,7 +307,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
                 || x.Scope.Type == VariableScopeType.SingleLevel && x.Scope.Level == SelectedLevel?.Id
             );
 
-        foreach (Variable variable in variables.Where(x => x.Category == null || x.Category == SelectedCategory?.Id))
+        foreach (Variable variable in variables.Where(x => x.Category is null || x.Category == SelectedCategory?.Id))
         {
             VariableViewModel vm = new()
             {

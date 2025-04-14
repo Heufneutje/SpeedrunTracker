@@ -29,7 +29,7 @@ public class SettingsViewModel : BaseViewModel
         get => Themes.FirstOrDefault(x => x.Theme == _settingsService.UserSettings.Theme);
         set
         {
-            if (value == null || Application.Current == null)
+            if (value is null || Application.Current is null)
                 return;
 
             if (_settingsService.UserSettings.Theme != value.Theme)
@@ -47,7 +47,7 @@ public class SettingsViewModel : BaseViewModel
         get => DateFormats.FirstOrDefault(x => x.FormatString == _settingsService.UserSettings.DateFormat);
         set
         {
-            if (value == null)
+            if (value is null)
                 return;
 
             if (_settingsService.UserSettings.DateFormat != value.FormatString)
@@ -64,7 +64,7 @@ public class SettingsViewModel : BaseViewModel
         get => TimeFormats.FirstOrDefault(x => x.FormatString == _settingsService.UserSettings.TimeFormat);
         set
         {
-            if (value == null)
+            if (value is null)
                 return;
 
             if (_settingsService.UserSettings.TimeFormat != value.FormatString)

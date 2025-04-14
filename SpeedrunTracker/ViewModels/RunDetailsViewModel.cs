@@ -32,7 +32,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     {
         get
         {
-            if (_runComment == null && RunDetails?.Run?.Comment != null)
+            if (_runComment is null && RunDetails?.Run?.Comment is not null)
                 _runComment = RunDetails
                     .Run.Comment.Replace("(/static/blob", $"({_config["speedrun-dot-com:base-address"]}static/blob")
                     .MarkdownifyUrls();
@@ -49,12 +49,12 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     private EmbeddableUrl? _selectedVideo;
 
     public string? Title =>
-        RunDetails == null
+        RunDetails is null
             ? "RunDetails"
             : $"{RunDetails.Category?.Name} in {RunDetails.Run.Times?.PrimaryTimeSpan}";
 
     public string? SubTitle =>
-        RunDetails == null
+        RunDetails is null
             ? "by <unknown>"
             : $"by {string.Join(" and ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
 
@@ -72,7 +72,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     {
         get
         {
-            if (RunDetails == null)
+            if (RunDetails is null)
                 return null;
 
             return RunDetails.Run.Status?.StatusType switch
@@ -127,7 +127,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
 
     partial void OnRunDetailsChanged(RunDetails? value)
     {
-        if (value?.Run.Videos?.Links != null)
+        if (value?.Run.Videos?.Links is not null)
             VideoUrls.AddRange(_embedService.GetEmbeddableUrls(value.Run.Videos));
 
         SelectedVideo = VideoUrls.FirstOrDefault();
@@ -142,7 +142,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
 
     public async Task LoadDataAsync()
     {
-        if (RunDetails?.Examiner == null && RunDetails?.Run.Status?.ExaminerId != null)
+        if (RunDetails?.Examiner is null && RunDetails?.Run.Status?.ExaminerId is not null)
             RunDetails.Examiner =
                 await ExecuteNetworkTask(_userService.GetUserAsync(RunDetails.Run.Status.ExaminerId))
                 ?? User.GetUserNotFoundPlaceholder();
@@ -154,7 +154,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     [RelayCommand]
     private async Task NavigateToUserAsync(User? user)
     {
-        if (user == null)
+        if (user is null)
         {
             user = SelectedPlayer;
             SelectedPlayer = null;

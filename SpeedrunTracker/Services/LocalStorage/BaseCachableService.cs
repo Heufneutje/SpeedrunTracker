@@ -17,11 +17,11 @@ public abstract class BaseCachableService
         where T : class
     {
         CacheItem cacheItem = await _cacheService.GetCacheItemAsync(gameId, itemType);
-        if (cacheItem != null && !cacheItem.IsExpired)
+        if (cacheItem is not null && !cacheItem.IsExpired)
             return _cacheService.DeserializeCacheItem<T>(cacheItem);
 
         T? resource = (await repositoryAction)?.Data;
-        if (resource != null)
+        if (resource is not null)
             await _cacheService.SaveCacheItemAsync(gameId, itemType, resource);
         return resource;
     }

@@ -115,7 +115,7 @@ public partial class ProfileViewModel : BaseViewModel
     [RelayCommand]
     private async Task NavigateToUserAsync()
     {
-        if (IsLoggedIn && User != null)
+        if (IsLoggedIn && User is not null)
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", User);
     }
 

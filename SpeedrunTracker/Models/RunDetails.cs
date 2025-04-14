@@ -29,7 +29,7 @@ public class RunDetails
     {
         get
         {
-            if (_trophyAsset == null && Place < 5)
+            if (_trophyAsset is null && Place < 5)
                 _trophyAsset = GameAssets?.GetTrophyAsset(Place);
             return _trophyAsset;
         }

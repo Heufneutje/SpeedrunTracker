@@ -28,7 +28,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
     protected override async Task<List<Entity>> SearchEntitiesAsync()
     {
         PagedData<List<User>>? apiData = await ExecuteNetworkTask(_userService.SearchUsersAsync(Query?.Trim() ?? string.Empty));
-        if (apiData == null)
+        if (apiData is null)
             return [];
 
         return apiData

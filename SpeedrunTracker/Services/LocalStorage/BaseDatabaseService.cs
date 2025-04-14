@@ -13,7 +13,7 @@ public class BaseDatabaseService
 
     protected SQLiteAsyncConnection GetConnection()
     {
-        if (_databaseService.Connection == null)
+        if (_databaseService.Connection is null)
             throw new InvalidOperationException("Local database was not initialized");
 
         return _databaseService.Connection;

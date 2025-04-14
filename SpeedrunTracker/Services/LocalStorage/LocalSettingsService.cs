@@ -18,7 +18,7 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
     public async Task LoadSettingsAsync()
     {
         UserSettings = await GetConnection().Table<UserSettings>().FirstOrDefaultAsync();
-        if (UserSettings == null)
+        if (UserSettings is null)
         {
             UserSettings = new()
             {
@@ -29,13 +29,13 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
             await GetConnection().InsertAsync(UserSettings);
         }
 
-        if (UserSettings.DateFormat == null)
+        if (UserSettings.DateFormat is null)
             UserSettings.DateFormat = _configuration["defaults:date-format"];
 
-        if (UserSettings.TimeFormat == null)
+        if (UserSettings.TimeFormat is null)
             UserSettings.TimeFormat = _configuration["defaults:time-format"];
 
-        if (UserSettings.DisplayBackgrounds == null)
+        if (UserSettings.DisplayBackgrounds is null)
             UserSettings.DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds");
     }
 

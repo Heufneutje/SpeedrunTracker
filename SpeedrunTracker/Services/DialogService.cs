@@ -15,7 +15,7 @@ public class DialogService : IDialogService
     )
     {
         Page? mainPage = GetMainPage();
-        return mainPage != null && await mainPage.DisplayAlert(title, message, accept, cancel);
+        return mainPage is not null && await mainPage.DisplayAlert(title, message, accept, cancel);
     }
 
     private static Page? GetMainPage() => Application.Current?.Windows[0].Page;

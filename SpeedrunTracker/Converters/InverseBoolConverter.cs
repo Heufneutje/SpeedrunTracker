@@ -9,7 +9,7 @@ public class InverseBoolConverter : IValueConverter
         if (targetType != typeof(bool))
             throw new InvalidOperationException("The target must be a boolean");
 
-        return value == null || !(bool)value;
+        return value is null || !(bool)value;
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

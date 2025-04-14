@@ -4,7 +4,7 @@ public class ExclusionCollection : Dictionary<string, List<string>>
 {
     public static ExclusionCollection ParseExclusions(string configuredExclusions)
     {
-        if (configuredExclusions == null)
+        if (configuredExclusions is null)
             return [];
 
         return configuredExclusions

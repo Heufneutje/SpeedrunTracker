@@ -24,7 +24,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
     protected async Task<T?> ExecuteNetworkTask<T>(Task<T> task)
         where T : class?
     {
-        if (_currentNetworkAccess == null || _currentNetworkAccess != NetworkAccess.Internet)
+        if (_currentNetworkAccess is null || _currentNetworkAccess != NetworkAccess.Internet)
             _currentNetworkAccess = Connectivity.Current.NetworkAccess;
 
         if (_currentNetworkAccess != NetworkAccess.Internet)

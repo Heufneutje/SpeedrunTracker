@@ -31,7 +31,7 @@ public class CacheService : BaseDatabaseService, ICacheService
 
     public T? DeserializeCacheItem<T>(CacheItem cacheItem)
     {
-        if (cacheItem.CachedJson == null)
+        if (cacheItem.CachedJson is null)
             return default;
 
         return _jsonSerializationService.Deserialize<T>(cacheItem.CachedJson);

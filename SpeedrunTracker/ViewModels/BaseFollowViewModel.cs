@@ -48,7 +48,7 @@ public abstract partial class BaseFollowViewModel<T> : BaseFollowViewModel
 
     public async Task LoadFollowingStatusAsync()
     {
-        if (_followEntity != null)
+        if (_followEntity is not null)
             IsFollowing = await _followService.IsFollowingAsync(_followEntity.Id);
 
         CloseActivityIndicator();
@@ -56,7 +56,7 @@ public abstract partial class BaseFollowViewModel<T> : BaseFollowViewModel
 
     protected async Task ToggleFollowAsync()
     {
-        if (_followEntity == null)
+        if (_followEntity is null)
             return;
 
         if (IsFollowing == true)

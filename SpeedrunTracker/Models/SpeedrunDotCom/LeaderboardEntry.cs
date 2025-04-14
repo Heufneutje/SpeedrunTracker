@@ -27,7 +27,7 @@ public record LeaderboardEntry
         get
         {
             _level ??=
-                Run.LevelId == null || LevelJson?.Data == null
+                Run.LevelId is null || LevelJson?.Data is null
                     ? null
                     : JsonSerializer.Deserialize<Level>(LevelJson.Data.ToString()!);
             return _level;
@@ -42,7 +42,7 @@ public record LeaderboardEntry
         get
         {
             _platform ??=
-                Run?.System?.PlatformId == null || PlatformJson?.Data == null
+                Run?.System?.PlatformId is null || PlatformJson?.Data is null
                     ? null
                     : JsonSerializer.Deserialize<GamePlatform>(PlatformJson.Data.ToString()!);
             return _platform;
@@ -68,7 +68,7 @@ public record LeaderboardEntry
     {
         get
         {
-            if (_trophyAsset == null && Place < 5)
+            if (_trophyAsset is null && Place < 5)
                 _trophyAsset = Game?.Data?.Assets?.GetTrophyAsset(Place);
 
             return _trophyAsset;

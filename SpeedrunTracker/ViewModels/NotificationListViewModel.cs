@@ -45,7 +45,7 @@ public partial class NotificationListViewModel : BaseNetworkActionViewModel
         PagedData<List<Notification>>? notifications = await ExecuteNetworkTask(
             _notificationService.GetNotificationsAsync(_offset)
         );
-        if (notifications == null)
+        if (notifications is null)
             return;
 
         Notifications.AddRange(
@@ -77,7 +77,7 @@ public partial class NotificationListViewModel : BaseNetworkActionViewModel
     {
         NotificationLink? link = SelectedNotification?.Notification?.Item;
 
-        if (link != null)
+        if (link is not null)
             await _browserService.OpenAsync(link.Uri);
 
         SelectedNotification = null;

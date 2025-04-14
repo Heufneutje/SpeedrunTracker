@@ -70,7 +70,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
             if (
                 _isCurrentlyShowingLevels == true && showLevels
                 || _isCurrentlyShowingLevels == false && !showLevels
-                || User == null
+                || User is null
             )
                 return;
 
@@ -78,12 +78,12 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
             _isCurrentlyShowingLevels = showLevels;
 
             _allPersonalBests ??= await ExecuteNetworkTask(_userService.GetUserPersonalBestsAsync(User.Id));
-            if (_allPersonalBests == null)
+            if (_allPersonalBests is null)
                 return;
 
             IEnumerable<LeaderboardEntry> filteredBests = showLevels
-                ? _allPersonalBests.Where(x => x.Run.LevelId != null)
-                : _allPersonalBests.Where(x => x.Run.LevelId == null);
+                ? _allPersonalBests.Where(x => x.Run.LevelId is not null)
+                : _allPersonalBests.Where(x => x.Run.LevelId is null);
 
             Dictionary<string, User> players = [];
             List<UserPersonalBestsGroup> groups = [];
@@ -97,7 +97,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
                 }
 
                 BaseGame? game = entries[0].Game?.Data;
-                if (game != null)
+                if (game is not null)
                     groups.Add(
                         new UserPersonalBestsGroup(
                             game,
@@ -119,7 +119,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
         foreach (KeyValuePair<string, string> valuePair in entry.Run.Values)
         {
             Variable? variable = entry.Category?.Data.Variables.Data.Find(x => x.Id == valuePair.Key);
-            if (variable == null || !variable.Values.Values.ContainsKey(valuePair.Value))
+            if (variable is null || !variable.Values.Values.ContainsKey(valuePair.Value))
                 continue;
 
             VariableValue value = variable.Values.Values[valuePair.Value];
@@ -152,12 +152,12 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     {
         User? examiner = null;
         LeaderboardEntry? leaderboardEntry = SelectedEntry?.Entry;
-        if (leaderboardEntry == null)
+        if (leaderboardEntry is null)
             return;
 
         ShowActivityIndicator();
 
-        if (leaderboardEntry.Run.Status?.ExaminerId != null)
+        if (leaderboardEntry.Run.Status?.ExaminerId is not null)
             examiner = await GetRunUserAsync(leaderboardEntry.Run.Status.ExaminerId);
 
         RunDetails runDetails = new()
@@ -186,7 +186,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     [RelayCommand]
     private void ShowAvatarPopup()
     {
-        if (User?.Assets?.Image != null)
+        if (User?.Assets?.Image is not null)
             ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.Uri);
     }
 

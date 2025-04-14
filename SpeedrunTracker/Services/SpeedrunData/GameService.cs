@@ -33,7 +33,7 @@ public class GameService : BaseCachableService, IGameService
             CacheItemType.Categories,
             _gameRepository.GetGameCategoriesAsync(gameId)
         );
-        if (categories == null)
+        if (categories is null)
             return [];
 
         return categories.Where(x => !_archivedCategories.IsExcluded(gameId, x.Id)).ToList();
@@ -46,7 +46,7 @@ public class GameService : BaseCachableService, IGameService
             CacheItemType.Levels,
             _gameRepository.GetGameLevelsAsync(gameId)
         );
-        if (levels == null)
+        if (levels is null)
             return [];
 
         return levels.Where(x => !_archivedLevels.IsExcluded(gameId, x.Id)).ToList();
@@ -59,7 +59,7 @@ public class GameService : BaseCachableService, IGameService
             CacheItemType.Variables,
             _gameRepository.GetGameVariablesAsync(gameId)
         );
-        if (variables == null)
+        if (variables is null)
             return [];
 
         return variables.Where(x => !_archivedVariables.IsExcluded(gameId, x.Id)).ToList();

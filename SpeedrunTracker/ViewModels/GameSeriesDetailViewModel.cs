@@ -53,7 +53,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
     [RelayCommand]
     public async Task LoadGamesAsync()
     {
-        if (_hasReachedEnd || Series == null)
+        if (_hasReachedEnd || Series is null)
             return;
 
         try
@@ -61,7 +61,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
             PagedData<List<Game>>? games = await ExecuteNetworkTask(
                 _gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset)
             );
-            if (games == null)
+            if (games is null)
                 return;
 
             Games.AddRange(games.Data);
@@ -80,7 +80,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
     [RelayCommand]
     private async Task NavigateToGameAsync()
     {
-        if (SelectedGame == null)
+        if (SelectedGame is null)
             return;
 
         ShowActivityIndicator();

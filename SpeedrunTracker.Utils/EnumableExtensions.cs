@@ -11,9 +11,9 @@ public static class EnumableExtensions
 
     public static bool SequenceEqualOrNull<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
     {
-        if (first == null && second == null)
+        if (first is null && second is null)
             return true;
-        if (first != null && second != null && first.SequenceEqual(second))
+        if (first is not null && second is not null && first.SequenceEqual(second))
             return true;
 
         return false;

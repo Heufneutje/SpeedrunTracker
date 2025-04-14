@@ -39,7 +39,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
     [RelayCommand]
     private async Task NavigateAsync(Entity? entity)
     {
-        if (entity == null)
+        if (entity is null)
             return;
 
         ShowActivityIndicator();
@@ -47,7 +47,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
         {
             case EntityType.Games:
                 Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
-                if (game != null)
+                if (game is not null)
                 {
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
                     return;
@@ -56,7 +56,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
 
             case EntityType.Series:
                 GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
-                if (series != null)
+                if (series is not null)
                 {
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
                     return;
@@ -65,7 +65,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
 
             case EntityType.Users:
                 User? user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
-                if (user != null)
+                if (user is not null)
                 {
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
                     return;

@@ -8,7 +8,7 @@ public class LocalDatabaseService : ILocalDatabaseService
 
     public async Task InitAsync(string databaseName, SQLiteOpenFlags flags)
     {
-        if (Connection != null)
+        if (Connection is not null)
             return;
 
         Connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, databaseName), flags);

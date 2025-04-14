@@ -34,7 +34,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
         PagedData<List<GameSeries>>? apiData = await ExecuteNetworkTask(
             _gameSeriesService.SearchGameSeriesAsync(Query?.Trim() ?? string.Empty)
         );
-        if (apiData == null)
+        if (apiData is null)
             return [];
 
         return apiData

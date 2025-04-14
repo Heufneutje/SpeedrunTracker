@@ -8,7 +8,7 @@ public class CacheDatabaseService : ICacheDatabaseService
 
     public async Task InitAsync(string databaseName, SQLiteOpenFlags flags)
     {
-        if (Connection != null)
+        if (Connection is not null)
             return;
 
         Connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.CacheDirectory, databaseName), flags);
