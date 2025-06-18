@@ -1,7 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+﻿using AndroidX.Lifecycle;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -12,6 +13,7 @@ public partial class NotificationListViewModel : BaseNetworkActionViewModel
     private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
+    private bool _isLoaded;
 
     [ObservableProperty]
     private bool _isRefreshing;
@@ -34,6 +36,16 @@ public partial class NotificationListViewModel : BaseNetworkActionViewModel
         _browserService = browserService;
         _settingsService = settingsService;
         Notifications = [];
+    }
+
+    [RelayCommand]
+    private async Task InitializeAsync()
+    {
+        if (!_isLoaded)
+        {
+            IsRefreshing = true;
+            _isLoaded = true;
+        }
     }
 
     [RelayCommand]

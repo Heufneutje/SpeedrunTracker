@@ -20,6 +20,7 @@ public partial class RunDetailsPage : ContentPage
     {
         if (!_isLoaded)
         {
+            _viewModel.ShowActivityIndicator();
             _viewModel.RunDetails = RunDetails;
             await _viewModel.LoadDataAsync();
             BindingContext = _viewModel;
@@ -27,8 +28,8 @@ public partial class RunDetailsPage : ContentPage
         }
     }
 
-    private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+    private async void WebView_Navigated(object sender, WebNavigatedEventArgs e)
     {
-        _viewModel.CloseActivityIndicator();
+        await _viewModel.CloseActivityIndicatorAsync();
     }
 }

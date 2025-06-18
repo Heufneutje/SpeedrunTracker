@@ -6,5 +6,4 @@
     <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
     <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
     <converters:IsNullConverter x:Key="IsNullConverter" />
-    <converters:MyItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
 </ResourceDictionary>

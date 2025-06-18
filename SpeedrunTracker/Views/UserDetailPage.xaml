@@ -5,11 +5,18 @@
                       xmlns:local="clr-namespace:SpeedrunTracker.Views"
                       xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
                       xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
+                      xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                       x:DataType="viewmodels:UserDetailsViewModel"
                       x:Class="SpeedrunTracker.Views.UserDetailPage"
+                      x:Name="UserDetailPageName"
                       Appearing="ContentPage_Appearing"
                       mtk:LeakMonitorBehavior.Cascade="True"
                       mtk:TearDownBehavior.Cascade="True">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding InitializeCommand}"
+                                        BindingContext="{Binding Path=BindingContext, Source={x:Reference UserDetailPageName}, x:DataType=ContentPage}"
+                                        EventName="Loaded" />
+    </ContentPage.Behaviors>
     <Shell.TitleView>
         <Label Text="{Binding DisplayName}"
                TextColor="White"

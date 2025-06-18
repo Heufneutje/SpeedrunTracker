@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Resources.Localization;
@@ -38,10 +38,10 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
-   
+
     protected abstract Task<List<Entity>> SearchEntitiesAsync();
 
     [RelayCommand]

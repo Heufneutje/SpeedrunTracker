@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using AndroidX.Lifecycle;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -12,6 +13,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     private readonly IUserService _userService;
     private readonly ILocalSettingsService _settingsService;
     private bool? _isCurrentlyShowingLevels;
+    private bool _isLoaded;
     private List<LeaderboardEntry>? _allPersonalBests;
 
     [ObservableProperty]
@@ -54,6 +56,16 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     partial void OnUserChanged(User? value)
     {
         _followEntity = value;
+    }
+
+    [RelayCommand]
+    private async Task InitializeAsync()
+    {
+        if (!_isLoaded)
+        {
+            await LoadFollowingStatusAsync();
+            _isLoaded = true;
+        }
     }
 
     [RelayCommand]
@@ -110,7 +122,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 
@@ -184,10 +196,13 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     }
 
     [RelayCommand]
-    private void ShowAvatarPopup()
+    private async Task ShowAvatarPopupAsync()
     {
         if (User?.Assets?.Image is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.SecureUri);
+            await ShowPopupAsync<ImagePopupViewModel>(new()
+            {
+                [nameof(ImagePopupViewModel.ImageSource)] = User.Assets.Image.SecureUri
+            });
     }
 
     private async Task<User> GetRunUserAsync(string userId)

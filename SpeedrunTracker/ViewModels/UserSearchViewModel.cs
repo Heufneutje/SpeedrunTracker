@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using SpeedrunTracker.Resources.Localization;
@@ -21,7 +21,6 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
     {
         if (SelectedEntity?.SearchObject is User user)
         {
-            ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
             SelectedEntity = null;
         }

@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using SpeedrunTracker.Resources.Localization;
+using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -20,6 +20,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     private int _leaderboardEntriesVisible;
     private const int _leaderboardEntriesStepSize = 10;
     private bool _replaceEntries;
+    private bool _isLoaded;
 
     public GameDetailViewModel(
         IGameService gameService,
@@ -108,7 +109,40 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         SelectedCategory = value?.FirstOrDefault();
     }
 
-    public async Task<bool> LoadCategoriesAsync()
+    [RelayCommand]
+    private async Task InitializeAsync()
+    {
+        if (_isLoaded)
+            return;
+
+        ShowActivityIndicator();
+        if (!await LoadVariablesAsync())
+        {
+            await NagivateBackAsync();
+            return;
+        }
+        if (!await LoadCategoriesAsync())
+        {
+            await NagivateBackAsync();
+            return;
+        }
+        if (!await LoadLevelsAsync())
+        {
+            await NagivateBackAsync();
+            return;
+        }
+        await LoadFollowingStatusAsync();
+        await CloseActivityIndicatorAsync();
+        _isLoaded = true;
+    }
+
+    private async Task NagivateBackAsync()
+    {
+        await CloseActivityIndicatorAsync();
+        await Shell.Current.Navigation.PopAsync();
+    }
+
+    private async Task<bool> LoadCategoriesAsync()
     {
         if (Game is null)
             return false;
@@ -122,7 +156,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         return true;
     }
 
-    public async Task<bool> LoadLevelsAsync()
+    private async Task<bool> LoadLevelsAsync()
     {
         if (Game is null)
             return false;
@@ -137,7 +171,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         return true;
     }
 
-    public async Task<bool> LoadVariablesAsync()
+    private async Task<bool> LoadVariablesAsync()
     {
         if (Game is null)
             return false;
@@ -196,7 +230,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
                 DisplayLeaderboardEntries();
         }
 
-        CloseActivityIndicator();
+        await CloseActivityIndicatorAsync();
     }
 
     [RelayCommand]
@@ -282,15 +316,19 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
             Variables = SelectedLeaderboardEntry.Run.Variables,
         };
 
+        await CloseActivityIndicatorAsync();
         await Shell.Current.GoToAsync(Routes.RunDetailPageRoute, "RunDetails", runDetails);
         SelectedLeaderboardEntry = null;
     }
 
     [RelayCommand]
-    private void ShowImagePopup()
+    private async Task ShowImagePopupAsync()
     {
         if (Game?.Assets?.CoverSmall?.SecureUri is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.SecureUri);
+            await ShowPopupAsync<ImagePopupViewModel>(new()
+            {
+                [nameof(ImagePopupViewModel.ImageSource)] = Game.Assets.CoverSmall.Uri
+            });
     }
 
     private void UpdateVariables()

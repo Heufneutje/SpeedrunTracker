@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -13,6 +13,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
     private readonly ILocalSettingsService _settingsService;
     private int _offset;
     private bool _hasReachedEnd;
+    private bool _isLoaded;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BackgroundUri))]
@@ -51,13 +52,25 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
     protected override Task FollowAsync(GameSeries entity) => _followService.FollowSeriesAsync(entity);
 
     [RelayCommand]
-    public async Task LoadGamesAsync()
+    private async Task InitializeAsync()
+    {
+        if (!_isLoaded)
+        {
+            await LoadGamesAsync();
+            await LoadFollowingStatusAsync();
+            _isLoaded = true;
+        }
+    }
+
+    [RelayCommand]
+    private async Task LoadGamesAsync()
     {
         if (_hasReachedEnd || Series is null)
             return;
 
         try
         {
+            ShowActivityIndicator();
             PagedData<List<Game>>? games = await ExecuteNetworkTask(
                 _gameSeriesService.GetGameSeriesEntriesAsync(Series.Id, _offset)
             );
@@ -73,7 +86,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 
@@ -83,7 +96,6 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         if (SelectedGame is null)
             return;
 
-        ShowActivityIndicator();
         await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", SelectedGame);
         SelectedGame = null;
     }

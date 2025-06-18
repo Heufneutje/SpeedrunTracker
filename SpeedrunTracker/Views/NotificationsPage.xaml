@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:loc="clr-namespace:SpeedrunTracker.Localization"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodels:NotificationListViewModel"
              x:Class="SpeedrunTracker.Views.NotificationsPage"
-             Title="{loc:Translate MenuItemNotificationsTitle}"
-             Appearing="ContentPage_Appearing">
+             x:Name="NotificationsPageName"
+             Title="{loc:Translate MenuItemNotificationsTitle}">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding InitializeCommand}"
+                                        BindingContext="{Binding Path=BindingContext, Source={x:Reference NotificationsPageName}, x:DataType=ContentPage}"
+                                        EventName="Loaded" />
+    </ContentPage.Behaviors>
     <RefreshView IsRefreshing="{Binding IsRefreshing}"
                  Command="{Binding RefreshNotificationsCommand}">
         <CollectionView SelectionMode="Single"

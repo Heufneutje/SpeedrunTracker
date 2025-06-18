@@ -6,7 +6,6 @@ namespace SpeedrunTracker.Views;
 public partial class UserDetailPage : BaseDetailPage
 {
     private readonly UserDetailsViewModel _viewModel;
-    private bool _isLoaded;
 
     public User? User
     {
@@ -18,14 +17,5 @@ public partial class UserDetailPage : BaseDetailPage
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
-    }
-
-    private async void ContentPage_Appearing(object sender, EventArgs e)
-    {
-        if (!_isLoaded)
-        {
-            await _viewModel.LoadFollowingStatusAsync();
-            _isLoaded = true;
-        }
     }
 }

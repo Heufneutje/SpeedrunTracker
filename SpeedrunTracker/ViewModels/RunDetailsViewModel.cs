@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
@@ -149,7 +149,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
                 ?? User.GetUserNotFoundPlaceholder();
 
         if (!HasVideo)
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
     }
 
     [RelayCommand]
@@ -162,10 +162,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
         }
 
         if (!string.IsNullOrEmpty(user?.Id))
-        {
-            ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
-        }
     }
 
     [RelayCommand]

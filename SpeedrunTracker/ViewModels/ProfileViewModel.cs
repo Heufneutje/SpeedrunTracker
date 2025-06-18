@@ -1,11 +1,12 @@
-﻿using System.Net;
-using CommunityToolkit.Maui.Core;
+﻿using AndroidX.Lifecycle;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 using SpeedrunTracker.Resources.Localization;
+using System.Net;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -14,6 +15,7 @@ public partial class ProfileViewModel : BaseViewModel
     private readonly IUserService _userService;
     private readonly IDialogService _dialogService;
     private readonly IToastService _toastService;
+    private bool _isLoaded;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Name))]
@@ -41,6 +43,16 @@ public partial class ProfileViewModel : BaseViewModel
         _userService = userService;
         _dialogService = dialogService;
         _toastService = toastService;
+    }
+
+    [RelayCommand]
+    private async Task InitializeAsync()
+    {
+        if (!_isLoaded)
+        {
+            await LoadProfileAsync();
+            _isLoaded = true;
+        }
     }
 
     public async Task LoadProfileAsync()
@@ -73,7 +85,7 @@ public partial class ProfileViewModel : BaseViewModel
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 

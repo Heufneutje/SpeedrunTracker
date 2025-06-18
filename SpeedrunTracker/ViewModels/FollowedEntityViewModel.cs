@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -50,31 +50,32 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
         {
             case EntityType.Games:
                 Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(SelectedEntity.Id));
+                await CloseActivityIndicatorAsync();
                 if (game is not null)
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
-                else
-                    CloseActivityIndicator();
                 break;
             case EntityType.Series:
                 GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(SelectedEntity.Id));
+                await CloseActivityIndicatorAsync();
                 if (series is not null)
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
-                else
-                    CloseActivityIndicator();
                 break;
             case EntityType.Users:
                 User? user = await ExecuteNetworkTask(_userService.GetUserAsync(SelectedEntity.Id));
+                await CloseActivityIndicatorAsync();
                 if (user is not null)
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
-                else
-                    CloseActivityIndicator();
+                break;
+            default:
+                await CloseActivityIndicatorAsync();
                 break;
         }
 
         SelectedEntity = null;
     }
 
-    public async Task LoadFollowedEntities()
+    [RelayCommand]
+    private async Task LoadFollowedEntitiesAsync()
     {
         List<EntityGroup> entities = [];
         List<FollowedEntity> followedEntities = await _localFollowService.GetFollowedEntitiesAsync();

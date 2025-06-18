@@ -6,7 +6,6 @@ namespace SpeedrunTracker.Views;
 public partial class GameSeriesDetailsPage : BaseDetailPage
 {
     private readonly GameSeriesDetailViewModel _viewModel;
-    private bool _isLoaded;
 
     public GameSeries? Series
     {
@@ -18,15 +17,5 @@ public partial class GameSeriesDetailsPage : BaseDetailPage
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
-    }
-
-    private async void ContentPage_Appearing(object sender, EventArgs e)
-    {
-        if (!_isLoaded)
-        {
-            await _viewModel.LoadGamesAsync();
-            await _viewModel.LoadFollowingStatusAsync();
-            _isLoaded = true;
-        }
     }
 }
