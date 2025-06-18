@@ -1,9 +1,9 @@
 ﻿namespace SpeedrunTracker.Models;
 
-public class RunDetails
+public record RunDetails
 {
     public int Place { get; set; }
-    public Speedrun Run { get; set; }
+    public required Speedrun Run { get; set; }
     public Category? Category { get; set; }
     public Level? Level { get; set; }
     public GamePlatform? Platform { get; set; }
@@ -33,5 +33,10 @@ public class RunDetails
                 _trophyAsset = GameAssets?.GetTrophyAsset(Place);
             return _trophyAsset;
         }
+    }
+
+    public RunDetails()
+    {
+        Variables = [];
     }
 }

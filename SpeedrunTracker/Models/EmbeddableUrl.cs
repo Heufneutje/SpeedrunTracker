@@ -3,8 +3,8 @@
 public class EmbeddableUrl
 {
     public int Number { get; set; }
-    public string Url { get; set; }
-    public string EmbedUrl { get; set; }
+    public string? Url { get; set; }
+    public string? EmbedUrl { get; set; }
     public EmbedType EmbedType { get; set; }
 
     public string IconSource =>
