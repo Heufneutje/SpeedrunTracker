@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using Refit;
 

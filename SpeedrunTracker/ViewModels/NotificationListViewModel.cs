@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 

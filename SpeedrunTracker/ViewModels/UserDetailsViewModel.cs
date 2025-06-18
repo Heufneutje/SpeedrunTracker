@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -64,7 +64,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
 
     private async Task LoadPersonalBestsAsync(bool showLevels)
     {
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
         try
         {
             if (
@@ -110,7 +110,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 
@@ -155,7 +155,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
         if (leaderboardEntry is null)
             return;
 
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
 
         if (leaderboardEntry.Run.Status?.ExaminerId is not null)
             examiner = await GetRunUserAsync(leaderboardEntry.Run.Status.ExaminerId);
@@ -184,10 +184,13 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     }
 
     [RelayCommand]
-    private void ShowAvatarPopup()
+    private async Task ShowAvatarPopupAsync()
     {
         if (User?.Assets?.Image is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.Uri);
+            await ShowPopupAsync<ImagePopupViewModel>(new()
+            {
+                [nameof(ImagePopupViewModel.ImageSource)] = User.Assets.Image.Uri
+            });
     }
 
     private async Task<User> GetRunUserAsync(string userId)

@@ -50,7 +50,7 @@ public partial class GameDetailPage : BaseDetailPage
         }
         finally
         {
-            _viewModel.CloseActivityIndicator();
+            await _viewModel.CloseActivityIndicatorAsync();
         }
     }
 

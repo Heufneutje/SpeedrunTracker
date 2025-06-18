@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -24,7 +24,7 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
     [RelayCommand(CanExecute = nameof(CanSearch))]
     private async Task SearchAsync()
     {
-        ShowActivityIndicator("Searching...");
+        await ShowActivityIndicatorAsync("Searching...");
 
         try
         {
@@ -34,10 +34,10 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
-   
+
     protected abstract Task<List<Entity>> SearchEntitiesAsync();
 
     [RelayCommand]

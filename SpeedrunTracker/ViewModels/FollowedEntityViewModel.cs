@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -42,7 +42,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
         if (entity is null)
             return;
 
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
         switch ((EntityType?)entity.SearchObject)
         {
             case EntityType.Games:
@@ -73,7 +73,7 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
                 break;
         }
 
-        CloseActivityIndicator();
+        await CloseActivityIndicatorAsync();
     }
 
     public async Task LoadFollowedEntities()

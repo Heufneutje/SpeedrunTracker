@@ -76,7 +76,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="AdamE.MemoryToolkit.Maui" Version="1.0.0" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="12.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="FFImageLoading.Maui" Version="1.2.7" />
 		<PackageReference Include="HarfBuzzSharp.NativeAssets.Android" Version="8.3.1.1" />

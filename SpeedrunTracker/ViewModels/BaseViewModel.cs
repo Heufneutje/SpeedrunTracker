@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SpeedrunTracker.ViewModels;
@@ -13,25 +13,47 @@ public abstract class BaseViewModel : ObservableObject
         _popupService = popupService;
     }
 
-    public void ShowActivityIndicator(string loadingText = "Loading...")
+    public async Task ShowActivityIndicatorAsync(string loadingText = "Loading...")
     {
         IsRunningBackgroundTask = true;
-        _popupService?.ShowPopup<SpinnerPopupViewModel>(onPresenting => onPresenting.LoadingText = loadingText);
+
+        if (_popupService is null)
+            return;
+
+        Dictionary<string, object> queryAttributes = new()
+        {
+            [nameof(SpinnerPopupViewModel.LoadingText)] = loadingText
+        };
+        IPopupOptions popupOptions = new PopupOptions()
+        {
+            CanBeDismissedByTappingOutsideOfPopup = false
+        };
+
+        await _popupService.ShowPopupAsync<SpinnerPopupViewModel>(Shell.Current, popupOptions, queryAttributes);
     }
 
-    public void CloseActivityIndicator()
+    public async Task CloseActivityIndicatorAsync()
     {
         IsRunningBackgroundTask = false;
-        _popupService?.ClosePopup();
+
+        if (_popupService is not null)
+            await _popupService.ClosePopupAsync(Shell.Current);
     }
 
-    public void ShowPopup<T>(Action<T> onPresenting) where T : BaseViewModel
+    public async Task ShowPopupAsync<T>(Dictionary<string, object> queryAttributes) where T : BaseViewModel
     {
-        _popupService?.ShowPopup(onPresenting);
+        IPopupOptions popupOptions = new PopupOptions()
+        {
+            CanBeDismissedByTappingOutsideOfPopup = true
+        };
+
+        if (_popupService is not null)
+            await _popupService.ShowPopupAsync<T>(Shell.Current, popupOptions, queryAttributes);
     }
 
-    public void ClosePopup()
+    public async Task ClosePopupAsync()
     {
-        _popupService?.ClosePopup();
+        if (_popupService is not null)
+            await _popupService.ClosePopupAsync(Shell.Current);
     }
 }

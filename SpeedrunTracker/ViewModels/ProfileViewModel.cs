@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Refit;
@@ -44,7 +44,7 @@ public partial class ProfileViewModel : BaseViewModel
 
     public async Task LoadProfileAsync()
     {
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
 
         try
         {
@@ -72,7 +72,7 @@ public partial class ProfileViewModel : BaseViewModel
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 

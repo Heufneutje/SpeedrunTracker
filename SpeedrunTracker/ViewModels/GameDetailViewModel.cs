@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -151,7 +151,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         if (Game is null)
             return;
 
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
 
         _leaderboardEntriesVisible = 0;
         _leaderboard = null;
@@ -195,7 +195,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
                 DisplayLeaderboardEntries();
         }
 
-        CloseActivityIndicator();
+        await CloseActivityIndicatorAsync();
     }
 
     [RelayCommand]
@@ -239,7 +239,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         if (category is null)
             return;
 
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
 
         Level? level = Levels?.FirstOrDefault(x => x.Id == SelectedLeaderboardEntry.Run.LevelId);
         GamePlatform? platform = Game.Platforms.Data.Find(x =>
@@ -286,10 +286,13 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     }
 
     [RelayCommand]
-    private void ShowImagePopup()
+    private async Task ShowImagePopupAsync()
     {
         if (Game?.Assets?.CoverSmall?.Uri is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.Uri);
+            await ShowPopupAsync<ImagePopupViewModel>(new()
+            {
+                [nameof(ImagePopupViewModel.ImageSource)] = Game.Assets.CoverSmall.Uri
+            });
     }
 
     private void UpdateVariables()

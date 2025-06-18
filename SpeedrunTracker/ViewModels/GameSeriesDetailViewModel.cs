@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
@@ -73,7 +73,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         }
         finally
         {
-            CloseActivityIndicator();
+            await CloseActivityIndicatorAsync();
         }
     }
 
@@ -83,7 +83,7 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
         if (SelectedGame is null)
             return;
 
-        ShowActivityIndicator();
+        await ShowActivityIndicatorAsync();
         await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", SelectedGame);
         SelectedGame = null;
     }

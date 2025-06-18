@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -51,7 +51,7 @@ public abstract partial class BaseFollowViewModel<T> : BaseFollowViewModel
         if (_followEntity is not null)
             IsFollowing = await _followService.IsFollowingAsync(_followEntity.Id);
 
-        CloseActivityIndicator();
+        await CloseActivityIndicatorAsync();
     }
 
     protected async Task ToggleFollowAsync()

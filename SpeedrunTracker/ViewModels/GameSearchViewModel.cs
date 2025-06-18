@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
 
@@ -20,7 +20,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
     {
         if (entity?.SearchObject is Game game)
         {
-            ShowActivityIndicator();
+            await ShowActivityIndicatorAsync();
             await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
         }
     }
