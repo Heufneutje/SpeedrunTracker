@@ -21,19 +21,11 @@
                    Text="{Binding Query}"
                    Grid.Row="0"
                    SearchButtonPressed="searchBar_SearchButtonPressed"></SearchBar>
-        <ListView ItemsSource="{Binding Entities}"
-                  CachingStrategy="RecycleElement"
-                  HasUnevenRows="True"
-                  SelectionMode="None"
-                  ItemTemplate="{StaticResource EntitiesTemplate}"
-                  Grid.Row="1"
-                  x:Name="entitiesListView">
-            <ListView.Behaviors>
-                <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                Command="{Binding NavigateToCommand}"
-                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                                BindingContext="{Binding Path=BindingContext, Source={x:Reference entitiesListView}, x:DataType=ListView}" />
-            </ListView.Behaviors>
-        </ListView>
+        <CollectionView ItemsSource="{Binding Entities}"
+                        SelectionMode="Single"
+                        ItemTemplate="{StaticResource EntitiesTemplate}"
+                        SelectedItem="{Binding SelectedEntity}"
+                        SelectionChangedCommand="{Binding NavigateToCommand}"
+                        Grid.Row="1" />
     </Grid>
 </ContentPage>

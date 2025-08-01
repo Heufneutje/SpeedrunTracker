@@ -20,12 +20,13 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
 
     public override string SearchTextPlaceholder => "Search for game series...";
 
-    protected override async Task NavigateToAsync(Entity? entity)
+    protected override async Task NavigateToAsync()
     {
-        if (entity?.SearchObject is GameSeries series)
+        if (SelectedEntity?.SearchObject is GameSeries series)
         {
             ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
+            SelectedEntity = null;
         }
     }
 

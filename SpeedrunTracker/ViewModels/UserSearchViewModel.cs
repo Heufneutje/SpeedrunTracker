@@ -16,12 +16,13 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
         _userService = userService;
     }
 
-    protected override async Task NavigateToAsync(Entity? entity)
+    protected override async Task NavigateToAsync()
     {
-        if (entity?.SearchObject is User user)
+        if (SelectedEntity?.SearchObject is User user)
         {
             ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
+            SelectedEntity = null;
         }
     }
 

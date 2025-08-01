@@ -13,6 +13,9 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
     [ObservableProperty]
     private string? _query;
 
+    [ObservableProperty]
+    protected Entity? _selectedEntity;
+
     public abstract string SearchTextPlaceholder { get; }
 
     protected BaseSearchEntityViewModel(IToastService toastService, IPopupService popupService)
@@ -41,7 +44,7 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
     protected abstract Task<List<Entity>> SearchEntitiesAsync();
 
     [RelayCommand]
-    protected abstract Task NavigateToAsync(Entity? entity);
+    protected abstract Task NavigateToAsync();
 
     public bool CanSearch() => !IsRunningBackgroundTask;
 }

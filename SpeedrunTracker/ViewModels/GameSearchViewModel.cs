@@ -16,12 +16,13 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
         _gameService = gameService;
     }
 
-    protected override async Task NavigateToAsync(Entity? entity)
+    protected override async Task NavigateToAsync()
     {
-        if (entity?.SearchObject is Game game)
+        if (SelectedEntity?.SearchObject is Game game)
         {
             ShowActivityIndicator();
             await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
+            SelectedEntity = null;
         }
     }
 

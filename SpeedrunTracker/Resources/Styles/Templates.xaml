@@ -11,7 +11,7 @@
                     x:Class="SpeedrunTracker.Resources.Styles.Templates">
     <DataTemplate x:Key="EntitiesGroupHeaderTemplate"
                   x:DataType="models:EntityGroup">
-        <ViewCell>
+        <VerticalStackLayout>
             <Grid Padding="10"
                   ColumnSpacing="5"
                   ColumnDefinitions="Auto,*">
@@ -28,12 +28,13 @@
                        Grid.Column="1"
                        FontAttributes="Bold" />
             </Grid>
-        </ViewCell>
+            <Line Style="{StaticResource SeparatorLine}" />
+        </VerticalStackLayout>
     </DataTemplate>
 
     <DataTemplate x:Key="EntitiesTemplate"
                   x:DataType="models:Entity">
-        <ViewCell Height="100">
+        <VerticalStackLayout Style="{StaticResource SelectionColorVerticalStackLayout}">
             <Grid Padding="10"
                   RowDefinitions="Auto,Auto"
                   ColumnDefinitions="Auto,*">
@@ -53,8 +54,10 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        Margin="10,0,0,10" />
+
             </Grid>
-        </ViewCell>
+            <Line Style="{StaticResource SeparatorLine}" />
+        </VerticalStackLayout>
     </DataTemplate>
 
     <DataTemplate x:Key="GameSeriesEntriesTemplate"
@@ -250,7 +253,7 @@
 
     <DataTemplate x:Key="NotificationTemplate"
                   x:DataType="viewmodels:NotificationViewModel">
-        <VerticalStackLayout>
+        <VerticalStackLayout Style="{StaticResource SelectionColorVerticalStackLayout}">
             <Grid Padding="20"
                   ColumnSpacing="10"
                   ColumnDefinitions="10,*"
@@ -261,17 +264,16 @@
                          Grid.RowSpan="2"
                          HeightRequest="10"
                          WidthRequest="10"
-                         VerticalOptions="Center"/>
+                         VerticalOptions="Center" />
                 <Label Text="{Binding FormattedCreationDate, Mode=OneTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}"
                        TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray300}}"
                        Grid.Row="0"
-                       Grid.Column="1"/>
+                       Grid.Column="1" />
                 <Label Text="{Binding Notification.Text, Mode=OneTime}"
                        Grid.Row="1"
-                       Grid.Column="1"/>
+                       Grid.Column="1" />
             </Grid>
-            <Line StrokeThickness="1"
-                  BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+            <Line Style="{StaticResource SeparatorLine}" />
         </VerticalStackLayout>
     </DataTemplate>
 </ResourceDictionary>

@@ -17,6 +17,9 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
     [NotifyPropertyChangedFor(nameof(HasEntities))]
     private List<EntityGroup> _entities;
 
+    [ObservableProperty]
+    private Entity? _selectedEntity;
+
     public bool HasEntities => Entities?.Count > 0;
 
     public FollowedEntityViewModel(
@@ -37,43 +40,38 @@ public partial class FollowedEntityViewModel : BaseNetworkActionViewModel
     }
 
     [RelayCommand]
-    private async Task NavigateAsync(Entity? entity)
+    private async Task NavigateAsync()
     {
-        if (entity is null)
+        if (SelectedEntity is null)
             return;
 
         ShowActivityIndicator();
-        switch ((EntityType?)entity.SearchObject)
+        switch ((EntityType?)SelectedEntity.SearchObject)
         {
             case EntityType.Games:
-                Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(entity.Id));
+                Game? game = await ExecuteNetworkTask(_gameService.GetGameAsync(SelectedEntity.Id));
                 if (game is not null)
-                {
                     await Shell.Current.GoToAsync(Routes.GameDetailPageRoute, "Game", game);
-                    return;
-                }
+                else
+                    CloseActivityIndicator();
                 break;
-
             case EntityType.Series:
-                GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(entity.Id));
+                GameSeries? series = await ExecuteNetworkTask(_gameSeriesService.GetGameSeriesAsync(SelectedEntity.Id));
                 if (series is not null)
-                {
                     await Shell.Current.GoToAsync(Routes.SeriesDetailPageRoute, "Series", series);
-                    return;
-                }
+                else
+                    CloseActivityIndicator();
                 break;
-
             case EntityType.Users:
-                User? user = await ExecuteNetworkTask(_userService.GetUserAsync(entity.Id));
+                User? user = await ExecuteNetworkTask(_userService.GetUserAsync(SelectedEntity.Id));
                 if (user is not null)
-                {
                     await Shell.Current.GoToAsync(Routes.UserDetailPageRoute, "User", user);
-                    return;
-                }
+                else
+                    CloseActivityIndicator();
                 break;
         }
 
-        CloseActivityIndicator();
+        SelectedEntity = null;
     }
 
     public async Task LoadFollowedEntities()

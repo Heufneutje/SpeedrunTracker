@@ -17,20 +17,13 @@
                Padding="10"
                FontSize="Medium"
                IsVisible="{Binding HasEntities, Converter={StaticResource InverseBoolConverter}}" />
-        <ListView ItemsSource="{Binding Entities}"
-                  CachingStrategy="RecycleElement"
-                  IsGroupingEnabled="True"
-                  HasUnevenRows="True"
-                  SelectionMode="None"
-                  GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
-                  ItemTemplate="{StaticResource EntitiesTemplate}"
-                  x:Name="entitiesListView">
-            <ListView.Behaviors>
-                <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                Command="{Binding NavigateCommand}"
-                                                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
-                                                BindingContext="{Binding Path=BindingContext, Source={x:Reference entitiesListView}, x:DataType=ListView}" />
-            </ListView.Behaviors>
-        </ListView>
+        <CollectionView ItemsSource="{Binding Entities}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedEntity}"
+                        SelectionChangedCommand="{Binding NavigateCommand}"
+                        GroupHeaderTemplate="{StaticResource EntitiesGroupHeaderTemplate}"
+                        ItemTemplate="{StaticResource EntitiesTemplate}"
+                        IsGrouped="True"/>
+
     </Grid>
 </ContentPage>

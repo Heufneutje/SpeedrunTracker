@@ -13,7 +13,7 @@
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReachedCommand="{Binding LoadNotificationsCommand}"
                         ItemTemplate="{StaticResource NotificationTemplate}"
-                        SelectedItem="{Binding SelectedNotification, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedNotification}"
                         SelectionChangedCommand="{Binding OpenNotificationLinkCommand}" />
     </RefreshView>
 </ContentPage>
