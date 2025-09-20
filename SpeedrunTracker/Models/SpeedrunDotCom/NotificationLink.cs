@@ -1,7 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record NotificationLink
+public record NotificationLink : BaseLink
 {
     public NotificationLinkType? Rel { get; set; }
-    public required string Uri { get; set; }
 }

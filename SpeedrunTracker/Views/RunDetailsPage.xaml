@@ -119,7 +119,7 @@
                                                      IsValueVisible="False"
                                                      ImageSource="trophy" />
                         <HorizontalStackLayout>
-                            <ffil:CachedImage Source="{Binding RunDetails.TrophyAsset.Uri}"
+                            <ffil:CachedImage Source="{Binding RunDetails.TrophyAsset.SecureUri}"
                                               IsVisible="{Binding HasTrophyAsset}"
                                               Style="{StaticResource TrophyImageStyle}"
                                               Margin="5,-5,0,0" />

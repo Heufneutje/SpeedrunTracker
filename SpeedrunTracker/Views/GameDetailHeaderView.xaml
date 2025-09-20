@@ -10,7 +10,7 @@
              mtk:TearDownBehavior.Suppress="True">
     <Grid ColumnDefinitions="100,*">
         <ffil:CachedImage Grid.Column="0"
-                          Source="{Binding Game.Assets.CoverSmall.Uri}"
+                          Source="{Binding Game.Assets.CoverSmall.SecureUri}"
                           Margin="10">
             <ffil:CachedImage.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding ShowImagePopupCommand}" />

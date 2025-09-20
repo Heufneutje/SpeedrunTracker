@@ -32,7 +32,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
 
     public bool ShowRuns => PersonalBests?.Any() == true || IsRunningBackgroundTask;
 
-    public override ShareDetails ShareDetails => new(User?.Weblink, User?.Names?.International);
+    public override ShareDetails ShareDetails => new(User?.SecureWeblink, User?.Names?.International);
 
     public UserDetailsViewModel(
         IBrowserService browserService,
@@ -187,7 +187,7 @@ public partial class UserDetailsViewModel : BaseFollowViewModel<User>
     private void ShowAvatarPopup()
     {
         if (User?.Assets?.Image is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.Uri);
+            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = User.Assets.Image.SecureUri);
     }
 
     private async Task<User> GetRunUserAsync(string userId)

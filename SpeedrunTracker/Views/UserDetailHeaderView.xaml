@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <controls:AvatarControl Grid.Column="0"
-                                ImageSource="{Binding User.Assets.Image.Uri}"
+                                ImageSource="{Binding User.Assets.Image.SecureUri}"
                                 AvatarSize="80"
                                 Margin="10"
                                 VerticalOptions="Fill"
@@ -38,7 +38,7 @@
             <HorizontalStackLayout>
                 <ImageButton Source="youtube"
                              Command="{Binding OpenUrlCommand}"
-                             CommandParameter="{Binding User.YouTube.Uri}"
+                             CommandParameter="{Binding User.YouTube.SecureUri}"
                              ToolTipProperties.Text="YouTube"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}">
@@ -48,7 +48,7 @@
                 </ImageButton>
                 <ImageButton Source="twitch"
                              Command="{Binding OpenUrlCommand}"
-                             CommandParameter="{Binding User.Twitch.Uri}"
+                             CommandParameter="{Binding User.Twitch.SecureUri}"
                              ToolTipProperties.Text="Twitch"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Twitch, Converter={StaticResource IsNotNullConverter}}">
@@ -58,7 +58,7 @@
                 </ImageButton>
                 <ImageButton Source="twitter"
                              Command="{Binding OpenUrlCommand}"
-                             CommandParameter="{Binding User.Twitter.Uri}"
+                             CommandParameter="{Binding User.Twitter.SecureUri}"
                              ToolTipProperties.Text="Twitter"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Twitter, Converter={StaticResource IsNotNullConverter}}">
@@ -68,7 +68,7 @@
                 </ImageButton>
                 <ImageButton Source="hitbox"
                              Command="{Binding OpenUrlCommand}"
-                             CommandParameter="{Binding User.Hitbox.Uri}"
+                             CommandParameter="{Binding User.Hitbox.SecureUri}"
                              ToolTipProperties.Text="Hitbox"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Hitbox, Converter={StaticResource IsNotNullConverter}}">
@@ -78,7 +78,7 @@
                 </ImageButton>
                 <ImageButton Source="srl"
                              Command="{Binding OpenUrlCommand}"
-                             CommandParameter="{Binding User.SpeedRunsLive.Uri}"
+                             CommandParameter="{Binding User.SpeedRunsLive.SecureUri}"
                              ToolTipProperties.Text="SpeedRunsLive"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.SpeedRunsLive, Converter={StaticResource IsNotNullConverter}}">

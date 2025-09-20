@@ -24,7 +24,7 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
 
     public bool HasMultipleVideos => RunDetails?.Run?.Videos?.Links?.Count > 1;
 
-    public bool HasTrophyAsset => !string.IsNullOrEmpty(RunDetails?.TrophyAsset?.Uri);
+    public bool HasTrophyAsset => !string.IsNullOrEmpty(RunDetails?.TrophyAsset?.SecureUri);
 
     private string? _runComment;
 
@@ -101,9 +101,9 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
         && RunDetails?.Ruleset?.DefaultTimingType != timingType;
 
     public string? BackgroundUri =>
-        _settingsService.UserSettings.DisplayBackgrounds == true ? RunDetails?.GameAssets?.Background?.Uri : null;
+        _settingsService.UserSettings.DisplayBackgrounds == true ? RunDetails?.GameAssets?.Background?.SecureUri : null;
 
-    public override ShareDetails ShareDetails => new(RunDetails?.Run?.Weblink, Title);
+    public override ShareDetails ShareDetails => new(RunDetails?.Run?.SecureWeblink, Title);
 
     public RunDetailsViewModel(
         IBrowserService browserService,

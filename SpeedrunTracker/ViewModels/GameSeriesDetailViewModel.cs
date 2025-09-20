@@ -23,10 +23,10 @@ public partial class GameSeriesDetailViewModel : BaseFollowViewModel<GameSeries>
 
     public RangedObservableCollection<Game> Games { get; set; }
 
-    public override ShareDetails ShareDetails => new(Series?.Weblink, Series?.Names?.International);
+    public override ShareDetails ShareDetails => new(Series?.SecureWeblink, Series?.Names?.International);
 
     public string? BackgroundUri =>
-        _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.Uri : null;
+        _settingsService.UserSettings.DisplayBackgrounds == true ? Series?.Assets?.Background?.SecureUri : null;
 
     partial void OnSeriesChanged(GameSeries? value)
     {

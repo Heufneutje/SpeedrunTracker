@@ -79,10 +79,10 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
             return string.Join(", ", Game.Platforms.Data.Select(x => x.Name));
         }
     }
-    public override ShareDetails ShareDetails => new(Game?.Weblink, Game?.Names?.International);
+    public override ShareDetails ShareDetails => new(Game?.SecureWeblink, Game?.Names?.International);
 
     public string? BackgroundUri =>
-        _settingsService.UserSettings.DisplayBackgrounds == true ? Game?.Assets?.Background?.Uri : null;
+        _settingsService.UserSettings.DisplayBackgrounds == true ? Game?.Assets?.Background?.SecureUri : null;
 
     partial void OnSelectedCategoryChanged(Category? value)
     {
@@ -288,8 +288,8 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
     [RelayCommand]
     private void ShowImagePopup()
     {
-        if (Game?.Assets?.CoverSmall?.Uri is not null)
-            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.Uri);
+        if (Game?.Assets?.CoverSmall?.SecureUri is not null)
+            ShowPopup<ImagePopupViewModel>(vm => vm.ImageSource = Game.Assets.CoverSmall.SecureUri);
     }
 
     private void UpdateVariables()

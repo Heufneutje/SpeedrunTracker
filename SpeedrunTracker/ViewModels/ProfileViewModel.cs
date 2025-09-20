@@ -27,7 +27,7 @@ public partial class ProfileViewModel : BaseViewModel
 
     public string Name => User?.DisplayName ?? "Guest";
 
-    public string? ImageUri => User?.Assets?.Image?.Uri;
+    public string? ImageUri => User?.Assets?.Image?.SecureUri;
 
     public ProfileViewModel(
         IUserService userService,

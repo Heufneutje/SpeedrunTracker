@@ -1,7 +1,6 @@
 ﻿namespace SpeedrunTracker.Models.SpeedrunDotCom;
 
-public record Link
+public record Link : BaseLink
 {
     public string? Rel { get; set; }
-    public required string Uri { get; set; }
 }

@@ -43,7 +43,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
             {
                 Title = x.Names.International,
                 Subtitle = $"Created: {x.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
-                ImageUrl = x.Assets?.CoverSmall?.Uri,
+                ImageUrl = x.Assets?.CoverSmall?.SecureUri,
                 SearchObject = x,
             })
             .ToList();

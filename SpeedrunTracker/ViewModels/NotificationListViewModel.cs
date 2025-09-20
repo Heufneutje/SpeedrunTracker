@@ -78,7 +78,7 @@ public partial class NotificationListViewModel : BaseNetworkActionViewModel
         NotificationLink? link = SelectedNotification?.Notification?.Item;
 
         if (link is not null)
-            await _browserService.OpenAsync(link.Uri);
+            await _browserService.OpenAsync(link.SecureUri);
 
         SelectedNotification = null;
     }

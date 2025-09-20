@@ -10,7 +10,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
         FollowedEntity item = new()
         {
             Id = game.Id,
-            ImageUrl = game.Assets?.CoverSmall?.Uri,
+            ImageUrl = game.Assets?.CoverSmall?.SecureUri,
             Title = game.Names.International,
             Subtitle = $"Released: {game.Released}",
             Type = EntityType.Games,
@@ -23,7 +23,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
         FollowedEntity item = new()
         {
             Id = series.Id,
-            ImageUrl = series.Assets?.CoverSmall?.Uri,
+            ImageUrl = series.Assets?.CoverSmall?.SecureUri,
             Title = series.Names.International,
             Subtitle = $"Created: {series.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
             Type = EntityType.Series,
@@ -36,7 +36,7 @@ public class LocalFollowService : BaseDatabaseService, ILocalFollowService
         FollowedEntity item = new()
         {
             Id = user.Id,
-            ImageUrl = user.Assets?.Image?.Uri ?? "user",
+            ImageUrl = user.Assets?.Image?.SecureUri ?? "user",
             Title = user.Names?.International,
             Subtitle = $"Registered: {user.Signup:yyyy-MM-dd}",
             Type = EntityType.Users,

@@ -7,6 +7,7 @@ public abstract record BaseSpeedrunModel
     public string Id { get; set; }
 
     public string? Weblink { get; set; }
+    public string? SecureWeblink => Weblink?.Replace("http://", "https://");
 
     public List<Link> Links { get; set; }
 
