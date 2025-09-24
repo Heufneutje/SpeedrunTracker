@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -8,7 +9,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IGameService _gameService;
 
-    public override string SearchTextPlaceholder => "Search for games...";
+    public override string SearchTextPlaceholder => AppStrings.GameSearchPagePlaceholderText;
 
     public GameSearchViewModel(IToastService toastService, IGameService gameService, IPopupService popupService)
         : base(toastService, popupService)
@@ -37,7 +38,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
             .Select(x => new Entity()
             {
                 Title = x.Names.International,
-                Subtitle = $"Released: {x.Released}",
+                Subtitle = $"{AppStrings.EntitySubtitleReleased}: {x.Released}",
                 ImageUrl = x.Assets?.CoverSmall?.SecureUri,
                 SearchObject = x,
             })

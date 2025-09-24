@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Refit;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -25,7 +26,7 @@ public partial class ProfileViewModel : BaseViewModel
     [ObservableProperty]
     private string? _apiKey;
 
-    public string Name => User?.DisplayName ?? "Guest";
+    public string Name => User?.DisplayName ?? AppStrings.ProfilePageGuestLabel;
 
     public string? ImageUri => User?.Assets?.Image?.SecureUri;
 
@@ -64,7 +65,7 @@ public partial class ProfileViewModel : BaseViewModel
         catch (Exception ex)
         {
             if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-                await _toastService.ShowToastAsync("The provided API key is invalid.");
+                await _toastService.ShowToastAsync(AppStrings.ProfilePageApiKeyErrorToast);
             else
                 await HandleUnknownError(ex);
 
@@ -81,7 +82,7 @@ public partial class ProfileViewModel : BaseViewModel
     {
         if (string.IsNullOrEmpty(ApiKey))
         {
-            await _toastService.ShowToastAsync("No API key provided.");
+            await _toastService.ShowToastAsync(AppStrings.ProfilePageNoApiKeyErrorToast);
             return;
         }
 
@@ -100,7 +101,7 @@ public partial class ProfileViewModel : BaseViewModel
     {
         try
         {
-            if (!confirm || await _dialogService.ShowConfirmationAsync("Log out", "Are you sure you want to log out?"))
+            if (!confirm || await _dialogService.ShowConfirmationAsync(AppStrings.ProfilePageLogoutTitle, AppStrings.ProfilePageLogoutMessage))
             {
                 SecureStorage.Remove(Constants.ApiKey);
                 await LoadProfileAsync();
@@ -121,6 +122,6 @@ public partial class ProfileViewModel : BaseViewModel
 
     private async Task HandleUnknownError(Exception ex)
     {
-        await _toastService.ShowToastAsync($"An error occurred while getting profile data: {ex.Message}");
+        await _toastService.ShowToastAsync($"{AppStrings.ProfilePageUnknownErrorToast}: {ex.Message}");
     }
 }

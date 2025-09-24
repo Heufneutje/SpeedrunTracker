@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -13,8 +14,9 @@ public abstract class BaseViewModel : ObservableObject
         _popupService = popupService;
     }
 
-    public void ShowActivityIndicator(string loadingText = "Loading...")
+    public void ShowActivityIndicator(string? loadingText = null)
     {
+        loadingText ??= AppStrings.SpinnerLoadingText;
         IsRunningBackgroundTask = true;
         _popupService?.ShowPopup<SpinnerPopupViewModel>(onPresenting => onPresenting.LoadingText = loadingText);
     }

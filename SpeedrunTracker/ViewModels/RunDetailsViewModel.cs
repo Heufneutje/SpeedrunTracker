@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Configuration;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -51,12 +52,12 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     public string? Title =>
         RunDetails is null
             ? "RunDetails"
-            : $"{RunDetails.Category?.Name} in {RunDetails.Run.Times?.PrimaryTimeSpan}";
+            : $"{RunDetails.Category?.Name} {AppStrings.RunDetailsPageTitleInText} {RunDetails.Run.Times?.PrimaryTimeSpan}";
 
     public string? SubTitle =>
         RunDetails is null
-            ? "by <unknown>"
-            : $"by {string.Join(" and ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
+            ? AppStrings.RunDetailsPageSubtitleByUnknownText
+            : $"{AppStrings.RunDetailsPageSubtitleByText} {string.Join($" {AppStrings.RunDetailsPageSubtitlePlayerSeparator} ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
 
     public string FullTitle => $"{Title} {SubTitle}";
 
@@ -77,11 +78,11 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
 
             return RunDetails.Run.Status?.StatusType switch
             {
-                SpeedrunStatusType.New => "Verification pending",
+                SpeedrunStatusType.New => AppStrings.RunDetailsPageStatusVerificationPendingText,
                 SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue
-                    ? $"Verified on {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat)} at {RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat)}"
-                    : "Verified",
-                SpeedrunStatusType.Rejected => $"Rejected ({RunDetails.Run.Status.Reason ?? string.Empty})",
+                    ? string.Format(AppStrings.RunDetailsPageStatusVerifiedOnText, RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat), RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat))
+                    : AppStrings.RunDetailsPageStatusVerifiedText,
+                SpeedrunStatusType.Rejected => $"{AppStrings.RunDetailsPageStatusRejectedText} ({RunDetails.Run.Status.Reason ?? string.Empty})",
                 _ => string.Empty,
             };
         }

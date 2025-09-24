@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using SpeedrunTracker.Resources.Localization;
+using System.Collections.ObjectModel;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -97,9 +98,9 @@ public class SettingsViewModel : BaseViewModel
         get =>
             _themeSettings ??= new List<ThemeSetting>
             {
-                new("System Default", AppTheme.Unspecified),
-                new("Light", AppTheme.Light),
-                new("Dark", AppTheme.Dark),
+                new(AppStrings.SettingsPageSystemTheme, AppTheme.Unspecified),
+                new(AppStrings.SettingsPageLightTheme, AppTheme.Light),
+                new(AppStrings.SettingsPageDarkTheme, AppTheme.Dark),
             }.AsObservableCollection();
     }
 

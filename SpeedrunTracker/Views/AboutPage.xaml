@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
              xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:Class="SpeedrunTracker.Views.AboutPage"
              x:DataType="viewmodels:AboutViewModel"
-             Title="About">
+             Title="{x:Static loc:AppStrings.MenuItemAboutTitle}">
     <ScrollView>
         <VerticalStackLayout>
             <ffil:CachedImage Source="main"
@@ -14,23 +15,23 @@
                    HorizontalTextAlignment="Center"
                    FontSize="Title"
                    Margin="20" />
-            <Label Text="Created by Stefan Frijters in .NET MAUI with data provided by the speedrun.com REST API."
+            <Label Text="{x:Static loc:AppStrings.AboutPageCreditsLabel}"
                    HorizontalTextAlignment="Center"
                    FontSize="Subtitle"
                    Margin="20" />
-            <Label Text="Please report any issues you may encounter on the issue tracker."
+            <Label Text="{x:Static loc:AppStrings.AboutPageIssueTrackerLabel}"
                    HorizontalTextAlignment="Center"
                    FontSize="Subtitle"
                    Margin="20" />
-            <Button Text="Issue Tracker"
+            <Button Text="{x:Static loc:AppStrings.AboutPageIssueTrackerButton}"
                     Command="{Binding OpenUrlCommand}"
                     CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/issues"
                     Margin="10" />
-            <Button Text="Privacy Policy"
+            <Button Text="{x:Static loc:AppStrings.AboutPagePrivacyPolicyButton}"
                     Command="{Binding OpenUrlCommand}"
                     CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/blob/master/Documentation/PrivacyPolicy.md"
                     Margin="10" />
-            <Button Text="Terms &amp; Conditions"
+            <Button Text="{x:Static loc:AppStrings.AboutPageTermsAndConditionsButton}"
                     Command="{Binding OpenUrlCommand}"
                     CommandParameter="https://github.com/Heufneutje/SpeedrunTracker/blob/master/Documentation/TermsAndConditions.md"
                     Margin="10" />

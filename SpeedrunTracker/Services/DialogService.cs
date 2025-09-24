@@ -1,19 +1,25 @@
-﻿namespace SpeedrunTracker.Services;
+﻿using SpeedrunTracker.Resources.Localization;
+
+namespace SpeedrunTracker.Services;
 
 public class DialogService : IDialogService
 {
-    public Task ShowAlertAsync(string title, string message, string cancel = "OK")
+    public Task ShowAlertAsync(string title, string message, string? cancel = null)
     {
+        cancel ??= AppStrings.DialogOkButton;
         return GetMainPage()?.DisplayAlert(title, message, cancel) ?? Task.CompletedTask;
     }
 
     public async Task<bool> ShowConfirmationAsync(
         string title,
         string message,
-        string accept = "Yes",
-        string cancel = "No"
+        string? accept = null,
+        string? cancel = null
     )
     {
+        accept ??= AppStrings.DialogYesButton;
+        cancel ??= AppStrings.DialogNoButton;
+
         Page? mainPage = GetMainPage();
         return mainPage is not null && await mainPage.DisplayAlert(title, message, accept, cancel);
     }

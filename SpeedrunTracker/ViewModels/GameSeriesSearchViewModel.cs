@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -18,7 +19,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
         _gameSeriesService = gameSeriesService;
     }
 
-    public override string SearchTextPlaceholder => "Search for game series...";
+    public override string SearchTextPlaceholder => AppStrings.GameSeriesSearchPagePlaceholderText;
 
     protected override async Task NavigateToAsync()
     {
@@ -42,7 +43,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
             .Data.Select(x => new Entity()
             {
                 Title = x.Names.International,
-                Subtitle = $"Created: {x.Created?.ToString("yyyy-MM-dd") ?? "Unknown"}",
+                Subtitle = $"{AppStrings.EntitySubtitleCreated}: {x.Created?.ToString("yyyy-MM-dd") ?? AppStrings.EntitySubtitleUnknown}",
                 ImageUrl = x.Assets?.CoverSmall?.SecureUri,
                 SearchObject = x,
             })

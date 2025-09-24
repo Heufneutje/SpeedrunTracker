@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="SpeedrunTracker.Views.SettingsPage"
-             Title="Settings"
+             Title="{x:Static loc:AppStrings.MenuItemSettingsTitle}"
              Disappearing="ContentPage_Disappearing">
     <ScrollView>
         <VerticalStackLayout Padding="10">
@@ -12,11 +13,11 @@
                 <Grid ColumnDefinitions="2*,*"
                       RowDefinitions="Auto,Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="Interface"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageInterfaceGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />
-                    <Label Text="Theme"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageThemeItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -26,7 +27,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             VerticalOptions="Center" />
-                    <Label Text="Display Backgrounds"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageBackgroundsItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="2"
                            Grid.Column="0"
@@ -44,11 +45,11 @@
                 <Grid ColumnDefinitions="2*,*"
                       RowDefinitions="Auto,Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="Date and Time"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageDateTimeGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />
-                    <Label Text="Date Format"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageDateFormatItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -58,7 +59,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             VerticalOptions="Center" />
-                    <Label Text="Time Format"
+                    <Label Text="{x:Static loc:AppStrings.SettingePageTimeFormatItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="2"
                            Grid.Column="0"
@@ -75,7 +76,7 @@
                 <Grid ColumnDefinitions="*,Auto"
                       RowDefinitions="Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="Maximum Leaderboard Results"
+                    <Label Text="{x:Static loc:AppStrings.SettingsPageMaximumLeaderboardResultsGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />

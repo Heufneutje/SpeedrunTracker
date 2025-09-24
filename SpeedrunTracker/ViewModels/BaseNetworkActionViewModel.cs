@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using CommunityToolkit.Maui.Core;
 using Refit;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -29,7 +30,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
 
         if (_currentNetworkAccess != NetworkAccess.Internet)
         {
-            await _toastService.ShowToastAsync("No internet access.");
+            await _toastService.ShowToastAsync(AppStrings.BaseNetworkActionNoInternetAccessToast);
             return null;
         }
 
@@ -43,7 +44,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
             {
                 case HttpStatusCode.Forbidden:
                     await _toastService.ShowToastAsync(
-                        "You must be logged in to view this content.",
+                        AppStrings.BaseNetworkActionForbiddenToast,
                         ToastDuration.Long
                     );
                     break;
@@ -54,7 +55,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
 
                 case HttpStatusCode.InternalServerError:
                     await _toastService.ShowToastAsync(
-                        "Received an unknown error from the speedrun.com API.",
+                        AppStrings.BaseNetworkActionUnknownErrorToast,
                         ToastDuration.Long
                     );
                     break;

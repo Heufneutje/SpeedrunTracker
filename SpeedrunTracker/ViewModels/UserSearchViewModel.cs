@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Core;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -8,7 +9,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IUserService _userService;
 
-    public override string SearchTextPlaceholder => "Search for users...";
+    public override string SearchTextPlaceholder => AppStrings.UserSearchPagePlaceholderText;
 
     public UserSearchViewModel(IToastService toastService, IUserService userService, IPopupService popupService)
         : base(toastService, popupService)
@@ -36,7 +37,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
             .Data.Select(x => new Entity()
             {
                 Title = x.Names?.International,
-                Subtitle = $"Registered: {x.Signup:yyyy-MM-dd}",
+                Subtitle = $"{AppStrings.EntitySubtitleRegistered}: {x.Signup:yyyy-MM-dd}",
                 ImageUrl = x.Assets?.Image?.SecureUri ?? "user",
                 SearchObject = x,
             })

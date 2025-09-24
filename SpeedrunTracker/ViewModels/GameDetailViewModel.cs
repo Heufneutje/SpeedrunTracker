@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SpeedrunTracker.Extensions;
 using SpeedrunTracker.Navigation;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -126,7 +127,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         if (Game is null)
             return false;
 
-        List<Level> allLevels = new() { new() { Name = "Full Game" } };
+        List<Level> allLevels = new() { new() { Name = AppStrings.GameDetailPageFullGameButton } };
         List<Level>? gameLevels = await ExecuteNetworkTask(_gameService.GetGameLevelsAsync(Game.Id));
         if (gameLevels is null)
             return false;

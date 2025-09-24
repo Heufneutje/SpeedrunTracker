@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -6,7 +7,7 @@ public partial class AboutViewModel : BaseViewModel
 {
     private readonly IBrowserService _browserService;
 
-    public string VersionText => $"SpeedrunTracker {AppInfo.VersionString}";
+    public static string VersionText => $"{AppStrings.AppName} {AppInfo.VersionString}";
 
     public AboutViewModel(IBrowserService browserService)
     {

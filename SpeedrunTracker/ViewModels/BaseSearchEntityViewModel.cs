@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SpeedrunTracker.Resources.Localization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -27,7 +28,7 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
     [RelayCommand(CanExecute = nameof(CanSearch))]
     private async Task SearchAsync()
     {
-        ShowActivityIndicator("Searching...");
+        ShowActivityIndicator(AppStrings.SpinnerSearchingText);
 
         try
         {

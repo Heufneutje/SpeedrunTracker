@@ -29,6 +29,7 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<PackageIcon></PackageIcon>
+		<NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -114,6 +115,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Resources\Localization\AppStrings.Designer.cs">
+		  <DependentUpon>AppStrings.resx</DependentUpon>
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		</Compile>
 		<Compile Update="Views\GameDetailsPage.xaml.cs">
 			<DependentUpon>GameDetailsPage.xaml</DependentUpon>
 		</Compile>
@@ -123,6 +129,13 @@
 		<Compile Update="Views\GameDetailFilterView.xaml.cs">
 			<DependentUpon>GameDetailFilterView.xaml</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Localization\AppStrings.resx">
+	    <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
