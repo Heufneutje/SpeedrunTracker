@@ -118,185 +118,185 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutPageCreditsLabel" xml:space="preserve">
-    <value>Created by Stefan Frijters in .NET MAUI with data provided by the speedrun.com REST API.</value>
+    <value>Gemaakt door Stefan Frijters in .NET MAUI met gegevens verstrekt door speedrun.com REST API.</value>
   </data>
   <data name="AboutPageIssueTrackerButton" xml:space="preserve">
-    <value>Issue Tracker</value>
+    <value>Bug tracker</value>
   </data>
   <data name="AboutPageIssueTrackerLabel" xml:space="preserve">
-    <value>Please report any issues you may encounter on the issue tracker.</value>
+    <value>Rapporteer alle problemen die je tegenkomt op de bug tracker.</value>
   </data>
   <data name="AboutPagePrivacyPolicyButton" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>Privacybeleid</value>
   </data>
   <data name="AboutPageTermsAndConditionsButton" xml:space="preserve">
-    <value>Terms &amp; Conditions</value>
+    <value>Algemene voorwaarden</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>SpeedrunTracker</value>
   </data>
   <data name="BaseNetworkActionForbiddenToast" xml:space="preserve">
-    <value>You must be logged in to view this content.</value>
+    <value>Je moet ingelogd zijn om deze inhoud te bekijken.</value>
   </data>
   <data name="BaseNetworkActionNoInternetAccessToast" xml:space="preserve">
-    <value>No internet access.</value>
+    <value>Geen internettoegang.</value>
   </data>
   <data name="BaseNetworkActionUnknownErrorToast" xml:space="preserve">
-    <value>Received an unknown error from the speedrun.com API.</value>
+    <value>Onbekende fout ontvangen van de speedrun.com API.</value>
   </data>
   <data name="DialogNoButton" xml:space="preserve">
-    <value>No</value>
+    <value>Nee</value>
   </data>
   <data name="DialogOkButton" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="DialogYesButton" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ja</value>
   </data>
   <data name="FavoritesPageAddedToFavoritesToast" xml:space="preserve">
-    <value>Added "{0}" to your favorites.</value>
+    <value>"{0}" is toegevoegd aan je favorieten.</value>
   </data>
   <data name="FavoritesPageFavoriteButton" xml:space="preserve">
-    <value>Favorite</value>
+    <value>Toevoegen aan favorieten</value>
   </data>
   <data name="FavoritesPagePlaceholderLabel" xml:space="preserve">
-    <value>It looks like you have not yet added any games, series or users to your favorites!
+    <value>Het lijkt erop dat je nog geen spellen, series of gebruikers aan je favorieten hebt toegevoegd!
 
-Search for a game, series or user and hit the Favorite button to add them to this list.</value>
+Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe te voegen aan deze lijst.</value>
   </data>
   <data name="FavoritesPageRemovedFromFavoritesToast" xml:space="preserve">
-    <value>Removed "{0}" from your favorites.</value>
+    <value>"{0}" is verwijderd uit je favorieten.</value>
   </data>
   <data name="FavoritesPageUnfavoriteButton" xml:space="preserve">
-    <value>Unfavorite</value>
+    <value>Verwijderen uit favorieten</value>
   </data>
   <data name="MenuItemAboutTitle" xml:space="preserve">
-    <value>About</value>
+    <value>Over</value>
   </data>
   <data name="MenuItemFavoritesTitle" xml:space="preserve">
-    <value>Favorites</value>
+    <value>Favorieten</value>
   </data>
   <data name="MenuItemNotificationsTitle" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Meldingen</value>
   </data>
   <data name="MenuItemProfileTitle" xml:space="preserve">
-    <value>Profile</value>
+    <value>Profiel</value>
   </data>
   <data name="MenuItemSearchGameSeriesTabTitle" xml:space="preserve">
     <value>Series</value>
   </data>
   <data name="MenuItemSearchGamesTabTitle" xml:space="preserve">
-    <value>Games</value>
+    <value>Spellen</value>
   </data>
   <data name="MenuItemSearchTitle" xml:space="preserve">
-    <value>Search</value>
+    <value>Zoeken</value>
   </data>
   <data name="MenuItemSearchUsersTabTitle" xml:space="preserve">
-    <value>Users</value>
+    <value>Gebruikers</value>
   </data>
   <data name="MenuItemSettingsTitle" xml:space="preserve">
-    <value>Settings</value>
+    <value>Instellingen</value>
   </data>
   <data name="SpinnerSearchingText" xml:space="preserve">
-    <value>Searching...</value>
+    <value>Bezig met zoeken...</value>
   </data>
   <data name="SettingePageTimeFormatItem" xml:space="preserve">
-    <value>Time Format</value>
+    <value>Tijdnotatie</value>
   </data>
   <data name="SettingsPageBackgroundsItem" xml:space="preserve">
-    <value>Display Backgrounds</value>
+    <value>Achtergronden weergeven</value>
   </data>
   <data name="SettingsPageDarkTheme" xml:space="preserve">
-    <value>Dark</value>
+    <value>Donker</value>
   </data>
   <data name="SettingsPageDateFormatItem" xml:space="preserve">
-    <value>Date Format</value>
+    <value>Datumnotatie</value>
   </data>
   <data name="SettingsPageDateTimeGroupHeader" xml:space="preserve">
-    <value>Date and Time</value>
+    <value>Datum en tijd</value>
   </data>
   <data name="SettingsPageInterfaceGroupHeader" xml:space="preserve">
-    <value>Interface</value>
+    <value>Uiterlijk</value>
   </data>
   <data name="SettingsPageLightTheme" xml:space="preserve">
-    <value>Light</value>
+    <value>Licht</value>
   </data>
   <data name="SettingsPageMaximumLeaderboardResultsGroupHeader" xml:space="preserve">
-    <value>Maximum Leaderboard Results</value>
+    <value>Maximum aantal scorebord resultaten</value>
   </data>
   <data name="SettingsPageSystemTheme" xml:space="preserve">
-    <value>System Default</value>
+    <value>Standaard</value>
   </data>
   <data name="SettingsPageThemeItem" xml:space="preserve">
-    <value>Theme</value>
+    <value>Thema</value>
   </data>
   <data name="SpinnerLoadingText" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Bezig met laden...</value>
   </data>
   <data name="GameDetailPageFullGameButton" xml:space="preserve">
-    <value>Full Game</value>
+    <value>Volledig spel</value>
   </data>
   <data name="GameSearchPagePlaceholderText" xml:space="preserve">
-    <value>Search for games...</value>
+    <value>Zoek naar spellen...</value>
   </data>
   <data name="EntitySubtitleReleased" xml:space="preserve">
-    <value>Released</value>
+    <value>Gepubliceerd</value>
   </data>
   <data name="GameSeriesSearchPagePlaceholderText" xml:space="preserve">
-    <value>Search for game series...</value>
+    <value>Zoek naar spel series...</value>
   </data>
   <data name="EntitySubtitleCreated" xml:space="preserve">
-    <value>Created</value>
+    <value>Aangemaakt</value>
   </data>
   <data name="EntitySubtitleUnknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>Onbekend</value>
   </data>
   <data name="ProfilePageGuestLabel" xml:space="preserve">
-    <value>Guest</value>
+    <value>Gast</value>
   </data>
   <data name="ProfilePageApiKeyErrorToast" xml:space="preserve">
-    <value>The provided API key is invalid.</value>
+    <value>De opgegeven API-sleutel is ongeldig.</value>
   </data>
   <data name="ProfilePageNoApiKeyErrorToast" xml:space="preserve">
-    <value>No API key provided.</value>
+    <value>Geen API-sleutel opgegeven.</value>
   </data>
   <data name="ProfilePageLogoutMessage" xml:space="preserve">
-    <value>Are you sure you want to log out?</value>
+    <value>Weet je zeker dat je wilt uitloggen?</value>
   </data>
   <data name="ProfilePageLogoutTitle" xml:space="preserve">
-    <value>Log out</value>
+    <value>Uitloggen</value>
   </data>
   <data name="ProfilePageUnknownErrorToast" xml:space="preserve">
-    <value>An error occurred while getting profile data</value>
+    <value>Er is een fout opgetreden bij het ophalen van profielgegevens</value>
   </data>
   <data name="EntitySubtitleRegistered" xml:space="preserve">
-    <value>Registered</value>
+    <value>Geregistreerd</value>
   </data>
   <data name="UserSearchPagePlaceholderText" xml:space="preserve">
-    <value>Search for users...</value>
+    <value>Zoek gebruiker...</value>
   </data>
   <data name="RunDetailsPageTitleInText" xml:space="preserve">
     <value>in</value>
   </data>
   <data name="RunDetailsPageSubtitleByUnknownText" xml:space="preserve">
-    <value>by &lt;unknown&gt;</value>
+    <value>door &lt;onbekend&gt;</value>
   </data>
   <data name="RunDetailsPageSubtitleByText" xml:space="preserve">
-    <value>by</value>
+    <value>door</value>
   </data>
   <data name="RunDetailsPageSubtitlePlayerSeparator" xml:space="preserve">
-    <value>and</value>
+    <value>en</value>
   </data>
   <data name="RunDetailsPageStatusVerificationPendingText" xml:space="preserve">
-    <value>Verification pending</value>
+    <value>Verificatie in behandeling</value>
   </data>
   <data name="RunDetailsPageStatusVerifiedOnText" xml:space="preserve">
-    <value>Verified on {0} at {1}</value>
+    <value>Geverifieerd op {0} om {1}</value>
   </data>
   <data name="RunDetailsPageStatusVerifiedText" xml:space="preserve">
-    <value>Verified</value>
+    <value>Geverifieerd</value>
   </data>
   <data name="RunDetailsPageStatusRejectedText" xml:space="preserve">
-    <value>Rejected</value>
+    <value>Afgewezen</value>
   </data>
 </root>
