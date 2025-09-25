@@ -1,3 +1,3 @@
 files:
-  - source: SpeedrunTracker/Resources/Localization
+  - source: SpeedrunTracker/Resources/Localization/AppStrings.resx
     translation: SpeedrunTracker/Resources/Localization/AppStrings.%two_letters_code%.resx
