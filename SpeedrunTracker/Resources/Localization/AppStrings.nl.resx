@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutPageCreditsLabel" xml:space="preserve">
+    <value>Gemaakt door Stefan Frijters in .NET MAUI met gegevens verstrekt door speedrun.com REST API.</value>
+  </data>
+  <data name="AboutPageIssueTrackerButton" xml:space="preserve">
+    <value>Bug tracker</value>
+  </data>
+  <data name="AboutPageIssueTrackerLabel" xml:space="preserve">
+    <value>Rapporteer alle problemen die je tegenkomt op de bug tracker.</value>
+  </data>
+  <data name="AboutPagePrivacyPolicyButton" xml:space="preserve">
+    <value>Privacybeleid</value>
+  </data>
+  <data name="AboutPageTermsAndConditionsButton" xml:space="preserve">
+    <value>Algemene voorwaarden</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>SpeedrunTracker</value>
+  </data>
+  <data name="BaseNetworkActionForbiddenToast" xml:space="preserve">
+    <value>Je moet ingelogd zijn om deze inhoud te bekijken.</value>
+  </data>
+  <data name="BaseNetworkActionNoInternetAccessToast" xml:space="preserve">
+    <value>Geen internettoegang.</value>
+  </data>
+  <data name="BaseNetworkActionUnknownErrorToast" xml:space="preserve">
+    <value>Onbekende fout ontvangen van de speedrun.com API.</value>
+  </data>
+  <data name="DialogNoButton" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="DialogOkButton" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DialogYesButton" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="FavoritesPageAddedToFavoritesToast" xml:space="preserve">
+    <value>"{0}" is toegevoegd aan je favorieten.</value>
+  </data>
+  <data name="FavoritesPageFavoriteButton" xml:space="preserve">
+    <value>Toevoegen aan favorieten</value>
+  </data>
+  <data name="FavoritesPagePlaceholderLabel" xml:space="preserve">
+    <value>Het lijkt erop dat je nog geen spellen, series of gebruikers aan je favorieten hebt toegevoegd!
+
+Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe te voegen aan deze lijst.</value>
+  </data>
+  <data name="FavoritesPageRemovedFromFavoritesToast" xml:space="preserve">
+    <value>"{0}" is verwijderd uit je favorieten.</value>
+  </data>
+  <data name="FavoritesPageUnfavoriteButton" xml:space="preserve">
+    <value>Verwijderen uit favorieten</value>
+  </data>
+  <data name="MenuItemAboutTitle" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="MenuItemFavoritesTitle" xml:space="preserve">
+    <value>Favorieten</value>
+  </data>
+  <data name="MenuItemNotificationsTitle" xml:space="preserve">
+    <value>Meldingen</value>
+  </data>
+  <data name="MenuItemProfileTitle" xml:space="preserve">
+    <value>Profiel</value>
+  </data>
+  <data name="MenuItemSearchGameSeriesTabTitle" xml:space="preserve">
+    <value>Series</value>
+  </data>
+  <data name="MenuItemSearchGamesTabTitle" xml:space="preserve">
+    <value>Spellen</value>
+  </data>
+  <data name="MenuItemSearchTitle" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="MenuItemSearchUsersTabTitle" xml:space="preserve">
+    <value>Gebruikers</value>
+  </data>
+  <data name="MenuItemSettingsTitle" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="SpinnerSearchingText" xml:space="preserve">
+    <value>Bezig met zoeken...</value>
+  </data>
+  <data name="SettingePageTimeFormatItem" xml:space="preserve">
+    <value>Tijdnotatie</value>
+  </data>
+  <data name="SettingsPageBackgroundsItem" xml:space="preserve">
+    <value>Achtergronden weergeven</value>
+  </data>
+  <data name="SettingsPageDarkTheme" xml:space="preserve">
+    <value>Donker</value>
+  </data>
+  <data name="SettingsPageDateFormatItem" xml:space="preserve">
+    <value>Datumnotatie</value>
+  </data>
+  <data name="SettingsPageDateTimeGroupHeader" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="SettingsPageInterfaceGroupHeader" xml:space="preserve">
+    <value>Uiterlijk</value>
+  </data>
+  <data name="SettingsPageLightTheme" xml:space="preserve">
+    <value>Licht</value>
+  </data>
+  <data name="SettingsPageMaximumLeaderboardResultsGroupHeader" xml:space="preserve">
+    <value>Maximum aantal scorebord resultaten</value>
+  </data>
+  <data name="SettingsPageSystemTheme" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="SettingsPageThemeItem" xml:space="preserve">
+    <value>Thema</value>
+  </data>
+  <data name="SpinnerLoadingText" xml:space="preserve">
+    <value>Bezig met laden...</value>
+  </data>
+  <data name="GameDetailPageFullGameButton" xml:space="preserve">
+    <value>Volledig spel</value>
+  </data>
+  <data name="GameSearchPagePlaceholderText" xml:space="preserve">
+    <value>Zoek naar spellen...</value>
+  </data>
+  <data name="EntitySubtitleReleased" xml:space="preserve">
+    <value>Gepubliceerd</value>
+  </data>
+  <data name="GameSeriesSearchPagePlaceholderText" xml:space="preserve">
+    <value>Zoek naar spel series...</value>
+  </data>
+  <data name="EntitySubtitleCreated" xml:space="preserve">
+    <value>Aangemaakt</value>
+  </data>
+  <data name="EntitySubtitleUnknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="ProfilePageGuestLabel" xml:space="preserve">
+    <value>Gast</value>
+  </data>
+  <data name="ProfilePageApiKeyErrorToast" xml:space="preserve">
+    <value>De opgegeven API-sleutel is ongeldig.</value>
+  </data>
+  <data name="ProfilePageNoApiKeyErrorToast" xml:space="preserve">
+    <value>Geen API-sleutel opgegeven.</value>
+  </data>
+  <data name="ProfilePageLogoutMessage" xml:space="preserve">
+    <value>Weet je zeker dat je wilt uitloggen?</value>
+  </data>
+  <data name="ProfilePageLogoutTitle" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="ProfilePageUnknownErrorToast" xml:space="preserve">
+    <value>Er is een fout opgetreden bij het ophalen van profielgegevens</value>
+  </data>
+  <data name="EntitySubtitleRegistered" xml:space="preserve">
+    <value>Geregistreerd</value>
+  </data>
+  <data name="UserSearchPagePlaceholderText" xml:space="preserve">
+    <value>Zoek gebruiker...</value>
+  </data>
+  <data name="RunDetailsPageTitleInText" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="RunDetailsPageSubtitleByUnknownText" xml:space="preserve">
+    <value>door &lt;onbekend&gt;</value>
+  </data>
+  <data name="RunDetailsPageSubtitleByText" xml:space="preserve">
+    <value>door</value>
+  </data>
+  <data name="RunDetailsPageSubtitlePlayerSeparator" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="RunDetailsPageStatusVerificationPendingText" xml:space="preserve">
+    <value>Verificatie in behandeling</value>
+  </data>
+  <data name="RunDetailsPageStatusVerifiedOnText" xml:space="preserve">
+    <value>Geverifieerd op {0} om {1}</value>
+  </data>
+  <data name="RunDetailsPageStatusVerifiedText" xml:space="preserve">
+    <value>Geverifieerd</value>
+  </data>
+  <data name="RunDetailsPageStatusRejectedText" xml:space="preserve">
+    <value>Afgewezen</value>
+  </data>
+</root>
