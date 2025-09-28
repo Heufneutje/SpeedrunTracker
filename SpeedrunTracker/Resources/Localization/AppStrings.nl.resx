@@ -299,4 +299,97 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
   <data name="RunDetailsPageStatusRejectedText" xml:space="preserve">
     <value>Afgewezen</value>
   </data>
+  <data name="BaseDetailPageShareToolbarItem" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="GameDetailFilterViewFullGameLevelLabel" xml:space="preserve">
+    <value>Full Game / Individual Level</value>
+  </data>
+  <data name="GameDetailFilterViewCategoryLabel" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="GameDetailFilterViewLeaderboardButton" xml:space="preserve">
+    <value>Show Leaderboard</value>
+  </data>
+  <data name="GameDetailHeaderViewPlatformsLabel" xml:space="preserve">
+    <value>Platforms</value>
+  </data>
+  <data name="ProfilePageEnterApiKeyLabel" xml:space="preserve">
+    <value>Enter your API key below to link your speedrun.com profile.</value>
+  </data>
+  <data name="ProfilePageApiKeyLabel" xml:space="preserve">
+    <value>API Key</value>
+  </data>
+  <data name="ProfilePageLoginTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="RunDetailsPageVideosLabel" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="RunDetailsPageOpenExternalPlayerButton" xml:space="preserve">
+    <value>Open External Player</value>
+  </data>
+  <data name="RunDetailsPageNoVideoLabel" xml:space="preserve">
+    <value>No Video Available</value>
+  </data>
+  <data name="RunDetailsPageDescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="RunDetailsPagePlayersLabel" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="RunDetailsPageLevelLabel" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="RunDetailsPageRankLabel" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="RunDetailsPageTimeLabel" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="RunDetailsPageRealTimeLabel" xml:space="preserve">
+    <value>Real Time</value>
+  </data>
+  <data name="RunDetailsPageDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="RunDetailsPagePlatformLabel" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="RunDetailsPageInGameTimeLabel" xml:space="preserve">
+    <value>In-game Time</value>
+  </data>
+  <data name="RunDetailsPageStatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="RunDetailsPageExaminerLabel" xml:space="preserve">
+    <value>Examiner</value>
+  </data>
+  <data name="UserDetailHeaderViewYouTubeButton" xml:space="preserve">
+    <value>YouTube</value>
+  </data>
+  <data name="UserDetailHeaderViewTwitchButton" xml:space="preserve">
+    <value>Twitch</value>
+  </data>
+  <data name="UserDetailHeaderViewTwitterButton" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="UserDetailHeaderViewHitboxButton" xml:space="preserve">
+    <value>Hitbox</value>
+  </data>
+  <data name="UserDetailHeaderViewSpeedRunsLiveButton" xml:space="preserve">
+    <value>SpeedRunsLive</value>
+  </data>
+  <data name="UserDetailPageGamePbButton" xml:space="preserve">
+    <value>Show Full Game PBs</value>
+  </data>
+  <data name="UserDetailPageLevelPbButton" xml:space="preserve">
+    <value>Show Level PBs</value>
+  </data>
+  <data name="SettingsPageSystemLanguage" xml:space="preserve">
+    <value>System Default</value>
+  </data>
+  <data name="SettingsPageLanguageItem" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>
