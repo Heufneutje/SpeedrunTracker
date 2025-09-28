@@ -115,6 +115,15 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share.
+        /// </summary>
+        internal static string BaseDetailPageShareToolbarItem {
+            get {
+                return ResourceManager.GetString("BaseDetailPageShareToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must be logged in to view this content..
         /// </summary>
         internal static string BaseNetworkActionForbiddenToast {
@@ -252,6 +261,42 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        internal static string GameDetailFilterViewCategoryLabel {
+            get {
+                return ResourceManager.GetString("GameDetailFilterViewCategoryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Game / Individual Level.
+        /// </summary>
+        internal static string GameDetailFilterViewFullGameLevelLabel {
+            get {
+                return ResourceManager.GetString("GameDetailFilterViewFullGameLevelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Leaderboard.
+        /// </summary>
+        internal static string GameDetailFilterViewLeaderboardButton {
+            get {
+                return ResourceManager.GetString("GameDetailFilterViewLeaderboardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platforms.
+        /// </summary>
+        internal static string GameDetailHeaderViewPlatformsLabel {
+            get {
+                return ResourceManager.GetString("GameDetailHeaderViewPlatformsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full Game.
         /// </summary>
         internal static string GameDetailPageFullGameButton {
@@ -369,11 +414,38 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to API Key.
+        /// </summary>
+        internal static string ProfilePageApiKeyLabel {
+            get {
+                return ResourceManager.GetString("ProfilePageApiKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your API key below to link your speedrun.com profile..
+        /// </summary>
+        internal static string ProfilePageEnterApiKeyLabel {
+            get {
+                return ResourceManager.GetString("ProfilePageEnterApiKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guest.
         /// </summary>
         internal static string ProfilePageGuestLabel {
             get {
                 return ResourceManager.GetString("ProfilePageGuestLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string ProfilePageLoginTitle {
+            get {
+                return ResourceManager.GetString("ProfilePageLoginTitle", resourceCulture);
             }
         }
         
@@ -410,6 +482,114 @@ namespace SpeedrunTracker.Resources.Localization {
         internal static string ProfilePageUnknownErrorToast {
             get {
                 return ResourceManager.GetString("ProfilePageUnknownErrorToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string RunDetailsPageDateLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string RunDetailsPageDescriptionLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Examiner.
+        /// </summary>
+        internal static string RunDetailsPageExaminerLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageExaminerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In-game Time.
+        /// </summary>
+        internal static string RunDetailsPageInGameTimeLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageInGameTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        internal static string RunDetailsPageLevelLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageLevelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Video Available.
+        /// </summary>
+        internal static string RunDetailsPageNoVideoLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageNoVideoLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open External Player.
+        /// </summary>
+        internal static string RunDetailsPageOpenExternalPlayerButton {
+            get {
+                return ResourceManager.GetString("RunDetailsPageOpenExternalPlayerButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platform.
+        /// </summary>
+        internal static string RunDetailsPagePlatformLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPagePlatformLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        internal static string RunDetailsPagePlayersLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPagePlayersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        internal static string RunDetailsPageRankLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageRankLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Time.
+        /// </summary>
+        internal static string RunDetailsPageRealTimeLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageRealTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string RunDetailsPageStatusLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageStatusLabel", resourceCulture);
             }
         }
         
@@ -477,11 +657,29 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string RunDetailsPageTimeLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to in.
         /// </summary>
         internal static string RunDetailsPageTitleInText {
             get {
                 return ResourceManager.GetString("RunDetailsPageTitleInText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Videos.
+        /// </summary>
+        internal static string RunDetailsPageVideosLabel {
+            get {
+                return ResourceManager.GetString("RunDetailsPageVideosLabel", resourceCulture);
             }
         }
         
@@ -590,6 +788,69 @@ namespace SpeedrunTracker.Resources.Localization {
         internal static string SpinnerSearchingText {
             get {
                 return ResourceManager.GetString("SpinnerSearchingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hitbox.
+        /// </summary>
+        internal static string UserDetailHeaderViewHitboxButton {
+            get {
+                return ResourceManager.GetString("UserDetailHeaderViewHitboxButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SpeedRunsLive.
+        /// </summary>
+        internal static string UserDetailHeaderViewSpeedRunsLiveButton {
+            get {
+                return ResourceManager.GetString("UserDetailHeaderViewSpeedRunsLiveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch.
+        /// </summary>
+        internal static string UserDetailHeaderViewTwitchButton {
+            get {
+                return ResourceManager.GetString("UserDetailHeaderViewTwitchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X.
+        /// </summary>
+        internal static string UserDetailHeaderViewTwitterButton {
+            get {
+                return ResourceManager.GetString("UserDetailHeaderViewTwitterButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YouTube.
+        /// </summary>
+        internal static string UserDetailHeaderViewYouTubeButton {
+            get {
+                return ResourceManager.GetString("UserDetailHeaderViewYouTubeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Full Game PBs.
+        /// </summary>
+        internal static string UserDetailPageGamePbButton {
+            get {
+                return ResourceManager.GetString("UserDetailPageGamePbButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Level PBs.
+        /// </summary>
+        internal static string UserDetailPageLevelPbButton {
+            get {
+                return ResourceManager.GetString("UserDetailPageLevelPbButton", resourceCulture);
             }
         }
         

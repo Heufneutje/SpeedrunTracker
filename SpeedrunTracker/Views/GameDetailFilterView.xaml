@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
              x:DataType="viewmodels:GameDetailViewModel"
@@ -10,7 +11,7 @@
              mtk:TearDownBehavior.Suppress="True">
     <VerticalStackLayout Padding="10">
         <VerticalStackLayout>
-            <controls:RunPropertyControl Title="Full Game / Individual Level"
+            <controls:RunPropertyControl Title="{x:Static loc:AppStrings.GameDetailFilterViewFullGameLevelLabel}"
                                          IsValueVisible="False"
                                          ImageSource="world"
                                          IsVisible="{Binding HasIndividualLevels}" />
@@ -24,7 +25,7 @@
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
-            <controls:RunPropertyControl Title="Category"
+            <controls:RunPropertyControl Title="{x:Static loc:AppStrings.GameDetailFilterViewCategoryLabel}"
                                          IsValueVisible="False"
                                          ImageSource="category" />
             <CollectionView Style="{StaticResource CategoryCollectionViewStyle}"
@@ -39,7 +40,7 @@
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Variables}"
                                  HorizontalOptions="Start"
                                  BindableLayout.ItemTemplate="{StaticResource VariablesTemplate}" />
-            <Button Text="Show Leaderboard"
+            <Button Text="{x:Static loc:AppStrings.GameDetailFilterViewLeaderboardButton}"
                     Command="{Binding LoadLeaderboardCommand}"
                     Margin="5" />
         </VerticalStackLayout>

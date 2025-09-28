@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
              xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              xmlns:mtk="clr-namespace:MemoryToolkit.Maui;assembly=MemoryToolkit.Maui"
@@ -39,7 +40,7 @@
                 <ImageButton Source="youtube"
                              Command="{Binding OpenUrlCommand}"
                              CommandParameter="{Binding User.YouTube.SecureUri}"
-                             ToolTipProperties.Text="YouTube"
+                             ToolTipProperties.Text="{x:Static loc:AppStrings.UserDetailHeaderViewYouTubeButton}"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.YouTube, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
@@ -49,7 +50,7 @@
                 <ImageButton Source="twitch"
                              Command="{Binding OpenUrlCommand}"
                              CommandParameter="{Binding User.Twitch.SecureUri}"
-                             ToolTipProperties.Text="Twitch"
+                             ToolTipProperties.Text="{x:Static loc:AppStrings.UserDetailHeaderViewTwitchButton}"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Twitch, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
@@ -59,7 +60,7 @@
                 <ImageButton Source="twitter"
                              Command="{Binding OpenUrlCommand}"
                              CommandParameter="{Binding User.Twitter.SecureUri}"
-                             ToolTipProperties.Text="Twitter"
+                             ToolTipProperties.Text="{x:Static loc:AppStrings.UserDetailHeaderViewTwitterButton}"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Twitter, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
@@ -69,7 +70,7 @@
                 <ImageButton Source="hitbox"
                              Command="{Binding OpenUrlCommand}"
                              CommandParameter="{Binding User.Hitbox.SecureUri}"
-                             ToolTipProperties.Text="Hitbox"
+                             ToolTipProperties.Text="{x:Static loc:AppStrings.UserDetailHeaderViewHitboxButton}"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.Hitbox, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
@@ -79,7 +80,7 @@
                 <ImageButton Source="srl"
                              Command="{Binding OpenUrlCommand}"
                              CommandParameter="{Binding User.SpeedRunsLive.SecureUri}"
-                             ToolTipProperties.Text="SpeedRunsLive"
+                             ToolTipProperties.Text="{x:Static loc:AppStrings.UserDetailHeaderViewSpeedRunsLiveButton}"
                              Style="{StaticResource UserProfileButtonStyle}"
                              IsVisible="{Binding User.SpeedRunsLive, Converter={StaticResource IsNotNullConverter}}">
                     <ImageButton.Behaviors>
