@@ -386,4 +386,10 @@ Search for a game, series or user and hit the Favorite button to add them to thi
   <data name="UserDetailPageLevelPbButton" xml:space="preserve">
     <value>Show Level PBs</value>
   </data>
+  <data name="SettingsPageSystemLanguage" xml:space="preserve">
+    <value>System Default</value>
+  </data>
+  <data name="SettingsPageLanguageItem" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>

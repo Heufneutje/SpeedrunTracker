@@ -115,6 +115,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Generated\SupportedLanguages.g.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>SupportedLanguages.tt</DependentUpon>
+		</Compile>
 		<Compile Update="Resources\Localization\AppStrings.Designer.cs">
 		  <DependentUpon>AppStrings.resx</DependentUpon>
 		  <DesignTime>True</DesignTime>
@@ -202,5 +207,16 @@
 		<MauiXaml Update="Views\UserDetailHeaderView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Generated\SupportedLanguages.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>SupportedLanguages.g.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
 	</ItemGroup>
 </Project>

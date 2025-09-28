@@ -1,5 +1,8 @@
-﻿using SpeedrunTracker.Resources.Localization;
+﻿using SpeedrunTracker.Generated;
+using SpeedrunTracker.Models;
+using SpeedrunTracker.Resources.Localization;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace SpeedrunTracker.ViewModels;
 
@@ -91,6 +94,25 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
+    public LanguageSetting? AppLanguage
+    {
+        get => LanguageSettings.FirstOrDefault(x => x.CultureCode == _settingsService.UserSettings.AppLanguage);
+        set
+        {
+            if (_settingsService.UserSettings.AppLanguage != value?.CultureCode)
+            {
+                _settingsService.UserSettings.AppLanguage = value?.CultureCode;
+                _hasChanges = true;
+                OnPropertyChanged();
+                if (string.IsNullOrEmpty(value?.CultureCode))
+                    CultureInfo.CurrentUICulture = CultureInfo.InstalledUICulture;
+                else
+                    CultureInfo.CurrentUICulture = new CultureInfo(value.CultureCode);
+                AppStrings.Culture = CultureInfo.CurrentUICulture;
+            }
+        }
+    }
+
     private ObservableCollection<ThemeSetting>? _themeSettings;
 
     public ObservableCollection<ThemeSetting> Themes
@@ -129,6 +151,34 @@ public class SettingsViewModel : BaseViewModel
                 new("11:59 PM", "hh:mm tt"),
                 new("11:59:59 PM", "hh:mm:ss tt"),
             }.AsObservableCollection();
+    }
+
+    private ObservableCollection<LanguageSetting>? _languageSettings;
+    public ObservableCollection<LanguageSetting> LanguageSettings
+    {
+        get
+        {
+            if (_languageSettings is null)
+            {
+                _languageSettings = [];
+                foreach (string cultureCode in SupportedLanguages.All)
+                {
+                    CultureInfo culture = new(cultureCode);
+                    _languageSettings.Add(new LanguageSetting
+                    {
+                        DisplayName = culture.NativeName,
+                        CultureCode = culture.Name
+                    });
+                }
+
+                _languageSettings.Add(new LanguageSetting
+                {
+                    DisplayName = AppStrings.SettingsPageSystemLanguage,
+                    CultureCode = string.Empty
+                });
+            }
+            return _languageSettings;
+        }
     }
 
     public SettingsViewModel(ILocalSettingsService settingsService)

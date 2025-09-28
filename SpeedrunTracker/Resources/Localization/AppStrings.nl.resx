@@ -387,4 +387,10 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
   <data name="UserDetailPageLevelPbButton" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="SettingsPageSystemLanguage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="SettingsPageLanguageItem" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
 </root>

@@ -37,6 +37,9 @@ public class LocalSettingsService : BaseDatabaseService, ILocalSettingsService
 
         if (UserSettings.DisplayBackgrounds is null)
             UserSettings.DisplayBackgrounds = _configuration.GetValue<bool>("defaults:display-backgrounds");
+
+        if (UserSettings.AppLanguage is null)
+            UserSettings.AppLanguage = string.Empty;
     }
 
     public async Task SaveSettingsAsync()
