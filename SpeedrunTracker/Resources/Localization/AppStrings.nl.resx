@@ -300,70 +300,70 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
     <value>Afgewezen</value>
   </data>
   <data name="BaseDetailPageShareToolbarItem" xml:space="preserve">
-    <value>Share</value>
+    <value>Delen</value>
   </data>
   <data name="GameDetailFilterViewFullGameLevelLabel" xml:space="preserve">
-    <value>Full Game / Individual Level</value>
+    <value>Volledig Spel / Individueel Level</value>
   </data>
   <data name="GameDetailFilterViewCategoryLabel" xml:space="preserve">
-    <value>Category</value>
+    <value>Categorie</value>
   </data>
   <data name="GameDetailFilterViewLeaderboardButton" xml:space="preserve">
-    <value>Show Leaderboard</value>
+    <value>Toon Scorebord</value>
   </data>
   <data name="GameDetailHeaderViewPlatformsLabel" xml:space="preserve">
     <value>Platforms</value>
   </data>
   <data name="ProfilePageEnterApiKeyLabel" xml:space="preserve">
-    <value>Enter your API key below to link your speedrun.com profile.</value>
+    <value>Voer hieronder je API-sleutel in om je speedrun.com profiel te koppelen.</value>
   </data>
   <data name="ProfilePageApiKeyLabel" xml:space="preserve">
-    <value>API Key</value>
+    <value>API-sleutel</value>
   </data>
   <data name="ProfilePageLoginTitle" xml:space="preserve">
-    <value>Login</value>
+    <value>Inloggen</value>
   </data>
   <data name="RunDetailsPageVideosLabel" xml:space="preserve">
-    <value>Videos</value>
+    <value>Video's</value>
   </data>
   <data name="RunDetailsPageOpenExternalPlayerButton" xml:space="preserve">
-    <value>Open External Player</value>
+    <value>Open Externe Speler</value>
   </data>
   <data name="RunDetailsPageNoVideoLabel" xml:space="preserve">
-    <value>No Video Available</value>
+    <value>Geen video beschikbaar</value>
   </data>
   <data name="RunDetailsPageDescriptionLabel" xml:space="preserve">
-    <value>Description</value>
+    <value>Omschrijving</value>
   </data>
   <data name="RunDetailsPagePlayersLabel" xml:space="preserve">
-    <value>Players</value>
+    <value>Spelers</value>
   </data>
   <data name="RunDetailsPageLevelLabel" xml:space="preserve">
     <value>Level</value>
   </data>
   <data name="RunDetailsPageRankLabel" xml:space="preserve">
-    <value>Rank</value>
+    <value>Positie</value>
   </data>
   <data name="RunDetailsPageTimeLabel" xml:space="preserve">
-    <value>Time</value>
+    <value>Tijd</value>
   </data>
   <data name="RunDetailsPageRealTimeLabel" xml:space="preserve">
-    <value>Real Time</value>
+    <value>Echte tijd</value>
   </data>
   <data name="RunDetailsPageDateLabel" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="RunDetailsPagePlatformLabel" xml:space="preserve">
     <value>Platform</value>
   </data>
   <data name="RunDetailsPageInGameTimeLabel" xml:space="preserve">
-    <value>In-game Time</value>
+    <value>In-game tijd</value>
   </data>
   <data name="RunDetailsPageStatusLabel" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="RunDetailsPageExaminerLabel" xml:space="preserve">
-    <value>Examiner</value>
+    <value>Reviewer</value>
   </data>
   <data name="UserDetailHeaderViewYouTubeButton" xml:space="preserve">
     <value>YouTube</value>
@@ -381,15 +381,15 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
     <value>SpeedRunsLive</value>
   </data>
   <data name="UserDetailPageGamePbButton" xml:space="preserve">
-    <value>Show Full Game PBs</value>
+    <value>Volledige Spel PB's weergeven</value>
   </data>
   <data name="UserDetailPageLevelPbButton" xml:space="preserve">
-    <value>Show Level PBs</value>
+    <value>Level PB's weergeven</value>
   </data>
   <data name="SettingsPageSystemLanguage" xml:space="preserve">
-    <value>System Default</value>
+    <value>Standaard</value>
   </data>
   <data name="SettingsPageLanguageItem" xml:space="preserve">
-    <value>Language</value>
+    <value>Taal</value>
   </data>
 </root>
