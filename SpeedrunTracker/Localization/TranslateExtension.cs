@@ -1,6 +1,7 @@
 ﻿namespace SpeedrunTracker.Localization;
 
 [ContentProperty(nameof(Name))]
+[AcceptEmptyServiceProvider]
 public class TranslateExtension : BindableObject, IMarkupExtension<BindingBase>
 {
     public static readonly BindableProperty NameProperty = BindableProperty.Create(nameof(Name), typeof(string), typeof(TranslateExtension), null,
