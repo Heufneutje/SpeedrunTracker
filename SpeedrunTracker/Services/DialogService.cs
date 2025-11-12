@@ -2,11 +2,11 @@
 
 namespace SpeedrunTracker.Services;
 
-public class DialogService : IDialogService
+public class DialogService : BaseService, IDialogService
 {
     public Task ShowAlertAsync(string title, string message, string? cancel = null)
     {
-        cancel ??= AppStrings.DialogOkButton;
+        cancel ??= Translate(nameof(AppStrings.DialogOkButton));
         return GetMainPage()?.DisplayAlert(title, message, cancel) ?? Task.CompletedTask;
     }
 
@@ -17,8 +17,8 @@ public class DialogService : IDialogService
         string? cancel = null
     )
     {
-        accept ??= AppStrings.DialogYesButton;
-        cancel ??= AppStrings.DialogNoButton;
+        accept ??= Translate(nameof(AppStrings.DialogYesButton));
+        cancel ??= Translate(nameof(AppStrings.DialogNoButton));
 
         Page? mainPage = GetMainPage();
         return mainPage is not null && await mainPage.DisplayAlert(title, message, accept, cancel);

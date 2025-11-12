@@ -17,7 +17,7 @@ public abstract partial class BaseFollowViewModel : BaseShareableViewModel
 
     public bool IsFollowingEnabled => IsFollowing.HasValue;
 
-    public string FollowButtonText => IsFollowing == true ? AppStrings.FavoritesPageUnfavoriteButton : AppStrings.FavoritesPageFavoriteButton;
+    public string FollowButtonText => IsFollowing == true ? Translate(nameof(AppStrings.FavoritesPageUnfavoriteButton)) : Translate(nameof(AppStrings.FavoritesPageFavoriteButton));
 
     public string FollowButtonIconSource => IsFollowing == true ? "favorite_enabled" : "favorite_disabled";
 
@@ -63,12 +63,12 @@ public abstract partial class BaseFollowViewModel<T> : BaseFollowViewModel
         if (IsFollowing == true)
         {
             await _followService.UnfollowAsync(_followEntity.Id);
-            await _toastService.ShowToastAsync(string.Format(AppStrings.FavoritesPageRemovedFromFavoritesToast, _followEntity.DisplayName));
+            await _toastService.ShowToastAsync(string.Format(Translate(nameof(AppStrings.FavoritesPageRemovedFromFavoritesToast)), _followEntity.DisplayName));
         }
         else if (IsFollowing == false)
         {
             await FollowAsync(_followEntity);
-            await _toastService.ShowToastAsync(string.Format(AppStrings.FavoritesPageAddedToFavoritesToast, _followEntity.DisplayName));
+            await _toastService.ShowToastAsync(string.Format(Translate(nameof(AppStrings.FavoritesPageAddedToFavoritesToast)), _followEntity.DisplayName));
         }
 
         IsFollowing = !(IsFollowing ?? false);

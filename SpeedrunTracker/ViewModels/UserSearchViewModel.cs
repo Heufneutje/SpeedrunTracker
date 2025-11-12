@@ -9,7 +9,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IUserService _userService;
 
-    public override string SearchTextPlaceholder => AppStrings.UserSearchPagePlaceholderText;
+    public override string SearchTextPlaceholder => Translate(nameof(AppStrings.UserSearchPagePlaceholderText));
 
     public UserSearchViewModel(IToastService toastService, IUserService userService, IPopupService popupService)
         : base(toastService, popupService)
@@ -37,7 +37,7 @@ public class UserSearchViewModel : BaseSearchEntityViewModel
             .Data.Select(x => new Entity()
             {
                 Title = x.Names?.International,
-                Subtitle = $"{AppStrings.EntitySubtitleRegistered}: {x.Signup:yyyy-MM-dd}",
+                Subtitle = $"{Translate(nameof(AppStrings.EntitySubtitleRegistered))}: {x.Signup:yyyy-MM-dd}",
                 ImageUrl = x.Assets?.Image?.SecureUri ?? "user",
                 SearchObject = x,
             })

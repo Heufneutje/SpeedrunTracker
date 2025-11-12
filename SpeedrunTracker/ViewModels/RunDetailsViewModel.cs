@@ -52,12 +52,12 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
     public string? Title =>
         RunDetails is null
             ? "RunDetails"
-            : $"{RunDetails.Category?.Name} {AppStrings.RunDetailsPageTitleInText} {RunDetails.Run.Times?.PrimaryTimeSpan}";
+            : $"{RunDetails.Category?.Name} {Translate(nameof(AppStrings.RunDetailsPageTitleInText))} {RunDetails.Run.Times?.PrimaryTimeSpan}";
 
     public string? SubTitle =>
         RunDetails is null
-            ? AppStrings.RunDetailsPageSubtitleByUnknownText
-            : $"{AppStrings.RunDetailsPageSubtitleByText} {string.Join($" {AppStrings.RunDetailsPageSubtitlePlayerSeparator} ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
+            ? Translate(nameof(AppStrings.RunDetailsPageSubtitleByUnknownText))
+            : $"{Translate(nameof(AppStrings.RunDetailsPageSubtitleByText))} {string.Join($" {Translate(nameof(AppStrings.RunDetailsPageSubtitlePlayerSeparator))} ", RunDetails.Run.Players.Select(x => x.DisplayName))}";
 
     public string FullTitle => $"{Title} {SubTitle}";
 
@@ -78,11 +78,11 @@ public partial class RunDetailsViewModel : BaseShareableViewModel
 
             return RunDetails.Run.Status?.StatusType switch
             {
-                SpeedrunStatusType.New => AppStrings.RunDetailsPageStatusVerificationPendingText,
+                SpeedrunStatusType.New => Translate(nameof(AppStrings.RunDetailsPageStatusVerificationPendingText)),
                 SpeedrunStatusType.Verified => RunDetails.Run.Status.VerifyDate.HasValue
-                    ? string.Format(AppStrings.RunDetailsPageStatusVerifiedOnText, RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat), RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat))
-                    : AppStrings.RunDetailsPageStatusVerifiedText,
-                SpeedrunStatusType.Rejected => $"{AppStrings.RunDetailsPageStatusRejectedText} ({RunDetails.Run.Status.Reason ?? string.Empty})",
+                    ? string.Format(Translate(nameof(AppStrings.RunDetailsPageStatusVerifiedOnText)), RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.DateFormat), RunDetails.Run.Status.VerifyDate.Value.ToString(_settingsService.UserSettings.TimeFormat))
+                    : Translate(nameof(AppStrings.RunDetailsPageStatusVerifiedText)),
+                SpeedrunStatusType.Rejected => $"{ Translate(nameof(AppStrings.RunDetailsPageStatusRejectedText))} ({RunDetails.Run.Status.Reason ?? string.Empty})",
                 _ => string.Empty,
             };
         }

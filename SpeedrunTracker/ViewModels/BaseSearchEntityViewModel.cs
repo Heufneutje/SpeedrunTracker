@@ -28,7 +28,7 @@ public abstract partial class BaseSearchEntityViewModel : BaseNetworkActionViewM
     [RelayCommand(CanExecute = nameof(CanSearch))]
     private async Task SearchAsync()
     {
-        ShowActivityIndicator(AppStrings.SpinnerSearchingText);
+        ShowActivityIndicator(Translate(nameof(AppStrings.SpinnerSearchingText)));
 
         try
         {

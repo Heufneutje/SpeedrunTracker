@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using SpeedrunTracker.Generated;
+using SpeedrunTracker.Localization;
+using System.Globalization;
 
 namespace SpeedrunTracker;
 
@@ -9,8 +11,10 @@ public partial class App : Application
         InitializeComponent();
         UserAppTheme = settingsService.UserSettings.Theme;
 
-        if (!string.IsNullOrEmpty(settingsService.UserSettings.AppLanguage))
-            CultureInfo.CurrentUICulture = new CultureInfo(settingsService.UserSettings.AppLanguage);
+        if (string.IsNullOrEmpty(settingsService.UserSettings.AppLanguage))
+            settingsService.UserSettings.AppLanguage = SupportedLanguages.All.FirstOrDefault(x => x.Equals(CultureInfo.InstalledUICulture.TwoLetterISOLanguageName, StringComparison.OrdinalIgnoreCase)) ?? "en-US";
+
+        LocalizationResourceManager.Instance.Culture = new CultureInfo(settingsService.UserSettings.AppLanguage);
     }
 
     protected override Window CreateWindow(IActivationState? activationState)

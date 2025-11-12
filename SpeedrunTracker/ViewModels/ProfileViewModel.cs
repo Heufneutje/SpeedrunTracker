@@ -26,7 +26,7 @@ public partial class ProfileViewModel : BaseViewModel
     [ObservableProperty]
     private string? _apiKey;
 
-    public string Name => User?.DisplayName ?? AppStrings.ProfilePageGuestLabel;
+    public string Name => User?.DisplayName ?? Translate(nameof(AppStrings.ProfilePageGuestLabel));
 
     public string? ImageUri => User?.Assets?.Image?.SecureUri;
 
@@ -65,7 +65,7 @@ public partial class ProfileViewModel : BaseViewModel
         catch (Exception ex)
         {
             if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
-                await _toastService.ShowToastAsync(AppStrings.ProfilePageApiKeyErrorToast);
+                await _toastService.ShowToastAsync(Translate(nameof(AppStrings.ProfilePageApiKeyErrorToast)));
             else
                 await HandleUnknownError(ex);
 
@@ -82,7 +82,7 @@ public partial class ProfileViewModel : BaseViewModel
     {
         if (string.IsNullOrEmpty(ApiKey))
         {
-            await _toastService.ShowToastAsync(AppStrings.ProfilePageNoApiKeyErrorToast);
+            await _toastService.ShowToastAsync(Translate(nameof(AppStrings.ProfilePageNoApiKeyErrorToast)));
             return;
         }
 
@@ -101,7 +101,7 @@ public partial class ProfileViewModel : BaseViewModel
     {
         try
         {
-            if (!confirm || await _dialogService.ShowConfirmationAsync(AppStrings.ProfilePageLogoutTitle, AppStrings.ProfilePageLogoutMessage))
+            if (!confirm || await _dialogService.ShowConfirmationAsync(Translate(nameof(AppStrings.ProfilePageLogoutTitle)), Translate(nameof(AppStrings.ProfilePageLogoutMessage))))
             {
                 SecureStorage.Remove(Constants.ApiKey);
                 await LoadProfileAsync();
@@ -122,6 +122,6 @@ public partial class ProfileViewModel : BaseViewModel
 
     private async Task HandleUnknownError(Exception ex)
     {
-        await _toastService.ShowToastAsync($"{AppStrings.ProfilePageUnknownErrorToast}: {ex.Message}");
+        await _toastService.ShowToastAsync($"{Translate(nameof(AppStrings.ProfilePageUnknownErrorToast))}: {ex.Message}");
     }
 }

@@ -2,7 +2,7 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-       xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
+       xmlns:loc="clr-namespace:SpeedrunTracker.Localization"
        xmlns:views="clr-namespace:SpeedrunTracker.Views"
        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
        x:Class="SpeedrunTracker.AppShell"
@@ -27,7 +27,7 @@
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout>
-            <Label Text="{x:Static loc:AppStrings.AppName}"
+            <Label Text="{loc:Translate AppName}"
                    FontSize="Title"
                    Padding="20"
                    TextColor="{StaticResource White}" />
@@ -40,38 +40,38 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent ContentTemplate="{DataTemplate views:FollowingPage}"
                       Route="Following"
-                      Title="{x:Static loc:AppStrings.MenuItemFavoritesTitle}"
+                      Title="{loc:Translate MenuItemFavoritesTitle}"
                       Icon="following" />
-        <Tab Title="{x:Static loc:AppStrings.MenuItemSearchTitle}"
+        <Tab Title="{loc:Translate MenuItemSearchTitle}"
              Icon="search">
             <ShellContent ContentTemplate="{DataTemplate views:GameSearchPage}"
                           Route="SearchGames"
-                          Title="{x:Static loc:AppStrings.MenuItemSearchGamesTabTitle}" />
+                          Title="{loc:Translate MenuItemSearchGamesTabTitle}" />
             <ShellContent ContentTemplate="{DataTemplate views:GameSeriesSearchPage}"
                           Route="SearchSeries"
-                          Title="{x:Static loc:AppStrings.MenuItemSearchGameSeriesTabTitle}" />
+                          Title="{loc:Translate MenuItemSearchGameSeriesTabTitle}" />
             <ShellContent ContentTemplate="{DataTemplate views:UserSearchPage}"
                           Route="SearchUsers"
-                          Title="{x:Static loc:AppStrings.MenuItemSearchUsersTabTitle}" />
+                          Title="{loc:Translate MenuItemSearchUsersTabTitle}" />
         </Tab>
         <ShellContent ContentTemplate="{DataTemplate views:NotificationsPage}"
                       Route="Notifications"
-                      Title="{x:Static loc:AppStrings.MenuItemNotificationsTitle}"
+                      Title="{loc:Translate MenuItemNotificationsTitle}"
                       Icon="bell" />
     </FlyoutItem>
-    <FlyoutItem Title="{x:Static loc:AppStrings.MenuItemProfileTitle}"
+    <FlyoutItem Title="{loc:Translate MenuItemProfileTitle}"
                 FlyoutIcon="user">
         <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}"
                       Route="Profile" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static loc:AppStrings.MenuItemSettingsTitle}"
+    <FlyoutItem Title="{loc:Translate MenuItemSettingsTitle}"
                 FlyoutIcon="gear">
         <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"
                       Route="Settings" />
     </FlyoutItem>
 
-    <FlyoutItem Title="{x:Static loc:AppStrings.MenuItemAboutTitle}"
+    <FlyoutItem Title="{loc:Translate MenuItemAboutTitle}"
                 FlyoutIcon="about">
         <ShellContent ContentTemplate="{DataTemplate views:AboutPage}"
                       Route="about" />

@@ -1,5 +1,5 @@
 ﻿using SpeedrunTracker.Generated;
-using SpeedrunTracker.Models;
+using SpeedrunTracker.Localization;
 using SpeedrunTracker.Resources.Localization;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -105,10 +105,12 @@ public class SettingsViewModel : BaseViewModel
                 _hasChanges = true;
                 OnPropertyChanged();
                 if (string.IsNullOrEmpty(value?.CultureCode))
-                    CultureInfo.CurrentUICulture = CultureInfo.InstalledUICulture;
+                    LocalizationResourceManager.Instance.Culture = CultureInfo.InstalledUICulture;
                 else
-                    CultureInfo.CurrentUICulture = new CultureInfo(value.CultureCode);
-                AppStrings.Culture = CultureInfo.CurrentUICulture;
+                    LocalizationResourceManager.Instance.Culture = new CultureInfo(value.CultureCode);
+
+                _themeSettings = null;
+                OnPropertyChanged(nameof(Themes));
             }
         }
     }
@@ -120,9 +122,9 @@ public class SettingsViewModel : BaseViewModel
         get =>
             _themeSettings ??= new List<ThemeSetting>
             {
-                new(AppStrings.SettingsPageSystemTheme, AppTheme.Unspecified),
-                new(AppStrings.SettingsPageLightTheme, AppTheme.Light),
-                new(AppStrings.SettingsPageDarkTheme, AppTheme.Dark),
+                new(Translate(nameof(AppStrings.SettingsPageSystemTheme)), AppTheme.Unspecified),
+                new(Translate(nameof(AppStrings.SettingsPageLightTheme)), AppTheme.Light),
+                new(Translate(nameof(AppStrings.SettingsPageDarkTheme)), AppTheme.Dark),
             }.AsObservableCollection();
     }
 
@@ -170,12 +172,6 @@ public class SettingsViewModel : BaseViewModel
                         CultureCode = culture.Name
                     });
                 }
-
-                _languageSettings.Add(new LanguageSetting
-                {
-                    DisplayName = AppStrings.SettingsPageSystemLanguage,
-                    CultureCode = string.Empty
-                });
             }
             return _languageSettings;
         }

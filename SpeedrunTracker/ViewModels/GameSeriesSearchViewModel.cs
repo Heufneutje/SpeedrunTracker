@@ -19,7 +19,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
         _gameSeriesService = gameSeriesService;
     }
 
-    public override string SearchTextPlaceholder => AppStrings.GameSeriesSearchPagePlaceholderText;
+    public override string SearchTextPlaceholder => Translate(nameof(AppStrings.GameSeriesSearchPagePlaceholderText));
 
     protected override async Task NavigateToAsync()
     {
@@ -43,7 +43,7 @@ public class GameSeriesSearchViewModel : BaseSearchEntityViewModel
             .Data.Select(x => new Entity()
             {
                 Title = x.Names.International,
-                Subtitle = $"{AppStrings.EntitySubtitleCreated}: {x.Created?.ToString("yyyy-MM-dd") ?? AppStrings.EntitySubtitleUnknown}",
+                Subtitle = $"{Translate(nameof(AppStrings.EntitySubtitleCreated))}: {x.Created?.ToString("yyyy-MM-dd") ?? Translate(nameof(AppStrings.EntitySubtitleUnknown))}",
                 ImageUrl = x.Assets?.CoverSmall?.SecureUri,
                 SearchObject = x,
             })

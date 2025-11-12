@@ -7,7 +7,7 @@ public partial class AboutViewModel : BaseViewModel
 {
     private readonly IBrowserService _browserService;
 
-    public static string VersionText => $"{AppStrings.AppName} {AppInfo.VersionString}";
+    public static string VersionText => $"{Translate(nameof(AppStrings.AppName))} {AppInfo.VersionString}";
 
     public AboutViewModel(IBrowserService browserService)
     {

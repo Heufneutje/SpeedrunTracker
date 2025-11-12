@@ -6,5 +6,5 @@ namespace SpeedrunTracker.ViewModels;
 public partial class SpinnerPopupViewModel : BaseViewModel
 {
     [ObservableProperty]
-    private string _loadingText = AppStrings.SpinnerLoadingText;
+    private string _loadingText = Translate(nameof(AppStrings.SpinnerLoadingText));
 }

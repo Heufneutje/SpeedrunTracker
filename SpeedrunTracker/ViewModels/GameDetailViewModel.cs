@@ -127,7 +127,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         if (Game is null)
             return false;
 
-        List<Level> allLevels = new() { new() { Name = AppStrings.GameDetailPageFullGameButton } };
+        List<Level> allLevels = [new() { Name = Translate(nameof(AppStrings.GameDetailPageFullGameButton)) }];
         List<Level>? gameLevels = await ExecuteNetworkTask(_gameService.GetGameLevelsAsync(Game.Id));
         if (gameLevels is null)
             return false;

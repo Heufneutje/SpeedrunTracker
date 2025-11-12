@@ -9,7 +9,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
 {
     private readonly IGameService _gameService;
 
-    public override string SearchTextPlaceholder => AppStrings.GameSearchPagePlaceholderText;
+    public override string SearchTextPlaceholder => Translate(nameof(AppStrings.GameSearchPagePlaceholderText));
 
     public GameSearchViewModel(IToastService toastService, IGameService gameService, IPopupService popupService)
         : base(toastService, popupService)
@@ -38,7 +38,7 @@ public class GameSearchViewModel : BaseSearchEntityViewModel
             .Select(x => new Entity()
             {
                 Title = x.Names.International,
-                Subtitle = $"{AppStrings.EntitySubtitleReleased}: {x.Released}",
+                Subtitle = $"{Translate(nameof(AppStrings.EntitySubtitleReleased))}: {x.Released}",
                 ImageUrl = x.Assets?.CoverSmall?.SecureUri,
                 SearchObject = x,
             })

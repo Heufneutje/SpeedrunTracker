@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Localization"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="SpeedrunTracker.Views.SettingsPage"
-             Title="{x:Static loc:AppStrings.MenuItemSettingsTitle}"
+             Title="{loc:Translate MenuItemSettingsTitle}"
              Disappearing="ContentPage_Disappearing">
     <ScrollView>
         <VerticalStackLayout Padding="10">
@@ -13,11 +13,11 @@
                 <Grid ColumnDefinitions="2*,*"
                       RowDefinitions="Auto,Auto,Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageInterfaceGroupHeader}"
+                    <Label Text="{loc:Translate SettingsPageInterfaceGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageThemeItem}"
+                    <Label Text="{loc:Translate SettingsPageThemeItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -27,7 +27,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             VerticalOptions="Center" />
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageLanguageItem}"
+                    <Label Text="{loc:Translate SettingsPageLanguageItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="2"
                            Grid.Column="0"
@@ -37,7 +37,7 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             VerticalOptions="Center" />
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageBackgroundsItem}"
+                    <Label Text="{loc:Translate SettingsPageBackgroundsItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="3"
                            Grid.Column="0"
@@ -55,11 +55,11 @@
                 <Grid ColumnDefinitions="2*,*"
                       RowDefinitions="Auto,Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageDateTimeGroupHeader}"
+                    <Label Text="{loc:Translate SettingsPageDateTimeGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageDateFormatItem}"
+                    <Label Text="{loc:Translate SettingsPageDateFormatItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="1"
                            Grid.Column="0"
@@ -69,7 +69,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             VerticalOptions="Center" />
-                    <Label Text="{x:Static loc:AppStrings.SettingePageTimeFormatItem}"
+                    <Label Text="{loc:Translate SettingePageTimeFormatItem}"
                            Style="{StaticResource SettingsItemSubLabel}"
                            Grid.Row="2"
                            Grid.Column="0"
@@ -86,7 +86,7 @@
                 <Grid ColumnDefinitions="*,Auto"
                       RowDefinitions="Auto,Auto"
                       Padding="0,0,20,10">
-                    <Label Text="{x:Static loc:AppStrings.SettingsPageMaximumLeaderboardResultsGroupHeader}"
+                    <Label Text="{loc:Translate SettingsPageMaximumLeaderboardResultsGroupHeader}"
                            Style="{StaticResource GroupHeaderLabel}"
                            Grid.Row="0"
                            Grid.ColumnSpan="2" />

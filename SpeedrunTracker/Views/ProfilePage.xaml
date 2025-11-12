@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:SpeedrunTracker.Controls"
-             xmlns:loc="clr-namespace:SpeedrunTracker.Resources.Localization"
+             xmlns:loc="clr-namespace:SpeedrunTracker.Localization"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
              x:DataType="viewmodels:ProfileViewModel"
              x:Class="SpeedrunTracker.Views.ProfilePage"
-             Title="{x:Static loc:AppStrings.MenuItemProfileTitle}"
+             Title="{loc:Translate MenuItemProfileTitle}"
              Appearing="ContentPage_Appearing">
     <VerticalStackLayout>
         <Grid RowDefinitions="3*,*">
@@ -25,24 +25,24 @@
 
             <VerticalStackLayout Grid.Row="1"
                                  Margin="0,40,0,0">
-                <Label Text="{x:Static loc:AppStrings.ProfilePageEnterApiKeyLabel}"
+                <Label Text="{loc:Translate ProfilePageEnterApiKeyLabel}"
                        HorizontalOptions="Center"
                        IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
                 <Entry x:Name="_apiKeyEntry"
-                       Placeholder="{x:Static loc:AppStrings.ProfilePageApiKeyLabel}"
+                       Placeholder="{loc:Translate ProfilePageApiKeyLabel}"
                        IsPassword="True"
                        HorizontalOptions="Center"
                        WidthRequest="300"
                        Margin="20"
                        Text="{Binding ApiKey, Mode=TwoWay}"
                        IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}" />
-                <Button Text="{x:Static loc:AppStrings.ProfilePageLoginTitle}"
+                <Button Text="{loc:Translate ProfilePageLoginTitle}"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         IsVisible="{Binding IsLoggedIn, Converter={StaticResource InverseBoolConverter}}"
                         Command="{Binding LoginCommand}"
                         Clicked="Button_Clicked" />
-                <Button Text="{x:Static loc:AppStrings.ProfilePageLogoutTitle}"
+                <Button Text="{loc:Translate ProfilePageLogoutTitle}"
                         HorizontalOptions="Center"
                         WidthRequest="100"
                         IsVisible="{Binding IsLoggedIn}"

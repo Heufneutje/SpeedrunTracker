@@ -30,7 +30,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
 
         if (_currentNetworkAccess != NetworkAccess.Internet)
         {
-            await _toastService.ShowToastAsync(AppStrings.BaseNetworkActionNoInternetAccessToast);
+            await _toastService.ShowToastAsync(Translate(nameof(AppStrings.BaseNetworkActionNoInternetAccessToast)));
             return null;
         }
 
@@ -44,7 +44,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
             {
                 case HttpStatusCode.Forbidden:
                     await _toastService.ShowToastAsync(
-                        AppStrings.BaseNetworkActionForbiddenToast,
+                        Translate(nameof(AppStrings.BaseNetworkActionForbiddenToast)),
                         ToastDuration.Long
                     );
                     break;
@@ -55,7 +55,7 @@ public abstract class BaseNetworkActionViewModel : BaseViewModel
 
                 case HttpStatusCode.InternalServerError:
                     await _toastService.ShowToastAsync(
-                        AppStrings.BaseNetworkActionUnknownErrorToast,
+                        Translate(nameof(AppStrings.BaseNetworkActionUnknownErrorToast)),
                         ToastDuration.Long
                     );
                     break;
