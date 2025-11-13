@@ -57,8 +57,6 @@ public partial class ProfileViewModel : BaseViewModel
 
     public async Task LoadProfileAsync()
     {
-        ShowActivityIndicator();
-
         try
         {
             IsLoggedIn = !string.IsNullOrEmpty(await SecureStorage.GetAsync(Constants.ApiKey));
@@ -68,24 +66,24 @@ public partial class ProfileViewModel : BaseViewModel
                 return;
             }
 
+            ShowActivityIndicator();
             User = await _userService.GetUserProfileAsync();
+            await CloseActivityIndicatorAsync();
         }
         catch (HttpRequestException httpEx)
         {
+            await CloseActivityIndicatorAsync();
             await HandleUnknownError(httpEx);
         }
         catch (Exception ex)
         {
+            await CloseActivityIndicatorAsync();
             if (ex is ApiException apiEx && apiEx.StatusCode == HttpStatusCode.Forbidden)
                 await _toastService.ShowToastAsync(Translate(nameof(AppStrings.ProfilePageApiKeyErrorToast)));
             else
                 await HandleUnknownError(ex);
 
             await LogoutAsync(false);
-        }
-        finally
-        {
-            await CloseActivityIndicatorAsync();
         }
     }
 

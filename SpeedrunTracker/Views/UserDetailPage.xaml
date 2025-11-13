@@ -9,7 +9,6 @@
                       x:DataType="viewmodels:UserDetailsViewModel"
                       x:Class="SpeedrunTracker.Views.UserDetailPage"
                       x:Name="UserDetailPageName"
-                      Appearing="ContentPage_Appearing"
                       mtk:LeakMonitorBehavior.Cascade="True"
                       mtk:TearDownBehavior.Cascade="True">
     <ContentPage.Behaviors>

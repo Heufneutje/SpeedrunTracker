@@ -9,7 +9,6 @@
                       x:Class="SpeedrunTracker.Views.GameSeriesDetailsPage"
                       x:DataType="viewmodels:GameSeriesDetailViewModel"
                       x:Name="GameSeriesDetailsPageName"
-                      Appearing="ContentPage_Appearing"
                       mtk:LeakMonitorBehavior.Cascade="True"
                       mtk:TearDownBehavior.Cascade="True">
     <ContentPage.Behaviors>
