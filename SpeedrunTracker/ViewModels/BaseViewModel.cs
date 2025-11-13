@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls.Shapes;
 using SpeedrunTracker.Localization;
 using SpeedrunTracker.Resources.Localization;
 
@@ -9,11 +10,18 @@ public abstract class BaseViewModel : ObservableObject
 {
     private bool _isDisplayingActivityIndicator;
     private readonly IPopupService? _popupService;
+    private readonly Rectangle _popupShape;
     public bool IsRunningBackgroundTask { get; private set; }
 
     protected BaseViewModel(IPopupService? popupService = null)
     {
         _popupService = popupService;
+        _popupShape = new Rectangle()
+        {
+            StrokeThickness = 0,
+            RadiusX = 10,
+            RadiusY = 10
+        };
     }
 
     public void ShowActivityIndicator(string? loadingText = null)
@@ -31,7 +39,7 @@ public abstract class BaseViewModel : ObservableObject
         IPopupOptions popupOptions = new PopupOptions()
         {
             CanBeDismissedByTappingOutsideOfPopup = false,
-            Shape = null
+            Shape = _popupShape
         };
 
         _isDisplayingActivityIndicator = true;
@@ -54,7 +62,8 @@ public abstract class BaseViewModel : ObservableObject
     {
         IPopupOptions popupOptions = new PopupOptions()
         {
-            CanBeDismissedByTappingOutsideOfPopup = true
+            CanBeDismissedByTappingOutsideOfPopup = true,
+            Shape = _popupShape
         };
 
         if (_popupService is not null)

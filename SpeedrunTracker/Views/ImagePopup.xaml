@@ -2,12 +2,12 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                x:Class="SpeedrunTracker.Views.ImagePopup"
+               x:DataType="viewmodels:ImagePopupViewModel"
                xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
-               x:DataType="viewmodels:ImagePopupViewModel"
-               Style="{StaticResource PopupStyle}">
-    <VerticalStackLayout Padding="20">
+               BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}">
+    <VerticalStackLayout>
         <ffil:CachedImage Source="{Binding ImageSource}" />
     </VerticalStackLayout>
 </toolkit:Popup>

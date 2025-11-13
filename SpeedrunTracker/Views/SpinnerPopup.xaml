@@ -6,7 +6,7 @@
                xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
                x:DataType="viewmodels:SpinnerPopupViewModel"
                BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}">
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout>
         <ActivityIndicator IsRunning="True" />
         <Label Text="{Binding LoadingText}"
                Style="{StaticResource IndicatorLabelStyle}" />

@@ -327,7 +327,7 @@ public partial class GameDetailViewModel : BaseFollowViewModel<Game>
         if (Game?.Assets?.CoverSmall?.SecureUri is not null)
             await ShowPopupAsync<ImagePopupViewModel>(new()
             {
-                [nameof(ImagePopupViewModel.ImageSource)] = Game.Assets.CoverSmall.Uri
+                [nameof(ImagePopupViewModel.ImageSource)] = Game.Assets.CoverSmall.SecureUri
             });
     }
 
