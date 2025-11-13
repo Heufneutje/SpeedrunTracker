@@ -26,7 +26,7 @@
     </Shell.ItemTemplate>
 
     <Shell.FlyoutHeader>
-        <VerticalStackLayout>
+        <VerticalStackLayout Style="{StaticResource FlyoutHeaderStyle}">
             <Label Text="{loc:Translate AppName}"
                    FontSize="Title"
                    Padding="20"

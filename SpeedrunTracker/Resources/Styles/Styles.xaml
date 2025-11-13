@@ -405,11 +405,6 @@
                 Value="OpenSansRegular" />
     </Style>
 
-    <!--<Style TargetType="{x:Type views:SpinnerPopup}">
-        <Setter Property="Color"
-                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray950}}" />
-    </Style>-->
-
     <Style x:Key="FlyoutItemStyle"
            TargetType="Grid">
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -425,6 +420,12 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+
+    <Style x:Key="FlyoutHeaderStyle"
+           TargetType="VerticalStackLayout">
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gray900}}" />
     </Style>
 
     <Style x:Key="FlyoutItemLabelStyle"
