@@ -2,105 +2,58 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:loc="clr-namespace:SpeedrunTracker.Localization"
+             xmlns:sv="clr-namespace:AiForms.Settings;assembly=SettingsView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:SpeedrunTracker.ViewModels"
+             x:Name="SettingsPageName"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="SpeedrunTracker.Views.SettingsPage"
-             Title="{loc:Translate MenuItemSettingsTitle}"
-             Disappearing="ContentPage_Disappearing">
-    <ScrollView>
-        <VerticalStackLayout Padding="10">
-            <Border Style="{StaticResource TransparentGridElementBorder}">
-                <Grid ColumnDefinitions="2*,*"
-                      RowDefinitions="Auto,Auto,Auto,Auto"
-                      Padding="0,0,20,10">
-                    <Label Text="{loc:Translate SettingsPageInterfaceGroupHeader}"
-                           Style="{StaticResource GroupHeaderLabel}"
-                           Grid.Row="0"
-                           Grid.ColumnSpan="2" />
-                    <Label Text="{loc:Translate SettingsPageThemeItem}"
-                           Style="{StaticResource SettingsItemSubLabel}"
-                           Grid.Row="1"
-                           Grid.Column="0"
-                           VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding Themes}"
-                            SelectedItem="{Binding Theme}"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            VerticalOptions="Center" />
-                    <Label Text="{loc:Translate SettingsPageLanguageItem}"
-                           Style="{StaticResource SettingsItemSubLabel}"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding LanguageSettings}"
-                            SelectedItem="{Binding AppLanguage}"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            VerticalOptions="Center" />
-                    <Label Text="{loc:Translate SettingsPageBackgroundsItem}"
-                           Style="{StaticResource SettingsItemSubLabel}"
-                           Grid.Row="3"
-                           Grid.Column="0"
-                           VerticalOptions="Center" />
-                    <Switch IsToggled="{Binding DisplayBackgrounds}"
-                            HorizontalOptions="Start"
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            VerticalOptions="Center"
-                            Margin="-10,0,0,0"/>
-                </Grid>
-            </Border>
-
-            <Border Style="{StaticResource TransparentGridElementBorder}">
-                <Grid ColumnDefinitions="2*,*"
-                      RowDefinitions="Auto,Auto,Auto"
-                      Padding="0,0,20,10">
-                    <Label Text="{loc:Translate SettingsPageDateTimeGroupHeader}"
-                           Style="{StaticResource GroupHeaderLabel}"
-                           Grid.Row="0"
-                           Grid.ColumnSpan="2" />
-                    <Label Text="{loc:Translate SettingsPageDateFormatItem}"
-                           Style="{StaticResource SettingsItemSubLabel}"
-                           Grid.Row="1"
-                           Grid.Column="0"
-                           VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding DateFormats}"
-                            SelectedItem="{Binding DateFormat}"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            VerticalOptions="Center" />
-                    <Label Text="{loc:Translate SettingePageTimeFormatItem}"
-                           Style="{StaticResource SettingsItemSubLabel}"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           VerticalOptions="Center" />
-                    <Picker ItemsSource="{Binding TimeFormats}"
-                            SelectedItem="{Binding TimeFormat}"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            VerticalOptions="Center" />
-                </Grid>
-            </Border>
-
-            <Border Style="{StaticResource TransparentGridElementBorder}">
-                <Grid ColumnDefinitions="*,Auto"
-                      RowDefinitions="Auto,Auto"
-                      Padding="0,0,20,10">
-                    <Label Text="{loc:Translate SettingsPageMaximumLeaderboardResultsGroupHeader}"
-                           Style="{StaticResource GroupHeaderLabel}"
-                           Grid.Row="0"
-                           Grid.ColumnSpan="2" />
-                    <Slider Minimum="1"
-                            Maximum="1000"
-                            Value="{Binding MaxLeaderboardResults, Mode=TwoWay}"
-                            Margin="10,0,0,0"
-                            Grid.Row="1"
-                            Grid.Column="0" />
-                    <Label Grid.Row="1"
-                           Grid.Column="1"
-                           Text="{Binding MaxLeaderboardResults}" />
-                </Grid>
-            </Border>
-        </VerticalStackLayout>
-    </ScrollView>
+             Title="{loc:Translate MenuItemSettingsTitle}">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding SaveChangesCommand}"
+                                        BindingContext="{Binding Path=BindingContext, Source={x:Reference SettingsPageName}, x:DataType=ContentPage}"
+                                        EventName="Disappearing" />
+    </ContentPage.Behaviors>
+    <sv:SettingsView x:Name="settingsView">
+        <sv:Section Title="{loc:Translate SettingsPageInterfaceGroupHeader}">
+            <sv:PickerCell Title="{loc:Translate SettingsPageThemeItem}"
+                           SelectedItem="{Binding Theme}"
+                           ItemsSource="{Binding Themes}"
+                           SelectionMode="Single"
+                           UsePickToClose="True"
+                           AccentColor="{StaticResource LightHighlight}"
+                           x:Name="themeCell"/>
+            <sv:PickerCell Title="{loc:Translate SettingsPageLanguageItem}"
+                           SelectedItem="{Binding AppLanguage}"
+                           ItemsSource="{Binding LanguageSettings}"
+                           SelectionMode="Single"
+                           UsePickToClose="True"
+                           AccentColor="{StaticResource LightHighlight}" />
+            <sv:SwitchCell Title="{loc:Translate SettingsPageBackgroundsItem}"
+                           On="{Binding DisplayBackgrounds}"
+                           AccentColor="{StaticResource LightHighlight}" />
+        </sv:Section>
+        <sv:Section Title="{loc:Translate SettingsPageDateTimeGroupHeader}">
+            <sv:PickerCell Title="{loc:Translate SettingsPageDateFormatItem}"
+                           SelectedItem="{Binding DateFormat}"
+                           ItemsSource="{Binding DateFormats}"
+                           SelectionMode="Single"
+                           UsePickToClose="True"
+                           AccentColor="{StaticResource LightHighlight}" />
+            <sv:PickerCell Title="{loc:Translate SettingePageTimeFormatItem}"
+                           SelectedItem="{Binding TimeFormat}"
+                           ItemsSource="{Binding TimeFormats}"
+                           SelectionMode="Single"
+                           UsePickToClose="True"
+                           AccentColor="{StaticResource LightHighlight}" />
+        </sv:Section>
+        <sv:Section Title="{loc:Translate SettingsPageLeadboardGroupHeader}">
+            <sv:TextPickerCell Title="{loc:Translate SettingsPageMaximumLeaderboardResultsItem}"
+                               PickerTitle="{loc:Translate SettingsPageMaximumLeaderboardResultsItem}"
+                               SelectedItem="{Binding MaxLeaderboardResults}"
+                               Items="{Binding LeaderboardResultsOptions}"
+                               AccentColor="{StaticResource LightHighlight}"
+                               IsCircularPicker="False" />
+        </sv:Section>
+    </sv:SettingsView>
 </ContentPage>

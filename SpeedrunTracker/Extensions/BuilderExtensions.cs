@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AiForms.Settings;
 using CommunityToolkit.Maui;
 using FFImageLoading.Maui;
 using MemoryToolkit.Maui;
@@ -39,6 +40,7 @@ public static class BuilderExtensions
             .UseMauiCommunityToolkit()
             .UseMauiApp<App>()
             .UseFFImageLoading()
+            .UseSettingsView()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

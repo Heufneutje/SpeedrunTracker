@@ -221,8 +221,8 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
   <data name="SettingsPageLightTheme" xml:space="preserve">
     <value>Licht</value>
   </data>
-  <data name="SettingsPageMaximumLeaderboardResultsGroupHeader" xml:space="preserve">
-    <value>Maximum aantal scorebord resultaten</value>
+  <data name="SettingsPageMaximumLeaderboardResultsItem" xml:space="preserve">
+    <value>Maximum aantal resultaten</value>
   </data>
   <data name="SettingsPageSystemTheme" xml:space="preserve">
     <value>Standaard</value>
@@ -391,5 +391,8 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
   </data>
   <data name="SettingsPageLanguageItem" xml:space="preserve">
     <value>Taal</value>
+  </data>
+  <data name="SettingsPageLeadboardGroupHeader" xml:space="preserve">
+    <value>Scorebord</value>
   </data>
 </root>

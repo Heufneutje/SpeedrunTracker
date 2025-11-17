@@ -3,9 +3,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:ffil="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
-                    xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                     xmlns:markdown="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
+                    xmlns:sv="clr-namespace:AiForms.Settings;assembly=SettingsView"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                     xmlns:views="clr-namespace:SpeedrunTracker.Views">
 
     <Style TargetType="ActivityIndicator">
@@ -396,6 +396,25 @@
                 Value="14" />
         <Setter Property="TextFontFace"
                 Value="OpenSansRegular" />
+    </Style>
+
+    <Style TargetType="sv:SettingsView">
+        <Setter Property="BackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="CellBackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="HeaderTextColor"
+                Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="HeaderBackgroundColor"
+                Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+        <Setter Property="HeaderFontSize"
+                Value="Small" />
+        <Setter Property="CellValueTextColor"
+                Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+        <Setter Property="CellDescriptionColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Gray200}}" />
+        <Setter Property="CellTitleColor"
+                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     </Style>
 
     <Style x:Key="FlyoutItemStyle"

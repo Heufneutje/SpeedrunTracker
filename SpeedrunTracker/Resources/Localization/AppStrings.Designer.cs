@@ -747,6 +747,15 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
+        internal static string SettingsPageLeadboardGroupHeader {
+            get {
+                return ResourceManager.GetString("SettingsPageLeadboardGroupHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Light.
         /// </summary>
         internal static string SettingsPageLightTheme {
@@ -756,11 +765,11 @@ namespace SpeedrunTracker.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Leaderboard Results.
+        ///   Looks up a localized string similar to Max Results.
         /// </summary>
-        internal static string SettingsPageMaximumLeaderboardResultsGroupHeader {
+        internal static string SettingsPageMaximumLeaderboardResultsItem {
             get {
-                return ResourceManager.GetString("SettingsPageMaximumLeaderboardResultsGroupHeader", resourceCulture);
+                return ResourceManager.GetString("SettingsPageMaximumLeaderboardResultsItem", resourceCulture);
             }
         }
         

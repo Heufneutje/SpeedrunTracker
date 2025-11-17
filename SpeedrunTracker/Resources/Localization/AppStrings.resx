@@ -221,8 +221,8 @@ Search for a game, series or user and hit the Favorite button to add them to thi
   <data name="SettingsPageLightTheme" xml:space="preserve">
     <value>Light</value>
   </data>
-  <data name="SettingsPageMaximumLeaderboardResultsGroupHeader" xml:space="preserve">
-    <value>Maximum Leaderboard Results</value>
+  <data name="SettingsPageMaximumLeaderboardResultsItem" xml:space="preserve">
+    <value>Max Results</value>
   </data>
   <data name="SettingsPageSystemTheme" xml:space="preserve">
     <value>System Default</value>
@@ -391,5 +391,8 @@ Search for a game, series or user and hit the Favorite button to add them to thi
   </data>
   <data name="SettingsPageLanguageItem" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="SettingsPageLeadboardGroupHeader" xml:space="preserve">
+    <value>Leaderboard</value>
   </data>
 </root>

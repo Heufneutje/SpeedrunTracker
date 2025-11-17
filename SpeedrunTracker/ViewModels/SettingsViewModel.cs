@@ -1,4 +1,5 @@
-﻿using SpeedrunTracker.Generated;
+﻿using CommunityToolkit.Mvvm.Input;
+using SpeedrunTracker.Generated;
 using SpeedrunTracker.Localization;
 using SpeedrunTracker.Resources.Localization;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Globalization;
 
 namespace SpeedrunTracker.ViewModels;
 
-public class SettingsViewModel : BaseViewModel
+public partial class SettingsViewModel : BaseViewModel
 {
     private readonly ILocalSettingsService _settingsService;
     private bool _hasChanges;
@@ -108,9 +109,6 @@ public class SettingsViewModel : BaseViewModel
                     LocalizationResourceManager.Instance.Culture = CultureInfo.InstalledUICulture;
                 else
                     LocalizationResourceManager.Instance.Culture = new CultureInfo(value.CultureCode);
-
-                _themeSettings = null;
-                OnPropertyChanged(nameof(Themes));
             }
         }
     }
@@ -177,11 +175,27 @@ public class SettingsViewModel : BaseViewModel
         }
     }
 
+    private ObservableCollection<int>? _leaderboardResultsOptions;
+    public ObservableCollection<int> LeaderboardResultsOptions
+    {
+        get
+        {
+            if (_leaderboardResultsOptions is null)
+            {
+                _leaderboardResultsOptions = [];
+                for (int i = 50; i <= 1000; i += 50)
+                    _leaderboardResultsOptions.Add(i);
+            }
+            return _leaderboardResultsOptions;
+        }
+    }
+
     public SettingsViewModel(ILocalSettingsService settingsService)
     {
         _settingsService = settingsService;
     }
 
+    [RelayCommand]
     public async Task SaveChangesAsync()
     {
         if (_hasChanges)
