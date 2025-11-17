@@ -222,7 +222,7 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
     <value>Licht</value>
   </data>
   <data name="SettingsPageMaximumLeaderboardResultsItem" xml:space="preserve">
-    <value>Max Results</value>
+    <value>Maximum aantal resultaten</value>
   </data>
   <data name="SettingsPageSystemTheme" xml:space="preserve">
     <value>Standaard</value>
@@ -393,6 +393,6 @@ Zoek naar een spel, serie of gebruiker en druk op de knop Favorieten om ze toe t
     <value>Taal</value>
   </data>
   <data name="SettingsPageLeadboardGroupHeader" xml:space="preserve">
-    <value>Leaderboard</value>
+    <value>Scorebord</value>
   </data>
 </root>
